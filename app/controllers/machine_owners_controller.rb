@@ -1,0 +1,2 @@
+class MachineOwnersController < ApplicationController
+end

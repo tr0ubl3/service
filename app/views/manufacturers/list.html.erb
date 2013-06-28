@@ -1,0 +1,26 @@
+<div class="container">
+<table class="table table-bordered table-hover">
+<caption>Manufacturers List</caption>
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+	<% @i=0 %>
+	<% @manufacturers.each do |manufacturer| %>
+    <tr>
+      <td><%= @i+=1 %></td>
+      <td><%= manufacturer.name %></td>
+      <td>
+      <%= link_to("Show", {:action => 'show', :id => manufacturer.id}, :class => 'btn btn-small') %>
+      <%= link_to("Edit", '#', :class => 'btn btn-primary btn-small') %>
+      <%= link_to("Delete", '#', :class => 'btn btn-danger btn-small') %>     
+      </td>
+      <% end %>
+    </tr>
+</tbody>
+</table>
+</div>

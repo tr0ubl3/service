@@ -1,0 +1,2 @@
+module MachineOwnersHelper
+end

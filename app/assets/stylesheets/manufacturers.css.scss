@@ -1,0 +1,25 @@
+// Place all the styles related to the Manufacturers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-bordered caption + thead tr:first-child th:first-child {
+	text-align: center;
+	width: 10px;
+}
+
+.table-bordered tbody:last-child tr:last-child > td:last-child {
+	width: 200px;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+background-image: asset-url('glyphicons-halflings.png', image);
+}
+
+.icon-white {
+background-image: asset-url('glyphicons-halflings-white.png', image);	
+}
+
+.spatiu-sus {
+	margin-top: 10px;
+}
