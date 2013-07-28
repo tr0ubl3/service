@@ -1,0 +1,39 @@
+<div class="container">
+    <% if !flash[:notice].blank? %>
+    <div class="alert alert-success distantier-alerta">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+<%= flash[:notice] %>
+</div>
+<% end %>
+<table class="table table-bordered table-hover">
+<caption class="titlu-tabel">Machines List</caption>
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Machine name</th>
+      <th>Machine type</th>
+      <th>Manufacturer</th>
+      <th>Machine number</th>
+      <th>Last updated</th>
+    </tr>
+</thead>
+<tbody>
+	<% @i=0 %>
+	<% @machines.each do |machine| %>
+    <tr>
+      <td><%= @i+=1 %></td>
+      <td><%= link_to(machine.display_name, {:action =>'show', :id => machine.id}) %></td>
+      <td><%= machine.machine_type %></td>
+      <% if machine.manufacturer == nil %>
+        <td><%= 'None' %></td>
+      <% else %>
+        <td><%= machine.manufacturer.name %></td>
+      <% end %>
+      <td><%= machine.machine_number %></td>
+      <td><%= machine.updated_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      <% end %>
+    </tr>
+</tbody>
+</table>
+  <%= link_to(raw("<i class='icon-plus'></i><span class='spatiu-st-dr-link-cu-iconita'>Add</span>"), {:action => 'new'}, {:class => 'btn btn-success'}) %>
+</div>
