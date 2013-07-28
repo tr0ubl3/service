@@ -1,11 +1,20 @@
 <div class="container">
+    <% if !flash[:notice].blank? %>
+    <div class="alert alert-success distantier-alerta">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+<%= flash[:notice] %>
+</div>
+<% end %>
 <table class="table table-bordered table-hover">
-<caption>Manufacturers List</caption>
+<caption class="titlu-tabel">Manufacturers List</caption>
 <thead>
     <tr>
       <th>#</th>
       <th>Name</th>
-      <th>Actions</th>
+      <th>Address</th>
+      <th>Office tel</th>
+      <th>Office mail</th>
+      <th>Last updated</th>
     </tr>
 </thead>
 <tbody>
@@ -13,14 +22,14 @@
 	<% @manufacturers.each do |manufacturer| %>
     <tr>
       <td><%= @i+=1 %></td>
-      <td><%= manufacturer.name %></td>
-      <td>
-      <%= link_to("Show", {:action => 'show', :id => manufacturer.id}, :class => 'btn btn-small') %>
-      <%= link_to("Edit", '#', :class => 'btn btn-primary btn-small') %>
-      <%= link_to("Delete", '#', :class => 'btn btn-danger btn-small') %>     
-      </td>
+      <td><%= link_to(manufacturer.name, {:action =>'show', :id => manufacturer.id}) %></td>
+      <td><%= manufacturer.address %></td>
+      <td><%= manufacturer.office_tel %></td>
+      <td><%= manufacturer.office_mail %></td>
+      <td><%= manufacturer.updated_at.strftime("%d.%m.%Y at %H:%M") %></td>
       <% end %>
     </tr>
 </tbody>
 </table>
+  <%= link_to(raw("<i class='icon-plus'></i><span class='spatiu-st-dr-link-cu-iconita'>Add</span>"), {:action => 'new'}, {:class => 'btn btn-success'}) %>
 </div>

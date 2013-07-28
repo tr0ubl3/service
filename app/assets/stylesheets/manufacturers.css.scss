@@ -23,3 +23,111 @@ background-image: asset-url('glyphicons-halflings-white.png', image);
 .spatiu-sus {
 	margin-top: 10px;
 }
+
+.spatiu-sus-jos {
+	margin: 10px 0;
+}
+
+.titlu-tabel {
+	text-align: left;
+	font-weight: bold;
+	font-size: 24px;
+	padding: 10px 0;
+}
+
+.spatiu-st-dr-link-cu-iconita {
+	margin: 0 5px;
+}
+
+$fs: 16px; //font size
+$br: 10px; //broder radius
+$bw: 1px; //grosime linie border
+$bs: $bw solid #2e2e2e; //border style
+$rtlh: 30px; //rand tabel line height
+
+.container-grup {
+	background-color: rgb(255, 255, 255);
+	width: 100%;
+	display: block;
+	border: $bs;
+	border-radius: $br;
+	margin: 20px 0 0 0;
+	position: relative;
+}
+
+.container-grup h2 {
+	display: block;
+	position: absolute;
+	line-height: $fs;
+	font-size: $fs;
+	overflow: visible;
+	background-color: #eeeeee;
+	padding: $fs/2;
+	border-radius: $br 0 $br 0;
+	margin-top: 0;
+	color: gray;
+}
+
+.clear-row {
+	display: block;
+	position: static;
+	clear: both;
+	width: 100%;
+	height: 0;
+	margin-top: 40px;
+}
+
+.tabel-container {
+margin: 0 auto 20px auto;
+width: 920px;
+text-align: center;
+}
+
+.rand-tabel {
+width: 100%;
+height: $rtlh;
+border: $bs;
+margin-top: -$bw;
+}
+
+.titlu-rand, .continut-rand {
+	display: block;
+	height: $rtlh;
+	line-height: $rtlh;
+	float: left;
+}
+
+.titlu-rand {
+width: 20%;
+font-weight: bold;
+border-right: $bs;
+margin-left: -$bw;
+text-align: left;
+text-indent: 10px;
+}
+
+.continut-rand {
+width: 80%;
+margin-left: -$bw;
+}
+
+.raza-contur-sus {
+	border-radius: $br $br 0 0;
+	-webkit-border-radius: $br $br 0 0; 
+	-moz-border-radius: $br $br 0 0; 
+}
+
+.raza-contur-jos {
+	border-radius: 0 0 $br $br;
+	-webkit-border-radius: 0 0 $br $br;
+	-moz-border-radius: 0 0 $br $br;
+}
+
+.cust-btn {
+	margin: 10px 0;
+	float: right;
+}
+
+.distantier-alerta {
+	margin: 10px 0;
+}
