@@ -1,64 +1,62 @@
 <div class="container">
-<%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'list'}, {:class => 'btn spatiu-sus'}) %>
-<h1>Update Manufacturer</h1>
-<%= form_for(:manufacturer, :url => {:action => 'update', :id => @manufacturer.id}, html: {class: "form-horizontal"}) do |f| %>
-  <div class="control-group">
-    <label class="control-label" for="inputname">Manufacturer name :</label>
-    <div class="controls">
-      <%= f.text_field(:name) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputaddress">Country :</label>
-    <div class="controls">
-      <%= f.text_field(:country) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputaddress">City :</label>
-    <div class="controls">
-      <%= f.text_field(:city) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputaddress">Address :</label>
-    <div class="controls">
-      <%= f.text_field(:address) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputaddress">Postal code :</label>
-    <div class="controls">
-      <%= f.text_field(:postal_code) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputofficetel">Office telephone :</label>
-    <div class="controls">
-      <%= f.text_field(:office_tel) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputofficetel">Fax :</label>
-    <div class="controls">
-      <%= f.text_field(:fax) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputmail">Office e-mail :</label>
-    <div class="controls">
-      <%= f.text_field(:office_mail) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputofficetel">Mobile :</label>
-    <div class="controls">
-      <%= f.text_field(:mobile) %>
-    </div>
-  </div>
-  <div class="controls">
-  <%= submit_tag("Save manufacturer", :class => 'btn btn-success') %>
+<%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'show', :id => @machine.id}, {:class => 'btn spatiu-sus'}) %>
+
+<% if !flash[:notice].blank? %>
+<div class="alert alert-success distantier-alerta">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+<%= flash[:notice] %>
 </div>
 <% end %>
 
+<h1>Update Machine</h1>
+<%= form_for(:machine, :url => {:action => 'update', :id => @machine.id}, html: {class: "form-horizontal"}) do |f| %>
+
+<div class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">Machine type :</label>
+    <div class="controls">
+      <%= f.text_field(:machine_type) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Machine number :</label>
+    <div class="controls">
+      <%= f.text_field(:machine_number) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Display name :</label>
+    <div class="controls">
+      <%= f.text_field(:display_name) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Machine manufacturer :</label>
+    <div class="controls">
+      <%= f.collection_select(:manufacturer_id, manufacturers, :id, :name) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Machine owner :</label>
+    <div class="controls">
+      <%= f.collection_select(:machine_owner_id, owners, :id, :name) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Delivery date :</label>
+    <div class="controls">
+      <%= f.date_select(:delivery_date) %>
+  </div>
+</div>
+  <div class="control-group">
+    <label class="control-label">Waranty period :</label>
+    <div class="controls">
+      <%= f.text_field(:waranty_period) %>
+    </div>
+  </div>
+</div>
+<div class="controls">
+  <%= submit_tag("Save machine", :class => 'btn btn-success') %>
+</div>
+<% end %>
 </div>
