@@ -42,7 +42,11 @@
   <div class="control-group">
     <label class="control-label">Machine owner :</label>
     <div class="controls fix_LineHeight">
+      <% if @machine.machine_owner == nil %>
+      <%= 'None' %>
+      <% else %>
       <%= @machine.machine_owner.name %>
+      <% end %>
     </div>
   </div>
   <div class="control-group">
@@ -60,7 +64,7 @@
 </div>
 	
 <div class="spatiu-sus-jos">
-<%= link_to(raw("<i class='icon-remove'></i><span class='spatiu-st-dr-link-cu-iconita'>Delete manufacturer</span>"), {:action => 'delete', :id => @machine.id}, {:class => 'btn btn-danger'}) %>
-<%= link_to(raw("<i class='icon-pencil'></i><span class='spatiu-st-dr-link-cu-iconita'>Edit manufacturer</span>"), {:action => 'edit', :id => @machine.id}, {:class => 'btn btn-primary'}) %>
+<%= link_to(raw("<i class='icon-remove'></i><span class='spatiu-st-dr-link-cu-iconita'>Delete machine</span>"), {:action => 'delete', :id => @machine.id}, {:class => 'btn btn-danger'}) %>
+<%= link_to(raw("<i class='icon-pencil'></i><span class='spatiu-st-dr-link-cu-iconita'>Edit machine</span>"), {:action => 'edit', :id => @machine.id}, {:class => 'btn btn-primary'}) %>
 </div>
 </div>
