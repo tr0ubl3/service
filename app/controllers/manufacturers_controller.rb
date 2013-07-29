@@ -3,7 +3,7 @@ class ManufacturersController < ApplicationController
 	respond_to :html, :json
 
 	def list
-		@manufacturers = Manufacturer.order("manufacturers.id ASC")
+		@manufacturers = Manufacturer.order("firms.id ASC")
 	end
 
 	def show

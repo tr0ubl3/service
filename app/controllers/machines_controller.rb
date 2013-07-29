@@ -1,5 +1,6 @@
 class MachinesController < ApplicationController
-helper_method :manufacturers, :owners, :machine_manufacturer, :manufacturer_test?	
+helper_method :manufacturers, :owners
+
 	def list
 		@machines = Machine.order("machines.id ASC")
 	end

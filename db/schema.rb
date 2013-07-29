@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728141811) do
+ActiveRecord::Schema.define(:version => 20130729153843) do
 
   create_table "events", :force => true do |t|
     t.integer  "machine_id"
@@ -24,13 +24,19 @@ ActiveRecord::Schema.define(:version => 20130728141811) do
 
   add_index "events", ["machine_id"], :name => "index_events_on_machine_id"
 
-  create_table "machine_owners", :force => true do |t|
+  create_table "firms", :force => true do |t|
     t.string   "name"
     t.string   "address"
     t.string   "office_tel"
     t.string   "office_mail"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "country"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "fax"
+    t.string   "mobile"
+    t.string   "type"
   end
 
   create_table "machines", :force => true do |t|
@@ -47,19 +53,5 @@ ActiveRecord::Schema.define(:version => 20130728141811) do
 
   add_index "machines", ["machine_owner_id"], :name => "index_machines_on_machine_owner_id"
   add_index "machines", ["manufacturer_id"], :name => "index_machines_on_manufacturer_id"
-
-  create_table "manufacturers", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "office_tel"
-    t.string   "office_mail"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "country"
-    t.string   "city"
-    t.string   "postal_code"
-    t.string   "fax"
-    t.string   "mobile"
-  end
 
 end
