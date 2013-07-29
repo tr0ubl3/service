@@ -1,0 +1,35 @@
+<div class="container">
+    <% if !flash[:notice].blank? %>
+    <div class="alert alert-success distantier-alerta">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+<%= flash[:notice] %>
+</div>
+<% end %>
+<table class="table table-bordered table-hover">
+<caption class="titlu-tabel">Machine owners list</caption>
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Office tel</th>
+      <th>Office mail</th>
+      <th>Last updated</th>
+    </tr>
+</thead>
+<tbody>
+	<% @i=0 %>
+	<% @owners.each do |owner| %>
+    <tr>
+      <td><%= @i+=1 %></td>
+      <td><%= link_to(owner.name, {:action =>'show', :id => owner.id}) %></td>
+      <td><%= owner.address %></td>
+      <td><%= owner.office_tel %></td>
+      <td><%= owner.office_mail %></td>
+      <td><%= owner.updated_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      <% end %>
+    </tr>
+</tbody>
+</table>
+  <%= link_to(raw("<i class='icon-plus'></i><span class='spatiu-st-dr-link-cu-iconita'>Add</span>"), {:action => 'new'}, {:class => 'btn btn-success'}) %>
+</div>
