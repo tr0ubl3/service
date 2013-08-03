@@ -1,5 +1,9 @@
 Service::Application.routes.draw do
+  devise_for :users
+
   get "main/index"
+
+  root to: 'manufacturers#list'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
