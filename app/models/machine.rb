@@ -3,12 +3,12 @@ class Machine < ActiveRecord::Base
   belongs_to :manufacturer
   belongs_to :machine_owner
   has_many :events
-#validari
 validates :display_name, :presence => true,
   				   :length => { :within => 3..255 },
   				   :uniqueness => true
 validates :machine_number, :presence => true,
-  				      :length => { :within => 3..255 }
+  				      :length => { :within => 3..255 },
+  				      :uniqueness => true
 
 validates :machine_type, :presence => true,
 				      :length => { :within => 3..255 }
