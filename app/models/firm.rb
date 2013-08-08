@@ -1,6 +1,9 @@
 class Firm < ActiveRecord::Base
   attr_accessible :name, :country, :city, :address, :postal_code, :fax, :office_tel, :office_mail, :mobile, :type
   has_many :machines
+
+  EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+
   validates :name, :presence => true,
   				   :length => { :within => 3..255 },
   				   :uniqueness => true
@@ -23,6 +26,7 @@ class Firm < ActiveRecord::Base
   validates :fax, :length => { :within => 3..255 }
 
   validates :office_mail, :presence => true,
-  				          :length => { :within => 3..255 }
+  				          :length => { :within => 3..255 },
+  				          :format => EMAIL_REGEX
   validates :mobile, :length => { :within => 8..255 }
 end
