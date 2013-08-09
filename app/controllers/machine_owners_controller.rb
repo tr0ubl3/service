@@ -7,7 +7,8 @@ class MachineOwnersController < ApplicationController
 
 	def show
 		@owner = MachineOwner.find(params[:id])
-		@mo = @owner.machines.order("machines.id ASC")
+		# mm = machine manufacturer = machine owner
+		@mm = @owner.machines.order("machines.id ASC")
 	end
 
 	def new

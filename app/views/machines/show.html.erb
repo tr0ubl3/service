@@ -1,4 +1,4 @@
-<%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'list'}, {:class => 'btn spatiu-sus'}) %>
+<%= render(:partial => "shared/btn_back_to_list") %>
 
 <% if !flash[:notice].blank? %>
 <div class="alert alert-success distantier-alerta">

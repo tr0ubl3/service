@@ -1,4 +1,4 @@
-<%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'list'}, {:class => 'btn spatiu-sus'}) %>
+<%= render(:partial => "shared/btn_back_to_list.html.erb") %>
 <h1>New Manufacturer</h1>
 <%= form_for(:machine, :url => {:action => 'create'}, html: {class: "form-horizontal"}) do |f| %>
 <%= render(:partial => 'form', :locals => {:f => f}) %>

@@ -1,0 +1,120 @@
+	<h1><%= firm.name %> details</h1>
+	<div class="container-grup">
+		<h2>Address</h2>
+			<div class="clear-row"></div>
+			<div class="tabel-container">
+				<div class="rand-tabel clearfix raza-contur-sus">
+					<span class="titlu-rand">Name :</span>
+					<span class="continut-rand"> 
+					<%= link_to(firm.name, "#", id: "test", data: {trigger: "click", title: "test", content: "mambo jambo", animation: 'true', placement: "top"}) %></span>
+				</div>
+
+				<div class="rand-tabel clearfix">
+					<span class="titlu-rand">Country :</span>
+					<span class="continut-rand"><%= firm.country %></span>
+				</div>
+
+				<div class="rand-tabel clearfix">
+					<span class="titlu-rand">City :</span>
+					<span class="continut-rand"><%= firm.city %></span>
+				</div>
+
+				<div class="rand-tabel clearfix">
+					<span class="titlu-rand">Address :</span>
+					<span class="continut-rand"><%= firm.address %></span>
+				</div>
+
+				<div class="rand-tabel clearfix raza-contur-jos">
+					<span class="titlu-rand">Postal code :</span>
+					<span class="continut-rand"><%= firm.postal_code %></span>
+				</div>
+			</div>
+	</div>
+
+	<div class="container-grup">
+		<h2>Contact</h2>
+			<div class="clear-row"></div>
+			<div class="tabel-container">
+				<div class="rand-tabel clearfix raza-contur-sus">
+					<span class="titlu-rand">Telephone : </span>
+					<span class="continut-rand"><%= firm.office_tel %></span>
+				</div>
+
+				<div class="rand-tabel clearfix">
+					<span class="titlu-rand">Fax :</span>
+					<span class="continut-rand"><%= firm.fax %></span>
+				</div>
+
+				<div class="rand-tabel clearfix">
+					<span class="titlu-rand">E-mail :</span>
+					<span class="continut-rand"><%= firm.office_mail %></span>
+				</div>
+
+				<div class="rand-tabel clearfix raza-contur-jos">
+					<span class="titlu-rand">Mobile :</span>
+					<span class="continut-rand"><%= firm.mobile %></span>
+				</div>
+			</div>
+	</div>
+
+	<div class="container-grup">
+		<h2>Machines</h2>
+			<div class="clear-row"></div>
+<table class="table table-bordered table-hover">
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Delivered date</th>
+      <th>Waranty period</th>
+      <th>Machine number</th>
+    </tr>
+</thead>
+<tbody>
+	<% @i=0 %>
+	<% @mm.each do |machine| %>
+    <tr>
+      <td><%= @i+=1 %></td>
+      <td><%= machine.display_name %></td>
+      <td><%= machine.machine_type %></td>
+      <td><%= machine.delivery_date %></td>
+      <td><%= machine.waranty_period %></td>
+      <td><%= machine.machine_number %></td>
+      <% end %>
+    </tr>
+</tbody>
+</table>
+	</div>
+
+	<div class="container-grup">
+		<h2>Users</h2>
+<div class="clear-row"></div>
+		<table class="table table-bordered table-hover">
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Telephone</th>
+      <th>E-mail</th>
+      <th>Mobile</th>
+      <th>Urmeaza ...</th>
+    </tr>
+</thead>
+<tbody>
+	<% @n=0 %>
+    <tr>
+      <td><%= @n+=1 %></td>
+      <td><%= @n+=1 %></td>
+      <td><%= @n+=1 %></td>
+      <td><%= @n+=1 %></td>
+      <td><%= @n+=1 %></td>
+      <td><%= @n+=1 %></td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="spatiu-sus-jos cust-btn">
+<%= link_to(raw("<i class='icon-remove'></i><span class='spatiu-st-dr-link-cu-iconita'>Delete ") + button_name, {:action => 'delete', :id => firm.id}, {:class => 'btn btn-danger'}) %></span>
+<%= link_to(raw("<i class='icon-pencil'></i><span class='spatiu-st-dr-link-cu-iconita'>Edit ") + button_name, {:action => 'edit', :id => firm.id}, {:class => 'btn btn-primary'}) %></span>
+</div>
