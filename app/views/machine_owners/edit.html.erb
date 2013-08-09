@@ -2,62 +2,6 @@
 <%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'show', :id => @owner.id}, {:class => 'btn spatiu-sus'}) %>
 <h1>Update Machine Owner</h1>
 <%= form_for(@owner, :url => {:action => 'update', :id => @owner.id}, html: {class: "form-horizontal"}) do |f| %>
-  <div class="control-group">
-    <label class="control-label">Machine owner name :</label>
-    <div class="controls">
-      <%= f.text_field(:name) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Country :</label>
-    <div class="controls">
-      <%= f.text_field(:country) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">City :</label>
-    <div class="controls">
-      <%= f.text_field(:city) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Address :</label>
-    <div class="controls">
-      <%= f.text_field(:address) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Postal code :</label>
-    <div class="controls">
-      <%= f.text_field(:postal_code) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Office telephone :</label>
-    <div class="controls">
-      <%= f.text_field(:office_tel) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Fax :</label>
-    <div class="controls">
-      <%= f.text_field(:fax) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Office e-mail :</label>
-    <div class="controls">
-      <%= f.text_field(:office_mail) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Mobile :</label>
-    <div class="controls">
-      <%= f.text_field(:mobile) %>
-    </div>
-  </div>
-  <div class="controls">
-  <%= submit_tag("Save machine owner", :class => 'btn btn-success') %>
-</div>
+<%= render(:partial => 'form', :locals => {:f => f}) %>
 <% end %>
 </div>

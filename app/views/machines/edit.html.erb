@@ -10,53 +10,6 @@
 
 <h1>Update Machine</h1>
 <%= form_for(:machine, :url => {:action => 'update', :id => @machine.id}, html: {class: "form-horizontal"}) do |f| %>
-
-<div class="form-horizontal">
-  <div class="control-group">
-    <label class="control-label">Machine type :</label>
-    <div class="controls">
-      <%= f.text_field(:machine_type) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Machine number :</label>
-    <div class="controls">
-      <%= f.text_field(:machine_number) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Display name :</label>
-    <div class="controls">
-      <%= f.text_field(:display_name) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Machine manufacturer :</label>
-    <div class="controls">
-      <%= f.collection_select(:manufacturer_id, manufacturers, :id, :name) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Machine owner :</label>
-    <div class="controls">
-      <%= f.collection_select(:machine_owner_id, owners, :id, :name) %>
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Delivery date :</label>
-    <div class="controls">
-      <%= f.date_select(:delivery_date) %>
-  </div>
-</div>
-  <div class="control-group">
-    <label class="control-label">Waranty period :</label>
-    <div class="controls">
-      <%= f.text_field(:waranty_period) %>
-    </div>
-  </div>
-</div>
-<div class="controls">
-  <%= submit_tag("Save machine", :class => 'btn btn-success') %>
-</div>
+<%= render(:partial => 'form', :locals => {:f => f}) %>
 <% end %>
 </div>
