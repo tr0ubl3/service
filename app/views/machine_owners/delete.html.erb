@@ -1,4 +1,3 @@
-<div class="container">
 	<%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'list'}, {:class => 'btn spatiu-sus'}) %>
 	<div class="alert distantier-alerta">
   		<strong>Warning!</strong> This action cannot be undone !!!.
@@ -7,4 +6,3 @@
 		<p>Are you sure you want to delete <b><%= @owner.name %></b> ?</p>
 		<%= submit_tag("Yes, delete it !", :class => 'btn btn-danger') %>
 	<% end %>
-</div>

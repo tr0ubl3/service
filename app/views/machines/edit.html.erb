@@ -1,4 +1,3 @@
-<div class="container">
 <%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'show', :id => @machine.id}, {:class => 'btn spatiu-sus'}) %>
 
 <% if !flash[:notice].blank? %>
@@ -12,4 +11,3 @@
 <%= form_for(:machine, :url => {:action => 'update', :id => @machine.id}, html: {class: "form-horizontal"}) do |f| %>
 <%= render(:partial => 'form', :locals => {:f => f}) %>
 <% end %>
-</div>

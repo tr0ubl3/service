@@ -1,4 +1,3 @@
-<div class="container">
 <%= link_to(raw("<i class='icon-chevron-left'></i>back"), {:action => 'list'}, {:class => 'btn spatiu-sus'}) %>
 <h1>New Manufacturer</h1>
 <%= form_for(:manufacturer, :url => {:action => 'create'}, html: {class: "form-horizontal"}) do |f| %>
@@ -7,4 +6,3 @@
   <%= submit_tag("Save manufacturer", :class => 'btn btn-success') %>
 </div>
 <% end %>
-</div>

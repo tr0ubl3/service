@@ -1,0 +1,36 @@
+    <% if !flash[:notice].blank? %>
+      <div class="alert alert-success distantier-alerta">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+      </div>
+    <% end %>
+<table class="table table-bordered table-hover">
+<caption class="titlu-tabel">Events List</caption>
+<div class="alert">
+  <strong>to be updated</strong>
+</div>
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Event type</th>
+      <th>Machine</th>
+      <th>Date of event</th>
+    </tr>
+</thead>
+<tbody>
+  <% @i=0 %>
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= @i+=1 %></td>
+      <td><%= event.event_type %></td>
+      <% if event.machine == nil %>
+
+      <% else %>
+        <td><%= event.machine.display_name %></td>
+      <% end %>
+      <td><%= event.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      <% end %>
+    </tr>
+</tbody>
+</table>
+  <%= link_to(raw("<i class='icon-plus'></i><span class='spatiu-st-dr-link-cu-iconita'>Add</span>"), {:action => 'new'}, {:class => 'btn btn-success'}) %>
