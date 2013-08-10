@@ -4,8 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+posalux:
+  name: "Posalux"
+  country: "Elvetia"
+  city: "Biel"
+  address: "Str No. 1"
+  postal_code: "50023"
+  office_tel: "00410020123123"
+  fax: "00410020123123"
+  office_mail: "office@posalux.ch"
+  mobile: "00410740123009"
