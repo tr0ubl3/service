@@ -14,3 +14,14 @@ posalux:
   fax: "00410020123123"
   office_mail: "office@posalux.ch"
   mobile: "00410740123009"
+
+delphi:
+  name: "Delphi"
+  country: "Romania"
+  city: "Iasi"
+  address: "Str No. 1"
+  postal_code: "50023"
+  office_tel: "00410020123123"
+  fax: "00410020123123"
+  office_mail: "office@delphi.com"
+  mobile: "00410740123009"
