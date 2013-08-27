@@ -4,11 +4,10 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
-  require "rails/application"
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
-
+  
 # --- Instructions ---
 # Sort the contents of this file into a Spork.prefork and a Spork.each_run
 # block.
@@ -59,7 +58,7 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-  config.mock_with :rspec
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -78,10 +77,11 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
-  end
+end
 end
 
-  Spork.each_run do
-    # This code will be run each time you run your specs.
+Spork.each_run do
+  # This code will be run each time you run your specs.
 
-  end
+end
+

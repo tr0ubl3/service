@@ -13,6 +13,7 @@ class EventsController < ApplicationController
 
 	def new
 		@event = Event.new
+		@machines = Machine.all
 	end
 
 	def create

@@ -8,9 +8,16 @@ gem 'rails', '3.2.11'
 group :development, :test do
 	gem 'sqlite3'
 	gem 'rspec-rails'
-	gem 'guard-rspec', '~> 0.5.5'
-	gem "webrat" , ">= 0.7.2"
 	gem "selenium-client" , ">= 1.2.18"
+
+	## guard gems begin 
+
+	gem "guard"
+	gem 'guard-rspec', '~> 0.5.5'
+	gem 'guard-spork', :github => 'guard/guard-spork'
+	gem 'guard-cucumber'
+
+	## end
 end
 
 group :production do
@@ -23,7 +30,6 @@ group :test do
 	gem 'rb-notifu', '0.0.4'
 	gem 'win32console'
 	gem 'wdm'
-	gem 'guard-spork'
 	gem 'spork'
 	gem 'growl'
 	gem 'ruby_gntp'
@@ -31,6 +37,7 @@ group :test do
 	gem 'cucumber', '1.2.5'
 	gem 'cucumber-rails', :require => false 
 	gem 'database_cleaner'
+	gem 'childprocess', '0.3.6'
 end
 
 # Gems used only for assets and not required
