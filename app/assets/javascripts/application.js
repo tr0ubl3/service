@@ -12,7 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.ro
 //= require_tree .
+
 $(document).ready(function() {
 	$('#test').popover();
+	$('#event_date').datepicker({
+               format: 'dd.mm.yyyy',
+               autoclose: true,
+               startView: 0
+               });
 });

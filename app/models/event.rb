@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :machine_id, :event_date, :event_type, :event_description
+  attr_accessible :machine_id, :event_date, :event_type, :event_description, :hour_counter
   belongs_to :machine
 
 validates :event_date, :presence => true

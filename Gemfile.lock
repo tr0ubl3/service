@@ -40,6 +40,8 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.1.1)
     bcrypt-ruby (3.1.1-x86-mingw32)
+    bootstrap-datepicker-rails (1.1.1.7)
+      railties (>= 3.0)
     builder (3.0.4)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -222,6 +224,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bootstrap-datepicker-rails
   capybara (= 1.1.2)
   childprocess (= 0.3.6)
   coffee-rails (~> 3.2.1)

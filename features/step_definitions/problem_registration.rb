@@ -27,7 +27,7 @@ When(/^I register my new event/) do
   select('Date of event', :from => 'date')
   fill_in 'machine_hour_counter', with: '1234'
   choose('Machine stopped')
-  # shoul be an alarm code validator
+  # should be an alarm code validator
   fill_in 'alarm_code', with: '700323'
   click_button('Insert')
   fill_in 'event_description', with: "The machine stopped working with alarm number 700323 and after numerous attempts of restarting the machine, the alarm can't be canceled"
