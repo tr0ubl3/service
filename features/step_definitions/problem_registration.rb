@@ -23,15 +23,15 @@ When(/^I register my new event/) do
   visit('/')
   click_link_or_button('New event')
   current_path.should == '/events/new'
-  select('MH.329', :from => 'machine_list')
-  select('Date of event', :from => 'date')
-  fill_in 'machine_hour_counter', with: '1234'
+  select('MH.329', :from => 'event_machine_id')
+  fill_in 'event_event_date', with: '05.09.2013'
+  fill_in('Hour counter', with: '1234')
   choose('Machine stopped')
   # should be an alarm code validator
   fill_in 'alarm_code', with: '700323'
   click_button('Insert')
   fill_in 'event_description', with: "The machine stopped working with alarm number 700323 and after numerous attempts of restarting the machine, the alarm can't be canceled"
-  click_button('Submit')
+  click_button('Save')
 end
 
 Then(/^I have a new problem saved$/) do
