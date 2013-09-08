@@ -17,16 +17,14 @@ class EventsController < ApplicationController
 	end
 
 	def create
-		event = Event.new(params[:event])
-		event.save
-		redirect_to('/events/event_confirmation')
-		flash[:notice] = 'Event succesfully registered'	
-	# 	if @event.save
-	# 		flash[:notice] = "Successfully created event."
-	# 		redirect_to(:action => 'list')
-	# 	else
-	# 		render('new')
-	# 	end
+		@event = Event.new(params[:event])
+		if @event.save
+			redirect_to root_url
+			flash[:notice] = 'Event succesfully registered!'	
+		else
+			flash.now[:error] = 'Something went wrong!'
+			render :new
+		end
 	end
 
 	# def update

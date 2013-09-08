@@ -1,10 +1,10 @@
 Service::Application.routes.draw do
   
   get "general/index"
-
+  resources :events
   devise_for :users
   get "main/index"
-  root to: 'general#index', as: 'dashboard'
+  root to: 'general#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
