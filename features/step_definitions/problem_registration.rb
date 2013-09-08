@@ -35,6 +35,7 @@ When(/^I register my new event/) do
 end
 
 Then(/^I have a new problem saved$/) do
+  expect(Event.find_by_id(1)).not_to be_nil
 	current_path.should == "/events/event_confirmation"
 	page.should have_content('Problem saved and pending confirmation')
 end

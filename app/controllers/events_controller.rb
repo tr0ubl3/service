@@ -16,15 +16,18 @@ class EventsController < ApplicationController
 		@machines = Machine.all
 	end
 
-	# def create
-	# 	@event = Event.new(params[:event])
+	def create
+		event = Event.new(params[:event])
+		event.save
+		redirect_to('/events/event_confirmation')
+		flash[:notice] = 'Event succesfully registered'	
 	# 	if @event.save
 	# 		flash[:notice] = "Successfully created event."
 	# 		redirect_to(:action => 'list')
 	# 	else
 	# 		render('new')
 	# 	end
-	# end
+	end
 
 	# def update
 	# 	@event = Event.find(params[:id])
