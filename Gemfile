@@ -11,12 +11,10 @@ group :development, :test do
 	gem "selenium-client" , ">= 1.2.18"
 
 	## guard gems begin 
-
 	gem "guard"
 	gem 'guard-rspec', '~> 0.5.5'
 	gem 'guard-spork', :github => 'guard/guard-spork'
 	gem 'guard-cucumber'
-
 	## end
 end
 
@@ -30,7 +28,7 @@ group :test do
 	gem 'rb-notifu', '0.0.4'
 	gem 'win32console'
 	gem 'wdm'
-	gem 'spork'
+	gem 'spork', '0.9.0'
 	gem 'growl'
 	gem 'ruby_gntp'
 	gem 'win32-process'

@@ -4,6 +4,7 @@ describe "events/new.html.erb" do
   before :each do
     render
   end
+
   it "has text 'Define new machine event'" do
   	expect(rendered).to have_content('Define new machine event')
   end
@@ -14,7 +15,6 @@ describe "events/new.html.erb" do
 
   it 'has machine list drop down' do
   	expect(rendered).to have_css('select#event_machine_id')
-
   end
 
   it 'has a json event with machine details after selecting the machine number'
