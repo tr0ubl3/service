@@ -9,6 +9,9 @@ describe EventsController do
 			expect(assigns[:event]).not_to be_nil
 		end
 
+		it 'assigns @machines.all array too the view' do
+			expect(assigns[:machines]).not_to be_nil
+		end
 		it 'renders new template' do
 			expect(response).to render_template :new
 		end
