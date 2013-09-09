@@ -18,24 +18,24 @@ When(/^I register my new event/) do
 end
 
 Then(/^I have a new event saved$/) do
-  visit root_url
-  click_link_or_button('New event')
-  current_path.should == '/events/new'
-  fill_in 'event_event_date', with: '2013'
-  fill_in('Hour counter', with: 'abcd')
-  fill_in 'alarm_code', with: '@@@'
-  fill_in 'event_description', with: "12313"
-  click_button('Save')
+  expect(Event.find_by_id(1)).to be_false
 end
 
 When(/^I register a new event with invalid data$/) do
-  expect(page).to have_selector('form#new_event')
+  visit root_url
+  click_link_or_button('New event')
+  current_path.should == '/events/new'
+  fill_in 'event_event_date', with: ''
+  fill_in('Hour counter', with: '12')
+  fill_in 'alarm_code', with: 'abcd'
+  fill_in 'event_description', with: ""
+  click_button('Save')
 end
 
 Then(/^I should see the registration form again$/) do
-  expect(Event.find_by_id(1)).to be_nil
+  expect(page).to have_selector('form#new_event')
 end
 
 Then(/^I should not have a new event saved$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(Event.find_by_id(1)).to be_nil
 end

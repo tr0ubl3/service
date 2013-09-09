@@ -1,6 +1,6 @@
 <h2>Define new machine event</h2>
 <%= form_for(:event, :url => {:action => 'create'}, html: {id: "new_event"}) do |f| %>
-<%= f.select(:machine_id, Machine.all.collect { |m| [m.display_name, m.id] }, html: {id: "machine_list"}) %>
+<%= f.select(:machine_id, Machine.all.collect { |m| [m.display_name, m.id] }, :include_blank => true, html: {id: "machine_list"}) %>
 <br />
 <div class='input-append date' id='event_date'>
 <%= label_tag(:event_date, 'Date of the event') %>	

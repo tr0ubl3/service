@@ -12,39 +12,50 @@ describe Event do
 				alarm_code: "700123",
 				event_description: "machine has alarm 700123"
 			}
+			event = Event.new(@params)
+		end
+		it 'is invalid when machine_id is empty' do
+			@params[:machine_id] = nil
+			expect(event.valid?).to be_false
 		end
 		it 'is invalid when event_date is empty' do
 			@params[:event_date] = nil
-			event = Event.new(@params)
 			expect(event.valid?).to be_false
 		end
 		it 'is invalid when hour_counter is empty' do
 			@params[:hour_counter] = nil
-			event = Event.new(@params)
 			expect(event.valid?).to be_false
 		end
 		it 'is invalid when event_type is empty' do
 			@params[:event_type] = nil
-			event = Event.new(@params)
-			expect(event.valid?).to be_false
-		end
-		it 'is invalid when alarm_code is empty' do
-			@params[:alarm_code] = nil
-			event = Event.new(@params)
 			expect(event.valid?).to be_false
 		end
 		it 'is invalid when event_description is empty' do
 			@params[:event_description] = nil
-			event = Event.new(@params)
 			expect(event.valid?).to be_false
 		end
-		it 'is invalid when hour_counter < 3 chars'
-		it 'is invalid when alarm_code < 6 chars'
-		it 'is invalid when event_description < 3 chars'
-		it "is invalid when date format it's not %d.%m.%y"
-		it "is invalid when hour_counter it's not integer"
-		it "is invalid when alarm code it's not integer"
-		it "is invalid when event_description has only numbers or spaces"
+		it 'is invalid when hour_counter < 3 chars' do
+			@params[:hour_counter] = 12
+			expect(event.valid?).to be_false
+		end
+		it 'is invalid when alarm_code < 6 chars' do
+			@params[:alarm_code] = 12
+			expect(event.valid?).to be_false
+		end
+		it 'is invalid when event_description < 3 chars' do
+			@params[:event_description] = 'ma'
+			expect(event.valid?).to be_false
+		end
+		it "is invalid when hour_counter it's not a number" do
+			@params[:hour_counter] = '123a'
+			expect(event.valid?).to be_false
+			# puts event.errors.full_messages
+		end
+		it "is invalid when alarm_code it's not integer" do
+			@params[:alarm_code] = 'aaaaaa'
+			expect(event.valid?).to be_false
+			# puts event.errors.full_messages
+		end
 	end
 
 	it 'is an ActiveRecord model' do
