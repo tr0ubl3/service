@@ -31,4 +31,18 @@ $(document).ready(function() {
 	// 	trigger: 'click',
 	// 	content: 'Correct error'
 	// 	});
+// acjs - alarm code java script
+$('#acjs').on('click', doVal);
+function doVal(e) {
+	// acfi = alarm_code field id
+	acfi = $('#alarm_code');
+	// val = current value of field alarm_code
+	val = acfi.val();
+	e.preventDefault();
+	console.log(val);
+	// acfi.closest('.control-group').append(val);
+	$('<p></p>', {
+		text: val
+	}).appendTo('code');
+}
 });

@@ -19,6 +19,7 @@ When(/^I register my new event/) do
   # should be an alarm code validator
   fill_in 'alarm_code', with: 700323
   click_button('Insert alarm')
+  expect(page.has_css?('alarm-area'))
   fill_in 'event_description', with: "The machine stopped working with alarm number 700323 and after numerous attempts of restarting the machine, the alarm can't be canceled"
   click_button('Save')
 end
