@@ -1,16 +1,30 @@
 <h2>Define new machine event</h2>
-<%= form_for(:event, :url => {:action => 'create'}, html: {id: "new_event"}) do |f| %>
-	<%= f.select(:machine_id, Machine.all.collect { |m| [m.display_name, m.id] }, :include_blank => true, html: {id: "machine_list"}) %>
-	<br />
-	<div class='input-append date' id='event_date'>
-		<%= f.label(:event_date, 'Date of the event') %>	
-		<%= f.text_field :event_date, :value => Date.today.strftime('%d.%m.%Y') %>
-		<span class="add-on"><i class="icon-th"></i></span>
+<div class='well'>
+	<%= form_for(:event, :url => {:action => 'create'}, html: {id: "new_event"}) do |f| %>
+
+	<div class="control-group">
+		<%= f.label(:machine_id, 'Select machine', class: 'control-label') %>
+		<div class='controls'>
+			<%= f.select(:machine_id, Machine.all.collect { |m| [m.display_name, m.id] }, :include_blank => true, html: {id: "machine_list"}) %>
+		</div>
 	</div>
-	<br />
-		<%= f.label(:hour_counter, 'Hour counter') %>
-		<%= f.text_field :hour_counter, :id => 'hour_counter' %>
-	<div class='well'>
+
+	<div class="control-group">
+		<%= f.label(:event_date, 'Date of the event', class: 'control-label') %>	
+		<div class='controls'>
+			<%= f.text_field :event_date, :value => Date.today.strftime('%d.%m.%Y'), id: 'event_date' %>
+		</div>
+	</div>
+
+	<div class="control-group">
+			<%= f.label(:hour_counter, 'Hour counter', class: 'control-label') %>
+		<div class='controls'>
+			<%= f.text_field :hour_counter, :id => 'hour_counter' %>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<%= f.label(:event_type, 'Choose the machine status') %>
 		<label class='radio'>
 			<%= f.radio_button(:event_type, '1') %>
 			<%= label_tag(:event_type, 'Machine stopped') %>
@@ -23,15 +37,22 @@
 			<%= f.radio_button(:event_type, '3') %>
 			<%= label_tag(:event_type, 'Other') %>
 		</label>
+	</div>	
+	<div class="control-group">
+		<%= f.label(:alarm_code, 'Error codes definition', class: 'control-label') %>
+		<div class="controls input-append">
+			<%= f.text_field :alarm_code, :id => 'alarm_code' %>
+			<button class="btn" type="button">Insert alarm</button>
+		</div>
+		<code style='display: block;'>test</code>
 	</div>
-	<h4>Error codes definition</h4>
-	<div class="input-append">
-		<%= f.text_field :alarm_code, :id => 'alarm_code' %>
-		<button class="btn" type="button">Insert alarm</button>
+	<div class="control-group">
+		<%= f.label(:event_description, 'Event description', class: 'control-label') %>
+		<div class="controls">
+			<%= f.text_area :event_description, :id => 'event_description' %>
+		</div>
 	</div>
-	<br />
-	<h4><%= f.label(:event_description, 'Event description') %></h4>
-	<%= f.text_area :event_description, :id => 'event_description' %>
-	<%= submit_tag("Save") %>
+	<%= submit_tag("Save", class: 'btn btn-primary') %>
+</div>
 <% end %>
 

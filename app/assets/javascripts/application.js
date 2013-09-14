@@ -23,5 +23,12 @@ $(document).ready(function() {
                autoclose: true,
                startView: 0
                });
-	$('.field_with_errors').addClass('control-group error');
+	$('.field_with_errors').closest('.control-group').addClass('error');
+	// $('.error').popover({
+	// 	animation: false,
+	// 	placement: 'right',
+	// 	selector: 'input',
+	// 	trigger: 'click',
+	// 	content: 'Correct error'
+	// 	});
 });

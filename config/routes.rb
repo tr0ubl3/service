@@ -2,6 +2,7 @@ Service::Application.routes.draw do
   
   get "general/index"
   resources :events
+  resources :manufacturers
   devise_for :users
   get "main/index"
   root to: 'general#index'

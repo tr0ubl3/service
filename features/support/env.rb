@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'spork'
-require "selenium-webdriver"
+# require "selenium-webdriver"
 
 Spork.prefork do
 	ENV["RAILS_ENV"] ||= 'test'

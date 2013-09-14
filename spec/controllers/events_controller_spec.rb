@@ -65,7 +65,7 @@ describe EventsController do
 				expect(assigns[:event]).to eq(event)
 			end
 			it 'assigns error flash message' do
-				expect(flash[:error]).not_to be_nil
+				expect(flash[:alert]).not_to be_nil
 			end
 		end
 	end

@@ -14,7 +14,7 @@ When(/^I register my new event/) do
   # wait_until { page.has_content?('datepicker') }
   # find('datepicker').find("td.day.active").click
   # fill_in('Date of the event', with: '01.01.1900')
-  fill_in('Hour counter', with: 1234)
+  fill_in 'hour_counter', with: 1234 
   choose('Machine stopped')
   # should be an alarm code validator
   fill_in 'alarm_code', with: 700323
@@ -33,8 +33,8 @@ When(/^I register a new event with invalid data$/) do
   visit root_url
   click_link_or_button('New event')
   current_path.should == '/events/new'
-  fill_in 'event_event_date', with: ''
-  fill_in('Hour counter', with: '12')
+  fill_in 'event_date', with: ''
+  fill_in('hour_counter', with: '12')
   fill_in 'alarm_code', with: 'abcd'
   fill_in 'event_description', with: ""
   click_button('Save')

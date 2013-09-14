@@ -1,8 +1,10 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 #event_description {
-width: 100%;
-resize:vertical;
-min-height: 150px;
+	width: 100%;
+	height: 100px;
+	resize:vertical;
+	min-height: 150px;
 }

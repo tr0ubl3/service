@@ -20,7 +20,7 @@ describe "events/new.html.erb" do
   it 'has a json event with machine details after selecting the machine number'
 
   it 'has date of the event' do
-  	expect(rendered).to have_css('div#event_date')
+  	expect(rendered).to have_css('input#event_date')
   end
 
   it 'has hour counter' do
@@ -28,9 +28,9 @@ describe "events/new.html.erb" do
   end
 
   it 'has event type radio buttons' do
-  	expect(rendered).to have_css('input [type="radio"]#event_type_1')
-    expect(rendered).to have_css('input [type="radio"]#event_type_2')
-    expect(rendered).to have_css('input [type="radio"]#event_type_3')
+  	expect(rendered).to have_css('input [type="radio"]#event_event_type_1')
+    expect(rendered).to have_css('input [type="radio"]#event_event_type_2')
+    expect(rendered).to have_css('input [type="radio"]#event_event_type_3')
   end
 
   it "has error codes definition" do
