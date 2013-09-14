@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   belongs_to :machine
 
 validates :machine_id, :presence => true
-validates :event_date, :presence => true
+# validates :event_date, :presence => true
 validates :hour_counter, :presence => true, :length => { :within => 3..6 },
 						  numericality: { only_integer: true } 	
 validates :alarm_code, length: { is: 6 }, allow_nil: true, 

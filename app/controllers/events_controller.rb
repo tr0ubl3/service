@@ -22,8 +22,8 @@ class EventsController < ApplicationController
 			redirect_to root_url
 			flash[:notice] = 'Event succesfully registered!'	
 		else
-			flash.now[:error] = 'Something went wrong!'
-			render :new
+			flash.now[:alert] = 'Please correct the errors and try again!'
+			render 'events/new'
 		end
 	end
 

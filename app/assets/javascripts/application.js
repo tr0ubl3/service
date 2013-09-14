@@ -23,4 +23,5 @@ $(document).ready(function() {
                autoclose: true,
                startView: 0
                });
+	$('.field_with_errors').addClass('control-group error');
 });

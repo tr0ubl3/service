@@ -1,9 +1,13 @@
 require 'rubygems'
 require 'spork'
+require "selenium-webdriver"
+
 Spork.prefork do
 	ENV["RAILS_ENV"] ||= 'test'
 	require 'cucumber/rails'
+	# Capybara.default_driver = :selenium
 	Capybara.default_selector = :css
+	Capybara.default_wait_time = 5
 	ActionController::Base.allow_rescue = false
 	begin
 	  DatabaseCleaner.strategy = :transaction

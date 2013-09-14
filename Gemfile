@@ -16,6 +16,7 @@ group :development, :test do
 	gem 'guard-spork', :github => 'guard/guard-spork'
 	gem 'guard-cucumber'
 	## end
+	gem 'commands'
 end
 
 group :production do
