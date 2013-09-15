@@ -8,3 +8,25 @@
 	resize:vertical;
 	min-height: 150px;
 }
+
+.alarm_code_add {
+  display: block;
+  padding: 0 3px;
+  font-weight: bold;
+}
+
+.alarm_code_add:hover {
+  background: #7bd503;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+#acdp {
+display: none;
+}
+
+#acdp:before {
+font-family: sans-serif;
+font-size: 13px;
+content: "* click alarm to remove";
+}

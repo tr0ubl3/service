@@ -31,18 +31,51 @@ $(document).ready(function() {
 	// 	trigger: 'click',
 	// 	content: 'Correct error'
 	// 	});
-// acjs - alarm code java script
-$('#acjs').on('click', doVal);
+// acjs - alarm code button java script
+
+(function() {
+	$('#alarm_code').on('keydown', doChk);
+	function doChk(e) {
+		if(e.keyCode == 13) {
+			doVal(e);
+		}
+	};
+	$('#acjs').on('click', doVal);
 function doVal(e) {
 	// acfi = alarm_code field id
 	acfi = $('#alarm_code');
+
 	// val = current value of field alarm_code
 	val = acfi.val();
+	$('#acdp').css('display', 'block');
 	e.preventDefault();
-	console.log(val);
-	// acfi.closest('.control-group').append(val);
-	$('<p></p>', {
-		text: val
-	}).appendTo('code');
+	if(val === '') {
+		console.log('empty string detected');
+	}
+	else {
+		// acfi.closest('.control-group').append(val);
+		$('<p></p>', {
+			text: val,
+			class: 'alarm_code_add',
+			data: val
+		}).appendTo('#acdp');
+		acfi.val('');
+		}
 }
+})();
+
+(function() {
+	$('body').on('click', '.alarm_code_add', function () {
+		var t = $(this);
+		var text = t.text();
+		var confirmation = confirm("Are you sure you want to delete alarm:" + "\n" + text);
+		if (confirmation==true)
+		{
+			t.remove();
+		}
+
+	}
+	);
+})();
+
 });
