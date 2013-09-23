@@ -80,12 +80,33 @@ $(document).ready(function() {
 				$('#acdp').css('display', 'block');
 				AlarmArray.push(val);
 				console.log('My alarms are '+ AlarmArray);
-				$('<p></p>', {
-					text: val,
-					class: 'alarm_code_add',
-					data: val
-				}).appendTo('#acdp');
-				acfi.val('');
+				var search_text = $.ajax({
+											url: "new",
+											type: "get",
+											async: "false",
+											// contentType: 'json',
+											cache: "false",
+											data: {"search": val},
+											dataType: "json",
+											success: function( results ) {
+													if (results.length != 0) {
+													var alarm_text = results[0].text;
+													console.log("this is the one "+alarm_text);
+																	$('<p></p>', {
+																					text: val + " - " + alarm_text,
+																					class: 'alarm_code_add',
+																					data: val
+																				}).appendTo('#acdp');
+																				acfi.val('');
+
+												    }
+												    else {
+												    	alert('Invalid alarm');
+												    }
+												}
+											});
+				// console.log('Ajax merge, valoarea este: ' + search_text);
+
 			}
 			else {
 				acfi.closest('.control-group').addClass('error');
@@ -93,6 +114,7 @@ $(document).ready(function() {
 			}
 		}
 	})();
+
 
 	//anonymous function for deleting alarm after clicking on it
 	(function() {
@@ -105,6 +127,8 @@ $(document).ready(function() {
 			{
 				t.remove();
 				AlarmArray.splice(elem, 1);
+				// console.log('textul este ' + text)
+				// console.log('ordinea este ' + elem);
 				console.log('array now is: ' + AlarmArray);
 			}
 

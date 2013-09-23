@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908161130) do
+ActiveRecord::Schema.define(:version => 20130922203130) do
+
+  create_table "alarms", :force => true do |t|
+    t.integer  "number"
+    t.text     "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.integer  "machine_id"

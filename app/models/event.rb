@@ -10,4 +10,5 @@ validates :alarm_code, length: { is: 6 }, allow_nil: true,
 					   numericality: { only_integer: true }
 validates :event_type, :presence => true
 validates :event_description, :presence => true, :length => { :within => 3..500 }
+
 end

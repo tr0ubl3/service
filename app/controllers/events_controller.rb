@@ -14,6 +14,12 @@ class EventsController < ApplicationController
 	def new
 		@event = Event.new
 		@machines = Machine.all
+		@alarm_search = Alarm.t1(params[:search])
+		respond_to do |format|
+			format.html
+			format.json { render json: @alarm_search }
+		end
+
 	end
 
 	def create
