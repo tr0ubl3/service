@@ -1,6 +1,6 @@
 class Alarm < ActiveRecord::Base
   attr_accessible :number, :text
-
+  has_and_belongs_to_many :events
   scope :t1, lambda { |query| where(["number LIKE ?", "#{query}"]) }
 
 	def self.seal(search_query)
