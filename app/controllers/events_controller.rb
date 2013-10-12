@@ -26,7 +26,9 @@ class EventsController < ApplicationController
 	def create
 		@event = Event.new(params[:event])
 		if @event.save
-			@event.alarms << Alarm.find(params[:alarms])
+			if :alarms != nil
+				@event.alarms << Alarm.find(params[:alarms])
+			end
 			redirect_to root_url
 			flash[:notice] = 'Event succesfully registered!'	
 		else
