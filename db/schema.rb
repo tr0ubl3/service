@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(:version => 20131010195306) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "alarms_events", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "alarm_id"
+  end
+
+  add_index "alarms_events", ["event_id", "alarm_id"], :name => "index_alarms_events_on_event_id_and_alarm_id"
+
   create_table "events", :force => true do |t|
     t.integer  "machine_id"
     t.date     "event_date"
@@ -32,13 +39,6 @@ ActiveRecord::Schema.define(:version => 20131010195306) do
   end
 
   add_index "events", ["machine_id"], :name => "index_events_on_machine_id"
-
-  create_table "events_alarms", :id => false, :force => true do |t|
-    t.integer "event_id"
-    t.integer "alarm_id"
-  end
-
-  add_index "events_alarms", ["event_id", "alarm_id"], :name => "index_events_alarms_on_event_id_and_alarm_id"
 
   create_table "firms", :force => true do |t|
     t.string   "name"

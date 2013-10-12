@@ -15,6 +15,7 @@ class EventsController < ApplicationController
 		@event = Event.new
 		@machines = Machine.all
 		@alarm_search = Alarm.t1(params[:search])
+		@a = Alarm.find(1)
 		respond_to do |format|
 			format.html
 			format.json { render json: @alarm_search }
@@ -25,6 +26,7 @@ class EventsController < ApplicationController
 	def create
 		@event = Event.new(params[:event])
 		if @event.save
+			@event.alarms << Alarm.find(params[:alarms])
 			redirect_to root_url
 			flash[:notice] = 'Event succesfully registered!'	
 		else

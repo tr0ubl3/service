@@ -91,13 +91,21 @@ $(document).ready(function() {
 											success: function( results ) {
 													if (results.length != 0) {
 													var alarm_text = results[0].text;
+													var alarm_id = results[0].id;
 													console.log("this is the one "+alarm_text);
-																	$('<p></p>', {
-																					text: val + " - " + alarm_text,
-																					class: 'alarm_code_add',
-																					data: val
-																				}).appendTo('#acdp');
-																				acfi.val('');
+													$('<p></p>', {
+																	text: val + " - " + alarm_text,
+																	class: 'alarm_code_add',
+																	data: val
+																}).appendTo('#acdp');
+													$('<input />', {
+														id: 'alarms',
+														multiple: 'true',
+														name: 'alarms[]',
+														type: 'hidden',
+														value: alarm_id
+													}).appendTo('#acdp');
+													acfi.val('');
 
 												    }
 												    else {

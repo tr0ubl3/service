@@ -1,13 +1,13 @@
 class CreateEventsAlarmsJoin < ActiveRecord::Migration
   def up
-  	create_table :events_alarms, :id => false do |t|
-  		t.integer "event_id"
-  		t.integer "alarm_id"
+  	create_table :alarms_events, :id => false do |t|
+  		t.belongs_to :event
+  		t.belongs_to :alarm
   	end
-  	add_index :events_alarms, ["event_id", "alarm_id"]
+  	add_index :alarms_events, ["event_id", "alarm_id"]
   end
 
   def down
-  	drop_table :events_alarms
+  	drop_table :alarms_events
   end
 end
