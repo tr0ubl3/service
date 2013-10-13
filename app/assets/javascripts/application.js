@@ -97,7 +97,7 @@ $(document).ready(function() {
 																	text: val + " - " + alarm_text,
 																	class: 'alarm_code_add',
 																	data: val
-																}).appendTo('#acdp');
+																}).appendTo('#acdp').attr('data-alarmnumber', val);
 													$('<input />', {
 														id: 'alarms',
 														multiple: 'true',
@@ -129,7 +129,7 @@ $(document).ready(function() {
 		$('body').on('click', '.alarm_code_add', function () {
 			var t = $(this);
 			var hidden_field = t.next();
-			var text = t.text();
+			var text = t.attr('data-alarmnumber');
 			var elem = AlarmArray.indexOf(text);
 			var confirmation = confirm("Are you sure you want to delete alarm:" + "\n" + text);
 			if (confirmation==true)

@@ -3,6 +3,7 @@ class Machine < ActiveRecord::Base
   belongs_to :manufacturer
   belongs_to :machine_owner
   has_many :events
+  has_one :hour_counter
 validates :display_name, :presence => true,
   				   :length => { :within => 3..255 },
   				   :uniqueness => true

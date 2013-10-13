@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010195306) do
+ActiveRecord::Schema.define(:version => 20131013201857) do
 
   create_table "alarms", :force => true do |t|
     t.integer  "number"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20131010195306) do
     t.string   "fax"
     t.string   "mobile"
     t.string   "type"
+  end
+
+  create_table "hour_counters", :force => true do |t|
+    t.integer  "machine_id"
+    t.integer  "machine_hours_age"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "machines", :force => true do |t|
