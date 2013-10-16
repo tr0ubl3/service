@@ -31,9 +31,16 @@ class EventsController < ApplicationController
 			if params[:alarms] != nil
 				@event.alarms << Alarm.find(params[:alarms])
 			end
+			@machine = Machine.find(@event.machine_id)
+			@manufacturer = @machine.manufacturer.name.upcase.first(limit=3)
+			@machine_number = @machine.machine_number.gsub(/[-]/i, '')
+			@event_time = @event.created_at.strftime('%d%m%Y%H%M%S')
+			@event_count = "%.5d" % @machine.events.count
+			@owner = @machine.machine_owner.name.upcase.first(limit=3)
+			@event_name = @manufacturer + '-'+ @machine_number + '-' + @event_time + '-' + @event_count + '-' + @owner
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
 			redirect_to root_url
-			flash[:notice] = 'Event succesfully registered!'	
+			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
 		else
 			flash.now[:alert] = 'Please correct errors and try again!'
 			render 'events/new'
