@@ -17,6 +17,8 @@ helper_method :manufacturers, :owners
 		@machine = Machine.new(params[:machine])
 		if @machine.save
 			flash[:notice] = "Successfully created machine."
+			@machine_hours_debut = HourCounter.new(:machine_id => @machine.id, :machine_hours_age => 0)
+			@machine_hours_debut.save
 			redirect_to(:action => 'list')
 		else
 			render('new')
