@@ -25,7 +25,7 @@ class EventsController < ApplicationController
 
 	def create
 		@event = Event.new(params[:event])
-		# hc = hour_counter
+		# hc = hour counter
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
 		if @event.save
 			if params[:alarms] != nil
@@ -38,6 +38,7 @@ class EventsController < ApplicationController
 			@event_count = "%.5d" % @machine.events.count
 			@owner = @machine.machine_owner.name.upcase.first(limit=3)
 			@event_name = @manufacturer + '-'+ @machine_number + '-' + @event_time + '-' + @event_count + '-' + @owner
+			@event.update_attributes(:event_name => @event_name)
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
 			redirect_to root_url
 			flash[:notice] = 'Event ' + @event_name + ' registered!' 	

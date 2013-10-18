@@ -41,7 +41,7 @@
 	<div class="control-group">
 		<%= f.label(:alarm_code, 'Error codes definition', class: 'control-label') %>
 		<div class="controls input-append">
-			<%= f.text_field :alarm_code, :id => 'alarm_code' %>
+			<%= text_field_tag :alarm_code, 'Insert alarm code' %>
 			<button id="acjs" class="btn" type="button">Insert alarm</button>
 		</div>
 		<div id="acdp"></div>
