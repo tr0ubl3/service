@@ -12,5 +12,4 @@ validates :hour_counter, :presence => true, :length => { :within => 3..6 },
 # 					   numericality: { only_integer: true }
 validates :event_type, :presence => true
 validates :event_description, :presence => true, :length => { :within => 3..500 }
-
 end

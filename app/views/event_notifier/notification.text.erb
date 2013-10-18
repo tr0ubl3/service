@@ -1,0 +1,15 @@
+EventNotifier#notification
+
+A aparut un eveniment nou cu id-ul <%= @event.event_name %> !
+
+Detalii eveniment: 
+
+Masina :              <%= @machine.display_name %>
+Numar de ore :        <%= @event.hour_counter %>
+Stare masina:         <%= @event.event_type %>
+Coduri de alarma:     <% @event.alarms.each do |t| %>
+							<%= t.number %> - <%= t.text %>
+					  <% end %>
+Descriere eveniment : <%= @event.event_description %>
+
+
