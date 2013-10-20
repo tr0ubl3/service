@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 	
 	respond_to :html, :json
+	before_filter :authenticate_user!
 
 	# def list
 	# 	@events = Event.order("events.id ASC")
@@ -40,8 +41,8 @@ class EventsController < ApplicationController
 			@event_name = @manufacturer + '-'+ @machine_number + '-' + @event_time + '-' + @event_count + '-' + @owner
 			@event.update_attributes(:event_name => @event_name)
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
-			EventNotifier.confirmation(@event, @machine).deliver
-			EventNotifier.notification(@event, @machine).deliver
+			# EventNotifier.confirmation(@event, @machine).deliver
+			# EventNotifier.notification(@event, @machine).deliver
 			redirect_to root_url
 			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
 		else
