@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131020200450) do
+ActiveRecord::Schema.define(:version => 20131021203904) do
 
   create_table "alarms", :force => true do |t|
     t.integer  "number"
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(:version => 20131020200450) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "nick"
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -91,10 +91,11 @@ ActiveRecord::Schema.define(:version => 20131020200450) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "machine_owner_id"
     t.integer  "phone_number"
+    t.boolean  "admin",                  :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
