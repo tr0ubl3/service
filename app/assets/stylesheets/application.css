@@ -15,3 +15,7 @@
 .field_with_errors {
 	display: inline;
 }
+
+.margin-top-container {
+	margin-top: 50px;
+}

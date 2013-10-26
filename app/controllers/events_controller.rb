@@ -3,9 +3,9 @@ class EventsController < ApplicationController
 	respond_to :html, :json
 	before_filter :authenticate_user!
 
-	# def list
-	# 	@events = Event.order("events.id ASC")
-	# end
+	def list
+		@events = Event.order("events.id DESC")
+	end
 
 	# def show
 	# 	@event = Event.find(params[:id])
@@ -43,11 +43,12 @@ class EventsController < ApplicationController
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
 			# EventNotifier.confirmation(@event, @machine).deliver
 			# EventNotifier.notification(@event, @machine).deliver
-			redirect_to root_url
+			redirect_to :action => 'list'
 			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
 		else
+			@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
 			flash.now[:alert] = 'Please correct errors and try again!'
-			render 'events/new'
+			render :action => 'new'
 		end
 	end
 

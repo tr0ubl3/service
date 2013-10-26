@@ -3,7 +3,9 @@ Service::Application.routes.draw do
 
 
   get "general/index"
-  resources :events
+  resources :events, :except => [:create] do
+    post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
+  end
   resources :manufacturers
   resources :alarms
   devise_for :users

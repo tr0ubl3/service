@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   attr_accessible :machine_id, :event_date, :event_type, :event_description, :hour_counter, :event_name
   belongs_to :machine
   has_and_belongs_to_many :alarms
+  belongs_to :user
   accepts_nested_attributes_for :alarms
 
 validates :machine_id, :presence => true
