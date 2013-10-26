@@ -43,7 +43,7 @@ Service::Application.configure do
     domain: "domain.of.sender.net",
     authentication: "plain",
     user_name: "ionut.ciobanu.gt",
-    password: "50#oHut4eWhE^Uzm",
+    password: "",
     enable_starttls_auto: true
   }
 
