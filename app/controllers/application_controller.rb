@@ -5,4 +5,14 @@ class ApplicationController < ActionController::Base
 		list
     	render('list')
 	end
+	layout :layout
+
+	private
+	def layout
+		if devise_controller?
+		      "user"
+		    else
+		      "application"
+	    end
+	end
 end
