@@ -16,7 +16,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Service</a>
+          <a class="brand" href="/">Service</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right"> 
               <% if user_signed_in? %>
@@ -37,14 +37,52 @@
       </div>
     </div>
 
-		<div class="container margin-top-container">
+		<!-- <div class="container margin-top-container"> -->
 		  <% flash.each do |type, message| %>
 		  	<div class="alert <%= flash_class type %>">
 		  		<button class="close" data-dismiss="alert">x</button>
 		  		<%= message %>
 	  		</div>	
 		  <% end %>		
-		  <%= yield %>
-		</div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Events</li>
+              <%= active_link_to "Events list", events_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "New event", new_event_path , :active => :exclusive, :wrap_tag => :li %>
+              <li class="nav-header">Machines</li>
+              <%= active_link_to "Machines list", machines_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "New machine", new_machine_path , :active => :exclusive, :wrap_tag => :li %>
+              <li class="nav-header">Manufacturers</li>
+              <%= active_link_to "Manufacturers list", manufacturers_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "New manufacturer", new_manufacturer_path , :active => :exclusive, :wrap_tag => :li %>
+              <li class="nav-header">Machine owners</li>
+              <%= active_link_to "Machine Owners list", machine_owners_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "New machine owner", new_machine_owner_path , :active => :exclusive, :wrap_tag => :li %>
+              <li class="nav-header">Machine owners</li>
+              <%= active_link_to "Alarms list", alarms_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "New alarm", new_alarm_path , :active => :exclusive, :wrap_tag => :li %>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+
+          <%= yield %>
+                </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->      
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+		  
+		<!-- </div> -->
 	</body>
 </html>

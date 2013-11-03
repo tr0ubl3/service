@@ -26,6 +26,7 @@ class EventsController < ApplicationController
 
 	def create
 		@event = Event.new(params[:event])
+		@event.user_id = current_user.id
 		# hc = hour counter
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
 		if @event.save
@@ -35,7 +36,7 @@ class EventsController < ApplicationController
 			@machine = Machine.find(@event.machine_id)
 			@manufacturer = @machine.manufacturer.name.upcase.first(limit=3)
 			@machine_number = @machine.machine_number.gsub(/[-]/i, '')
-			@event_time = @event.created_at.strftime('%d%m%Y%H%M%S')
+			@event_time = @event.created_at.strftime('%d%m%y%H%M%S')
 			@event_count = "%.5d" % @machine.events.count
 			@owner = @machine.machine_owner.name.upcase.first(limit=3)
 			@event_name = @manufacturer + '-'+ @machine_number + '-' + @event_time + '-' + @event_count + '-' + @owner
@@ -43,13 +44,17 @@ class EventsController < ApplicationController
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
 			# EventNotifier.confirmation(@event, @machine).deliver
 			# EventNotifier.notification(@event, @machine).deliver
-			redirect_to :action => 'list'
 			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
+			render :action => 'confirmation'
 		else
 			@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
 			flash.now[:alert] = 'Please correct errors and try again!'
 			render :action => 'new'
 		end
+	end
+
+	def confirmation
+		@event_name = @event.event_name
 	end
 
 	# def update
