@@ -52,7 +52,7 @@ $(document).ready(function() {
 		// acfi = alarm_code field id
 		acfi = $('#alarm_code');
 		// val = current value of field alarm_code
-		val = acfi.val();
+		val = parseInt(acfi.val());
 		var regex = /^\d{5,6}$/;
 		e.preventDefault();
 		acfi.closest('.control-group').removeClass('error');
