@@ -1,3 +1,35 @@
 // Place all the styles related to the General controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.machine {
+			display: inline-block;
+			height: 50px;
+			width: 100px;
+			// background-color: grey;
+			margin: 5px;
+			line-height: 50px;
+			font-weight: bold;
+			text-align: center;
+			animation: myBlink 1s linear 0.5s infinite;
+			-webkit-animation: myBlink 1s linear 0.5s infinite;
+			border: 5px solid white;
+		 }
+
+@keyframes myBlink {
+    from {
+    	border-color: white;
+    }
+    to {
+    	border-color: red;
+    }
+}
+
+@-webkit-keyframes myBlink {
+	from {
+    	border-color: white;
+    }
+    to {
+    	border-color: red;
+    }
+}

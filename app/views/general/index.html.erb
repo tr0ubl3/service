@@ -1,4 +1,10 @@
 <h1>General#index</h1>
 <p>Find me in app/views/general/index.html.erb</p>
+<% @manufacturers.uniq.each do |t| %>
+	<h1><%= t %></h1>
+	<% @man_machines.each do |m| %>
+		<div class="machine"><%= m.display_name %></div>
+	<% end %>
+<% end %>
 <%= link_to 'New event', controller: 'events', action: 'new' %>
 
