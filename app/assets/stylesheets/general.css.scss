@@ -11,10 +11,12 @@
 			line-height: 50px;
 			font-weight: bold;
 			text-align: center;
-			animation: myBlink 1s linear 0.5s infinite;
-			-webkit-animation: myBlink 1s linear 0.5s infinite;
-			border: 5px solid white;
+			border: 5px solid grey;
 		 }
+.machine-animation {
+	animation: myBlink 3s linear 1.5s infinite;
+	-webkit-animation: myBlink 3s linear 1.5s infinite;
+}		 
 
 @keyframes myBlink {
     from {
@@ -34,7 +36,25 @@
     }
 }
 
-.machine:hover:after {
-	content: "test";
-	display: block;
+.blink {
+	animation: myIconBlink 0.5s linear 0.2s infinite;
+	-webkit-animation: myIconBlink 0.5s linear 0.2s infinite;
+}
+
+@keyframes myIconBlink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes myIconBlink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }

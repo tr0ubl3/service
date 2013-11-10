@@ -5,7 +5,14 @@
 	<% Machine.manufacturer_machine_types(id).each do |type| %>
 		<h3><%= type %></h3>
 		<% Machine.owner_machines_by_manufacturer_and_type(current_user.machine_owner, id, type).each do |machine| %>
-			<div class="machine"><%= machine.display_name %></div>
+				<div class="machine" data-toggle="dropdown">
+					<i class="icon-exclamation-sign blink"></i>
+					<%= machine.display_name %>
+				</div>
+				<ul class="dropdown-menu">
+					<li>test</li>
+					<li>test</li>
+				</ul>
 		<% end %>
 	<% end %>
 <% end %>
