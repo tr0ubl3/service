@@ -1,20 +1,21 @@
-<h1>General#index</h1>
-<p>Find me in app/views/general/index.html.erb</p>
 <% @manufacturer_ids.each do |id| %>
 	<h1><%= Machine.owner_manufacturer_name(id) %></h1>
 	<% Machine.manufacturer_machine_types(id).each do |type| %>
 		<h3><%= type %></h3>
 		<% Machine.owner_machines_by_manufacturer_and_type(current_user.machine_owner, id, type).each do |machine| %>
-				<div class="machine" data-toggle="dropdown">
-					<i class="icon-exclamation-sign blink"></i>
-					<%= machine.display_name %>
+				<% @events_count = machine.events.count %>
+				<% if @events_count > 0 
+					@status = "machine alarm"
+					@icon = "icon-exclamation-sign corner-icon blink"
+				   else
+				   	@status = "machine"
+				   	@icon = "icon-ok corner-icon"
+				   end
+				 %>
+				<div class="<%= @status %>" title="" data-title="<%= @events_count.to_s + " unsolved " + "event".pluralize(@events_count) %>">
+					<i class="<%= @icon %>"></i>
+					<div class="machine-name"><%= machine.display_name %></div>
 				</div>
-				<ul class="dropdown-menu">
-					<li>test</li>
-					<li>test</li>
-				</ul>
 		<% end %>
 	<% end %>
 <% end %>
-<%= link_to 'New event', controller: 'events', action: 'new' %>
-

@@ -2,7 +2,6 @@ class GeneralController < ApplicationController
   before_filter :authenticate_user!
   def index
 	@manufacturer_ids = Machine.owner_manufacturer_ids(current_user.machine_owner)
-
 	# @manufacturer_ids.each do |id|
 	# 	@manufacturer_names = Machine.owner_manufacturer_name(id)
 	# 	@manufacturer_machine_types = Machine.manufacturer_machine_types(id)
