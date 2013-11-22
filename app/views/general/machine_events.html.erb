@@ -10,10 +10,10 @@
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="tab1">
-			<%= render(:partial => "table", :locals => { :event_listing => @machine_events_all }) %>
+			<%= render(:partial => "table", :locals => { :event_listing => @machine_events_all, :row_number => @row_number_tab1 }) %>
 		</div>
 		<div class="tab-pane" id="tab2">
-			<%= render(:partial => "table", :locals => { :event_listing => @machine_user_events }) %>
+			<%= render(:partial => "table", :locals => { :event_listing => @machine_user_events, :row_number => @row_number_tab2 }) %>
 		</div>
 	</div>
 </div>

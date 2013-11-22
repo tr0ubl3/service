@@ -11,7 +11,7 @@
 	<tbody>
 		<% event_listing.each do |t| %>
 			<tr>
-				<td><%= @row_number+=1 %></td>
+				<td><%= row_number+=1 %></td>
 				<td><%= t.event_name %></td>
 				<td><%= t.event_date.strftime("%d.%m.%Y") %></td>
 				<td><%= user_full_name(t.user_id) %></td>
