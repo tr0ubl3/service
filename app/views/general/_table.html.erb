@@ -1,0 +1,22 @@
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Event name</th>
+			<th>Event date</th>
+			<th>Created by</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% event_listing.each do |t| %>
+			<tr>
+				<td><%= @row_number+=1 %></td>
+				<td><%= t.event_name %></td>
+				<td><%= t.event_date.strftime("%d.%m.%Y") %></td>
+				<td><%= user_full_name(t.user_id) %></td>
+				<td>Pending</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

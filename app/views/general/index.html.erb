@@ -12,10 +12,12 @@
 				   	@icon = "icon-ok corner-icon"
 				   end
 				 %>
-				<div class="<%= @status %>" title="" data-title="<%= @events_count.to_s + " unsolved " + "event".pluralize(@events_count) %>">
-					<i class="<%= @icon %>"></i>
-					<div class="machine-name"><%= machine.display_name %></div>
-				</div>
+				 <%= link_to machine_events_general_index_path(:machine => machine), :class => 'link_reset' do %>
+					<div class="<%= @status %>" title="" data-title="<%= @events_count.to_s + " unsolved " + "event".pluralize(@events_count) %>">
+						<i class="<%= @icon %>"></i>
+						<div class="machine-name"><%= machine.display_name %></div>
+					</div>
+				<% end %>
 		<% end %>
 	<% end %>
 <% end %>

@@ -8,8 +8,8 @@ class EventsController < ApplicationController
 	end
 
 	# def show
-	# 	@event = Event.find(params[:id])
-	# 	@me = @event.machines.order("events.id ASC")
+	# 	# @event = Event.find(params[:id])
+	# 	# @me = @event.machines.order("events.id ASC")
 	# end
 
 	def new
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
 			# EventNotifier.confirmation(@event, @machine).deliver
 			# EventNotifier.notification(@event, @machine).deliver
 			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
-			render :action => 'confirmation'
+			redirect_to root_path
 		else
 			@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
 			flash.now[:alert] = 'Please correct errors and try again!'

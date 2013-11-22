@@ -1,5 +1,6 @@
 class GeneralController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :user_full_name
   def index
 	@manufacturer_ids = Machine.owner_manufacturer_ids(current_user.machine_owner)
 	# @manufacturer_ids.each do |id|
@@ -20,5 +21,16 @@ class GeneralController < ApplicationController
 	# @manufacturers.uniq.each do |t|
 	# 	@man_machines = Manufacturer.where(:name => t).first.machines
 	# end
+  end
+
+  def machine_events
+  	@machine_name = Machine.find(params[:machine]).display_name
+	@machine_events_all = Event.where(:machine_id => params[:machine])
+	@machine_user_events = @machine_events_all.where(:user_id => current_user)
+	@row_number = 0
+
+	def user_full_name(id)
+		User.find(id).full_name
+	end
   end
 end
