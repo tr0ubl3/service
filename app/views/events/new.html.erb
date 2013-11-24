@@ -1,13 +1,17 @@
-<h2>Define new machine event</h2>
+<h2>Define new machine event<%= @machine_display_name %></h2>
 <div class='well'>
 	<%= form_for(:event, :url => {:action => 'create'}, html: {id: "new_event"}) do |f| %>
 
-	<div class="control-group">
-		<%= f.label(:machine_id, 'Select machine', class: 'control-label') %>
-		<div class='controls'>
-		<%= f.select(:machine_id, @machines.all.collect { |m| [m.display_name, m.id] }, :include_blank => true, html: {id: "machine_list"}) %>
+	<% if @machine_display_name == nil %>
+		<div class="control-group">
+			<%= f.label(:machine_id, 'Select machine', class: 'control-label') %>
+			<div class='controls'>
+			<%= f.select(:machine_id, @machines.all.collect { |m| [m.display_name, m.id] }, :include_blank => true, html: {id: "machine_list"}) %>
+			</div>
 		</div>
-	</div>
+		<% else %>
+		<%= hidden_field(:event, :machine_id, :value => params[:machine]) %>
+	<% end %>
 
 	<div class="control-group">
 		<%= f.label(:event_date, 'Date of the event', class: 'control-label') %>	
@@ -55,4 +59,3 @@
 	<%= submit_tag("Save", class: 'btn btn-primary') %>
 </div>
 <% end %>
-

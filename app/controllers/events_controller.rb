@@ -16,6 +16,11 @@ class EventsController < ApplicationController
 		@event = Event.new
 		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
 		@alarm_search = Alarm.t1(params[:search])
+		if params[:machine] != nil
+			params[:machine_id] = params[:machine]
+			@machine_display_name = " for " + @machines.where(:id => params[:machine]).first.display_name
+		end
+
 		# @a = Alarm.find(1)
 		respond_to do |format|
 			format.html
