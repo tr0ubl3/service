@@ -1,1 +1,45 @@
-<h1>work in progress</h1>
+<div class="wrapper_block">
+	<div class="show_wrapper">
+		<div class="show_label">Event date</div>
+		<div class="show_content"><%= @event.created_at.strftime("%d.%m.%Y" " created at " "%H:%M") %></div>
+	</div>	
+
+	<div class="show_wrapper">
+		<div class="show_label">Event registered by</div>
+		<div class="show_content"><%= user_full_name(@event.user_id) %> from <%= @firm_name %></div>
+	</div>	
+
+	<div class="show_wrapper">
+		<div class="show_label">Event ID</div>
+		<div class="show_content"><%= @event.event_name %></div>
+	</div>
+
+	<div class="show_wrapper">
+		<div class="show_label">Machine number</div>
+		<div class="show_content"><%= @machine_number %></div>
+	</div>
+
+	<div class="show_wrapper">
+		<div class="show_label">Event type</div>
+		<div class="show_content"><%= @event_type_text %></div>
+	</div>
+
+	<div class="show_wrapper">
+		<div class="show_label">Hour counter of machine when event happened</div>
+		<div class="show_content"><%= @event.hour_counter %></div>
+	</div>
+
+	<div class="show_wrapper">
+		<div class="show_label">Screen alarms when event took place</div>
+		<div class="show_content">
+			<% @event.alarms.each do |alarm| %>
+				<%= alarm.number.to_s + " - " + alarm.text %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="show_wrapper">
+		<div class="show_label">Event description</div>
+		<div class="show_content"><%= @event.event_description %></div>
+	</div>
+</div>

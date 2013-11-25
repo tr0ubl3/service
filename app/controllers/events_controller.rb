@@ -7,10 +7,20 @@ class EventsController < ApplicationController
 		@events = Event.order("events.id DESC")
 	end
 
-	# def show
-	# 	# @event = Event.find(params[:id])
-	# 	# @me = @event.machines.order("events.id ASC")
-	# end
+	def show
+		@event = Event.find(params[:id])
+		@firm_name = User.find(@event.user_id).machine_owner.name
+		@machine_number = Machine.find(@event.machine_id).machine_number
+
+		if @event.event_type = 1
+				@event_type_text = 'Machine fully stopped'
+			elsif @event.event_type = 2
+				@event_type_text = 'Machine was working with problems'
+			elsif @event.event_type = 3
+				@event_type_text = 'Event unrelated to machine stopping'
+		end
+		# @me = @event.machines.order("events.id ASC")
+	end
 
 	def new
 		@event = Event.new

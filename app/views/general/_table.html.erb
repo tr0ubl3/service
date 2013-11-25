@@ -3,7 +3,7 @@
 		<tr>
 			<th>#</th>
 			<th>Event name</th>
-			<th>Event date</th>
+			<th>Event ID</th>
 			<th>Created by</th>
 			<th>Status</th>
 		</tr>
@@ -12,7 +12,10 @@
 		<% event_listing.each do |t| %>
 			<tr>
 				<td><%= row_number+=1 %></td>
-				<td><%= t.event_name %></td>
+					<td><%= link_to event_path(t.id) do %>
+							<%= t.event_name %>
+						<% end %>
+					</td>
 				<td><%= t.event_date.strftime("%d.%m.%Y") %></td>
 				<td><%= user_full_name(t.user_id) %></td>
 				<td>Pending</td>

@@ -30,3 +30,36 @@ font-family: sans-serif;
 font-size: 13px;
 content: "* click alarm to remove";
 }
+
+.wrapper_block {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.show_wrapper {
+  display: block;
+  height: 50px;
+}
+
+.show_label {
+  display: block;
+  width: 350px;
+ 
+}
+
+.show_content {
+  display: inline-block;
+  width: 400px;
+
+}
+
+.show_label, .show_content {
+  height: 50px;
+  float: left; 
+  line-height: 50px;
+  padding-left: 15px;
+  border: 1px solid black;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
