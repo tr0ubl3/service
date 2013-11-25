@@ -1,23 +1,89 @@
+<div class="event-show-table">
+	<div class="event-column">
+		<div class="event-cell">
+			<span class="header-column">Client details:</span>
+			<div>
+				<span class="column1of2">Name:</span>
+				<span class="column2of2">Delphi</span>
+			</div>
+			<div>
+				<span class="column1of2">Address:</span>
+				<span class="column2of2">str. lol</span>			
+			</div>
+			<div>
+				<span class="column1of2">City:</span>
+				<span class="column2of2">Iasi</span>			
+			</div>
+			<div>
+				<span class="column1of2">Postal code:</span>
+				<span class="column2of2">700123</span>			
+			</div>			
+			<div>
+				<span class="column1of2">GPS coordinates:</span>
+				<span class="column2of2">N10.23232</span>
+			</div>
+				<span class="column2of2" style="margin-left: 120px;">E23.31231</span>
+			<div>
+				<span class="column1of2">Event reported by:</span>
+				<span class="column2of2">Gaitan Iulian</span>			
+			</div>
+			<div>
+				<span class="column1of2">Phone number:</span>
+				<span class="column2of2">0722123123</span>					
+			</div>	
+		</div>
+	</div>
+	<div class="event-column" style="border: none !important;">
+		<div class="event-cell">
+			<span class="header-column">Machine details:</span>
+			<div>
+				<span class="column1of2">Machine type:</span>
+				<span class="column2of2">nozzle</span>			
+			</div>
+			<div>
+				<span class="column1of2">Machine no:</span>
+				<span class="column2of2">9-1000-232</span>			
+			</div>
+			<div>
+				<span class="column1of2">Machine short name:</span>
+				<span class="column2of2">MH.232</span>			
+			</div>
+			<div>
+				<span class="column1of2">Delivery date:</span>
+				<span class="column2of2">10.10.1900</span>			
+			</div>
+			<div>
+				<span class="column1of2">Functioning hours:</span>
+				<span class="column2of2">100</span>			
+			</div>
+			<div>
+				<span class="column1of2">Waranty period:</span>
+				<span class="column2of2">yes</span>			
+			</div>
+		</div>
+	</div>
+</div>
+<h1>Event details</h1>
 <div class="wrapper_block">
 	<div class="show_wrapper">
 		<div class="show_label">Event date</div>
 		<div class="show_content"><%= @event.created_at.strftime("%d.%m.%Y" " created at " "%H:%M") %></div>
 	</div>	
 
-	<div class="show_wrapper">
+	<!-- <div class="show_wrapper">
 		<div class="show_label">Event registered by</div>
 		<div class="show_content"><%= user_full_name(@event.user_id) %> from <%= @firm_name %></div>
-	</div>	
+	</div>	 -->
 
 	<div class="show_wrapper">
 		<div class="show_label">Event ID</div>
 		<div class="show_content"><%= @event.event_name %></div>
 	</div>
 
-	<div class="show_wrapper">
+<!-- 	<div class="show_wrapper">
 		<div class="show_label">Machine number</div>
 		<div class="show_content"><%= @machine_number %></div>
-	</div>
+	</div> -->
 
 	<div class="show_wrapper">
 		<div class="show_label">Event type</div>
@@ -40,6 +106,51 @@
 
 	<div class="show_wrapper">
 		<div class="show_label">Event description</div>
-		<div class="show_content"><%= @event.event_description %></div>
+		<div class="show_content"><%= @event.event_description*200 %> </div>
 	</div>
 </div>
+
+<!-- <div class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">Machine owner :</label>
+    <div class="controls fix_LineHeight">
+
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Machine number :</label>
+    <div class="controls fix_LineHeight">
+
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Display name :</label>
+    <div class="controls fix_LineHeight">
+
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Machine manufacturer :</label>
+    <div class="controls fix_LineHeight">
+     
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Machine owner :</label>
+    <div class="controls fix_LineHeight">
+
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Delivery date :</label>
+    <div class="controls fix_LineHeight">
+
+  </div>
+</div>
+  <div class="control-group">
+    <label class="control-label">Waranty period :</label>
+    <div class="controls fix_LineHeight">
+
+    </div>
+  </div>
+</div> -->

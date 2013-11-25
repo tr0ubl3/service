@@ -63,3 +63,56 @@ content: "* click alarm to remove";
   margin-right: -1px;
   margin-bottom: -1px;
 }
+
+.event-show-table {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  border: 1px solid black;
+}
+
+.event-column {
+  display: block;
+  min-height: 100px;
+  width: 50%;
+  border-right: 1px solid black;
+}
+
+.event-column-row {
+  display: block;
+  width: 100%;
+  min-height: 20px;
+  border-bottom: 1px solid black;
+}
+
+.event-cell {
+  display: block;
+  height: 100%;
+}
+
+span {
+  padding: 0 3px;
+  height: 20px;
+  line-height: 20px;
+}
+
+span.header-column {
+  @extend span;
+  display: block;
+  font-weight: bold;
+  background-color: #DBDBDB;
+}
+
+span.column1of1 {
+  @extend span;
+}
+
+span.column2of2 {
+  @extend span;
+  font-style: italic;
+}
+
+.event-show-table div {
+  display:block;
+} 
