@@ -51,8 +51,8 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Events</li>
-              <%= active_link_to "Events list", events_path , :active => :exclusive, :wrap_tag => :li %>
-              <%= active_link_to "New event", new_event_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "Events list", service_events_path , :active => :exclusive, :wrap_tag => :li %>
+              <%= active_link_to "New event", new_service_event_path , :active => :exclusive, :wrap_tag => :li %>
               <li class="nav-header">Machines</li>
               <%= active_link_to "Machines list", machines_path , :active => :exclusive, :wrap_tag => :li %>
               <%= active_link_to "New machine", new_machine_path , :active => :exclusive, :wrap_tag => :li %>

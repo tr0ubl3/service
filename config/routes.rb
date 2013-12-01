@@ -6,7 +6,7 @@ Service::Application.routes.draw do
   # resources :events, :except => [:create] do
   #   post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
   # end
-  resources :alarms, :events, :manufacturers, :machine_owners, :machines
+  resources :alarms, :service_events, :manufacturers, :machine_owners, :machines
   resources :general do
     collection do
       get :machine_events

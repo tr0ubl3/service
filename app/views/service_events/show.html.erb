@@ -1,0 +1,133 @@
+<h1>Event <%= @event.event_name %></h1>
+<div class="event-show-table">
+	<div class="event-column">
+		<div class="event-cell">
+			<span class="header-column">Client details:</span>
+			<div>
+				<span class="column1of2">Name:</span>
+				<span class="column2of2"><%= @machine_owner.name %></span>
+			</div>
+			<div>
+				<span class="column1of2">Address:</span>
+				<span class="column2of2"><%= @machine_owner.address %></span>			
+			</div>
+			<div>
+				<span class="column1of2">City:</span>
+				<span class="column2of2"><%= @machine_owner.city %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Postal code:</span>
+				<span class="column2of2"><%= @machine_owner.postal_code %></span>			
+			</div>			
+			<div>
+				<span class="column1of2">GPS coordinates:</span>
+				<span class="column2of2">N10.23232</span>
+			</div>
+				<span class="column2of2" style="margin-left: 120px;">E23.31231</span>
+			<div>
+				<span class="column1of2">Event reported by:</span>
+				<span class="column2of2"><%= @event_user.full_name %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Phone number:</span>
+				<span class="column2of2"><%= @event_user.phone_number %></span>					
+			</div>	
+		</div>
+	</div>
+	<div class="event-column" style="border: none !important;">
+		<div class="event-cell">
+			<span class="header-column">Machine details:</span>
+			<div>
+				<span class="column1of2">Machine type:</span>
+				<span class="column2of2"><%= @machine.machine_type %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Machine no:</span>
+				<span class="column2of2"><%= @machine.machine_number %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Machine short name:</span>
+				<span class="column2of2"><%= @machine.display_name %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Delivery date:</span>
+				<span class="column2of2"><%= @machine.delivery_date.strftime("%d.%m.%Y") %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Functioning hours:</span>
+				<span class="column2of2"><%= @hour_counter %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Waranty period?:</span>
+				<span class="column2of2"><%= @machine.waranty_boolean %> (waranty period is until <u><%= @machine.waranty_date.strftime("%d.%m.%Y") %></u>)</span>			
+			</div>
+		</div>
+	</div>
+</div>
+<div class="event-show-table">
+	<div class="event-column">
+		<div class="event-cell">
+			<div>
+				<span class="column1of2">Event reported by:</span>
+				<span class="column2of2"><%= @event_user.full_name %> (from <%= @machine_owner.name %>)</span>			
+			</div>
+		</div>
+	</div>
+	<div class="event-column">
+		<div class="event-cell">
+			<div>
+				<span class="column1of2">Phone number:</span>
+				<span class="column2of2"><%= @event_user.phone_number %></span>			
+			</div>
+			<div>
+				<span class="column1of2">Email:</span>
+				<span class="column2of2"><%= @event_user.email %></span>			
+			</div>
+		</div>
+	</div>
+</div>
+<div class="event-show-table" style="display: block;">
+	<span class="header-column" style="width: 100%; padding: 0; text-indent: 3px;">
+		Event details:
+	</span>
+	<div class="form-horizontal">
+	  <div class="control-group">
+	    <label class="control-label">Event date:</label>
+	    <div class="controls fix_LineHeight">
+	    	<%= @event.created_at.strftime("%d.%m.%Y" " created at " "%H:%M") %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Event ID:</label>
+	    <div class="controls fix_LineHeight">
+	    	<%= @event.event_name %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Event type:</label>
+	    <div class="controls fix_LineHeight">
+	    	<%= @event_type_text %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Screen alarms:</label>
+	    <div class="controls fix_LineHeight">
+	    	<% @event.alarms.each do |alarm| %>
+					<%= alarm.number.to_s + " - " + alarm.text %>
+					<br />
+			<% end %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label">Event description:</label>
+	    <div class="controls fix_LineHeight">
+	    	<%= @event.event_description %>
+	  </div>
+	</div>
+	</div>
+</div>
+<div class="event-show-table" style="display: block;">
+	<span class="header-column" style="width: 100%; padding: 0; text-indent: 3px;">
+		Event status track:
+	</span>
+</div>

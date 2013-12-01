@@ -1,0 +1,130 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#event_description {
+	width: 100%;
+	height: 100px;
+	resize:vertical;
+	min-height: 150px;
+}
+
+.alarm_code_add {
+  display: block;
+  padding: 0 3px;
+  font-weight: bold;
+}
+
+.alarm_code_add:hover {
+  background: #7bd503;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+#acdp {
+display: none;
+}
+
+#acdp:before {
+font-family: sans-serif;
+font-size: 13px;
+content: "* click alarm to remove";
+}
+
+.wrapper_block {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.show_wrapper {
+  display: block;
+  height: 50px;
+}
+
+
+.show_label, .show_content {
+  min-height: 50px;
+  float: left; 
+  line-height: 50px;
+  padding-left: 15px;
+  border: 1px solid black;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.show_label {
+  display: block;
+  width: 350px;
+  font-size: normal;
+  font-weight: bold;
+ 
+}
+
+.show_content {
+  display: inline-block;
+  width: 400px;
+
+}
+
+.event-show-table {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 10px;
+  border: 1px solid black;
+}
+
+.event-column {
+  display: block;
+  min-height: 2px;
+  width: 50%;
+  border-right: 1px solid black;
+}
+
+.event-column-row {
+  display: block;
+  width: 100%;
+  min-height: 20px;
+  border-bottom: 1px solid black;
+}
+
+.event-cell {
+  display: block;
+  height: 100%;
+}
+
+span {
+  padding: 0 3px;
+  height: 20px;
+  line-height: 20px;
+}
+
+span.header-column {
+  @extend span;
+  display: block;
+  font-weight: bold;
+  background-color: #DBDBDB;
+}
+
+span.column1of1 {
+  @extend span;
+}
+
+span.column2of2 {
+  @extend span;
+  font-style: italic;
+}
+
+.event-show-table div {
+  display:block;
+} 
+
+.label-show-style {
+  font-weight: bold;
+  font-size: medium;
+}
+
+// .label-show-style:after {
+//   content: ':';
+// }

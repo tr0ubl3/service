@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131130211345) do
+ActiveRecord::Schema.define(:version => 20131201195738) do
 
   create_table "alarms", :force => true do |t|
     t.integer  "number"
@@ -20,37 +20,10 @@ ActiveRecord::Schema.define(:version => 20131130211345) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "alarms_events", :id => false, :force => true do |t|
-    t.integer "event_id"
+  create_table "alarms_service_events", :id => false, :force => true do |t|
+    t.integer "service_event_id"
     t.integer "alarm_id"
   end
-
-  add_index "alarms_events", ["event_id", "alarm_id"], :name => "index_alarms_events_on_event_id_and_alarm_id"
-
-  create_table "event_state_transitions", :force => true do |t|
-    t.integer  "event_id"
-    t.string   "event"
-    t.string   "from"
-    t.string   "to"
-    t.datetime "created_at"
-  end
-
-  add_index "event_state_transitions", ["event_id"], :name => "index_event_state_transitions_on_event_id"
-
-  create_table "events", :force => true do |t|
-    t.integer  "machine_id"
-    t.date     "event_date"
-    t.string   "event_type"
-    t.text     "event_description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "hour_counter"
-    t.string   "event_name"
-    t.integer  "user_id"
-    t.string   "state"
-  end
-
-  add_index "events", ["state"], :name => "index_events_on_state"
 
   create_table "firms", :force => true do |t|
     t.string   "name"
@@ -88,6 +61,27 @@ ActiveRecord::Schema.define(:version => 20131130211345) do
 
   add_index "machines", ["machine_owner_id"], :name => "index_machines_on_machine_owner_id"
   add_index "machines", ["manufacturer_id"], :name => "index_machines_on_manufacturer_id"
+
+  create_table "service_event_state_transitions", :force => true do |t|
+    t.integer  "service_event_id"
+    t.string   "event"
+    t.string   "from"
+    t.string   "to"
+    t.datetime "created_at"
+  end
+
+  create_table "service_events", :force => true do |t|
+    t.integer  "machine_id"
+    t.date     "event_date"
+    t.string   "event_type"
+    t.text     "event_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "hour_counter"
+    t.string   "event_name"
+    t.integer  "user_id"
+    t.string   "state"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

@@ -12,7 +12,7 @@
 		<% event_listing.each do |t| %>
 			<tr>
 				<td><%= row_number+=1 %></td>
-					<td><%= link_to event_path(t.id) do %>
+					<td><%= link_to service_event_path(t.id) do %>
 							<%= t.event_name %>
 						<% end %>
 					</td>

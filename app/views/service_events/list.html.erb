@@ -1,0 +1,31 @@
+<%= render(:partial => 'shared/flash_show') %>
+<table class="table table-bordered table-hover">
+<caption class="titlu-tabel">Events List</caption>
+<div class="alert">
+  <strong>to be updated</strong>
+</div>
+<thead>
+    <tr>
+      <th>#</th>
+      <th>Event type</th>
+      <th>Machine</th>
+      <th>Date of event</th>
+    </tr>
+</thead>
+<tbody>
+  <% @i=0 %>
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= @i+=1 %></td>
+      <td><%= event.event_type %></td>
+      <% if event.machine == nil %>
+
+      <% else %>
+        <td><%= event.machine.display_name %></td>
+      <% end %>
+      <td><%= event.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      <% end %>
+    </tr>
+</tbody>
+</table>
+<%= render(:partial => "shared/add_button") %>
