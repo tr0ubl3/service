@@ -37,4 +37,13 @@ class Machine < ActiveRecord::Base
   def self.owner_manufacturer_ids(owner_id)
     Machine.where(:machine_owner_id => owner_id).select(:manufacturer_id).map(&:manufacturer_id).uniq
   end
+
+  def waranty_boolean
+    delivery_date + waranty_period.days > DateTime.now ? 'yes' : 'no'
+  end
+
+  def waranty_date
+    delivery_date + waranty_period.days
+  end
+
 end

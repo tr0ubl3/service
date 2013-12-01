@@ -9,9 +9,10 @@ class EventsController < ApplicationController
 
 	def show
 		@event = Event.find(params[:id])
-		@firm_name = User.find(@event.user_id).machine_owner.name
-		@machine_number = Machine.find(@event.machine_id).machine_number
-
+		@machine_owner = Firm.find(Machine.find(@event.machine_id).machine_owner_id)
+		@event_user = User.find(@event.user_id)
+		@machine = Machine.find(@event.machine_id)
+		@hour_counter = Machine.find(@event.machine_id).hour_counter.machine_hours_age
 		if @event.event_type = 1
 				@event_type_text = 'Machine fully stopped'
 			elsif @event.event_type = 2

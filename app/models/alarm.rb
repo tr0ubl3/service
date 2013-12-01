@@ -10,6 +10,14 @@ class Alarm < ActiveRecord::Base
 		@g
 	end
 
+	state_machine :state, :initial => :alarm_created do
+		store_audit_trail
+		
+		event :confirmation do
+			transition :alarm_created => :alarm_pending
+		end
+	end
+
 private
 	def self.get_data(eval)
 		e = t1(eval)
