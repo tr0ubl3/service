@@ -3,7 +3,7 @@
 	<% Machine.manufacturer_machine_types(id).each do |type| %>
 		<h3><%= type %></h3>
 		<% Machine.owner_machines_by_manufacturer_and_type(current_user.machine_owner, id, type).each do |machine| %>
-				<% @events_count = machine.service_events.count %>
+				<% @events_count = machine.service_events.where(:state => 'pending_confirmation').count %>
 				<% if @events_count > 0 
 					@status = "machine alarm"
 					@icon = "icon-exclamation-sign corner-icon blink"

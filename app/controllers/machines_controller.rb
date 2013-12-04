@@ -19,7 +19,7 @@ helper_method :manufacturers, :owners
 			flash[:notice] = "Successfully created machine."
 			@machine_hours_debut = HourCounter.new(:machine_id => @machine.id, :machine_hours_age => 0)
 			@machine_hours_debut.save
-			redirect_to(:action => 'list')
+			redirect_to machines_path
 		else
 			render('new')
 		end
@@ -34,7 +34,7 @@ helper_method :manufacturers, :owners
 		respond_to do |format|
 			if @machine.update_attributes(params[:machine])
 				flash[:notice] = "Successfully updated machine."
-				format.html { redirect_to(:action => 'show', :id => @machine.id) }
+				format.html { redirect_to(machine_path, :id => @machine.id) }
 			else
 				render('edit')
 			end

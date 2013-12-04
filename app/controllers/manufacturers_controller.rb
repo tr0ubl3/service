@@ -19,7 +19,7 @@ class ManufacturersController < ApplicationController
 		@manufacturer = Manufacturer.new(params[:manufacturer])
 		if @manufacturer.save
 			flash[:notice] = "Successfully created manufacturer."
-			redirect_to(:action => 'list')
+			redirect_to manufacturers_path
 		else
 			render('new')
 		end
@@ -30,7 +30,7 @@ class ManufacturersController < ApplicationController
 		respond_to do |format|
 			if @manufacturer.update_attributes(params[:manufacturer])
 				flash[:notice] = "Successfully updated manufacturer."
-				format.html { redirect_to(:action => 'show', :id => @manufacturer.id) }
+				format.html { redirect_to(manufacturer_path, :id => @manufacturer.id) }
 			else
 				render('edit')
 			end
@@ -44,7 +44,7 @@ class ManufacturersController < ApplicationController
 	def destroy
 		manufacturer = Manufacturer.find(params[:id]).destroy
 		flash[:notice] = "Manufacturer permanently deleted !"
-		redirect_to(:action => 'list')
+		redirect_to manufacturers_path
 	end
 
 	def edit
