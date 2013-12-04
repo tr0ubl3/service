@@ -18,7 +18,8 @@
           </button>
           <a class="brand" href="/">Service</a>
           <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right"> 
+            <p class="navbar-text pull-right">
+              <span class="badge badge-important event-notification-bullet"><%= @new_events %></span> 
               <% if user_signed_in? %>
                 Logged in as
               	<%= link_to(current_user.full_name, destroy_user_session_path, :class => 'navbar-link') %>

@@ -94,7 +94,7 @@
 	  <div class="control-group">
 	    <label class="control-label">Event date:</label>
 	    <div class="controls fix_LineHeight">
-	    	<%= @event.created_at.strftime("%d.%m.%Y" " created at " "%H:%M") %>
+	    	<%= @event.event_date.strftime("%d.%m.%Y") %>
 	    </div>
 	  </div>
 	  <div class="control-group">
@@ -130,4 +130,7 @@
 	<span class="header-column" style="width: 100%; padding: 0; text-indent: 3px;">
 		Event status track:
 	</span>
+	<% @event.service_event_state_transitions.each do |state| %>
+		<p><%= state.to %> - <%= state.created_at.strftime("%d.%m.%Y" " - " "%H:%M") %></p>
+	<% end %>
 </div>
