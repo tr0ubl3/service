@@ -37,6 +37,8 @@ state_machine :state, :initial => :event_created do
 	# state :sending_quotation #sending quotation
 	# state :event_closed #event has has ended
 
+	# after_transition :on => :event_created, :do => :confirmation
+
 	event :confirmation do
 		transition :event_created => :pending_confirmation
 	end
