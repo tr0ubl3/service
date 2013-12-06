@@ -8,6 +8,6 @@
 <% end %>
 
 <h1>Update Machine</h1>
-<%= form_for(:machine, :url => {:action => 'update', :id => @machine.id}, html: {class: "form-horizontal"}) do |f| %>
+<%= form_for(:machine, :url => machine_path, :method => 'put', html: {class: "form-horizontal"}) do |f| %>
 <%= render(:partial => 'form', :locals => {:f => f}) %>
 <% end %>
