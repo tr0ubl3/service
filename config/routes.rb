@@ -6,12 +6,19 @@ Service::Application.routes.draw do
   # resources :events, :except => [:create] do
   #   post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
   # end
-  resources :alarms, :service_events, :manufacturers, :machine_owners, :machines
+  resources :alarms, :manufacturers, :machine_owners, :machines
   resources :general do
     collection do
       get :machine_events
     end
   end
+
+  resources :service_events do
+    collection do
+      get :confirm_event
+    end
+  end  
+
   devise_for :users
   get "main/index"
   root to: 'general#index'

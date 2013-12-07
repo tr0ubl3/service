@@ -126,3 +126,13 @@
 		<p><%= state.to %> - <%= state.created_at.strftime("%d.%m.%Y" " - " "%H:%M") %></p>
 	<% end %>
 </div>
+<div class="btn-group" style="margin-top: 10px;">
+  <a class="btn dropdown-toggle <%= @class %>" data-toggle="dropdown" title="<%= @title %>" href="#">
+    Event confirmation
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to "Confirm event", @confirm_event_link, :confirm => @confirm_event_confirmation %></li>
+    <li><%= link_to "Unconfirm this event", edit_service_event_path %></li>
+  </ul>
+</div>

@@ -3,7 +3,7 @@ class ServiceEvent < ActiveRecord::Base
   belongs_to :machine
   has_and_belongs_to_many :alarms
   belongs_to :user
-  has_many :service_event_state_transitions
+  has_many :service_event_state_transitions, :dependent => :destroy
   accepts_nested_attributes_for :alarms
 
 validates :machine_id, :presence => true

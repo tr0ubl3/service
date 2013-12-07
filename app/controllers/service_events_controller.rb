@@ -9,6 +9,9 @@ class ServiceEventsController < ApplicationController
 
 	def show
 		@event = ServiceEvent.find(params[:id])
+		@confirm_event_link = confirm_event_service_events_path(:id => params[:id])
+		@confirm_event_confirmation = "Are you sure you want to confirm this event ?"
+		check_event_confirmation(@event)
 		@machine_owner = Firm.find(Machine.find(@event.machine_id).machine_owner_id)
 		@event_user = User.find(@event.user_id)
 		@machine = Machine.find(@event.machine_id)
@@ -66,12 +69,43 @@ class ServiceEventsController < ApplicationController
 		else
 			@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
 			flash.now[:alert] = 'Please correct errors and try again!'
-			render :action => 'new'
+			render :new
 		end
 	end
 
 	def confirmation
 		@event_name = @event.event_name
+	end
+
+	def confirm_event
+		@event = ServiceEvent.find(params[:id])
+		if check_event_confirmation(@event) == true
+			@event.confirmed
+			flash[:notice] = 'Event is confirmed'
+			redirect_to service_event_path(@event)
+		else
+			flash[:notice] = "Something went wrong"
+		end
+			
+	end
+
+	def edit
+		@event = ServiceEvent.find(params[:id])
+	end 
+	
+	private
+
+	def check_event_confirmation(id)
+		@audit_event = ServiceEventStateTransition.where(:service_event_id => id).where(:to => 'confirmed')
+		if @audit_event.blank?
+			true
+		else
+			@class = 'disabled'
+			@title = 'Event is already confirmed'
+			@confirm_event_link ='#'
+			@confirm_event_confirmation = nil
+		end
+
 	end
 
 	# def update
@@ -96,7 +130,4 @@ class ServiceEventsController < ApplicationController
 	# 	redirect_to(:action => 'list')
 	# end
 
-	# def edit
-	# 	@event = ServiceEvent.find(params[:id])
-	# end 
 end

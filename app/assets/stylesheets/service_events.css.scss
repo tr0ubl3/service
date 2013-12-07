@@ -94,25 +94,25 @@ content: "* click alarm to remove";
   height: 100%;
 }
 
-span {
+.custom_span {
   padding: 0 3px;
   height: 20px;
   line-height: 20px;
 }
 
 span.header-column {
-  @extend span;
+  @extend custom_span;
   display: block;
   font-weight: bold;
   background-color: #DBDBDB;
 }
 
 span.column1of1 {
-  @extend span;
+  @extend custom_span;
 }
 
 span.column2of2 {
-  @extend span;
+  @extend custom_span;
   font-style: italic;
 }
 
