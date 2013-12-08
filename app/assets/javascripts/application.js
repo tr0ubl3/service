@@ -125,25 +125,25 @@ $(document).ready(function() {
 
 
 	//anonymous function for deleting alarm after clicking on it
-	(function() {
-		$('body').on('click', '.alarm_code_add', function () {
-			var t = $(this);
-			var hidden_field = t.next();
-			var text = t.attr('data-alarmnumber');
-			var elem = AlarmArray.indexOf(text);
-			var confirmation = confirm("Are you sure you want to delete alarm:" + "\n" + text);
-			if (confirmation==true)
-			{
-				t.remove();
-				hidden_field.remove();
-				AlarmArray.splice(elem, 1);
-				// console.log('textul este ' + text)
-				// console.log('ordinea este ' + elem);
-				console.log('array now is: ' + AlarmArray);
-			}
+	// (function() {
+	// 	$('body').on('click', '.alarm_code_add', function () {
+	// 		var t = $(this);
+	// 		var hidden_field = t.next();
+	// 		var text = t.attr('data-alarmnumber');
+	// 		var elem = AlarmArray.indexOf(text);
+	// 		var confirmation = confirm("Are you sure you want to delete alarm:" + "\n" + text);
+	// 		if (confirmation==true)
+	// 		{
+	// 			t.remove();
+	// 			hidden_field.remove();
+	// 			AlarmArray.splice(elem, 1);
+	// 			// console.log('textul este ' + text)
+	// 			// console.log('ordinea este ' + elem);
+	// 			console.log('array now is: ' + AlarmArray);
+	// 		}
 
-		}
-		);
-	})();
+	// 	}
+	// 	);
+	// })();
 
 	});
