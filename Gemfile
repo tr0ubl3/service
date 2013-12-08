@@ -17,7 +17,6 @@ group :development, :test do
 	gem 'guard-cucumber'
 	## end
 	gem 'commands'
-	# gem 'thin'
 end
 
 group :production do
@@ -59,7 +58,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'active_link_to'
 gem 'state_machine'
 gem 'state_machine-audit_trail'
-
+gem 'thin'
+gem 'eventmachine'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
