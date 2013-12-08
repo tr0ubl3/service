@@ -17,7 +17,7 @@ group :development, :test do
 	gem 'guard-cucumber'
 	## end
 	gem 'commands'
-	gem 'thin'
+	# gem 'thin'
 end
 
 group :production do
