@@ -91,10 +91,23 @@ class ServiceEventsController < ApplicationController
 
 	def edit
 		@event = ServiceEvent.find(params[:id])
+		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
 	end 
 	
+	def update
+		@event = ServiceEvent.find(params[:id])
+		respond_to do |format|
+			if @event.update_attributes(params[:event])
+				flash[:notice] = "Successfully updated event."
+				format.html { redirect_to(:action => 'show', :id => @event.id) }
+			else
+				flash[:alert] = "Please corect errors and try again"
+				render edit_service_event_path
+			end
+	    end
+	end
+	
 	private
-
 	def check_event_confirmation(id)
 		@audit_event = ServiceEventStateTransition.where(:service_event_id => id).where(:to => 'confirmed')
 		if @audit_event.blank?
@@ -105,20 +118,8 @@ class ServiceEventsController < ApplicationController
 			@confirm_event_link ='#'
 			@confirm_event_confirmation = nil
 		end
-
 	end
 
-	# def update
-	# 	@event = ServiceEvent.find(params[:id])
-	# 	respond_to do |format|
-	# 		if @event.update_attributes(params[:event])
-	# 			flash[:notice] = "Successfully updated event."
-	# 			format.html { redirect_to(:action => 'show', :id => @event.id) }
-	# 		else
-	# 			render('edit')
-	# 		end
-	#     end
-	# end
 
 	# def delete
 	# 	@event = ServiceEvent.find(params[:id])

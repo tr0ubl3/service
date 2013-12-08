@@ -34,94 +34,94 @@ $(document).ready(function() {
 // acjs - alarm code button java script
 
 	var AlarmArray = [];
-	(function() {
+	// (function() {
 
-		// insert data using enter key	
-		$('#alarm_code').on('keydown', doChk);
-		function doChk(e) {
-			if(e.keyCode == 13) {
-				doVal(e);
-			}
-		};
+	// 	// insert data using enter key	
+	// 	$('#alarm_code').on('keydown', doChk);
+	// 	function doChk(e) {
+	// 		if(e.keyCode == 13) {
+	// 			doVal(e);
+	// 		}
+	// 	};
 
-		// insert data using button	
-		$('#acjs').on('click', doVal);
+	// 	// insert data using button	
+	// 	$('#acjs').on('click', doVal);
 
-	// function for inserting data	
-	function doVal(e) {
-		// acfi = alarm_code field id
-		acfi = $('#alarm_code');
-		// val = current value of field alarm_code
-		val = parseInt(acfi.val());
-		var regex = /^\d{5,6}$/;
-		e.preventDefault();
-		acfi.closest('.control-group').removeClass('error');
-		if(val === '') {
-			console.log('empty string detected');
-		}
+	// // function for inserting data	
+	// function doVal(e) {
+	// 	// acfi = alarm_code field id
+	// 	acfi = $('#alarm_code');
+	// 	// val = current value of field alarm_code
+	// 	val = parseInt(acfi.val());
+	// 	var regex = /^\d{5,6}$/;
+	// 	e.preventDefault();
+	// 	acfi.closest('.control-group').removeClass('error');
+	// 	if(val === '') {
+	// 		console.log('empty string detected');
+	// 	}
 
-		else if (!(regex.test(val)) ? true:false ) {
-			console.log('value '+ val +' is not a number or does not have the required length')
-		}
+	// 	else if (!(regex.test(val)) ? true:false ) {
+	// 		console.log('value '+ val +' is not a number or does not have the required length')
+	// 	}
 
-		else {
-			// acfi.closest('.control-group').append(val);
-			var ValVerify = true;
-			//verificare daca eroare introdusa nu a fost deja introdusa
-			$.each(AlarmArray, function() {
-				if(val == this) {
-					console.log('Alarm ' + this + ' already introduced');
-					ValVerify = false;
-					return;
-				}
-			});
-			console.log(ValVerify);
-			if(ValVerify != false) {
-				$('#acdp').css('display', 'block');
-				AlarmArray.push(val);
-				console.log('My alarms are '+ AlarmArray);
-				var search_text = $.ajax({
-											url: "new",
-											type: "get",
-											async: "false",
-											// contentType: 'json',
-											cache: "false",
-											data: {"search": val},
-											dataType: "json",
-											success: function( results ) {
-													if (results.length != 0) {
-													var alarm_text = results[0].text;
-													var alarm_id = results[0].id;
-													console.log("this is the one "+alarm_text);
-													$('<p></p>', {
-																	text: val + " - " + alarm_text,
-																	class: 'alarm_code_add',
-																	data: val
-																}).appendTo('#acdp').attr('data-alarmnumber', val);
-													$('<input />', {
-														id: 'alarms',
-														multiple: 'true',
-														name: 'alarms[]',
-														type: 'hidden',
-														value: alarm_id
-													}).appendTo('#acdp');
-													acfi.val('');
+	// 	else {
+	// 		// acfi.closest('.control-group').append(val);
+	// 		var ValVerify = true;
+	// 		//verificare daca eroare introdusa nu a fost deja introdusa
+	// 		$.each(AlarmArray, function() {
+	// 			if(val == this) {
+	// 				console.log('Alarm ' + this + ' already introduced');
+	// 				ValVerify = false;
+	// 				return;
+	// 			}
+	// 		});
+	// 		console.log(ValVerify);
+	// 		if(ValVerify != false) {
+	// 			$('#acdp').css('display', 'block');
+	// 			AlarmArray.push(val);
+	// 			console.log('My alarms are '+ AlarmArray);
+	// 			var search_text = $.ajax({
+	// 										url: "/service_events/new",
+	// 										type: "get",
+	// 										async: "false",
+	// 										// contentType: 'json',
+	// 										cache: "false",
+	// 										data: {"search": val},
+	// 										dataType: "json",
+	// 										success: function( results ) {
+	// 												if (results.length != 0) {
+	// 												var alarm_text = results[0].text;
+	// 												var alarm_id = results[0].id;
+	// 												console.log("this is the one "+alarm_text);
+	// 												$('<p></p>', {
+	// 																text: val + " - " + alarm_text,
+	// 																class: 'alarm_code_add',
+	// 																data: val
+	// 															}).appendTo('#acdp').attr('data-alarmnumber', val);
+	// 												$('<input />', {
+	// 													id: 'alarms',
+	// 													multiple: 'true',
+	// 													name: 'alarms[]',
+	// 													type: 'hidden',
+	// 													value: alarm_id
+	// 												}).appendTo('#acdp');
+	// 												acfi.val('');
 
-												    }
-												    else {
-												    	alert('Invalid alarm');
-												    }
-												}
-											});
-				// console.log('Ajax merge, valoarea este: ' + search_text);
+	// 											    }
+	// 											    else {
+	// 											    	alert('Invalid alarm');
+	// 											    }
+	// 											}
+	// 										});
+	// 			// console.log('Ajax merge, valoarea este: ' + search_text);
 
-			}
-			else {
-				acfi.closest('.control-group').addClass('error');
-				}
-			}
-		}
-	})();
+	// 		}
+	// 		else {
+	// 			acfi.closest('.control-group').addClass('error');
+	// 			}
+	// 		}
+	// 	}
+	// })();
 
 
 	//anonymous function for deleting alarm after clicking on it
