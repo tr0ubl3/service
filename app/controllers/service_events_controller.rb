@@ -92,14 +92,14 @@ class ServiceEventsController < ApplicationController
 	def edit
 		@event = ServiceEvent.find(params[:id])
 		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
-		@machine_display_name = @machines.where(@event.machine_id).first.display_name
+		@machine_display_name = @machines.find(@event.machine_id).display_name
 		@hc = HourCounter.find_by_machine_id(@event.machine_id).machine_hours_age
 	end 
 	
 	def update
 		@event = ServiceEvent.find(params[:id])
 		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
-		@machine_display_name = @machines.where(@event.machine_id).first.display_name
+		@machine_display_name = @machines.find(@event.machine_id).display_name
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
 		respond_to do |format|
 			if @event.update_attributes(params[:service_event])
