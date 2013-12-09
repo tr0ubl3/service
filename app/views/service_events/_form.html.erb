@@ -7,7 +7,7 @@
       </div>
     </div>
     <% else %>
-    <%= hidden_field(:event, :machine_id, :value => params[:machine]) %>
+    <%= f.hidden_field(:machine_id, :value => @event.machine_id) %>
   <% end %>
 
   <div class="control-group">
@@ -20,7 +20,7 @@
   <div class="control-group">
       <%= f.label(:hour_counter, 'Hour counter', class: 'control-label') %>
     <div class='controls'>
-      <%= f.text_field :hour_counter, :id => 'hour_counter' %>
+      <%= text_field_tag :hour_counter, hc %>
     </div>
   </div>
 
@@ -45,7 +45,12 @@
       <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
       <button id="acjs" class="btn" type="button">Insert alarm</button>
     </div>
-    <div id="acdp"></div>
+    <div id="acdp" style="display: block">
+      <% @event.alarms.each do |alarm| %>
+        <p class="alarm_code_add" data-alarmnumber="<%= alarm.number %>"><%= alarm.number %> - <%= alarm.text %></p>
+        <input id="alarms" multiple="multiple" name="alarms[]" type="hidden" value="<%= alarm.id %>" />
+      <% end %>
+    </div>
   </div>
   <div class="control-group">
     <%= f.label(:event_description, 'Event description', class: 'control-label') %>

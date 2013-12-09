@@ -16,11 +16,11 @@ class ServiceEventsController < ApplicationController
 		@event_user = User.find(@event.user_id)
 		@machine = Machine.find(@event.machine_id)
 		@hour_counter = Machine.find(@event.machine_id).hour_counter.machine_hours_age
-		if @event.event_type = 1
+		if @event.event_type == 1
 				@event_type_text = 'Machine fully stopped'
-			elsif @event.event_type = 2
+		elsif @event.event_type == 2
 				@event_type_text = 'Machine was working with problems'
-			elsif @event.event_type = 3
+		else
 				@event_type_text = 'Event unrelated to machine stopping'
 		end
 		# @me = @event.machines.order("events.id ASC")
@@ -32,7 +32,7 @@ class ServiceEventsController < ApplicationController
 		@alarm_search = Alarm.t1(params[:search])
 		if params[:machine] != nil
 			params[:machine_id] = params[:machine]
-			@machine_display_name = " for " + @machines.where(:id => params[:machine]).first.display_name
+			@machine_display_name = @machines.where(:id => params[:machine]).first.display_name
 		end
 
 		# @a = Alarm.find(1)
@@ -92,24 +92,45 @@ class ServiceEventsController < ApplicationController
 	def edit
 		@event = ServiceEvent.find(params[:id])
 		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
+		@machine_display_name = @machines.where(@event.machine_id).first.display_name
+		@hc = HourCounter.find_by_machine_id(@event.machine_id).machine_hours_age
 	end 
 	
 	def update
 		@event = ServiceEvent.find(params[:id])
+		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
+		@machine_display_name = @machines.where(@event.machine_id).first.display_name
+		@hc = HourCounter.find_by_machine_id(@event.machine_id)
 		respond_to do |format|
-			if @event.update_attributes(params[:event])
+			if @event.update_attributes(params[:service_event])
+				if params[:alarms] != nil
+					# entered alarms difference
+					@new_alarms = params[:alarms].map(&:to_i) - @event.alarm_ids
+					@event.alarms << Alarm.find(@new_alarms)
+					# deleted alarms diference
+					@deleted_alarms = @event.alarm_ids - params[:alarms].map(&:to_i)
+					@deleted_alarms.each do |obj|
+						@event.alarms.delete Alarm.find(obj)
+					end
+				else
+					@event.alarms.delete_all
+				end
+				if params[:hour_counter].to_i != @hc
+					@hc.update_attributes(:machine_hours_age => params[:hour_counter].to_i)
+				end
+				@event.unconfirmed
 				flash[:notice] = "Successfully updated event."
-				format.html { redirect_to(:action => 'show', :id => @event.id) }
+				format.html { redirect_to service_event_path(@event) }
 			else
 				flash[:alert] = "Please corect errors and try again"
-				render edit_service_event_path
+				redirect_to edit_service_event_path(@event), :method => :get
 			end
 	    end
 	end
 	
 	private
 	def check_event_confirmation(id)
-		@audit_event = ServiceEventStateTransition.where(:service_event_id => id).where(:to => 'confirmed')
+		@audit_event = ServiceEventStateTransition.where(:service_event_id => id).where(to:['confirmed', 'revised_event'])
 		if @audit_event.blank?
 			true
 		else

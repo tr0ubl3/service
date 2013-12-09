@@ -1,6 +1,6 @@
 <h2>Edit <%= @event.event_name %></h2>
 <p>In this page you can unconfirm an event by editing it using the form below or you can choose to declare it as false alarm. Under will be edit event form.</p>
 
-<%= form_for(:event, :url => {:action => 'update'}, html: {id: "new_event"}) do |f| %>
-	<%= render(:partial => 'form', :locals => {:f => f}) %>
+<%= form_for @event, :url => {:action => "update"}, :method => "put" do |f| %>
+	<%= render(:partial => 'form', :locals => {:f => f, :hc => @hc}) %>
 <% end %>

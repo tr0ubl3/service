@@ -33,7 +33,7 @@ $(document).ready(function() {
 	// 	});
 // acjs - alarm code button java script
 
-	var AlarmArray = [];
+	// var AlarmArray = [];
 	// (function() {
 
 	// 	// insert data using enter key	

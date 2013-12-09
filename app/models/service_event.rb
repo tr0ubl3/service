@@ -48,11 +48,11 @@ state_machine :state, :initial => :event_created do
 	end
 
 	event :unconfirmed do
-		transition :uncofirmed => :revise_unconfirmed_event
+		transition :pending_confirmation => :revised_event
 	end
 
 	event :false do
-		transition :uncofirmed => :false_alarm
+		transition :pending_confirmation => :false_alarm
 	end
 
 	event :on_waranty do
