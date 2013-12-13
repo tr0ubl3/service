@@ -7,37 +7,46 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/">Service</a>
+          <%= link_to "Service", root_path, :class => "brand brand-custom" %>
           <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              <span class="badge badge-important event-notification-bullet"><%= check_user_admin? %></span> 
               <% if user_signed_in? %>
-                Logged in as
-              	<%= link_to(current_user.full_name, destroy_user_session_path, :class => 'navbar-link') %>
-              <% else %>
-              	<%= link_to("Login", new_user_session_path) %>
-              <% end %>	
-              </a>
-            </p>
-            <!-- <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul> -->
-          </div><!--/.nav-collapse -->
+                  <div class="dropdown pull-right">
+                    <p class="navbar-text" style="display: inline;">
+                      <span class="badge badge-important event-notification-bullet" title="pending events">
+                        <%= check_user_admin? %>
+                      </span> 
+                      Logged in as
+                    </p>
+                    <%= link_to current_user.full_name, '#', :class => 'navbar-link dropdown-toggle', :data => { :toggle => "dropdown" } %>
+                    <ul class="dropdown-menu" role="menu" aria-labeledby="dLabel">
+                      <li>
+                        <%= link_to "#" do %>
+                          <i class="icon-cog"></i> Control Panel 
+                        <% end %>
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <%= link_to edit_user_registration_path do %>
+                          <i class="icon-wrench"></i> Profile settings
+                        <% end %>
+                      </li>
+                      <li>
+                          <%= link_to destroy_user_session_path do %>
+                            <i class="icon-off"></i> Logout 
+                          <% end %>
+                      </li>
+                    </ul>
+                  </div>
+                  <% else %>
+                    <%= link_to "Login", new_user_session_path %>
+                  <% end %>
+          </div>
         </div>
       </div>
     </div>
-
 		<!-- <div class="container margin-top-container"> -->
 		  <% flash.each do |type, message| %>
 		  	<div class="alert <%= flash_class type %>">
@@ -45,7 +54,6 @@
 		  		<%= message %>
 	  		</div>	
 		  <% end %>		
-
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -70,20 +78,13 @@
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
-
           <%= yield %>
-                </div><!--/span-->
-          </div><!--/row-->
         </div><!--/span-->
-      </div><!--/row-->      
+      </div><!--/row-->
       <hr>
-
       <footer>
-        <p>&copy; Company 2013</p>
+        <p>&copy; International G&amp;T</p>
       </footer>
-
     </div><!--/.fluid-container-->
-		  
-		<!-- </div> -->
 	</body>
 </html>

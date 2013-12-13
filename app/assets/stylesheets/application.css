@@ -62,3 +62,7 @@ body {
 .disabled-link {
 	pointer-events: none;
 }
+
+.brand-custom {
+	-webkit-transition: all .3s linear;
+}
