@@ -30,4 +30,7 @@ class GeneralController < ApplicationController
 	@row_number_tab1 = 0
 	@row_number_tab2 = 0
   end
+
+  def control_panel
+  end
 end

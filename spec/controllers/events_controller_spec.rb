@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EventsController do
+describe ServiceEventsController do
 	describe 'GET new' do
 		before :each do
     		get :new

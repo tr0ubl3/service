@@ -10,6 +10,7 @@ Service::Application.routes.draw do
   resources :general do
     collection do
       get :machine_events
+      get :control_panel
     end
   end
 
