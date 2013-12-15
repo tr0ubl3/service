@@ -12,8 +12,8 @@
         <div class="container-fluid">
           <%= link_to "Service", root_path, :class => "brand brand-custom" %>
           <div class="nav-collapse collapse">
+            <div class="dropdown pull-right">
               <% if user_signed_in? %>
-                  <div class="dropdown pull-right">
                     <p class="navbar-text" style="display: inline;">
                       <span class="badge badge-important event-notification-bullet" title="pending events">
                         <%= check_user_admin? %>
@@ -39,10 +39,12 @@
                           <% end %>
                       </li>
                     </ul>
-                  </div>
-                  <% else %>
-                    <%= link_to "Login", new_user_session_path %>
-                  <% end %>
+                    <% else %>
+                      <p class="navbar-text" style="display: inline;">
+                        <%= link_to "Login", new_user_session_path %>
+                      </p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

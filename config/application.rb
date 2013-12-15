@@ -62,7 +62,7 @@ module Service
 
     config.to_prepare do
       Devise::SessionsController.layout "user"
-      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "application" }
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "user" }
       Devise::ConfirmationsController.layout "user"
       Devise::UnlocksController.layout "user"            
       Devise::PasswordsController.layout "user"        
