@@ -29,7 +29,7 @@ group :test do
 	gem 'rb-notifu', '0.0.4'
 	gem 'win32console'
 	gem 'wdm'
-	gem 'spork', :github => 'sporkrb/spork-rails'
+	gem 'spork-rails', :github => 'sporkrb/spork-rails'
 	gem 'growl'
 	gem 'ruby_gntp'
 	gem 'win32-process'
