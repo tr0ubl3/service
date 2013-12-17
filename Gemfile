@@ -60,6 +60,7 @@ gem 'state_machine'
 gem 'state_machine-audit_trail'
 gem 'thin'
 gem 'eventmachine'
+gem 'font-awesome-rails'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
