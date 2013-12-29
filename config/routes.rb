@@ -21,6 +21,7 @@ Service::Application.routes.draw do
   end  
 
   devise_for :users
+  devise_for :users, :controllers => { :registrations => "devise/registrations" }
   get "main/index"
   root to: 'general#index'
 

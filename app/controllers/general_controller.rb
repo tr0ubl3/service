@@ -32,5 +32,6 @@ class GeneralController < ApplicationController
   end
 
   def control_panel
+  	
   end
 end

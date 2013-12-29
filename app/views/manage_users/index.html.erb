@@ -5,56 +5,10 @@
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="tab1">
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>Enabled</th>
-						<th>Activated</th>
-						<th>Email</th>
-						<th>Last visit date</th>
-						<th>Registration date</th>
-						<th>Registered by</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Popescu Ioan</td>
-						<td>Yes</td>
-						<td>Yes</td>
-						<td>popescu.ioan@firma.ro</td>
-						<td>25.10.2013</td>
-						<td>01.03.2013</td>
-						<td>Ionut Ciobanu</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Popescu Ioan</td>
-						<td>Yes</td>
-						<td>Yes</td>
-						<td>popescu.ioan@firma.ro</td>
-						<td>25.10.2013</td>
-						<td>01.03.2013</td>
-						<td>Ionut Ciobanu</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Popescu Ioan</td>
-						<td>Yes</td>
-						<td>Yes</td>
-						<td>popescu.ioan@firma.ro</td>
-						<td>25.10.2013</td>
-						<td>01.03.2013</td>
-						<td>Ionut Ciobanu</td>
-					</tr>
-				</tbody>
-			</table>
+			<%= render(:partial => "list", :locals => { :users => @regular_users}) %>
 		</div>
 		<div class="tab-pane" id="tab2">
-			<table class="table table-striped">
-			</table>
+			<%= render(:partial => "list", :locals => { :users => @admin_users}) %>
 		</div>
 	</div>
 </div>

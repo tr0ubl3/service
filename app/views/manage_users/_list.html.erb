@@ -1,0 +1,33 @@
+<div class="button-group">
+	<%= link_to "New user", new_user_registration_path, :class => "btn btn-primary" %>
+	<a href="#" class="btn btn btn-warning">Suspend user</a>
+	<a href="#" class="btn btn-danger">Delete user</a>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Enabled</th>
+			<th>Activated</th>
+			<th>Email</th>
+			<th>Last visit date</th>
+			<th>Registration date</th>
+			<th>Registered by</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% users.each do |t| %>
+			<tr>
+				<td><%= 1 %></td>
+				<td><%= link_to t.full_name, "#", :data => {:toggle => "tooltip"}, :title => "click to edit " + t.full_name, :id => "user_list" %></td>
+				<td>Yes</td>
+				<td>Yes</td>
+				<td><%= t.email %></td>
+				<td><%= t.last_sign_in_at.strftime('%d.%m.%Y') %></td>
+				<td><%= t.created_at.strftime('%d.%m.%Y') %></td>
+				<td>Ionut Ciobanu</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
