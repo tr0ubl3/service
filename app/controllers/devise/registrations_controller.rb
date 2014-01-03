@@ -8,6 +8,10 @@ class Devise::RegistrationsController < DeviseController
     respond_with self.resource
   end
 
+  def new_admin
+    build_resource({})
+  end
+
   # POST /resource
   def create
     build_resource(sign_up_params)
@@ -136,7 +140,7 @@ class Devise::RegistrationsController < DeviseController
   private
   def require_no_authentication_for_user
     if current_user.admin? == false
-    	:require_no_authentication
+    	require_no_authentication
     end
   end
 end

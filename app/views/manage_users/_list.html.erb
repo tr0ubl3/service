@@ -1,8 +1,13 @@
 <div class="button-group">
-	<%= link_to "New user", new_user_registration_path, :class => "btn btn-primary" %>
+	<% if admin_user %>
+		<%= link_to "New admin user", new_admin_registration_path, :class => "btn btn-primary" %>
+	<% else %>
+		<%= link_to "New client user", new_user_registration_path, :class => "btn btn-primary" %>
+	<% end %>
 	<a href="#" class="btn btn btn-warning">Suspend user</a>
 	<a href="#" class="btn btn-danger">Delete user</a>
 </div>
+
 <table class="table table-striped">
 	<thead>
 		<tr>

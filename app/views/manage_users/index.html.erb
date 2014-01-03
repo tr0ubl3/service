@@ -5,10 +5,10 @@
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="tab1">
-			<%= render(:partial => "list", :locals => { :users => @regular_users}) %>
+			<%= render(:partial => "list", :locals => { :users => @regular_users, :admin_user => false }) %>
 		</div>
 		<div class="tab-pane" id="tab2">
-			<%= render(:partial => "list", :locals => { :users => @admin_users}) %>
+			<%= render(:partial => "list", :locals => { :users => @admin_users, :admin_user => true }) %>
 		</div>
 	</div>
 </div>
