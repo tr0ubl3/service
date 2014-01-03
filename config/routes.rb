@@ -24,6 +24,7 @@ Service::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "devise/registrations" }
   devise_scope :user do
     get "new_admin_registration", :to => "devise/registrations#new_admin"
+    post "admin_registration", :to => "devise/registrations#create_admin"
   end
   get "main/index"
   root to: 'general#index'
