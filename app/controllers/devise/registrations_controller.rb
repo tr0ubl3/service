@@ -1,6 +1,6 @@
 class Devise::RegistrationsController < DeviseController
-  prepend_before_filter :require_no_authentication_for_user, :only => [ :new, :create, :cancel ]
-  prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
+  prepend_before_filter :require_no_authentication_for_admin, :only => [ :new, :create, :cancel ]
+  prepend_before_filter :authenticate_scope!, :only => [:new_admin, :create_admin, :edit, :update, :destroy]
 
   # GET /resource/sign_up
   def new
@@ -10,23 +10,15 @@ class Devise::RegistrationsController < DeviseController
 
   def new_admin
     @admin = User.new
-    @generated_password = Devise.friendly_token.first(8)
   end
 
   def create_admin
+    @generated_password = Devise.friendly_token.first(8)
     @admin = User.new(params[:user])
-
+    @admin.admin = true
+    @admin.password = @generated_password
     if @admin.save
-      yield resource if block_given?
-      if resource.active_for_authentication?
-        set_flash_message :notice, :signed_up if is_flashing_format?
-        sign_up(resource_name, resource)
-        respond_with resource, :location => after_sign_up_path_for(resource)
-      else
-        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-        expire_data_after_sign_in!
-        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
-      end
+      redirect_to manage_users_path, notice: 'Admin user was successfully created.'
     else
       clean_up_passwords resource
       render "new_admin"
@@ -159,8 +151,8 @@ class Devise::RegistrationsController < DeviseController
   end
 
   private
-  def require_no_authentication_for_user
-    if current_user.admin? == false
+  def require_no_authentication_for_admin
+    if current_user.present? && current_user.admin? == false
     	require_no_authentication
     end
   end

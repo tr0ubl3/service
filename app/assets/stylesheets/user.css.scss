@@ -23,7 +23,8 @@
 .form-signin .form-signin-heading, .form-signin .checkbox {
         margin-bottom: 10px;
       }
-.form-signin input[type="text"], .form-signin input[type="password"], #user_email, #user_password, #user_password_confirmation {
+.form-signin input[type="email"], .form-signin input[type="password"], 
+.users .controls input, .users .controls select {
   font-size: 16px;
   height: auto;
   margin-bottom: 15px;
@@ -31,7 +32,7 @@
 }
 
 .form-password-reset {
-        max-width: 500px;
+  max-width: 500px;
 }
 
 .navcustom {
@@ -41,4 +42,15 @@
 .form-password-reset label {
     font-size: 15px;
     font-weight: bold;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    font-weight: bold;
+  }
 }
