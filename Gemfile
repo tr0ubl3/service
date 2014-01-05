@@ -24,7 +24,7 @@ group :production do
 end
 
 group :test do
-	gem 'capybara'
+	gem 'capybara', :github => 'jnicklas/capybara'
 	gem 'rb-fchange', '0.0.5'
 	gem 'rb-notifu', '0.0.4'
 	gem 'win32console'

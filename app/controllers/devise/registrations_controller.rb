@@ -19,10 +19,9 @@ class Devise::RegistrationsController < DeviseController
   def create_user_by_admin
     @generated_password = Devise.friendly_token.first(8)
     @user = User.new(params[:user])
-    @user.admin = true
     @user.password = @generated_password
     if @user.save
-      redirect_to manage_users_path, notice: 'Admin user was successfully created.'
+      redirect_to manage_users_path, notice: 'Regular user was successfully created.'
     else
       clean_up_passwords resource
       render "new_user_by_admin"
