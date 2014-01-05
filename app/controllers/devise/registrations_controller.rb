@@ -8,8 +8,25 @@ class Devise::RegistrationsController < DeviseController
     respond_with self.resource
   end
 
+  def new_user_by_admin
+    @user = User.new
+  end
+
   def new_admin
     @admin = User.new
+  end
+
+  def create_user_by_admin
+    @generated_password = Devise.friendly_token.first(8)
+    @user = User.new(params[:user])
+    @user.admin = true
+    @user.password = @generated_password
+    if @user.save
+      redirect_to manage_users_path, notice: 'Admin user was successfully created.'
+    else
+      clean_up_passwords resource
+      render "new_user_by_admin"
+    end
   end
 
   def create_admin
@@ -17,6 +34,7 @@ class Devise::RegistrationsController < DeviseController
     @admin = User.new(params[:user])
     @admin.admin = true
     @admin.password = @generated_password
+    @admin.machine_owner_id = 1
     if @admin.save
       redirect_to manage_users_path, notice: 'Admin user was successfully created.'
     else

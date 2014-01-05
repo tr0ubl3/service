@@ -1,8 +1,14 @@
 <div class="container users">
-	<h2>Sign up a new admin user</h2>
+	<h2>Sign up a new user user</h2>
 	<div class="well" style="width: 220px;">
-		<%= form_for(@admin, :as => :user, :url => admin_registration_path) do |f| %>
-		  <%= render(:partial => 'error_messages', :locals => { :user => @admin }) %>
+		<%= form_for(@user, :as => :user, :url => new_user_by_admin_registration_path) do |f| %>
+		  <%= render(:partial => 'error_messages', :locals => { :user => @user }) %>
+  		  <div class="control-group">
+			<%= f.label(:machine_owner_id, 'Select firm', class: 'control-label') %>
+			<div class='controls'>
+				<%= f.select(:machine_owner_id, MachineOwner.all.collect { |m| [m.name, m.id] }, :include_blank => true, html: {id: "maachine_owners_list"}) %>
+			</div>
+	      </div>
   		  <div class="control-group">
 			<%= f.label(:first_name, 'First name', class: 'control-label') %>
 			<div class='controls'>

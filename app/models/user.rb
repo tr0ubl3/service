@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many :service_events
   
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-  
+
+  validates :machine_owner_id, :presence => true
   validates :first_name, :presence => true,
                 :length => { :within => 3..255, message: 'missing required length' }
   validates :last_name, :presence => true,
