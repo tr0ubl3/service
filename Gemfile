@@ -7,14 +7,15 @@ gem 'rails', '3.2.11'
 
 group :development, :test do
 	gem 'sqlite3'
+	gem 'rspec'
 	gem 'rspec-rails'
 	gem "selenium-client" , ">= 1.2.18"
 
 	## guard gems begin 
-	gem "guard"
-	gem 'guard-rspec', '~> 0.5.5'
+	gem 'guard', :github => 'guard/guard'
 	gem 'guard-spork', :github => 'guard/guard-spork'
-	gem 'guard-cucumber'
+	gem 'guard-rspec', :github => 'guard/guard-rspec'
+	# gem 'guard-cucumber', :github => 'guard/guard-cucumber'
 	## end
 	gem 'commands'
 end
@@ -24,17 +25,17 @@ group :production do
 end
 
 group :test do
+	gem 'spork', :github => 'sporkrb/spork'
 	gem 'capybara', :github => 'jnicklas/capybara'
+	gem 'cucumber', '1.2.5'
+	gem 'cucumber-rails', :require => false 
 	gem 'rb-fchange', '0.0.5'
 	gem 'rb-notifu', '0.0.4'
 	gem 'win32console'
 	gem 'wdm'
-	gem 'spork-rails', :github => 'sporkrb/spork-rails'
 	gem 'growl'
 	gem 'ruby_gntp'
 	gem 'win32-process'
-	gem 'cucumber', '1.2.5'
-	gem 'cucumber-rails', :require => false 
 	gem 'database_cleaner'
 	gem 'childprocess', '0.3.6'
 end

@@ -1,3 +1,4 @@
---color
 --drb
+--color
+--format progress
 --order default

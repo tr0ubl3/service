@@ -13,6 +13,7 @@ Scenario: Successfully registering through web form application
 	When I fill the register form with valid data
 	And I succesfully submit the form
 	Then I receive an email regarding successfull submision of registration to admins
+	And Path should be sign in
 
 Scenario: The registration is confirmed
 	Given I am a guest

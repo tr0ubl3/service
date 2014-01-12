@@ -18,10 +18,17 @@ When(/^I fill the register form with valid data$/) do
 end
 
 When(/^I succesfully submit the form$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(User.find_by_email('ionescu@mail.com')).not_to be_nil
 end
 
 Then(/^I receive an email regarding successfull submision of registration to admins$/) do
+  email = ActionMailer::Base.deliveries.first
+  email.from.should == "noreply@service.com"
+  email.to.should == @user.email
+  email.body.should include("Your registration has been sent")
+end
+
+Then(/^Path should be sign in$/) do
   pending # express the regexp above with the code you wish you had
 end
 
