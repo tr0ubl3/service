@@ -21,7 +21,9 @@ Service::Application.routes.draw do
   end  
 
   # devise_for :users
-  devise_for :users, :controllers => { :registrations => "devise/registrations" }
+  devise_for :users, :controllers => { :registrations => "devise/registrations" } do
+    get "users/sign_up" => "devise/registrations#new"
+  end
   devise_scope :user do
     get "new_admin_registration", :to => "devise/registrations#new_admin"
     post "admin_registration", :to => "devise/registrations#create_admin"
