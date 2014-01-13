@@ -18,6 +18,7 @@ group :development, :test do
 	# gem 'guard-cucumber', :github => 'guard/guard-cucumber'
 	## end
 	gem 'commands'
+	gem 'factory_girl_rails', :require => false
 end
 
 group :production do
