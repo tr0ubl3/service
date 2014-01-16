@@ -7,6 +7,13 @@ class UsersController < ApplicationController
     @machine_owners = MachineOwner.all
   end
 
+  def create
+  	user = User.new(params[:user])
+  	user.save
+  	redirect_to signup_path, notice: 'You successfully submit registration'
+  	UserMailer.confirmation(user).deliver
+  end
+
 #   # GET /resource/sign_up
 #   def new
 #     @machine_owners = MachineOwner.all

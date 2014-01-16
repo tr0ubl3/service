@@ -25,9 +25,13 @@ describe UsersController do
 	end
 
 	describe 'POST create' do
-		it 'it sends new message to User class' do
+		let!(:user) { stub_model(User) }
+		before :each do
+			User.stub(:new).and_return(user)
+		end
+
+		it 'sends new message to User class' do
 			params = {
-				"machine_owner_id" => "1",
 				"first_name" => "John",
 				"last_name" => "Wilkins",
 				"phone_number" => "1234567890",
@@ -38,6 +42,30 @@ describe UsersController do
 			}
 			User.should_receive(:new).with(params)
 			post :create, user: params
+		end
+
+		it 'sends save message to user model' do
+			user.should_receive(:save)
+			post :create
+		end
+
+		context 'when save message returns true' do
+			before :each do
+				user.stub(:save).and_return(true)
+			end
+			it 'redirects to signup path' do
+				post :create
+				expect(response).to redirect_to signup_path
+			end
+			it 'assigns a success flash message' do
+				post :create
+				expect(flash[:notice]).not_to be_nil
+			end
+			it 'sends confirmation mail to user' do
+				email = UserMailer::ActionMailer::Base.deliveries.first
+				expect(email.from).to eq(['noreply@service.com'])
+			end
+			it 'sends approval mail to all admin users'
 		end
 	end
 end

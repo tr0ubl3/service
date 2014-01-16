@@ -86,13 +86,12 @@ ActiveRecord::Schema.define(:version => 20140116105540) do
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email",               :default => "",    :null => false
-    t.datetime "remember_created_at"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "email",            :default => "",    :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "machine_owner_id"
     t.integer  "phone_number"
-    t.boolean  "admin",               :default => false
+    t.boolean  "admin",            :default => false
   end
 
   add_index "users", ["machine_owner_id"], :name => "index_users_on_machine_owner_id"

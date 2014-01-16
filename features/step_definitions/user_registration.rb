@@ -24,8 +24,8 @@ end
 
 Then(/^I receive an email regarding successfull submision of registration to admins$/) do
   email = ActionMailer::Base.deliveries.first
-  email.from.should == "noreply@service.com"
-  email.to.should == @user.email
+  email.from.should == ["noreply@service.com"]
+  email.to.should == [User.last.email]
   email.body.should include("Your registration has been sent")
 end
 
