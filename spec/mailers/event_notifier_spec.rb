@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe EventNotifier do
+describe ServiceEventNotifier do
   describe "confirmation" do
     let(:mail) { EventNotifier.confirmation }
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Event do
+describe ServiceEvent do
 	let(:event) { Event.new }
 
 	describe "validations" do

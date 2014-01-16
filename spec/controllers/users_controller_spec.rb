@@ -1,26 +1,30 @@
 require 'spec_helper'
 
-describe Devise::RegistrationsController do
+describe UsersController do
 	describe 'GET new' do
-		let(:new_user) { mock_model('User').as_new_record }
+		let!(:user) { mock_model('User').as_new_record }
+		let!(:machine_owners) { create(:machine_owner) }
 		before :each do
-		    request.env['devise.mapping'] = Devise.mappings[:user]
-			User.stub(:new).and_return(new_user)
+			User.stub(:new).and_return(user)
+			get :new
 		end
 		it 'assigns user variable to the view' do
-			get :new
-			expect(assigns[:user]).to eq(new_user)
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it 'assigns machine_owners variable to the view' do
+			expect(assigns[:machine_owners]).to eq([machine_owners])
 		end
 		it 'renders new template' do
-			get :new
 			expect(response).to render_template :new
+		end
+
+		it 'renders with user layout' do
+			expect(response).to render_template(layout: 'layouts/user')
 		end
 	end
 
 	describe 'POST create' do
-		before :each do
-		    request.env['devise.mapping'] = Devise.mappings[:user]
-	    end
 		it 'it sends new message to User class' do
 			params = {
 				"machine_owner_id" => "1",

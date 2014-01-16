@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
  
-  attr_accessible :email, :password, :password_confirmation,
-                  :machine_owner_id, :first_name, :last_name,
+  attr_accessor :password, :password_confirmation
+  attr_accessible :email, :machine_owner_id, :first_name, :last_name,
                   :phone_number, :remember_me, :admin
   belongs_to :machine_owner
   has_many :service_events

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
 
-  # layout 'user', :only => [ :new ]
+  layout 'user', only: [:new]
 
   def new
+    @user = User.new
+    @machine_owners = MachineOwner.all
   end
 
 #   # GET /resource/sign_up

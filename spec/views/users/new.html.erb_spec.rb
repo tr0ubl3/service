@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'users/new.html.erb' do
 	before do
 	  user = mock_model("User").as_new_record.as_null_object
-	  @machine_owners = [create(:machine_owner)]
+	  machine_owners = [create(:machine_owner)]
 	  assign(:user, user)
+	  assign(:machine_owners, machine_owners)
 	  render
 	end
 
