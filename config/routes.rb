@@ -6,7 +6,9 @@ Service::Application.routes.draw do
   # resources :events, :except => [:create] do
   #   post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
   # end
-  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users
+  get 'signup', to: 'users#new', as: 'signup'
+
+  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :users
   resources :general do
     collection do
       get :machine_events
@@ -14,22 +16,13 @@ Service::Application.routes.draw do
     end
   end
 
+
   resources :service_events do
     collection do
       get :confirm_event
     end
   end  
 
-  # devise_for :users
-  devise_for :users, :controllers => { :registrations => "devise/registrations" } do
-    get "users/sign_up" => "devise/registrations#new"
-  end
-  devise_scope :user do
-    get "new_admin_registration", :to => "devise/registrations#new_admin"
-    post "admin_registration", :to => "devise/registrations#create_admin"
-    get "new_user_by_admin", :to => "devise/registrations#new_user_by_admin"
-    post "new_user_by_admin_registration", :to => "devise/registrations#create_user_by_admin"
-  end
   get "main/index"
   root to: 'general#index'
 

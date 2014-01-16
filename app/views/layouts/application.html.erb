@@ -13,14 +13,13 @@
           <%= link_to "Service", root_path, :class => "brand brand-custom" %>
           <div class="nav-collapse collapse">
             <div class="dropdown pull-right">
-              <% if user_signed_in? %>
+              <% if 1 == 1 %>
                     <p class="navbar-text" style="display: inline;">
                       <span class="badge badge-important event-notification-bullet" title="pending events">
-                        <%= check_user_admin? %>
                       </span> 
                       Logged in as
                     </p>
-                    <%= link_to current_user.full_name, '#', :class => 'navbar-link dropdown-toggle', :data => { :toggle => "dropdown" } %>
+                    <%= link_to 'Test name', '#', :class => 'navbar-link dropdown-toggle', :data => { :toggle => "dropdown" } %>
                     <ul class="dropdown-menu" role="menu" aria-labeledby="dLabel">
                       <li>
                         <%= link_to control_panel_general_index_path do %>
@@ -29,19 +28,19 @@
                       </li>
                       <li class="divider"></li>
                       <li>
-                        <%= link_to edit_user_registration_path do %>
+                        <%= link_to '#' do %>
                           <i class="icon-wrench"></i> Profile settings
                         <% end %>
                       </li>
                       <li>
-                          <%= link_to destroy_user_session_path do %>
+                          <%= link_to '#' do %>
                             <i class="icon-off"></i> Logout 
                           <% end %>
                       </li>
                     </ul>
                     <% else %>
                       <p class="navbar-text" style="display: inline;">
-                        <%= link_to "Login", new_user_session_path %>
+                        <%= link_to "Login", '#' %>
                       </p>
               <% end %>
             </div>

@@ -8,17 +8,9 @@ class ApplicationController < ActionController::Base
     	render('list')
 	end
 	
-	layout :layout
+	layout 'application'
 
 	private
-		def layout
-			if devise_controller?
-			      "user"
-			    else
-			      "application"
-		    end
-		end
-
 		def check_user_admin?
 			if current_user.admin == true
 				new_events_count

@@ -55,7 +55,6 @@ end
 
 gem 'jquery-rails'
 gem 'js-routes'
-gem 'devise'
 gem 'bootstrap-datepicker-rails'
 gem 'active_link_to'
 gem 'state_machine'

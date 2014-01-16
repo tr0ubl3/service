@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe 'devise/registrations/new.html.erb' do
+describe 'users/new.html.erb' do
 	before do
-	  view.stub(:resource).and_return(User.new)
-	  view.stub(:resource_name).and_return(:user)
-	  view.stub(:devise_mapping).and_return(Devise.mappings[:user])
+	  user = mock_model("User").as_new_record.as_null_object
+	  @machine_owners = [create(:machine_owner)]
+	  assign(:user, user)
 	  render
 	end
 
@@ -36,9 +36,9 @@ describe 'devise/registrations/new.html.erb' do
 		expect(rendered).to have_selector('input[type="submit"]')
 	end
 	it 'has sign_in link' do
-		expect(rendered).to have_link("Sign in", :href => "/users/sign_in")
+		expect(rendered).to have_link("Sign in", :href => '/signin')
 	end
 	it 'forgot password link' do
-		expect(rendered).to have_link("Forgot your password?", :href => "/users/password/new")
+		expect(rendered).to have_link("Forgot your password?", :href => '/password_reset')
 	end
 end

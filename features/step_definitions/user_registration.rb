@@ -2,12 +2,12 @@ Given(/^I am a guest$/) do
 end
 
 Given(/^I want to register on service web application$/) do
-  @machine_owners = create(:machine_owner)
-  visit new_user_registration_path
+  # @machine_owners = create(:machine_owner)
+  visit "/signup"
 end
 
 When(/^I fill the register form with valid data$/) do
-  current_path.should == '/users/sign_up'
+  current_path.should == '/signup'
   select('Delphi', :from => 'user_machine_owner_id')
   fill_in "user_first_name", :with => "Ionescu"
   fill_in "user_last_name", :with => "Vasile"
