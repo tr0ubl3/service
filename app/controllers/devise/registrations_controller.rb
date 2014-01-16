@@ -4,6 +4,7 @@ class Devise::RegistrationsController < DeviseController
 
   # GET /resource/sign_up
   def new
+    @machine_owners = MachineOwner.all
     build_resource({})
     respond_with self.resource
   end
@@ -44,6 +45,7 @@ class Devise::RegistrationsController < DeviseController
 
   # POST /resource
   def create
+    @machine_owners = MachineOwner.all
     build_resource(sign_up_params)
 
     if resource.save

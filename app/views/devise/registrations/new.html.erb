@@ -6,7 +6,7 @@
 		  <div class="control-group">
 			<%= f.label(:machine_owner_id, 'Select firm', class: 'control-label') %>
 			<div class='controls'>
-				<%= f.select(:machine_owner_id, MachineOwner.all.collect { |m| [m.name, m.id] }, :include_blank => true, html: {id: "machine_owners_list"}) %>
+				<%= f.select(:machine_owner_id, @machine_owners.collect { |m| [m.name, m.id] }, :include_blank => true, html: {id: "machine_owners_list"}) %>
 			</div>
 	      </div>
   		  <div class="control-group">

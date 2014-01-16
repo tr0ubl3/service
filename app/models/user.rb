@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   attr_accessible :email, :password, :password_confirmation,
                   :machine_owner_id, :first_name, :last_name,
-                  :phone_number, :remember_me
+                  :phone_number, :remember_me, :admin
   belongs_to :machine_owner
   has_many :service_events
   

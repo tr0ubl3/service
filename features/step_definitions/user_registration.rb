@@ -2,6 +2,7 @@ Given(/^I am a guest$/) do
 end
 
 Given(/^I want to register on service web application$/) do
+  @machine_owners = create(:machine_owner)
   visit new_user_registration_path
 end
 
