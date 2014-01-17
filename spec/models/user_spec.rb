@@ -5,6 +5,11 @@ describe User do
 	it 'is an ActiveRecord model' do
 		expect(User.superclass).to eq(ActiveRecord::Base)
 	end	
+
+	it 'has_secure_password available' do
+		user.password = 'testpassword'
+		expect(user.password_digest).not_to be_nil
+	end
 	it 'has first_name' do
 		user.first_name = "John"
 		expect(user.first_name).to eq("John")
