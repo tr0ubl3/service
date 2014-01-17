@@ -18,6 +18,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'factory_girl_rails'
+  require "email_spec"
 
   RSpec.configure do |config|
     require "rails/application"
@@ -34,8 +35,10 @@ Spork.prefork do
       @real_world = RSpec.world
       RSpec.instance_variable_set(:@world, RSpec::Core::World.new)
     end
-	config.order = "random"
-	config.fuubar_progress_bar_options = { :format => 'My Fuubar! <%B> %p%% %a' }
+  	config.order = "random"
+  	config.fuubar_progress_bar_options = { :format => 'My Fuubar! <%B> %p%% %a' }
+    config.include(EmailSpec::Helpers)
+    config.include(EmailSpec::Matchers)
   end
 end
 

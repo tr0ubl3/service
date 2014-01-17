@@ -9,9 +9,11 @@ class UsersController < ApplicationController
 
   def create
   	user = User.new(params[:user])
+    admins = User.where(:admin => true)
   	user.save
   	redirect_to signup_path, notice: 'You successfully submit registration'
   	UserMailer.confirmation(user).deliver
+    UserMailer.approval(admins).deliver
   end
 
 #   # GET /resource/sign_up

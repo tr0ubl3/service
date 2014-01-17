@@ -50,6 +50,8 @@ describe UsersController do
 		end
 
 		context 'when save message returns true' do
+			let(:user) { create(:user) }
+			let(:admin) { create(:admin) }
 			before :each do
 				user.stub(:save).and_return(true)
 			end
@@ -62,10 +64,13 @@ describe UsersController do
 				expect(flash[:notice]).not_to be_nil
 			end
 			it 'sends confirmation mail to user' do
-				email = UserMailer::ActionMailer::Base.deliveries.first
-				expect(email.from).to eq(['noreply@service.com'])
+				UserMailer.should_receive(:confirmation).with(user).and_return(double("UserMailer", :deliver => true))
+				post :create, :user => user
 			end
-			it 'sends approval mail to all admin users'
+			it 'sends approval mail to all admin users' do
+				UserMailer.should_receive(:approval).with([admin]).and_return(double("UserMailer", :deliver => true))
+				post :create, :user => user
+			end
 		end
 	end
 end

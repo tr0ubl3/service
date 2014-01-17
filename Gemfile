@@ -9,6 +9,7 @@ group :development, :test do
 	gem 'sqlite3'
 	gem 'rspec'
 	gem 'rspec-rails'
+	gem 'email_spec'
 	gem 'fuubar'
 	gem "selenium-client" , ">= 1.2.18"
 
