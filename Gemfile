@@ -12,6 +12,7 @@ group :development, :test do
 	gem 'email_spec'
 	gem 'fuubar'
 	gem "selenium-client" , ">= 1.2.18"
+	gem 'shoulda-matchers'
 	# gem 'email_validator', :require => 'email_validator/strict'
 
 	## guard gems begin 
