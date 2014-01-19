@@ -12,6 +12,7 @@ group :development, :test do
 	gem 'email_spec'
 	gem 'fuubar'
 	gem "selenium-client" , ">= 1.2.18"
+	# gem 'email_validator', :require => 'email_validator/strict'
 
 	## guard gems begin 
 	gem 'guard', :github => 'guard/guard'
@@ -65,7 +66,7 @@ gem 'thin'
 gem 'eventmachine'
 gem 'font-awesome-rails'
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

@@ -6,6 +6,7 @@ FactoryGirl.define do
 		phone_number 0740123123
 		admin false
 		machine_owner_id 1
+		password_digest "$2a$10$uYvJ7AaOeDJkNkyKavHaj.wE5GYK93z11W24RQj0rPHoNws3mbMlC"
 	end
 
 	factory :admin, class: User do
@@ -15,6 +16,7 @@ FactoryGirl.define do
 		phone_number 0740223223
 		admin true
 		machine_owner_id 1
+		password_digest "$2a$10$uYvJ7AaOeDJkNkyKavHaj.wE5GYK93z11W24RQj0rPHoNws3mbMlC"
 	end
 
 	factory :admin_2, class: User do
@@ -24,5 +26,6 @@ FactoryGirl.define do
 		phone_number 0740323323
 		admin true
 		machine_owner_id 1
+		password_digest "$2a$10$uYvJ7AaOeDJkNkyKavHaj.wE5GYK93z11W24RQj0rPHoNws3mbMlC"
 	end
 end

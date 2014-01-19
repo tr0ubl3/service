@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  layout 'user', only: [:new]
+  layout 'user', only: [:new, :login]
 
   def new
     @user = User.new
@@ -8,14 +8,21 @@ class UsersController < ApplicationController
   end
 
   def create
-  	user = User.new(params[:user])
+  	@user = User.new(params[:user])
+    @machine_owners = MachineOwner.all
     admins = User.where(:admin => true)
-  	user.save
-  	redirect_to signup_path, notice: 'You successfully submit registration'
-  	UserMailer.confirmation(user).deliver
-    UserMailer.approval(admins).deliver
+  	if @user.save
+    	redirect_to login_path, notice: 'You successfully submit registration'
+    	UserMailer.confirmation(@user).deliver
+      UserMailer.approval(admins).deliver
+    else
+      flash.now[:error] = 'Please correct errors and try again!'
+      render :new
+    end
   end
 
+  def login
+  end
 #   # GET /resource/sign_up
 #   def new
 #     @machine_owners = MachineOwner.all

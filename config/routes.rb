@@ -1,12 +1,10 @@
 Service::Application.routes.draw do
-  
-
-
   # get "general/index"
   # resources :events, :except => [:create] do
   #   post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
   # end
   get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'users#login', as: 'login'
 
   resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :users
   resources :general do

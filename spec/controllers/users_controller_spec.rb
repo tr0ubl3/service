@@ -26,12 +26,9 @@ describe UsersController do
 
 	describe 'POST create' do
 		let!(:user) { stub_model(User) }
-		before :each do
-			User.stub(:new).and_return(user)
-		end
-
-		it 'sends new message to User class' do
-			params = {
+		let!(:machine_owners) { create(:machine_owner) }
+		let(:params) do
+			 {
 				"first_name" => "John",
 				"last_name" => "Wilkins",
 				"phone_number" => "1234567890",
@@ -40,6 +37,12 @@ describe UsersController do
 				"password_confirmation" => "pass",
 				"admin" => false
 			}
+		end
+		before :each do
+			User.stub(:new).and_return(user)
+		end
+
+		it 'sends new message to User class' do
 			User.should_receive(:new).with(params)
 			post :create, user: params
 		end
@@ -55,9 +58,9 @@ describe UsersController do
 			before :each do
 				user.stub(:save).and_return(true)
 			end
-			it 'redirects to signup path' do
+			it 'redirects to login path' do
 				post :create
-				expect(response).to redirect_to signup_path
+				expect(response).to redirect_to login_path
 			end
 			it 'assigns a success flash message' do
 				post :create
@@ -71,6 +74,38 @@ describe UsersController do
 				UserMailer.should_receive(:approval).with([admin]).and_return(double("UserMailer", :deliver => true))
 				post :create, :user => user
 			end
+		end
+		
+		context "when save message return false" do
+			before :each do
+				user.stub(:save).and_return(false)
+				post :create, user: params
+			end
+			it 'renders new template' do
+				expect(response).to render_template :new
+			end
+			it 'assigns user variable to the view' do
+				expect(assigns[:user]).to eq(user)
+			end
+			it 'assigns machine_owners variable to the view' do
+				expect(assigns[:machine_owners]).to eq([machine_owners])
+			end
+			it 'assigns error flash message' do
+				expect(flash[:error]).not_to be_nil
+			end
+		end
+	end
+
+	describe 'GET login' do
+		before :each do
+			get :login
+		end
+		it 'renders login template' do
+			expect(response).to render_template :login
+		end
+
+		it 'renders with user layout' do
+			expect(response).to render_template(layout: 'layouts/user')
 		end
 	end
 end

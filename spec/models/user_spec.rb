@@ -2,6 +2,62 @@ require 'spec_helper'
 
 describe User do
 	let(:user) { User.new }
+
+	describe 'validations' do
+		before :each do
+			@params = {
+				machine_owner_id: '1',
+				first_name: 'Robb',
+				last_name: 'Stark',
+				phone_number: '0720123123',
+				email: 'robb.stark@mail.com',
+				password: 'securepassword',
+				password_confirmation: 'securepassword', 
+				admin: false
+			}
+		end
+		it 'is invalid machine owner id is empty' do
+			@params[:machine_owner_id] = nil
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid when first name is empty' do
+			@params[:first_name] = nil
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid when first name is invalid' do
+			@params[:first_name] = 'Test312'
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid when last name is empty' do
+			@params[:last_name] = nil
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid when phone number is empty' do
+			@params[:phone_number] = nil
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid email is invalid' do
+			@params[:email] = 'robb'
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid when email is not unique' do
+			User.create(@params)
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+		it 'is invalid when password and password confirmation are not the same' do
+			@params[:password] = 'secure'
+			user = User.new(@params)
+			expect(user.valid?).to be_false
+		end
+	end
+
 	it 'is an ActiveRecord model' do
 		expect(User.superclass).to eq(ActiveRecord::Base)
 	end	

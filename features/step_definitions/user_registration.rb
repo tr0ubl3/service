@@ -26,11 +26,31 @@ Then(/^I receive an email regarding successfull submision of registration to adm
   email = ActionMailer::Base.deliveries.first
   email.from.should == ["noreply@service.com"]
   email.to.should == [User.last.email]
-  email.body.should include("Your registration has been sent")
+  email.subject.should include("Registration confirmation")
 end
 
-Then(/^Path should be sign in$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^Path should be login$/) do
+  current_path.should == "/login"
+end
+
+When(/^I fill the register form with invalid data$/) do
+  visit "/signup"
+  # select('Delphi', :from => 'user_machine_owner_id')
+  fill_in "user_first_name", :with => "I"
+  fill_in "user_last_name", :with => "V"
+  fill_in "user_phone_number", :with => "1"
+  fill_in "user_email", :with => "ionescu"
+  fill_in "user_password", :with => "password123"
+  fill_in "user_password_confirmation", :with => "password123"
+  click_button "Sign up"
+end
+
+Then(/^I should see the register form again$/) do
+  expect(page).to have_selector('form#new_user')
+end
+
+Then(/^I should not be registered in application$/) do
+  expect(User.find_by_email('ionescu')).to be_nil
 end
 
 When(/^I receive the confirmation mail from application$/) do
