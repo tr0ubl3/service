@@ -19,6 +19,7 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'factory_girl_rails'
   require "email_spec"
+  require 'capybara/rspec'
 
   RSpec.configure do |config|
     require "rails/application"
@@ -39,6 +40,7 @@ Spork.prefork do
   	config.fuubar_progress_bar_options = { :format => 'My Fuubar! <%B> %p%% %a' }
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)
+    config.include Capybara::DSL
   end
 end
 

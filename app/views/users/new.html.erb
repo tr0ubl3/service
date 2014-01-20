@@ -2,6 +2,11 @@
 	<h2>Sign up</h2>
 	<div class="well" style="width: 220px;">
 		<%= form_for @user do |f| %>
+		<% if @user.errors.any? %>
+			<div id="error_explanation">
+
+			</div>
+		<% end %>
 		  <div class="control-group">
 			<%= f.label(:machine_owner_id, 'Select firm', class: 'control-label') %>
 			<div class='controls'>
