@@ -151,9 +151,9 @@ end
 
 When(/^I fill login form with valid data for "(.*?)"$/) do |email|
   visit('/login')
-  fill_in 'login_mail', with: email
+  fill_in 'login_email', with: email
   fill_in 'login_password', with: 'securepass'
-  click_button 'Login'
+  click_button 'Sign in'
 end
 
 Then(/^I should be logged in as "(.*?)" user$/) do |name|
