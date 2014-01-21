@@ -4,9 +4,9 @@ Service::Application.routes.draw do
   #   post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
   # end
   get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'users#login', as: 'login'
+  get 'login', to: 'sessions#new', as: 'login'
 
-  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :users
+  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :users, :sessions
   resources :general do
     collection do
       get :machine_events

@@ -23,7 +23,7 @@ Scenario: I try to register with invalid data
 
 Scenario: The registration is confirmed
 	Given I am a guest
-	When I receive the confirmation mail from application
+	When I receive the confirmation account mail from application
 	Then I shoud be able to login into application with my credentials
 	And I should be able to see the root index with all my firm machines listed
 
@@ -40,7 +40,8 @@ Scenario: I received a registration invitation
 Scenario: Approving new regular user registration from mail
 	Given I am an admin user
 	When I receive an email to approve a new user registration
-	Then I should be able to click a link in mail to approve user registration
+	Then I should be able to click a link in mail to get me to user approval page
+	And I should login into application with my admin credentials
 	And A confirmation mail should be sent to me
 
 Scenario: Approving new regular user registration from application

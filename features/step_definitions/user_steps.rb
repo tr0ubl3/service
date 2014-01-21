@@ -53,9 +53,9 @@ Then(/^I should not be registered in application$/) do
   expect(User.find_by_email('ionescu')).to be_nil
 end
 
-When(/^I receive the confirmation mail from application$/) do
+When(/^I receive the confirmation account mail from application$/) do
   pending # express the regexp above with the code you wish you had
-end
+end 
 
 Then(/^I shoud be able to login into application with my credentials$/) do
   pending # express the regexp above with the code you wish you had
@@ -143,4 +143,19 @@ end
 
 Given(/^I should be able to register another admin user$/) do
   pending # express the regexp above with the code you wish you had
+end
+
+Given(/^user with mail "(.*?)" exists$/) do |arg1|
+  User.stub(:find).and_return(create(:user))
+end
+
+When(/^I fill login form with valid data for "(.*?)"$/) do |email|
+  visit('/login')
+  fill_in 'login_mail', with: email
+  fill_in 'login_password', with: 'securepass'
+  click_button 'Login'
+end
+
+Then(/^I should be logged in as "(.*?)" user$/) do |name|
+  expect(page).to have_contents("Logged in as")
 end
