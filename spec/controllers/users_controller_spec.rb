@@ -84,6 +84,9 @@ describe UsersController do
 			it 'renders new template' do
 				expect(response).to render_template :new
 			end
+			it 'renders with user layout' do
+				expect(response).to render_template(layout: 'layouts/user')
+			end
 			it 'assigns user variable to the view' do
 				expect(assigns[:user]).to eq(user)
 			end

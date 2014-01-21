@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
- 
   has_secure_password
   # attr_accessor :password, :password_confirmation
   attr_accessible :email, :machine_owner_id, :first_name, :last_name,

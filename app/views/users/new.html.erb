@@ -3,8 +3,18 @@
 	<div class="well" style="width: 220px;">
 		<%= form_for @user do |f| %>
 		<% if @user.errors.any? %>
+			<% @user.errors.delete(:password_digest) %>
 			<div id="error_explanation">
-
+				<div class="alert alert-error">
+					The form contains <%= pluralize(@user.errors.count, "error") %>
+				</div>
+				<ul>
+					<% @user.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+					<% end %>
+				</ul>
 			</div>
 		<% end %>
 		  <div class="control-group">
@@ -32,21 +42,21 @@
 			</div>
 	      </div>
 		  <div class="control-group">
-		  	<%= f.label :email %>
+		  	<%= f.label :email, class: 'control-label' %>
 		  	<div class='controls'>
 			  	<%= f.email_field :email, :autofocus => true %>
 			</div>
 		  </div>
 
-		  <div class="controls">
-		  	<%= f.label :password %>
+		  <div class="control-group">
+		  	<%= f.label :password, class: 'control-label' %>
 		  	<div class="controls">
 			  	<%= f.password_field :password %>
 		    </div>
 		  </div>
 
-		  <div class="controls">
-		  	<%= f.label :password_confirmation %>
+		  <div class="control-group">
+		  	<%= f.label :password_confirmation, class: 'control-label' %>
 		  	<div class="controls">
 			  <%= f.password_field :password_confirmation %>
 			</div>
