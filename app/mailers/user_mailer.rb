@@ -6,9 +6,10 @@ class UserMailer < ActionMailer::Base
   	mail(to: @user.email, :subject => 'Registration confirmation')
   end
 
-  def approval(admins)
+  def approval(admins, new_user)
   	@admins = admins
+    @user = new_user
   	admin_mails = @admins.collect(&:email).join(',')
-  	mail(to: admin_mails, :subject => 'User registration approval pending')
+  	mail(to: admin_mails, :subject => 'Pending new user confirmation')
   end
 end

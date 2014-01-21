@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   	if @user.save
     	redirect_to login_path, notice: 'You successfully submit registration'
     	UserMailer.confirmation(@user).deliver
-      UserMailer.approval(admins).deliver
+      UserMailer.approval(admins, @user).deliver
     else
       flash.now[:error] = 'Please correct errors and try again!'
       render :new
