@@ -145,7 +145,7 @@ Given(/^I should be able to register another admin user$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^user with mail "(.*?)" exists$/) do |arg1|
+Given(/^user with mail  "(.*?)" exists$/) do |arg1|
   User.stub(:find).and_return(create(:user))
 end
 

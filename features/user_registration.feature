@@ -42,6 +42,8 @@ Scenario: Approving new regular user registration from mail
 	When I receive an email to approve a new user registration
 	Then I should be able to click a link in mail to get me to user approval page
 	And I should login into application with my admin credentials
+	Then I should see user details and approval button
+	And I approve
 	And A confirmation mail should be sent to me
 
 Scenario: Approving new regular user registration from application
