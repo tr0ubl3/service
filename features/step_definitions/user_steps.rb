@@ -159,3 +159,18 @@ end
 Then(/^I should be logged in as "(.*?)" user$/) do |name|
   expect(page).to have_content("Logged in as " + name)
 end
+
+When(/^I fill login form with invalid data$/) do
+  visit('/login')
+  fill_in 'login_email', with: 'test@mail.com'
+  fill_in 'login_password', with: 'securepass'
+  click_button 'Sign in'
+end
+
+Then(/^I should see an error$/) do
+  expect(page).to have_content('Username or password invalid!')
+end
+
+Then(/^I'm not logged in application$/) do
+  current_path.should == '/login'
+end
