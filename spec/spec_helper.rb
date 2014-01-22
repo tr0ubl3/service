@@ -1,16 +1,5 @@
-begin
-  require 'spork'
-rescue LoadError
-  module Spork
-    def self.prefork
-      yield
-    end
-
-    def self.each_run
-      yield
-    end
-  end
-end
+require 'rubygems'
+require 'spork'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
@@ -18,11 +7,13 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'factory_girl_rails'
-  require "email_spec"
+  require 'email_spec'
   require 'capybara/rspec'
-
+  
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+  
   RSpec.configure do |config|
-    require "rails/application"
+    # require "rails/application"
     Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
     require File.dirname(__FILE__) + "/../config/environment.rb"
   	config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -45,7 +36,6 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
   class RSpec::Core::ExampleGroup
     def self.run_all(reporter=nil)
       run(reporter || RSpec::Mocks::Mock.new('reporter').as_null_object)

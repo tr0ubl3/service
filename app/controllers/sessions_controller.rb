@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
 	def create
 		login = Login.new(params[:login])
-		login.authenticate
-		render nothing: true
+		session[:user_id] = login.authenticate
+		redirect_to root_url, notice: "You're logged in"
 	end
 end

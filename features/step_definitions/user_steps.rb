@@ -157,5 +157,5 @@ When(/^I fill login form with valid data for "(.*?)"$/) do |email|
 end
 
 Then(/^I should be logged in as "(.*?)" user$/) do |name|
-  expect(page).to have_contents("Logged in as")
+  expect(page).to have_content("Logged in as " + name)
 end

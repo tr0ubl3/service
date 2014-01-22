@@ -51,9 +51,19 @@ describe SessionsController do
 		end
 
 		context "when authenticate method return true" do
-			it "redirects to root url"
-			it "assigns a success flash message"
-			it "authenticates reader"
+			before :each do
+				login.stub(:authenticate).and_return(true)
+				post :create, login: params
+			end
+			it "redirects to root url" do
+				expect(response).to redirect_to(root_url)
+			end
+			it "assigns a success flash message" do
+				expect(flash[:notice]).not_to be_nil
+			end
+			it "authenticates reader" do
+				expect(session[:user_id]).not_to be_nil
+			end
 		end
 	end
 end
