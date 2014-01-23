@@ -45,14 +45,14 @@ describe SessionsController do
 				login.stub(:valid?).and_return(true)
 			end
 		end
-		it 'sends authenticate message to login model' do
-			login.should_receive(:authenticate)
+		it 'sends conditional_authentication message to login model' do
+			login.should_receive(:conditional_authentication)
 			post :create, login: params
 		end
 
-		context "when authenticate method return true" do
+		context "when conditional_authentication method return true" do
 			before :each do
-				login.stub(:authenticate).and_return(true)
+				login.stub(:conditional_authentication).and_return(true)
 				post :create, login: params
 			end
 			it "redirects to root url" do
@@ -68,7 +68,7 @@ describe SessionsController do
 
 		context "when authenticate method return false" do
 			before :each do
-				login.stub(:authenticate).and_return(false)
+				login.stub(:conditional_authentication).and_return(false)
 				post :create, login: params
 			end
 			it "redirects to login page" do

@@ -7,6 +7,17 @@ FactoryGirl.define do
 		admin false
 		machine_owner_id 1
 		password 'securepassword'
+		approved_at Time.now.to_date.to_time
+	end
+
+	factory :user2, class: User do
+		first_name "Daenarys"
+		last_name "Targaryen"
+		email "daenarys.targaryen@mail.com"
+		phone_number 0740123124
+		admin false
+		machine_owner_id 1
+		password 'securepassword'
 	end
 
 	factory :admin, class: User do
@@ -17,6 +28,7 @@ FactoryGirl.define do
 		admin true
 		machine_owner_id 1
 		password "securepassword"
+		approved_at Time.now
 	end
 
 	factory :admin_2, class: User do
@@ -27,5 +39,6 @@ FactoryGirl.define do
 		admin true
 		machine_owner_id 1
 		password "securepassword"
+		approved_at Time.now
 	end
 end

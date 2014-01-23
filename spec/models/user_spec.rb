@@ -81,4 +81,10 @@ describe User do
 		user.password_confirmation = "pass"
 		expect(user.password_confirmation).to eq("pass")
 	end
+
+	it 'has approved_at attribute' do
+		time = Time.now
+		user.approved_at = time
+		expect(user.approved_at).to eq(time)
+	end
 end

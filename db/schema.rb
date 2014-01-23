@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140118203535) do
+ActiveRecord::Schema.define(:version => 20140123162301) do
 
   create_table "alarms", :force => true do |t|
     t.integer  "number"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20140118203535) do
     t.integer  "phone_number"
     t.boolean  "admin",            :default => false
     t.string   "password_digest"
+    t.datetime "approved_at"
   end
 
   add_index "users", ["machine_owner_id"], :name => "index_users_on_machine_owner_id"

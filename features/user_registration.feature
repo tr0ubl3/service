@@ -23,6 +23,9 @@ Scenario: I try to register with invalid data
 
 Scenario: The registration is confirmed
 	Given I am a guest
+	And I've registered before with "daenarys.targaryen@mail.com"
+	And I'm waiting for account confirmation
+	And I can't login yet into application
 	When I receive the confirmation account mail from application
 	Then I shoud be able to login into application with my credentials
 	And I should be able to see the root index with all my firm machines listed

@@ -3,12 +3,21 @@ class Login
 	include ActiveAttr::MassAssignment
 	attr_accessor :email, :password
 
-	def authenticate
+	def conditional_authentication
 		user = User.find_by_email(email)
-		if user && user.authenticate(password)
+		if user && user.authenticate(password) && check_approval(user)
 			user.id 
 		else
 			nil
 		end 
+	end
+
+	private
+	def check_approval(user)
+		if user.approved_at?
+			return true
+		else
+			return false
+		end
 	end
 end

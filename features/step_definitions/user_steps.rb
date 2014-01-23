@@ -9,24 +9,21 @@ end
 When(/^I fill the register form with valid data$/) do
   current_path.should == '/signup'
   select('Delphi', :from => 'user_machine_owner_id')
-  fill_in "user_first_name", :with => "Ionescu"
-  fill_in "user_last_name", :with => "Vasile"
-  fill_in "user_phone_number", :with => "1231231231"
-  fill_in "user_email", :with => "ionescu@mail.com"
-  fill_in "user_password", :with => "password123"
-  fill_in "user_password_confirmation", :with => "password123"
+  fill_in "user_first_name", :with => "Daenerys"
+  fill_in "user_last_name", :with => "Targaryen"
+  fill_in "user_phone_number", :with => "0720123123"
+  fill_in "user_email", :with => "daenerys.targaryen@mail.com"
+  fill_in "user_password", :with => "securepass"
+  fill_in "user_password_confirmation", :with => "securepass"
   click_button "Sign up"
 end
 
 When(/^I succesfully submit the form$/) do
-  expect(User.find_by_email('ionescu@mail.com')).not_to be_nil
+  expect(User.find_by_email('daenerys.targaryen@mail.com')).not_to be_nil
 end
 
 Then(/^I receive an email regarding successfull submision of registration to admins$/) do
-  email = ActionMailer::Base.deliveries.first
-  email.from.should == ["noreply@service.com"]
-  email.to.should == [User.last.email]
-  email.subject.should include("Registration confirmation")
+  expect(unread_emails_for("daenerys.targaryen@mail.com").size).to eq(1)
 end
 
 Then(/^Path should be login$/) do
@@ -36,10 +33,10 @@ end
 When(/^I fill the register form with invalid data$/) do
   visit "/signup"
   # select('Delphi', :from => 'user_machine_owner_id')
-  fill_in "user_first_name", :with => "I"
-  fill_in "user_last_name", :with => "V"
+  fill_in "user_first_name", :with => "D"
+  fill_in "user_last_name", :with => "T"
   fill_in "user_phone_number", :with => "1"
-  fill_in "user_email", :with => "ionescu"
+  fill_in "user_email", :with => "daenerys"
   fill_in "user_password", :with => "password123"
   fill_in "user_password_confirmation", :with => "password123"
   click_button "Sign up"
@@ -50,11 +47,25 @@ Then(/^I should see the register form again$/) do
 end
 
 Then(/^I should not be registered in application$/) do
-  expect(User.find_by_email('ionescu')).to be_nil
+  expect(User.find_by_email('daenerys')).to be_nil
+end
+
+Given(/^I've registered before with "(.*?)"$/) do |email|
+  @user = create(:user2)
+  expect(User.find_by_email(email)).not_to be_nil
+end
+
+Given(/^I'm waiting for account confirmation$/) do
+  expect(@user.approved_at).to be_nil
+end
+
+Given(/^I can't login yet into application$/) do
+  login = Login.new(email: 'daenerys.targaryen@mail.com', password: 'securepassword')
+  expect(login.conditional_authentication).to be_nil
 end
 
 When(/^I receive the confirmation account mail from application$/) do
-  pending # express the regexp above with the code you wish you had
+  current_email.should have_subject('Your registration has been approved')
 end 
 
 Then(/^I shoud be able to login into application with my credentials$/) do
