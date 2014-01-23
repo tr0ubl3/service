@@ -168,7 +168,7 @@ When(/^I fill login form with invalid data$/) do
 end
 
 Then(/^I should see an error$/) do
-  expect(page).to have_content('Username or password invalid!')
+  expect(page).to have_content('Invalid email or password')
 end
 
 Then(/^I'm not logged in application$/) do

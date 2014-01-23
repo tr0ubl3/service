@@ -7,7 +7,13 @@
 	  <%= csrf_meta_tags %>
 	</head>
 
-	<body style="background-color: #F5F5F5;">
+	<body class="user">
+		<% flash.each do |type, message| %>
+		  	<div class="alert <%= flash_class type %> span6">
+		  		<button class="close" data-dismiss="alert">x</button>
+		  		<%= message %>
+	  		</div>	
+	    <% end %>	
 		<%= yield %>
 	</body>
 </html>
