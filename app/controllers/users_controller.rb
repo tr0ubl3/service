@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def login
+  def show
   end
 #   # GET /resource/sign_up
 #   def new

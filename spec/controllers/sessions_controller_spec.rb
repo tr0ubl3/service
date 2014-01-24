@@ -82,4 +82,21 @@ describe SessionsController do
 			end
 		end
 	end
+
+	describe "GET destroy" do
+		it 'sets session[:user_id] to nil' do
+			session[:user_id] = 1
+			get :destroy
+			expect(session[:user_id]).to be_nil
+		end
+
+		it 'redirects to login page' do
+			get :destroy
+			expect(response).to redirect_to login_path
+		end
+
+		it "assigns a flash message" do
+			expect(flash[:notice]).not_to be_nil
+		end
+	end
 end

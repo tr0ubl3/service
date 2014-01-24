@@ -9,6 +9,7 @@ Spork.prefork do
   require 'factory_girl_rails'
   require 'email_spec'
   require 'capybara/rspec'
+  require 'rack_session_access/capybara'
   ActiveSupport::Dependencies.clear
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
   # Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }

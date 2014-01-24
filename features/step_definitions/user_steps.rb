@@ -65,6 +65,7 @@ Given(/^I can't login yet into application$/) do
 end
 
 When(/^I receive the confirmation account mail from application$/) do
+  open_email('daenerys.targaryen@mail.com')
   current_email.should have_subject('Your registration has been approved')
 end 
 
@@ -156,14 +157,14 @@ Given(/^I should be able to register another admin user$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^user with mail  "(.*?)" exists$/) do |arg1|
+Given(/^user with mail "(.*?)" exists$/) do |arg1|
   User.stub(:find).and_return(create(:user))
 end
 
 When(/^I fill login form with valid data for "(.*?)"$/) do |email|
   visit('/login')
   fill_in 'login_email', with: email
-  fill_in 'login_password', with: 'securepass'
+  fill_in 'login_password', with: 'securepassword'
   click_button 'Sign in'
 end
 
@@ -183,5 +184,16 @@ Then(/^I should see an error$/) do
 end
 
 Then(/^I'm not logged in application$/) do
+  current_path.should == '/login'
+end
+
+Given(/^I am a "(.*?)" user$/) do |arg1|
+end
+
+When(/^I go to logout page$/) do
+  visit('/logout')
+end
+
+Then(/^I should be logged out$/) do
   current_path.should == '/login'
 end

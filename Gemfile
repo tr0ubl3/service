@@ -43,6 +43,7 @@ group :test do
 	gem 'win32-process'
 	gem 'database_cleaner'
 	gem 'childprocess', '0.3.6'
+	gem 'rack_session_access'
 end
 
 # Gems used only for assets and not required

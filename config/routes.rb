@@ -5,6 +5,7 @@ Service::Application.routes.draw do
   # end
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'destroy'
 
   resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :users, :sessions
   resources :general do

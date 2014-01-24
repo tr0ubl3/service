@@ -12,38 +12,7 @@
         <div class="container-fluid">
           <%= link_to "Service", root_path, :class => "brand brand-custom" %>
           <div class="nav-collapse collapse">
-            <div class="dropdown pull-right">
-              <% if 1 == 1 %>
-                    <p class="navbar-text" style="display: inline;">
-                      <span class="badge badge-important event-notification-bullet" title="pending events">
-                      </span> 
-                      Logged in as
-                    </p>
-                    <%= link_to 'Test name', '#', :class => 'navbar-link dropdown-toggle', :data => { :toggle => "dropdown" } %>
-                    <ul class="dropdown-menu" role="menu" aria-labeledby="dLabel">
-                      <li>
-                        <%= link_to control_panel_general_index_path do %>
-                          <i class="icon-cog"></i> Control Panel 
-                        <% end %>
-                      </li>
-                      <li class="divider"></li>
-                      <li>
-                        <%= link_to '#' do %>
-                          <i class="icon-wrench"></i> Profile settings
-                        <% end %>
-                      </li>
-                      <li>
-                          <%= link_to '#' do %>
-                            <i class="icon-off"></i> Logout 
-                          <% end %>
-                      </li>
-                    </ul>
-                    <% else %>
-                      <p class="navbar-text" style="display: inline;">
-                        <%= link_to "Login", '#' %>
-                      </p>
-              <% end %>
-            </div>
+            <%= top_right_menu %>
           </div>
         </div>
       </div>

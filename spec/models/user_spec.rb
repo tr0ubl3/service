@@ -87,4 +87,11 @@ describe User do
 		user.approved_at = time
 		expect(user.approved_at).to eq(time)
 	end
+
+	describe "#full_name" do
+		let(:user) { create(:user) }
+		it 'returns full name of a user' do
+			expect(user.full_name).not_to be_nil 
+		end
+	end
 end
