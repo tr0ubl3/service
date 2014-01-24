@@ -34,12 +34,11 @@ Then(/^I should be redirected to user details$/) do
 end
 
 Then(/^I'm not logged into application$/) do
-  page.set_rack_session(:user_id => @user.id)
-  expect(page.get_rack_session_key(:user_id)).to be_nil
+  expect(page).to have_content('Please login to see page')
 end
 
 Then(/^I should see login page$/) do
-  pending # express the regexp above with the code you wish you had
+  current_path.should == '/login'
 end
 
 Then(/^After login I should see user details$/) do
