@@ -23,7 +23,7 @@ FactoryGirl.define do
 	factory :admin, class: User do
 		first_name "Jon"
 		last_name "Snow"
-		email "john.snow@mail.com"
+		email "jon.snow@mail.com"
 		phone_number 0740223223
 		admin true
 		machine_owner_id 1

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   layout 'user', only: [:new, :create, :login]
+  before_filter :check_auth, only: [:show]
 
   def new
     @user = User.new

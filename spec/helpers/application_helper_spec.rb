@@ -4,7 +4,7 @@ describe ApplicationHelper do
 
 	describe "#top_right_menu" do
 		let!(:user) { create(:user) }
-		it "has Register link if user is not legged in" do
+		it "has Register link if user is not logged in" do
 			helper.stub(:current_user).and_return(nil)
 			expect(helper.top_right_menu).to have_link("Register")
 		end

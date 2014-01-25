@@ -9,11 +9,10 @@ Admin users have special functionality called control panel from where it can ma
 	Scenario: Admin approve new user registration with email
 		When I receive a notification email regarding pending new user registration
 		Then I click a link inside email
-		And I should be redirected to user details
-		But I'm not logged into application
 		And I should see login page
-		And After login I should see user details
-		And I should see confirmation button
+		Then I login with my credentials
+		And I should see user details
+		Then I should have confirmation button
 		When User is ok for registration
 		Then I click button to approve user registration
 

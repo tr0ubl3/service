@@ -1,5 +1,6 @@
 Given(/^I'm an admin$/) do
   @admin = create(:admin)
+  @user = create(:user)
   expect(@admin.admin).to be_true
 end
 
@@ -28,24 +29,22 @@ Then(/^I click a link inside email$/) do
   click_first_link_in_email
 end
 
-Then(/^I should be redirected to user details$/) do
-  @user = User.find_by_email('daenerys.targaryen@mail.com')
-  current_path.should == '/users/' + @user.id.to_s
-end
-
-Then(/^I'm not logged into application$/) do
-  expect(page).to have_content('Please login to see page')
-end
-
 Then(/^I should see login page$/) do
   current_path.should == '/login'
 end
 
-Then(/^After login I should see user details$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I login with my credentials$/) do
+  fill_in('login_email', :with => 'jon.snow@mail.com')
+  fill_in('login_password', :with => 'securepassword')
+  click_button 'Sign in'
 end
 
-Then(/^I should see confirmation button$/) do
+Then(/^I should see user details$/) do
+  expect(current_path).to eq(user_path(User.last.id))
+  expect(page).to have_content("#{@user.full_name} details")
+end
+
+Then(/^I should have confirmation button$/) do
   pending # express the regexp above with the code you wish you had
 end
 

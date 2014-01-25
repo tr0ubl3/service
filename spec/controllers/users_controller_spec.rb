@@ -53,7 +53,7 @@ describe UsersController do
 		end
 
 		context 'when save message returns true' do
-			let(:user) { create(:user) }
+			let(:user) { create(:user2) }
 			let(:admin) { create(:admin) }
 			before :each do
 				user.stub(:save).and_return(true)
@@ -71,8 +71,9 @@ describe UsersController do
 				post :create, :user => user
 			end
 			it 'sends approval mail to all admin users' do
-				UserMailer.should_receive(:approval).with([admin]).and_return(double("UserMailer", :deliver => true))
-				post :create, :user => user
+				admins = User.where(:admin => true)
+				UserMailer.should_receive(:approval).with(admins, user).and_return(double("UserMailer", :deliver => true))
+				post :create, user: user, admins: admin
 			end
 		end
 		
@@ -99,16 +100,29 @@ describe UsersController do
 		end
 	end
 
-	describe 'GET login' do
-		before :each do
-			get :login
-		end
-		it 'renders login template' do
-			expect(response).to render_template :login
-		end
+	describe 'get SHOW' do
+		context "when admin it's not logged in" do
+			let!(:user) { create(:user) }
+			before :each do
+				session[:user_id] = nil
+			end
 
-		it 'renders with user layout' do
-			expect(response).to render_template(layout: 'layouts/user')
+			it 'redirects to login page' do
+				get :show, id: user.id
+				expect(response).to redirect_to login_path
+			end
 		end
 	end
+	# describe 'GET login' do
+	# 	before :each do
+	# 		get :login
+	# 	end
+	# 	it 'renders login template' do
+	# 		expect(response).to render_template :login
+	# 	end
+
+	# 	it 'renders with user layout' do
+	# 		expect(response).to render_template(layout: 'layouts/user')
+	# 	end
+	# end
 end
