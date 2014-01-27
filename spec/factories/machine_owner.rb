@@ -1,15 +1,24 @@
 FactoryGirl.define do
   factory :machine_owner do
-    id "1"
-  	name "Delphi"
+    id "2"
+  	name "Delphi1"
   	address "Str. Victoria, No. 10"
-  	office_tel 1234567890
-  	office_mail "office@delphi.com"
+  	office_tel "0123456789"
+  	office_mail "office@delphi1.com"
   	country "Romania"
   	city "Nowhere"
-  	postal_code 700123
-  	fax 1234567890
-  	mobile 071231231
+  	postal_code "700123"
+  	fax "0123456789"
+  	mobile "0123456789"
   	type "MachineOwner"
+
+      factory :machine_owner_with_machines do
+        ignore do
+          machines_count 5
+        end
+        after(:create) do |machine_owner, evaluator|
+          create_list(:post, evaluator.machines_count, machine_owner: machine_owner)
+        end
+      end
   end
 end

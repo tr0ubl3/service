@@ -26,7 +26,7 @@ Scenario: The registration is confirmed
 	And I've registered before with "daenarys.targaryen@mail.com"
 	And I'm waiting for account confirmation
 	And I can't login yet into application
-	When I receive the confirmation account mail from application
+	When I receive the confirmation account email from application
 	Then I shoud be able to login into application with my credentials
 	And I should be able to see the root index with all my firm machines listed
 
@@ -47,7 +47,7 @@ Scenario: Approving new regular user registration from mail
 	And I should login into application with my admin credentials
 	Then I should see user details and approval button
 	And I approve
-	And A confirmation mail should be sent to me
+	And I have a confirmation email in inbox
 
 Scenario: Approving new regular user registration from application
 	Given I am an admin user

@@ -1,36 +1,28 @@
 class GeneralController < ApplicationController
   
   def index
-	@manufacturer_ids = Machine.where(:machine_owner_id => 1)
-	# @manufacturer_ids.each do |id|
-	# 	@manufacturer_names = Machine.owner_manufacturer_name(id)
-	# 	@manufacturer_machine_types = Machine.manufacturer_machine_types(id)
-	# 	@manufacturer_machine_types.each do |type|
-	# 		@machines = Machine.owner_machines_by_manufacturer_and_type(params[current_user.machine_owner, id, type])
-	# 	end
-	# end
-	# @machines = Machine.where(:machine_owner_id => current_user.machine_owner)
-	# @machine_manufacturer_ids = @machines.select(:manufacturer_id).map(&:manufacturer_id).uniq
-	# @manufacturer_names = Manufacturer.where(:id => @machine_manufacturer_ids).select(:name).map(&:name)
-	# @machine_type = @machines.where().select(:machine_type).map(&:machine_type).map(&:upcase).uniq
-	# @manufacturers = []
-	# @machines.each do |m|
-	# 	@manufacturers << m.manufacturer.name
-	# end
-	# @manufacturers.uniq.each do |t|
-	# 	@man_machines = Manufacturer.where(:name => t).first.machines
-	# end
+  	@machines = MachineOwner.find(current_user.machine_owner_id).machines
+    @manufacturer_names = @machines.collect(&:manufacturer).uniq.collect(&:name)
+    
   end
 
   def machine_events
-  	@machine_name = Machine.find(params[:machine]).display_name
-	@machine_events_all = ServiceEvent.where(:machine_id => params[:machine])
-	@machine_user_events = @machine_events_all.where(:user_id => current_user)
-	@row_number_tab1 = 0
-	@row_number_tab2 = 0
+    @machine_name = Machine.find(params[:machine]).display_name
+    @machine_events_all = ServiceEvent.where(:machine_id => params[:machine])
+    @machine_user_events = @machine_events_all.where(:user_id => current_user)
+    @row_number_tab1 = 0
+    @row_number_tab2 = 0
   end
 
   def control_panel
-  	
   end
+end
+
+def machine_types(manufacturer_name)
+  @machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id).collect(&:machine_type).uniq
+end
+
+def machines_collection(manufacturer_name, machine_type)
+  @machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id,
+                  :machine_type => machine_type)
 end

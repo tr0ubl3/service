@@ -136,4 +136,45 @@ describe UsersController do
 			expect(response).to render_template :show
 		end
 	end
+
+	describe 'GET approve_user' do
+		let!(:user) { create(:user2) }
+		
+		before do
+			allow(User).to receive(:find) { user }
+		end
+
+		it 'sends find message to User class' do
+			expect(User).to receive(:find) { user }
+			get :approve_user, id: user.id
+		end
+
+		it 'assigns user variable' do
+			get :approve_user, id: user.id
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it 'redirects to user_path' do
+			get :approve_user, id: user.id
+			expect(response).to redirect_to user_path(user)
+		end
+
+		context 'Admin approves user registration' do
+
+			it 'saves approved_at to user table' do
+				expect(user).to receive(:update_attributes) { user.approved_at }
+				get :approve_user, id: user.id, approved: true
+			end
+
+			it 'assigns a success flash message' do
+				get :approve_user, id: user.id, approved: true
+				expect(flash[:notice]).not_to be_nil
+			end
+
+			it 'sends confirmation mail to user' do
+				UserMailer.should_receive(:user_registration_approved).with(user).and_return(double("UserMailer", :deliver => true))
+				get :approve_user, id: user.id, approved: true
+			end
+		end
+	end
 end

@@ -5,9 +5,10 @@ FactoryGirl.define do
 		email "bud.spencer@mail.com"
 		phone_number 0740123123
 		admin false
-		machine_owner_id 1
+		machine_owner_id 2
 		password 'securepassword'
 		approved_at Time.now.to_date.to_time
+		MachineOwner
 	end
 
 	factory :user2, class: User do
@@ -16,7 +17,7 @@ FactoryGirl.define do
 		email "daenarys.targaryen@mail.com"
 		phone_number 0740123124
 		admin false
-		machine_owner_id 1
+		machine_owner_id 2
 		password 'securepassword'
 	end
 

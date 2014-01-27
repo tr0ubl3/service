@@ -60,21 +60,26 @@ Given(/^I'm waiting for account confirmation$/) do
 end
 
 Given(/^I can't login yet into application$/) do
-  login = Login.new(email: 'daenerys.targaryen@mail.com', password: 'securepassword')
+  login = Login.new(email: @user.email, password: @user.password)
   expect(login.conditional_authentication).to be_nil
 end
 
-When(/^I receive the confirmation account mail from application$/) do
-  open_email('daenerys.targaryen@mail.com')
-  current_email.should have_subject('Your registration has been approved')
+When(/^I receive the confirmation account email from application$/) do
+  UserMailer.user_registration_approved(@user).deliver
+  open_email(@user.email, :with_subject => "Your registration has been approved" )
 end 
 
 Then(/^I shoud be able to login into application with my credentials$/) do
-  expect(page).to have_link
+  @user.update_attributes(:approved_at => Time.now)
+  visit "/login"
+  fill_in "login_email", :with => "#{@user.email}"
+  fill_in "login_password", :with => "#{@user.password}"
+  click_button "Sign in"
 end
 
 Then(/^I should be able to see the root index with all my firm machines listed$/) do
-  pending # express the regexp above with the code you wish you had
+  current_path.should == "/"
+  expect(page).to have_content('')
 end
 
 Given(/^I was registered and waiting for confirmation$/) do

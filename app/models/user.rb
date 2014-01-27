@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   # attr_accessor :password, :password_confirmation
   attr_accessible :email, :machine_owner_id, :first_name, :last_name,
-                  :phone_number, :admin, :password, :password_confirmation
+                  :phone_number, :admin, :password, :password_confirmation, :approved_at
   belongs_to :machine_owner
   has_many :service_events
   

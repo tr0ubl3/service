@@ -50,4 +50,25 @@ describe UserMailer do
 			email.should have_body_text(/#{user_details_url}/)
 		end
 	end
+
+	describe 'user_registration_approved' do
+		let(:user) { create(:user2) }
+		let(:email) { UserMailer.user_registration_approved(user) }
+
+		it 'renders the subject' do
+			email.subject.should == 'Your registration has been approved'
+		end
+
+		it 'renders the receiver email' do
+			email.should deliver_to(user.email)
+		end
+
+		it 'renders the sender mail' do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns first and last name' do
+			email.should have_body_text(/#{user.full_name}/)
+		end
+	end
 end

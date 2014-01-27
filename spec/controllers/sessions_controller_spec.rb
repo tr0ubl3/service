@@ -17,7 +17,6 @@ describe SessionsController do
 			expect(response).to render_template :new
 		end
 
-		
 		it "assigns @login instance variable to the view" do
 			Login.stub(:new).and_return(login)
 			get :new

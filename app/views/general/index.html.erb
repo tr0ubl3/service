@@ -1,23 +1,11 @@
-<% @manufacturer_ids.each do |id| %>
-	<h1><%= Machine.owner_manufacturer_name(id) %></h1>
-	<% Machine.manufacturer_machine_types(id).each do |type| %>
+<% @manufacturer_names.each do |name| %>
+	<h1><%= name %></h1>
+	<% machine_types(name).each do |type| %>
 		<h3><%= type %></h3>
-		<% Machine.owner_machines_by_manufacturer_and_type(current_user.machine_owner, id, type).each do |machine| %>
-				<% @events_count = machine.service_events.where(:state => 'pending_confirmation').count %>
-				<% if @events_count > 0 
-					@status = "machine alarm"
-					@icon = "icon-exclamation-sign corner-icon blink"
-				   else
-				   	@status = "machine"
-				   	@icon = "icon-ok corner-icon"
-				   end
-				 %>
-				 <%= link_to machine_events_general_index_path(:machine => machine), :class => 'link_reset' do %>
-					<div class="<%= @status %>" title="" data-title="<%= @events_count.to_s + " unsolved " + "event".pluralize(@events_count) %>">
-						<i class="<%= @icon %>"></i>
-						<div class="machine-name"><%= machine.display_name %></div>
-					</div>
-				<% end %>
+		<% machines_collection(name, type).each do |machine| %>
+			<%= link_to machine_events_general_index_path(:machine => machine), :class => "link_reset" do %>
+				<%= event_status(machine) %>
+			<% end %>
 		<% end %>
 	<% end %>
 <% end %>

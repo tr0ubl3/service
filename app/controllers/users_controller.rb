@@ -27,7 +27,14 @@ class UsersController < ApplicationController
   end
 
   def approve_user
-    render nothing: true
+    @user = User.find(params[:id])
+    redirect_to user_path(@user)
+    if params[:approved]
+      @user.update_attributes(approved_at: Time.now)
+      flash[:notice] = 'User registration is approved'
+      UserMailer.user_registration_approved(@user).deliver
+    else
+    end
   end
 #   # GET /resource/sign_up
 #   def new
