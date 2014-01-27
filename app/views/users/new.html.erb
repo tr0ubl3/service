@@ -26,7 +26,7 @@
   		  <div class="control-group">
 			<%= f.label(:first_name, 'First name', class: 'control-label') %>
 			<div class='controls'>
-				<%= f.text_field :first_name %>
+				<%= f.text_field :first_name, :autofocus => true %>
 			</div>
 	      </div>
   		  <div class="control-group">
@@ -44,7 +44,7 @@
 		  <div class="control-group">
 		  	<%= f.label :email, class: 'control-label' %>
 		  	<div class='controls'>
-			  	<%= f.email_field :email, :autofocus => true %>
+			  	<%= f.email_field :email %>
 			</div>
 		  </div>
 

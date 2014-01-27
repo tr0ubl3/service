@@ -23,6 +23,11 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+  end
+
+  def approve_user
+    render nothing: true
   end
 #   # GET /resource/sign_up
 #   def new

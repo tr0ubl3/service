@@ -40,20 +40,17 @@ Then(/^I login with my credentials$/) do
 end
 
 Then(/^I should see user details$/) do
-  expect(current_path).to eq(user_path(User.last.id))
-  expect(page).to have_content("#{@user.full_name} details")
+  @new_user = User.last
+  expect(current_path).to eq(user_path(@new_user))
+  expect(page).to have_content("#{@new_user.full_name} details")
 end
 
 Then(/^I should have confirmation button$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^User is ok for registration$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_link("Approve registration", :href => approve_user_path(@new_user))
 end
 
 Then(/^I click button to approve user registration$/) do
-  pending # express the regexp above with the code you wish you had
+  click_link('Approve registration')
 end
 
 When(/^I receive a notification email regaring pending new user registration$/) do

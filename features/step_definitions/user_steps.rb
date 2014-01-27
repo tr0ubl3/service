@@ -70,7 +70,7 @@ When(/^I receive the confirmation account mail from application$/) do
 end 
 
 Then(/^I shoud be able to login into application with my credentials$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_link
 end
 
 Then(/^I should be able to see the root index with all my firm machines listed$/) do

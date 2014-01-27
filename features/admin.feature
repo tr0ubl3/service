@@ -13,8 +13,7 @@ Admin users have special functionality called control panel from where it can ma
 		Then I login with my credentials
 		And I should see user details
 		Then I should have confirmation button
-		When User is ok for registration
-		Then I click button to approve user registration
+		And I click button to approve user registration
 
 	Scenario: Admin doesn't approve user registration with email
 		When I receive a notification email regaring pending new user registration

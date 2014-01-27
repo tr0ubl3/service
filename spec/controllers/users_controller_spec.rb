@@ -113,16 +113,27 @@ describe UsersController do
 			end
 		end
 	end
-	# describe 'GET login' do
-	# 	before :each do
-	# 		get :login
-	# 	end
-	# 	it 'renders login template' do
-	# 		expect(response).to render_template :login
-	# 	end
 
-	# 	it 'renders with user layout' do
-	# 		expect(response).to render_template(layout: 'layouts/user')
-	# 	end
-	# end
+	describe 'GET show' do
+		let!(:user) { create(:user) }
+		before :each do
+			session[:user_id] = user.id
+			allow(User).to receive(:find).and_return(user)
+		end
+		
+		it 'sends find message to User class' do
+			expect(User).to receive(:find) { user }
+			get :show, id: user.id
+		end
+		
+		it 'assigns user variable to the view' do
+			get :show, id: user.id
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it 'renders show template' do
+			get :show, id: user.id
+			expect(response).to render_template :show
+		end
+	end
 end

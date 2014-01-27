@@ -1,9 +1,8 @@
 class ServiceEventsController < ApplicationController
 	
 	respond_to :html, :json
-	before_filter :authenticate_user!
 
-	def list
+	def index
 		@events = ServiceEvent.order("service_events.id DESC")
 	end
 
