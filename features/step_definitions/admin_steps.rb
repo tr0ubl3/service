@@ -45,26 +45,10 @@ Then(/^I should see user details$/) do
   expect(page).to have_content("#{@new_user.full_name} details")
 end
 
-Then(/^I should have confirmation button$/) do
-  expect(page).to have_link("Approve registration", :href => approve_user_path(@new_user))
-end
-
 Then(/^I click button to approve user registration$/) do
   click_link('Approve registration')
 end
 
-When(/^I receive a notification email regaring pending new user registration$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should see Don't confirm button$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^user is nok for registration$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I click button to disapprove registration$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I click button to deny user registration$/) do
+  click_link('Deny registration')
 end

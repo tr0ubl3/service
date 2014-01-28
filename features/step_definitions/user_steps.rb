@@ -70,6 +70,7 @@ When(/^I receive the confirmation account email from application$/) do
 end 
 
 Then(/^I shoud be able to login into application with my credentials$/) do
+  create(:machine_owner)
   @user.update_attributes(:approved_at => Time.now)
   visit "/login"
   fill_in "login_email", :with => "#{@user.email}"
@@ -78,20 +79,22 @@ Then(/^I shoud be able to login into application with my credentials$/) do
 end
 
 Then(/^I should be able to see the root index with all my firm machines listed$/) do
+  @machines = create(:machine)
   current_path.should == "/"
-  expect(page).to have_content('')
 end
 
 Given(/^I was registered and waiting for confirmation$/) do
-  pending # express the regexp above with the code you wish you had
+  @user = create(:user2)
+  expect(@user.approved_at).to be_nil
 end
 
 Given(/^Waiting for confirmation of the account$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(@user.approved_at).to be_nil
 end
 
 Then(/^I received an email with denial reason$/) do
-  pending # express the regexp above with the code you wish you had
+  UserMailer.user_registration_denied(@user).deliver
+  open_email(@user.email, :with_subject => "Your registration has been denied" )
 end
 
 Given(/^I don't know about web application$/) do

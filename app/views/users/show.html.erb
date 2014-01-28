@@ -5,8 +5,8 @@
 		<span class="caret"></span>
 	</a>
 	<ul class="dropdown-menu">
-		<li><%= link_to 'Approve registration', approve_user_path(@user) %></li>
-		<li><a href="#">Decline registration</a></li>
+		<li><%= link_to 'Approve registration', approve_user_path(@user, approve: true) %></li>
+		<li><%= link_to 'Deny registration', deny_user_path(@user, approve: false) %></a></li>
 	</ul>
 
 </div>

@@ -34,6 +34,9 @@ class UsersController < ApplicationController
       flash[:notice] = 'User registration is approved'
       UserMailer.user_registration_approved(@user).deliver
     else
+      @user.update_attributes(denied_at: Time.now)
+      flash[:alert] = "#{@user.full_name} registration it's denied"
+      UserMailer.user_registration_denied(@user).deliver
     end
   end
 #   # GET /resource/sign_up

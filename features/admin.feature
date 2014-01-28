@@ -5,23 +5,17 @@ Admin users have special functionality called control panel from where it can ma
 	Background:
 		Given I'm an admin
 		And New user registered
-	
-	Scenario: Admin approve new user registration with email
 		When I receive a notification email regarding pending new user registration
 		Then I click a link inside email
 		And I should see login page
 		Then I login with my credentials
 		And I should see user details
-		Then I should have confirmation button
-		And I click button to approve user registration
+	
+	Scenario: Admin approve new user registration with email
+		Then I click button to approve user registration
+		And I receive an email regarding new user registration
 
 	Scenario: Admin doesn't approve user registration with email
-		When I receive a notification email regaring pending new user registration
-		Then I click a link inside email
-		And I should be redirected to user details
-		But I'm not logged into application
-		And I should see login page
-		And After login I should see user details
-		And I should see Don't confirm button
-		When user is nok for registration
-		Then I click button to disapprove registration
+		Then I should have deny registration button
+		And I click button to deny user registration
+		And I receive an email with regarding user registration denial

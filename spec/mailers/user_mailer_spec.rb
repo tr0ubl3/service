@@ -71,4 +71,25 @@ describe UserMailer do
 			email.should have_body_text(/#{user.full_name}/)
 		end
 	end
+
+	describe 'user_registration_denied' do
+		let(:user) { create(:user2) }
+		let(:email) { UserMailer.user_registration_denied(user) }
+
+		it 'renders the subject' do
+			email.subject.should == 'Your registration has been denied'
+		end
+
+		it 'renders the receiver email' do
+			email.should deliver_to(user.email)
+		end
+
+		it 'renders the sender mail' do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns first and last name' do
+			email.should have_body_text(/#{user.full_name}/)
+		end
+	end
 end

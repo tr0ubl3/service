@@ -3,9 +3,10 @@ require 'spec_helper'
 describe UsersController do
 	describe 'GET new' do
 		let!(:user) { mock_model('User').as_new_record }
-		let!(:machine_owners) { create(:machine_owner) }
+		let!(:machine_owner) { create(:machine_owner) }
 		before :each do
 			User.stub(:new).and_return(user)
+			allow(Firm).to receive(:find) { machine_owner }
 			get :new
 		end
 		it 'assigns user variable to the view' do
@@ -13,7 +14,7 @@ describe UsersController do
 		end
 
 		it 'assigns machine_owners variable to the view' do
-			expect(assigns[:machine_owners]).to eq([machine_owners])
+			expect(assigns[:machine_owners]).to eq([machine_owner])
 		end
 		it 'renders new template' do
 			expect(response).to render_template :new
@@ -101,8 +102,8 @@ describe UsersController do
 	end
 
 	describe 'get SHOW' do
+		let!(:user) { create(:user) }
 		context "when admin it's not logged in" do
-			let!(:user) { create(:user) }
 			before :each do
 				session[:user_id] = nil
 			end
@@ -112,28 +113,27 @@ describe UsersController do
 				expect(response).to redirect_to login_path
 			end
 		end
-	end
 
-	describe 'GET show' do
-		let!(:user) { create(:user) }
-		before :each do
-			session[:user_id] = user.id
-			allow(User).to receive(:find).and_return(user)
-		end
-		
-		it 'sends find message to User class' do
-			expect(User).to receive(:find) { user }
-			get :show, id: user.id
-		end
-		
-		it 'assigns user variable to the view' do
-			get :show, id: user.id
-			expect(assigns[:user]).to eq(user)
-		end
+		context "admin it's logged in" do
+			before :each do
+				session[:user_id] = user.id
+				allow(User).to receive(:find).and_return(user)
+			end
+			
+			it 'sends find message to User class' do
+				expect(User).to receive(:find) { user }
+				get :show, id: user.id
+			end
+			
+			it 'assigns user variable to the view' do
+				get :show, id: user.id
+				expect(assigns[:user]).to eq(user)
+			end
 
-		it 'renders show template' do
-			get :show, id: user.id
-			expect(response).to render_template :show
+			it 'renders show template' do
+				get :show, id: user.id
+				expect(response).to render_template :show
+			end
 		end
 	end
 
@@ -174,6 +174,24 @@ describe UsersController do
 			it 'sends confirmation mail to user' do
 				UserMailer.should_receive(:user_registration_approved).with(user).and_return(double("UserMailer", :deliver => true))
 				get :approve_user, id: user.id, approved: true
+			end
+		end
+
+		context 'Admin denies user registration' do
+			
+			it 'saves denied_at to user table' do
+				expect(user).to receive(:update_attributes) { user.denied_at }
+				get :approve_user, id: user.id, approved: false
+			end
+
+			it 'assigns an alert flash message' do
+				get :approve_user, id: user.id, approved: false
+				expect(flash[:alert]).not_to be_nil
+			end
+
+			it 'sends mail to user' do
+				UserMailer.should_receive(:user_registration_denied).with(user).and_return(double("UserMailer", :deliver => true))
+				get :approve_user, id: user.id, approved: false
 			end
 		end
 	end

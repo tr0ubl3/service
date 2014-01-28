@@ -11,7 +11,11 @@ describe 'users/show.html.erb' do
 	end
 
 	it "has link 'Approve registration'" do
-		expect(rendered).to have_link("Approve registration", :href => approve_user_path(user))
+		expect(rendered).to have_link("Approve registration", :href => approve_user_path(user, approve: true))
+	end
+
+	it "has link 'Deny registration'" do
+		expect(rendered).to have_link("Deny registration", :href => deny_user_path(user, approve: false))
 	end
 
 	it 'has dl.dl-horizontal' do

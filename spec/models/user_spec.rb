@@ -88,6 +88,12 @@ describe User do
 		expect(user.approved_at).to eq(time)
 	end
 
+	it 'has approved_at attribute' do
+		time = Time.now
+		user.denied_at = time
+		expect(user.denied_at).to eq(time)
+	end
+
 	describe "#full_name" do
 		let(:user) { create(:user) }
 		it 'returns full name of a user' do

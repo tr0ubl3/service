@@ -1,5 +1,7 @@
 class GeneralController < ApplicationController
   
+  before_filter :check_auth
+
   def index
   	@machines = MachineOwner.find(current_user.machine_owner_id).machines
     @manufacturer_names = @machines.collect(&:manufacturer).uniq.collect(&:name)
