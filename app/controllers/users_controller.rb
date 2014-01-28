@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   layout 'user', only: [:new, :create, :login]
-  before_filter :check_auth, only: [:show]
+  before_filter :check_auth, only: [:show, :approve_user]
 
   def new
     @user = User.new
@@ -33,6 +33,7 @@ class UsersController < ApplicationController
       @user.update_attributes(approved_at: Time.now)
       flash[:notice] = 'User registration is approved'
       UserMailer.user_registration_approved(@user).deliver
+      UserMailer.user_registration_approved_to_admin(@user, current_user).deliver
     else
       @user.update_attributes(denied_at: Time.now)
       flash[:alert] = "#{@user.full_name} registration it's denied"

@@ -49,6 +49,16 @@ Then(/^I click button to approve user registration$/) do
   click_link('Approve registration')
 end
 
+Then(/^I receive an email regarding new user registration$/) do
+  UserMailer.user_registration_approved_to_admin(@user, @admin).deliver
+  open_email(@admin.email, :with_subject => "You approved #{@user.full_name} registration" )
+end
+
 Then(/^I click button to deny user registration$/) do
   click_link('Deny registration')
+end
+
+Then(/^I receive an email with regarding user registration denial$/) do
+  UserMailer.user_registration_denied_to_admin(@user, @admin).deliver
+  open_email(@admin.email, :with_subject => "You denied #{@user.full_name} registration" )
 end

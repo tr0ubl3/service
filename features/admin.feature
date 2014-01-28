@@ -16,6 +16,5 @@ Admin users have special functionality called control panel from where it can ma
 		And I receive an email regarding new user registration
 
 	Scenario: Admin doesn't approve user registration with email
-		Then I should have deny registration button
 		And I click button to deny user registration
 		And I receive an email with regarding user registration denial

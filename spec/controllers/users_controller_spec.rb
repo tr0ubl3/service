@@ -139,9 +139,11 @@ describe UsersController do
 
 	describe 'GET approve_user' do
 		let!(:user) { create(:user2) }
+		let!(:admin) { create(:admin) }
 		
 		before do
 			allow(User).to receive(:find) { user }
+			session[:user_id] = admin.id
 		end
 
 		it 'sends find message to User class' do
@@ -160,7 +162,6 @@ describe UsersController do
 		end
 
 		context 'Admin approves user registration' do
-
 			it 'saves approved_at to user table' do
 				expect(user).to receive(:update_attributes) { user.approved_at }
 				get :approve_user, id: user.id, approved: true
@@ -171,8 +172,14 @@ describe UsersController do
 				expect(flash[:notice]).not_to be_nil
 			end
 
-			it 'sends confirmation mail to user' do
+			it 'sends confirmation email to user' do
 				UserMailer.should_receive(:user_registration_approved).with(user).and_return(double("UserMailer", :deliver => true))
+				get :approve_user, id: user.id, approved: true
+			end
+
+			it "sends confirmation email to admin" do
+				controller.stub!(:current_user).and_return(admin)
+				UserMailer.should_receive(:user_registration_approved_to_admin).with(user, admin).and_return(double("UserMailer", :deliver => true))
 				get :approve_user, id: user.id, approved: true
 			end
 		end
