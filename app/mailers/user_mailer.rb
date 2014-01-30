@@ -28,4 +28,10 @@ class UserMailer < ActionMailer::Base
     @admin = admin
     mail(to: @admin.email, :subject => "You approved #{user.full_name} registration")
   end
+
+  def user_registration_denied_to_admin(user, admin)
+    @user = user
+    @admin = admin
+    mail(to: @admin.email, :subject => "You denied #{user.full_name} registration")
+  end
 end
