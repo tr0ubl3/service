@@ -1,8 +1,8 @@
 <div class="button-group">
 	<% if admin_user %>
-		<%= link_to "New admin user", new_admin_registration_path, :class => "btn btn-primary" %>
+		<%= link_to "New admin user", "#", :class => "btn btn-primary" %>
 	<% else %>
-		<%= link_to "New client user", new_user_by_admin_path, :class => "btn btn-primary" %>
+		<%= link_to "New client user", cp_new_users_path, :class => "btn btn-primary" %>
 	<% end %>
 	<a href="#" class="btn btn btn-warning">Suspend user</a>
 	<a href="#" class="btn btn-danger">Delete user</a>
@@ -29,7 +29,7 @@
 				<td>Yes</td>
 				<td>Yes</td>
 				<td><%= t.email %></td>
-				<td><%= t.last_sign_in_at %></td>
+				<td><%= 'to be created' %></td>
 				<td><%= t.created_at %></td>
 				<td>Ionut Ciobanu</td>
 			</tr>

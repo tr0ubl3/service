@@ -9,7 +9,7 @@ Service::Application.routes.draw do
   get 'approve_user/:id', to: 'users#approve_user', as: 'approve_user'
   get 'approve_user/:id', to: 'users#approve_user', as: 'deny_user'
 
-  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :users, :sessions
+  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
   resources :general do
     collection do
       get :machine_events
@@ -17,6 +17,11 @@ Service::Application.routes.draw do
     end
   end
 
+  resources :users do
+    collection do
+      get :cp_new
+    end
+  end
 
   resources :service_events do
     collection do

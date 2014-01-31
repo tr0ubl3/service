@@ -98,11 +98,11 @@ Then(/^I received an email with denial reason$/) do
 end
 
 Given(/^I don't know about web application$/) do
-  pending # express the regexp above with the code you wish you had
 end
 
-Given(/^I received an email with registration details$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^I received an email with registration invitation$/) do
+  UserMailer.registration_invitation(@user).deliver
+  open_email(@user.email, :with_subject => "Registration invitation to International G&T web application")
 end
 
 Then(/^I can go and login in application with credentials from mail$/) do

@@ -202,4 +202,21 @@ describe UsersController do
 			end
 		end
 	end
+
+	describe 'get cp_new' do
+		let!(:user) { mock_model('User').as_new_record }
+		let!(:machine_owner) { create(:machine_owner) }
+		before :each do
+			User.stub(:new).and_return(user)
+			get :cp_new
+		end
+		it 'assigns @user variable' do
+			get :cp_new, id: user.id
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it 'assigns machine_owners variable to the view' do
+			expect(assigns[:machine_owners]).to eq([machine_owner])
+		end
+	end
 end

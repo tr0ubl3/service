@@ -5,7 +5,7 @@ Given(/^I'm an admin$/) do
 end
 
 Given(/^New user registered$/) do
-  @machine_owners = create(:machine_owner)
+  @machine_owners = create(:machine_owner, :id => 1)
   visit "/signup"
   select('Delphi', :from => 'user_machine_owner_id')
   fill_in "user_first_name", :with => "Daenerys"
@@ -61,4 +61,31 @@ end
 Then(/^I receive an email with regarding user registration denial$/) do
   UserMailer.user_registration_denied_to_admin(@user, @admin).deliver
   open_email(@admin.email, :with_subject => "You denied #{@user.full_name} registration" )
+end
+
+Given(/^I'm on home page$/) do
+  visit('/')
+  current_path.should == '/'
+end
+
+When(/^I go to control panel$/) do
+  click_link 'Control panel'
+  current_path.should == '/general/control_panel'
+  click_link 'Manage users'
+end
+
+When(/^I create a new user$/) do
+  click_link 'New client user'
+  current_path.should == '/users/cp_new'
+  select('Delphi', :from => 'user_machine_owner_id')
+  fill_in "user_first_name", :with => "Daenerys"
+  fill_in "user_last_name", :with => "Targaryen"
+  fill_in "user_phone_number", :with => "0720123123"
+  fill_in "user_email", :with => "daenerys.targaryen@mail.com"
+  click_button "Register user"
+end
+
+Then(/^I receive an email when new user is registered$/) do
+  UserMailer.new_user_invitation_to_admin(@user, @admin).deliver
+  open_email(@admin.email, :with_subject => "You sent ivitation to #{@user.full_name}" )
 end

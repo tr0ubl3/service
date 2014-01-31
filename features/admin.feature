@@ -1,6 +1,6 @@
 Feature: Admin functionality
 
-Admin users have special functionality called control panel from where it can manage users (approving or denying user registration, creating new users, creatimg new admin users)
+Admin users have special functionality called control panel from where it can manage users (approving or denying user registration, creating new users, creating new admin users)
 
 	Background:
 		Given I'm an admin
@@ -18,3 +18,9 @@ Admin users have special functionality called control panel from where it can ma
 	Scenario: Admin doesn't approve user registration with email
 		And I click button to deny user registration
 		And I receive an email with regarding user registration denial
+
+	Scenario: Admin registers new user
+		Given I'm on home page
+		When I go to control panel
+		And I create a new user
+		Then I receive an email when new user is registered

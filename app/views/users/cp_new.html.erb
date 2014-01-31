@@ -1,0 +1,53 @@
+<div class="container users">
+	<h2>Sign up new user</h2>
+	<div class="form-signup span3 well">
+		<%= form_for @user do |f| %>
+		<% if @user.errors.any? %>
+			<% @user.errors.delete(:password_digest) %>
+			<div id="error_explanation">
+				<div class="alert alert-error">
+					The form contains <%= pluralize(@user.errors.count, "error") %>
+				</div>
+				<ul>
+					<% @user.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		  <div class="control-group">
+			<%= f.label(:machine_owner_id, 'Select firm', class: 'control-label') %>
+			<div class='controls'>
+				<%= f.select(:machine_owner_id, @machine_owners.collect { |m| [m.name, m.id] }, :include_blank => true, html: {id: "machine_owners_list"}) %>
+			</div>
+	      </div>
+  		  <div class="control-group">
+			<%= f.label(:first_name, 'First name', class: 'control-label') %>
+			<div class='controls'>
+				<%= f.text_field :first_name, :autofocus => true %>
+			</div>
+	      </div>
+  		  <div class="control-group">
+			<%= f.label(:last_name, 'Last name', class: 'control-label') %>
+			<div class='controls'>
+				<%= f.text_field :last_name %>
+			</div>
+	      </div>
+  		  <div class="control-group">
+			<%= f.label(:phone_number, 'Phone number', class: 'control-label') %>
+			<div class='controls'>
+				<%= f.text_field :phone_number %>
+			</div>
+	      </div>
+		  <div class="control-group">
+		  	<%= f.label :email, class: 'control-label' %>
+		  	<div class='controls'>
+			  	<%= f.email_field :email %>
+			</div>
+		  </div>
+		  <div><%= f.submit "Save user", class: 'btn btn-primary' %></div>
+		<% end %>
+	</div>
+</div>

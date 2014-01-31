@@ -40,6 +40,11 @@ class UsersController < ApplicationController
       UserMailer.user_registration_denied(@user).deliver
     end
   end
+
+  def cp_new
+    @user = User.new
+    @machine_owners = MachineOwner.all
+  end
 #   # GET /resource/sign_up
 #   def new
 #     @machine_owners = MachineOwner.all
