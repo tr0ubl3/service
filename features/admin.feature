@@ -22,5 +22,5 @@ Admin users have special functionality called control panel from where it can ma
 	Scenario: Admin registers new user
 		Given I'm on home page
 		When I go to control panel
-		And I create a new user
+		And I successfully create a new user
 		Then I receive an email when new user is registered

@@ -74,7 +74,7 @@ When(/^I go to control panel$/) do
   click_link 'Manage users'
 end
 
-When(/^I create a new user$/) do
+When(/^I successfully create a new user$/) do
   click_link 'New client user'
   current_path.should == '/users/cp_new'
   select('Delphi', :from => 'user_machine_owner_id')
@@ -82,10 +82,9 @@ When(/^I create a new user$/) do
   fill_in "user_last_name", :with => "Targaryen"
   fill_in "user_phone_number", :with => "0720123123"
   fill_in "user_email", :with => "daenerys.targaryen@mail.com"
-  click_button "Register user"
+  click_button "Save user"
 end
 
 Then(/^I receive an email when new user is registered$/) do
-  UserMailer.new_user_invitation_to_admin(@user, @admin).deliver
   open_email(@admin.email, :with_subject => "You sent ivitation to #{@user.full_name}" )
 end

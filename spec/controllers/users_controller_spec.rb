@@ -178,7 +178,7 @@ describe UsersController do
 			end
 
 			it "sends confirmation email to admin" do
-				controller.stub!(:current_user).and_return(admin)
+				controller.stub(:current_user).and_return(admin)
 				UserMailer.should_receive(:user_registration_approved_to_admin).with(user, admin).and_return(double("UserMailer", :deliver => true))
 				get :approve_user, id: user.id, approved: true
 			end
@@ -203,7 +203,7 @@ describe UsersController do
 		end
 	end
 
-	describe 'get cp_new' do
+	describe 'GET cp_new' do
 		let!(:user) { mock_model('User').as_new_record }
 		let!(:machine_owner) { create(:machine_owner) }
 		before :each do
@@ -218,5 +218,48 @@ describe UsersController do
 		it 'assigns machine_owners variable to the view' do
 			expect(assigns[:machine_owners]).to eq([machine_owner])
 		end
+
+		it 'renders new template' do
+			expect(response).to render_template :cp_new
+		end
+
+		it 'renders with application layout' do
+			expect(response).to render_template(layout: 'layouts/application')
+		end
+	end
+
+	describe 'POST cp_create' do
+		let!(:user) { stub_model(User) }
+		let!(:machine_owner) { create(:machine_owner) }
+		let(:params) do
+			 {
+				"machine_owner_id" => "2",
+				"first_name" => "John",
+				"last_name" => "Wilkins",
+				"phone_number" => "1234567890",
+				"email" => "john.wilkins@firm.com",
+				"admin" => false
+			}
+		end
+
+		before :each do
+			User.stub(:new).and_return(user)
+		end
+		
+		it 'sends new message to User class' do
+			User.should_receive(:new).with(params)
+			post :cp_create, user: params
+		end
+
+		it 'has password set' do
+			post :cp_create, user: params
+			expect(user.password).not_to be_nil
+		end
+
+		it 'sends save message to user model' do
+			user.should_receive(:save)
+			post :cp_create, user: params
+		end
+
 	end
 end

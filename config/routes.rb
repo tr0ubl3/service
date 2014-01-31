@@ -20,6 +20,7 @@ Service::Application.routes.draw do
   resources :users do
     collection do
       get :cp_new
+      post :cp_create
     end
   end
 
