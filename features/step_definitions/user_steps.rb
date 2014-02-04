@@ -98,15 +98,33 @@ Then(/^I received an email with denial reason$/) do
 end
 
 Given(/^I don't know about web application$/) do
+  @user = create(:user)
+  @machine_owner = create(:machine_owner)
 end
 
 Given(/^I received an email with registration invitation$/) do
-  UserMailer.registration_invitation(@user).deliver
-  open_email(@user.email, :with_subject => "Registration invitation to International G&T web application")
+  UserMailer.invitation(@user).deliver
+  open_email(@user.email, :with_subject => "You have been invited to International G&T web platform")
 end
 
-Then(/^I can go and login in application with credentials from mail$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I click the link from invitation$/) do
+  click_first_link_in_email
+end
+
+Then(/^I enter credentials from email$/) do
+  current_path.should == login_path
+  fill_in('login_email', :with => @user.email)
+  fill_in('login_password', :with => @user.password)
+  click_button('Sign in')
+end
+
+Then(/^I'm logged into application$/) do
+  # expect(page.get_rack_session_key('user_id')).to eq(@user.id)
+  expect(page).to have_content("Logged in as #{@user.full_name}")
+end
+
+Then(/^I receive an welcome email$/) do
+  open_email(@user.email, :with_subject => "Welcome to International G&T web platform")
 end
 
 Given(/^I am an admin user$/) do
@@ -125,9 +143,6 @@ Then(/^A confirmation mail should be sent to me$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Given(/^I'm logged into application$/) do
-  pending # express the regexp above with the code you wish you had
-end
 
 When(/^I approve a user from control panel$/) do
   pending # express the regexp above with the code you wish you had

@@ -1,0 +1,13 @@
+Dear <%= @user.full_name %>,
+
+You have been invited to use our web application designed to improve colaboration and comunication regarding machine events. To confirm your account please follow the link and use the following credentials:
+<%= link_to "Service application link", root_path(:only_path => false) %>
+email : <%= @user.email %>
+password : <%= @user.password %>
+
+You can change your account details after login. 
+
+If you think this email was a mistake please don't follow any links, and delete this as soon as possible.
+
+Best regards,
+International G&T team.

@@ -32,12 +32,17 @@ class UserMailer < ActionMailer::Base
   def user_registration_denied_to_admin(user, admin)
     @user = user
     @admin = admin
-    mail(to: @admin.email, :subject => "You denied #{user.full_name} registration")
+    mail(to: @admin.email, :subject => "You denied #{@user.full_name} registration")
   end
 
-  def new_user_invitation_to_admin(user, admin)
+  def invitation(user)
+    @user = user
+    mail(to: @user.email, :subject => "You have been invited to International G&T web platform")
+  end
+
+  def invitation_to_admin(user, admin)
     @user = user
     @admin = admin
-    mail(to: @admin.email, :subject => "You sent ivitation to #{user.full_name}")
+    mail(to: @admin.email, :subject => "You sent invitation to #{user.full_name}")
   end
 end

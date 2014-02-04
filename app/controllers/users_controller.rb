@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   layout 'user', only: [:new, :create, :login]
-  before_filter :check_auth, only: [:show, :approve_user]
+  before_filter :check_auth, only: [:show, :approve_user, :cp_new, :cp_create]
 
   def new
     @user = User.new
@@ -48,8 +48,15 @@ class UsersController < ApplicationController
 
   def cp_create
     @user = User.new(params[:user])
+    @machine_owners = MachineOwner.all
     @user.password = rand(36**8).to_s(36)
-    @user.save
-    render nothing: true
+    if @user.save
+      redirect_to manage_users_path, notice: "You successfully created user #{@user.full_name}"
+      UserMailer.invitation(@user).deliver
+      UserMailer.invitation_to_admin(@user, current_user).deliver
+    else
+      flash.now[:error] = 'Invalid form values'
+      render :cp_new
+    end
   end
 end

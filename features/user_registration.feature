@@ -38,11 +38,10 @@ Scenario: The registration is denied
 Scenario: I received a registration invitation
 	Given I don't know about web application
 	And I received an email with registration invitation
-	Then I click the invitation link
-	And I see a password set form
-	Then I enter a password and password confirmation
+	Then I click the link from invitation
+	And I enter credentials from email
 	And I'm logged into application
-	And I receive an email with registration
+	And I receive an welcome email
 
 Scenario: Approving new regular user registration from mail
 	Given I am an admin user

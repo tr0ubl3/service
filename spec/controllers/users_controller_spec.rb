@@ -205,8 +205,10 @@ describe UsersController do
 
 	describe 'GET cp_new' do
 		let!(:user) { mock_model('User').as_new_record }
+		let!(:admin) { create(:admin) }
 		let!(:machine_owner) { create(:machine_owner) }
 		before :each do
+			session[:user_id] = admin.id
 			User.stub(:new).and_return(user)
 			get :cp_new
 		end
@@ -230,6 +232,7 @@ describe UsersController do
 
 	describe 'POST cp_create' do
 		let!(:user) { stub_model(User) }
+		let!(:admin) { create(:admin) }
 		let!(:machine_owner) { create(:machine_owner) }
 		let(:params) do
 			 {
@@ -243,6 +246,7 @@ describe UsersController do
 		end
 
 		before :each do
+			session[:user_id] = admin.id
 			User.stub(:new).and_return(user)
 		end
 		
@@ -261,5 +265,66 @@ describe UsersController do
 			post :cp_create, user: params
 		end
 
+		context 'when save message returns true' do
+			let(:new_user) { create(:user) }
+			
+			before :each do
+				new_user.stub(:save).and_return(true)
+			end
+
+			it 'redirects to manage_users_path' do
+				post :cp_create, user: new_user
+				expect(response).to redirect_to manage_users_path
+			end
+
+			it 'assigns a success flash message' do
+				post :cp_create
+				expect(flash[:notice]).not_to be_nil
+			end
+
+			it 'sends invitation to user' do
+				UserMailer.should_receive(:invitation).with(new_user).and_return(double("UserMailer", :deliver => true))
+				post :cp_create, :user => new_user
+			end
+
+			it "sends invitation confirmation mail to admin" do
+				admin = controller.current_user
+				UserMailer.should_receive(:invitation_to_admin).with(new_user, admin).and_return(double("UserMailer", :deliver => true))
+				post :cp_create, :user => new_user
+			end
+		end
+		
+		context "when save message return false" do
+			let!(:new_user) { create(:user) }
+			let!(:params2) do
+			 {
+				"machine_owner_id" => "",
+				"first_name" => "",
+				"last_name" => "",
+				"phone_number" => "",
+				"email" => "",
+				"admin" => false
+			}
+			end
+			before :each do
+				new_user.stub(:save).and_return(false)
+				post :cp_create, user: params2
+			end
+			it 'renders new template' do
+				expect(response).to render_template :cp_new
+			end
+			it 'renders with user layout' do
+				expect(response).to render_template(layout: 'layouts/application')
+			end
+			it 'assigns user variable to the view' do
+				expect(assigns[:user]).to eq(user)
+			end
+			it 'assigns machine_owners variable to the view' do
+				expect(assigns[:machine_owners]).to eq([machine_owner])
+			end
+			it 'assigns error flash message' do
+				expect(flash[:error]).not_to be_nil
+			end
+		end
 	end
 end

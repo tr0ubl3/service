@@ -19,8 +19,15 @@ Admin users have special functionality called control panel from where it can ma
 		And I click button to deny user registration
 		And I receive an email with regarding user registration denial
 
-	Scenario: Admin registers new user
+	Scenario: Admin successfully registers new user
 		Given I'm on home page
 		When I go to control panel
 		And I successfully create a new user
 		Then I receive an email when new user is registered
+
+	Scenario: Admin tries to register new user
+		Given I'm on home page
+		When I go to control panel
+		And I fill new user form with invalid data
+		Then I should see the new user form again
+		And I should see form errors

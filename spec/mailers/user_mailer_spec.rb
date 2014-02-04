@@ -136,4 +136,47 @@ describe UserMailer do
 			email.should have_body_text(/#{admin.full_name}/)
 		end
 	end
+
+	describe "invitation" do
+		let(:user) { create(:user2) }
+		let(:email) { UserMailer.invitation(user) }
+
+		it "renders the subject" do
+			email.subject.should == "You have been invited to International G&T web platform"
+		end
+
+		it "renders the receiver email" do
+			email.should deliver_to(user.email)
+		end
+
+		it "renders the sender email" do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns user.full_name' do
+			email.should have_body_text(/#{user.full_name}/)
+		end
+	end
+
+	describe "invitation_to_admin" do
+		let(:user) { create(:user2) }
+		let(:admin) { create(:admin) }
+		let(:email) { UserMailer.invitation_to_admin(user, admin) }
+
+		it "renders the subject" do
+			email.subject.should == "You sent invitation to #{user.full_name}"
+		end
+
+		it "renders the receiver email" do
+			email.should deliver_to(admin.email)
+		end
+
+		it "renders the sender email" do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns user.full_name' do
+			email.should have_body_text(/#{user.full_name}/)
+		end
+	end
 end

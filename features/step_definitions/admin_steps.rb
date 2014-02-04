@@ -75,16 +75,39 @@ When(/^I go to control panel$/) do
 end
 
 When(/^I successfully create a new user$/) do
+  reset_mailer
   click_link 'New client user'
   current_path.should == '/users/cp_new'
   select('Delphi', :from => 'user_machine_owner_id')
-  fill_in "user_first_name", :with => "Daenerys"
-  fill_in "user_last_name", :with => "Targaryen"
+  fill_in "user_first_name", :with => "Vasile"
+  fill_in "user_last_name", :with => "Ionescu"
   fill_in "user_phone_number", :with => "0720123123"
-  fill_in "user_email", :with => "daenerys.targaryen@mail.com"
+  fill_in "user_email", :with => "vasile.ionescu@email.com"
   click_button "Save user"
+  current_path.should == manage_users_path
+  expect(page).to have_content("You successfully created user Vasile Ionescu")
 end
 
 Then(/^I receive an email when new user is registered$/) do
-  open_email(@admin.email, :with_subject => "You sent ivitation to #{@user.full_name}" )
+  open_email(@admin.email)
+  expect(current_email).to have_subject("You sent invitation to Vasile Ionescu")
+end
+
+When(/^I fill new user form with invalid data$/) do
+  click_link 'New client user'
+  current_path.should == '/users/cp_new'
+  select('', :from => 'user_machine_owner_id')
+  fill_in "user_first_name", :with => ""
+  fill_in "user_last_name", :with => ""
+  fill_in "user_phone_number", :with => ""
+  fill_in "user_email", :with => ""
+  click_button "Save user"
+end
+
+Then(/^I should see the new user form again$/) do
+  expect(page).to have_content("Sign up new user")
+end
+
+Then(/^I should see form errors$/) do
+  expect(page).to have_content("Invalid form values")
 end
