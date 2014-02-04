@@ -26,4 +26,18 @@ describe ApplicationController do
 			end
 		end	
 	end
+
+	describe "#update_login_count" do
+		let!(:user) { create(:user, :login_count => 2) }
+		
+		it 'save login_count to user table' do
+			expect{controller.update_login_count(user)}.to change{user.login_count}.by(1)
+		end
+
+		it 'sends email to first login of user' do
+			user2 = create(:user2, :login_count => 0)
+			UserMailer.should_receive(:welcome).with(user2).and_return(double("UserMailer", :deliver => true))
+			controller.update_login_count(user2)
+		end
+	end
 end

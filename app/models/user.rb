@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
   def full_name
   	first_name + " " + last_name
   end
+
+  def login_count_increment
+      self.increment(:login_count)
+  end
 end

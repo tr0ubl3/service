@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.fullpath
   end
 
+  def update_login_count(user)
+    login_count_save = proc do
+      user.login_count_increment
+    end
+    UserMailer.welcome(user).deliver if login_count_save.call.login_count == 1
+  end
+
 private
   def check_auth
     unless session[:user_id]

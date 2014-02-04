@@ -63,6 +63,10 @@ describe SessionsController do
 			it "authenticates user" do
 				expect(session[:user_id]).not_to be_nil
 			end
+
+			it "increments login count by 1" do
+				
+			end
 		end	
 
 		context "when authenticate method return false" do

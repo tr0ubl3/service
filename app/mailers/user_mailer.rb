@@ -45,4 +45,7 @@ class UserMailer < ActionMailer::Base
     @admin = admin
     mail(to: @admin.email, :subject => "You sent invitation to #{user.full_name}")
   end
+
+  def welcome(user)
+  end
 end

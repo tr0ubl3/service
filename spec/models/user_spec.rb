@@ -100,4 +100,12 @@ describe User do
 			expect(user.full_name).not_to be_nil 
 		end
 	end
+
+	describe "#login_count_increment" do
+		let(:user) { create(:user) }
+		
+		it 'increase user.login_count by 1' do
+			expect{user.login_count_increment}.to change{user.login_count}.from(0).to(1)
+		end
+	end
 end

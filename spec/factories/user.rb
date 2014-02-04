@@ -7,6 +7,7 @@ FactoryGirl.define do
 		admin false
 		machine_owner_id 2
 		password 'securepassword'
+		login_count 0
 		approved_at Time.now.to_date.to_time
 		MachineOwner
 	end
