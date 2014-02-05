@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
 		login = Login.new(params[:login])
 		if login.conditional_authentication
 			session[:user_id] = login.conditional_authentication
+			update_login_count(current_user)
 			flash[:notice] = "You're logged in"
 			redirect_back
 		else

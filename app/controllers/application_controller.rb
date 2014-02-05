@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def update_login_count(user)
     login_count_save = proc do
-      user.login_count_increment
+      user.login_count_increment && user.reload
     end
     UserMailer.welcome(user).deliver if login_count_save.call.login_count == 1
   end

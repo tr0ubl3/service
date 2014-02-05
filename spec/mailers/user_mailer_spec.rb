@@ -179,4 +179,25 @@ describe UserMailer do
 			email.should have_body_text(/#{user.full_name}/)
 		end
 	end
+
+	describe "welcome" do
+		let!(:user) { create(:user) }
+		let(:email) { UserMailer.welcome(user) }
+
+		it "renders the subject" do
+			email.subject.should == "Welcome to International G&T web platform"
+		end
+
+		it "renders the receiver email" do
+			email.should deliver_to(user.email)
+		end
+
+		it "renders the sender email" do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns user.full_name' do
+			email.should have_body_text(/#{user.full_name}/)
+		end
+	end 
 end

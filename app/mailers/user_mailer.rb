@@ -47,5 +47,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def welcome(user)
+    @user = user
+    mail(to: @user.email, :subject => "Welcome to International G&T web platform")
   end
 end

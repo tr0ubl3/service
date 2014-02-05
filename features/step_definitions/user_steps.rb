@@ -98,7 +98,7 @@ Then(/^I received an email with denial reason$/) do
 end
 
 Given(/^I don't know about web application$/) do
-  @user = create(:user)
+  @user = create(:user2, :approved_at => Time.now)
   @machine_owner = create(:machine_owner)
 end
 

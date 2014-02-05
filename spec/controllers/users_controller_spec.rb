@@ -260,6 +260,11 @@ describe UsersController do
 			expect(user.password).not_to be_nil
 		end
 
+		it 'has approved_at set' do
+			post :cp_create, user: params
+			expect(user.approved_at).not_to be_nil
+		end
+
 		it 'sends save message to user model' do
 			user.should_receive(:save)
 			post :cp_create, user: params

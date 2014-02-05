@@ -29,47 +29,60 @@ describe SessionsController do
 	end
 
 	describe "POST create" do
+		let!(:user) { create(:user) }
 		let(:params) do
 			{
-				"email" => "email@email.com",
-				"password" => "securepassword"
+				"email" => user.email,
+				"password" => user.password
 			}
 		end
 		let!(:login) {stub_model(Login)}
+		
 		before :each do
 			Login.stub(:new).and_return(login)
 		end
+
 		context "when data is valid" do
+			
 			before :each do
 				login.stub(:valid?).and_return(true)
 			end
+
+			it 'sends conditional_authentication message to login model' do
+				login.should_receive(:conditional_authentication)
+				post :create, login: params
+			end
 		end
-		it 'sends conditional_authentication message to login model' do
-			login.should_receive(:conditional_authentication)
-			post :create, login: params
-		end
+		
 
 		context "when conditional_authentication method return true" do
 			before :each do
 				login.stub(:conditional_authentication).and_return(true)
-				post :create, login: params
 			end
 			it "redirects to root url" do
+				post :create, login: params
 				expect(response).to redirect_to(root_url)
 			end
 			it "assigns a success flash message" do
+				post :create, login: params
 				expect(flash[:notice]).not_to be_nil
 			end
 			it "authenticates user" do
+				post :create, login: params
 				expect(session[:user_id]).not_to be_nil
 			end
 
-			it "increments login count by 1" do
-				
+			it "assigns current_user variable" do
+				post :create, login: params
+				expect(controller.current_user).not_to be_nil
+			end
+
+			it "increments login count of current_user by 1" do
+				expect{post :create, login: params}.to change{user.reload.login_count}.by(1)
 			end
 		end	
 
-		context "when authenticate method return false" do
+		context "when conditional_authentication method return false" do
 			before :each do
 				login.stub(:conditional_authentication).and_return(false)
 				post :create, login: params

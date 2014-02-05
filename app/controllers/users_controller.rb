@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @machine_owners = MachineOwner.all
     @user.password = rand(36**8).to_s(36)
+    @user.approved_at = Time.now
     if @user.save
       redirect_to manage_users_path, notice: "You successfully created user #{@user.full_name}"
       UserMailer.invitation(@user).deliver

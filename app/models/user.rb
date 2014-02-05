@@ -31,6 +31,6 @@ class User < ActiveRecord::Base
   end
 
   def login_count_increment
-      self.increment(:login_count)
+      self.increment!(:login_count)
   end
 end
