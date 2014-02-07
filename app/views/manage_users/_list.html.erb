@@ -14,7 +14,7 @@
 			<th>#</th>
 			<th>Name</th>
 			<th>Enabled</th>
-			<th>Activated</th>
+			<th>Pending confirmation</th>
 			<th>Email</th>
 			<th>Last visit date</th>
 			<th>Registration date</th>
@@ -23,13 +23,13 @@
 	</thead>
 	<tbody>
 		<% users.each do |t| %>
-			<tr>
+			<tr class="<%= confirm_warning(t) %>">
 				<td><%= 1 %></td>
-				<td><%= link_to t.full_name, "#", :data => {:toggle => "tooltip"}, :title => "click to edit " + t.full_name, :id => "user_list" %></td>
+				<td><%= link_to t.full_name, user_path(t), :data => {:toggle => "tooltip"}, :title => "click to see details of " + t.full_name, :id => "user_list" %></td>
 				<td>Yes</td>
-				<td>Yes</td>
+				<td><%= user_confirmation_text(t) %></td>
 				<td><%= t.email %></td>
-				<td><%= 'to be created' %></td>
+				<td><%= 'pending' %></td>
 				<td><%= t.created_at %></td>
 				<td>Ionut Ciobanu</td>
 			</tr>

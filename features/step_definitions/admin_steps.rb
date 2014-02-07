@@ -1,11 +1,12 @@
 Given(/^I'm an admin$/) do
   @admin = create(:admin)
   @user = create(:user)
+  @user2 = create(:user2)
+  @machine_owners = create(:machine_owner, :id => 1)
   expect(@admin.admin).to be_true
 end
 
 Given(/^New user registered$/) do
-  @machine_owners = create(:machine_owner, :id => 1)
   visit "/signup"
   select('Delphi', :from => 'user_machine_owner_id')
   fill_in "user_first_name", :with => "Daenerys"
@@ -45,16 +46,22 @@ Then(/^I should see user details$/) do
   expect(page).to have_content("#{@new_user.full_name} details")
 end
 
-Then(/^I click button to approve user registration$/) do
+Then(/^I click link to approve user registration$/) do
   click_link('Approve registration')
 end
+
 
 Then(/^I receive an email regarding new user registration$/) do
   UserMailer.user_registration_approved_to_admin(@user, @admin).deliver
   open_email(@admin.email, :with_subject => "You approved #{@user.full_name} registration" )
 end
 
-Then(/^I click button to deny user registration$/) do
+When(/^I receive an email regarding user registration$/) do
+  open_email(@admin.email)
+  current_email.should have_subject('Pending new user confirmation')
+end
+
+Then(/^I click link to deny user registration$/) do
   click_link('Deny registration')
 end
 
@@ -64,6 +71,10 @@ Then(/^I receive an email with regarding user registration denial$/) do
 end
 
 Given(/^I'm on home page$/) do
+  visit login_path
+  fill_in(:email, :with => @admin.email)
+  fill_in(:password, :with => @admin.password)
+  click_button "Sign in"
   visit('/')
   current_path.should == '/'
 end
@@ -110,4 +121,22 @@ end
 
 Then(/^I should see form errors$/) do
   expect(page).to have_content("Invalid form values")
+end
+
+When(/^I choose manage users$/) do
+  current_path.should == manage_users_path
+end
+
+Then(/^I should see users pending confirmation$/) do
+  expect(page).to have_selector("th", "Pending confirmation")
+  expect(page).to have_selector('tr', :text => @user2.full_name && "Yes")
+end
+
+Then(/^I can click user to see details$/) do
+  click_link @user2.full_name
+  current_path.should == user_path(@user2)
+end
+
+Then(/^I'm able to confirm or no registration$/) do
+  expect(page).to have_link("Approve registration" && "Deny registration")
 end

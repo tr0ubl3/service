@@ -43,42 +43,4 @@ Scenario: I received a registration invitation
 	And I'm logged into application
 	And I receive an welcome email
 
-Scenario: Approving new regular user registration from mail
-	Given I am an admin user
-	When I receive an email to approve a new user registration
-	Then I should be able to click a link in mail to get me to user approval page
-	And I should login into application with my admin credentials
-	Then I should see user details and approval button
-	And I approve
-	And I have a confirmation email in inbox
-
-Scenario: Approving new regular user registration from application
-	Given I am an admin user
-	And I'm logged into application
-	When I approve a user from control panel
-	Then I should receive a confirmation mail
-
-Scenario: Denying registration of a regular user from application
-	Given I am an admin user
-	And I'm logged into application
-	When I denny user registration from control panel
-	Then I should provide a reason of why I dennied registration
-	Then I should receive a confirmation mail with the reason
-
-Scenario: Denying registration of a regular user from mail
-	Given I am an admin user
-	When I receive an email to approve a new user registration
-	Then I should be able to click a link in mail to denny user registration
-	And I should be redirected to application for entering a reason of denying
-
-Scenario: New regular user registration
-	Given I am an admin user
-	And I'm logged into application
-	And I should be able to register a new regular user from control panel
-	Then I should receive a confirmation mail
-
-Scenario: Admin user registration
-	Given I am an admin user
-	And I'm logged into application
-	And I should be able to register another admin user
-	Then I should receive a confirmation mail
+Scenario: I receive admin confirmation
