@@ -16,3 +16,10 @@
 
 # ignore devise config file
 # /config/initializers/devise.rb
+
+#ignore gemfile from linux mint
+# Gemfile
+# Gemfile.lock
+
+#ignore db schema from linux mint
+db/schema.rb

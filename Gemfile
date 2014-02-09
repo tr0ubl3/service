@@ -23,6 +23,7 @@ group :development, :test do
 	## end
 	gem 'commands'
 	gem 'factory_girl_rails', :require => false
+	gem "therubyracer"
 end
 
 group :production do
@@ -34,15 +35,15 @@ group :test do
 	gem 'capybara', :github => 'jnicklas/capybara'
 	gem 'cucumber', '1.2.5'
 	gem 'cucumber-rails', :require => false 
-	gem 'rb-fchange', '0.0.5'
-	gem 'rb-notifu', '0.0.4'
-	gem 'win32console'
-	gem 'wdm'
-	gem 'growl'
-	gem 'ruby_gntp'
-	gem 'win32-process'
+	# gem 'rb-fchange', '0.0.5'
+	# gem 'rb-notifu', '0.0.4'
+	# gem 'win32console'
+	# gem 'wdm'
+	# gem 'growl'
+	# gem 'ruby_gntp'
+	# gem 'win32-process'
 	gem 'database_cleaner'
-	gem 'childprocess', '0.3.6'
+	# gem 'childprocess', '0.3.6'
 	gem 'rack_session_access'
 end
 
