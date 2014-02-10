@@ -13,6 +13,7 @@ module ApplicationHelper
 	def top_right_menu
 		content_tag(:div, class: "dropdown pull-right navbar-text")	do
 			if current_user
+				admin_notifications +
 				raw("Logged in as #{link_top_right_menu(current_user)}") +
 				dropdown_menu
 			else
@@ -21,7 +22,22 @@ module ApplicationHelper
 		end
 	end
 
+	def admin_notifications
+		content_tag(:div, class: "admin_notifications", title: "#{pending_users} users pending confirmation") do
+			link_to manage_users_path do
+				raw("<span class='badge badge-info'>
+						<i class='icon-user'></i> #{pending_users}
+				</span>")
+			end
+		end
+	end
+
+	def pending_users
+		pending_number = User.where(:approved_at => nil).count
+	end
+
 	private
+
 	def link_top_right_menu(user)
 		link_to user.full_name, "#", :class => "navbar-text navbar-link dropdown-toggle",
 		 							 :data => { :toggle => "dropdown" } 

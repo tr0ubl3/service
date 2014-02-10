@@ -46,10 +46,12 @@ Admin users have special functionality called control panel from where it can ma
 		And I can click user to see details
 		And I'm able to confirm or no registration
 
-	Scenario: Admin sees a flashing bullet regarding new user registration
+	Scenario: Admin sees a flashing bullet when are pending confirmation users
+		Given A user is pending confirmation
 		When I'm on home page
 		Then I see how many users are pending registration confirmation
-		And Clicking flashing bullet i see manage users page
+		And I click flashing bullet
+		Then I see manage users page
 
 	Scenario: Admin user registration by another admin
 		And I should be able to register another admin user

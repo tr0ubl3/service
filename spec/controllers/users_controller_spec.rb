@@ -7,7 +7,7 @@ describe UsersController do
 		before :each do
 			User.stub(:new).and_return(user)
 			allow(Firm).to receive(:find) { machine_owner }
-			get :new
+			get :new 
 		end
 		it 'assigns user variable to the view' do
 			expect(assigns[:user]).to eq(user)

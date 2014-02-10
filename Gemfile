@@ -31,10 +31,12 @@ group :production do
 end
 
 group :test do
-	gem 'spork', :github => 'sporkrb/spork'
+	gem 'spork'
+	gem "spork-rails"
 	gem 'capybara', :github => 'jnicklas/capybara'
 	gem 'cucumber', '1.2.5'
-	gem 'cucumber-rails', :require => false 
+	gem 'cucumber-rails', :require => false
+	# gem 'rb-fsevent' 
 	# gem 'rb-fchange', '0.0.5'
 	# gem 'rb-notifu', '0.0.4'
 	# gem 'win32console'

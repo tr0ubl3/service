@@ -21,4 +21,18 @@ describe ApplicationHelper do
 		end 
 	end
 
+	describe "#pending_users" do
+		let(:user) { create(:user2) }
+		before :each do
+			@pending_number = User.where(:approved_at => nil).count
+		end
+
+		it "it returns number of users that are pending confirmation" do
+			expect(helper.pending_users).to have_content("#{@pending_number}")
+		end
+
+		it "has link pending_number" do
+			expect(helper.pending_users).to have_link("#{@pending_number}", :href => manage_users_path)
+		end
+	end
 end

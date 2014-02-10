@@ -67,3 +67,8 @@ body {
 .brand-custom {
 	-webkit-transition: all .3s linear;
 }
+
+.admin_notifications {
+	display: inline-block !important;
+	margin-right: 10px;
+}

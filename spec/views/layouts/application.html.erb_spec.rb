@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "layouts/application.html.erb" do
 	before :each do
 		@user = create(:user)
-		view.stub!(:current_user).and_return(@user)
+		view.stub(:current_user).and_return(@user)
 	end
 
 	it "doesn't have a flash block without a flash message" do
@@ -32,5 +32,17 @@ describe "layouts/application.html.erb" do
 	it "has current_user link in the navbar" do
 		render
 		expect(rendered).to have_link("#{@user.full_name}", :href => '#')
+	end
+
+	it "has div container for bullet notifications with number of pending users" do
+		create(:user2)
+		render
+		expect(rendered).to have_css("div.admin_notifications", text: "#{pending_users}")
+	end
+
+	it "has link manage_users_path" do
+		create(:user2)
+		render
+		expect(rendered).to have_link("#{pending_users}", :href => manage_users_path)
 	end
 end

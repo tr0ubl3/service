@@ -140,3 +140,21 @@ end
 Then(/^I'm able to confirm or no registration$/) do
   expect(page).to have_link("Approve registration" && "Deny registration")
 end
+
+Given(/^A user is pending confirmation$/) do
+  @user_pending = User.where(:approved_at => nil).count
+  @user_pending.should be > 0
+end
+
+Then(/^I see how many users are pending registration confirmation$/) do
+  current_path.should == "/"
+  expect(page).to have_selector("div.admin_notifications", text: "#{@user_pending}")
+end
+
+Then(/^I click flashing bullet$/) do
+  click_link "#{@user_pending}"
+end
+
+Then(/^I see manage users page$/) do
+  current_path.should == manage_users_path
+end
