@@ -53,6 +53,11 @@ Admin users have special functionality called control panel from where it can ma
 		And I click flashing bullet
 		Then I see manage users page
 
+	Scenario: Admin doesn't see a flashing bullet when are no pending confirmation users
+		Given Is no user pending confirmation
+		When I'm logged in application
+		Then I don't see a bullet with users pending confirmation	
+
 	Scenario: Admin user registration by another admin
 		And I should be able to register another admin user
 		Then I should receive a confirmation mail

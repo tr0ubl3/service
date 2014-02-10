@@ -28,11 +28,31 @@ describe ApplicationHelper do
 		end
 
 		it "it returns number of users that are pending confirmation" do
-			expect(helper.pending_users).to have_content("#{@pending_number}")
+			expect(helper.pending_users).to eq(@pending_number)
+		end
+	end
+
+	describe "#admin_notifications" do
+		let(:user) { create(:user2) }
+		
+		before :each do
+			@pending_number = User.where(:approved_at => nil).count
 		end
 
+		it "has a div.admin_notifications container" do
+			expect(helper.admin_notifications).to have_selector("div.admin_notifications")
+		end
+
+		it "has a bootstrap info badge span.badge.badge-info" do
+			expect(helper.admin_notifications).to have_selector("span.badge.badge-info")
+		end
+
+		it "has a bootstrap i.icon-user" do
+			expect(helper.admin_notifications).to have_selector("i.icon-user")
+		end
+			
 		it "has link pending_number" do
-			expect(helper.pending_users).to have_link("#{@pending_number}", :href => manage_users_path)
+			expect(helper.admin_notifications).to have_link("#{@pending_number}", :href => manage_users_path)
 		end
 	end
 end

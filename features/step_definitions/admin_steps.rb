@@ -158,3 +158,7 @@ end
 Then(/^I see manage users page$/) do
   current_path.should == manage_users_path
 end
+
+Given(/^Is no user pending confirmation$/) do
+  
+end
