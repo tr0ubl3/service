@@ -160,5 +160,5 @@ Then(/^I see manage users page$/) do
 end
 
 Given(/^Is no user pending confirmation$/) do
-  
+  pending
 end
