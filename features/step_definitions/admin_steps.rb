@@ -160,5 +160,16 @@ Then(/^I see manage users page$/) do
 end
 
 Given(/^Is no user pending confirmation$/) do
-  pending
+  @user2.destroy
+end
+
+When(/^I'm logged in application$/) do
+  page.set_rack_session(:user_id => @admin.id)
+  visit root_path
+  current_path.should == '/'
+end
+
+Then(/^I don't see a bullet with users pending confirmation$/) do
+  @user_pending = User.where(:approved_at => nil).count
+  expect(page).not_to have_selector("div.admin_notifications", text: "#{@user_pending}")
 end

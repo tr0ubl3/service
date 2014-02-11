@@ -23,12 +23,17 @@ module ApplicationHelper
 	end
 
 	def admin_notifications
-		content_tag(:div, class: "admin_notifications", title: "#{pending_users} users pending confirmation") do
-			link_to manage_users_path do
-				raw("<span class='badge badge-info'>
-						<i class='icon-user'></i> #{pending_users}
-				</span>")
+		if pending_users > 0
+			content_tag(:div, class: "admin_notifications", 
+						title: "#{pending_users} users pending confirmation") do
+				link_to manage_users_path do
+					raw("<span class='badge badge-info'>
+							<i class='icon-user'></i> #{pending_users}
+					</span>")
+				end
 			end
+		else
+			raw("")
 		end
 	end
 

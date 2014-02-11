@@ -18,7 +18,7 @@ describe ApplicationHelper do
 		it "has current_user link" do
 			helper.stub(:current_user).and_return(user)
 			expect(helper.top_right_menu).to have_link("#{user.full_name}", :href => "#")
-		end 
+		end
 	end
 
 	describe "#pending_users" do
@@ -33,26 +33,37 @@ describe ApplicationHelper do
 	end
 
 	describe "#admin_notifications" do
-		let(:user) { create(:user2) }
 		
-		before :each do
-			@pending_number = User.where(:approved_at => nil).count
+		context "when there are pending users" do
+			before :each do
+				helper.stub(:pending_users).and_return(1)
+			end
+		
+			it "has a div.admin_notifications container" do
+				expect(helper.admin_notifications).to have_selector("div.admin_notifications")
+			end
+
+			it "has a bootstrap info badge span.badge.badge-info" do
+				expect(helper.admin_notifications).to have_selector("span.badge.badge-info")
+			end
+
+			it "has a bootstrap i.icon-user" do
+				expect(helper.admin_notifications).to have_selector("i.icon-user")
+			end
+				
+			it "has link pending_number" do
+				expect(helper.admin_notifications).to have_link("#{@pending_number}", :href => manage_users_path)
+			end
 		end
 
-		it "has a div.admin_notifications container" do
-			expect(helper.admin_notifications).to have_selector("div.admin_notifications")
-		end
-
-		it "has a bootstrap info badge span.badge.badge-info" do
-			expect(helper.admin_notifications).to have_selector("span.badge.badge-info")
-		end
-
-		it "has a bootstrap i.icon-user" do
-			expect(helper.admin_notifications).to have_selector("i.icon-user")
-		end
+		context "when are no pending users" do
+			before :each do
+				helper.stub(:pending_users).and_return(0)
+			end
 			
-		it "has link pending_number" do
-			expect(helper.admin_notifications).to have_link("#{@pending_number}", :href => manage_users_path)
+			it "doesn't have div.admin_notifications" do
+				expect(helper.admin_notifications).not_to have_selector("div.admin_notifications")
+			end
 		end
 	end
 end
