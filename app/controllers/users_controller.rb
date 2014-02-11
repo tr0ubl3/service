@@ -60,4 +60,24 @@ class UsersController < ApplicationController
       render :cp_new
     end
   end
+
+  def new_admin
+    @admin = User.new
+  end
+
+  def create_admin
+    @admin = User.new(params[:user])
+    @admin.password = rand(36**8).to_s(36)
+    @admin.approved_at = Time.now
+    @admin.firm_id = Firm.where(:type => "AuthorizedReseller").first.id
+    @admin.admin = true
+    if @admin.save
+      redirect_to manage_users_path
+      flash[:notice] = "You successfully registered admin user #{@admin.full_name}"
+      UserMailer.admin_invitation(@admin).deliver
+      UserMailer.confirmation_for_admin(@admin, current_user).deliver
+    else
+      render nothing: true
+    end
+  end
 end

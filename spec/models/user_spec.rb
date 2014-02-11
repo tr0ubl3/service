@@ -6,7 +6,7 @@ describe User do
 	describe 'validations' do
 		before :each do
 			@params = {
-				machine_owner_id: 1,
+				firm_id: 1,
 				first_name: 'Robb',
 				last_name: 'Stark',
 				phone_number: 0720123123,
@@ -16,7 +16,7 @@ describe User do
 				admin: false
 			}
 		end
-		it {should validate_presence_of :machine_owner_id}
+		it {should validate_presence_of :firm_id}
 		it {should validate_presence_of :first_name}
 		it {should ensure_length_of(:first_name).is_at_least(2).is_at_most(50)}
 		it {should_not allow_value('Test234', 'Test 234', 'Test!234').for(:first_name)}
@@ -49,7 +49,7 @@ describe User do
 
 	it { should have_secure_password }
 	it { should_not allow_mass_assignment_of(:password_digest) }
-	it { should belong_to(:machine_owner) }
+	it { should belong_to(:firm) }
 	it { should have_many(:service_events) }
 
 	it 'has first_name' do

@@ -21,6 +21,8 @@ Service::Application.routes.draw do
     collection do
       get :cp_new
       post :cp_create
+      get :new_admin
+      post :create_admin
     end
   end
 

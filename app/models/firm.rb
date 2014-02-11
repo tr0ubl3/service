@@ -1,6 +1,7 @@
 class Firm < ActiveRecord::Base
   attr_accessible :name, :country, :city, :address, :postal_code, :fax, :office_tel, :office_mail, :mobile, :type
   has_many :machines
+  has_many :users
 
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
   NUMBERS = /[0-9]/i

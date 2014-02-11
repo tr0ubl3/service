@@ -50,4 +50,13 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: @user.email, :subject => "Welcome to International G&T web platform")
   end
+
+  def admin_invitation(admin)
+  end
+
+  def confirmation_for_admin(new_admin, admin)
+    @new_admin = new_admin
+    @admin = admin
+    mail(to: @admin.email, :subject => "You successfully registered new admin user #{@new_admin.full_name}")
+  end
 end

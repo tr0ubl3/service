@@ -173,3 +173,41 @@ Then(/^I don't see a bullet with users pending confirmation$/) do
   @user_pending = User.where(:approved_at => nil).count
   expect(page).not_to have_selector("div.admin_notifications", text: "#{@user_pending}")
 end
+
+When(/^I'm on manage users page$/) do
+  page.set_rack_session(:user_id => @admin.id)
+  visit manage_users_path
+  current_path.should == manage_users_path
+end
+
+Then(/^I click Admin users link$/) do
+  click_link "Admin users"
+end
+
+Then(/^I click new admin user to register new admin$/) do
+  click_link "New admin"
+  current_path.should == new_admin_users_path
+end
+
+When(/^I successfully submit admin user form$/) do
+  reseller = create(:authorized_reseller, :id => 2)
+  fill_in "user_first_name", :with => "Ned"
+  fill_in "user_last_name", :with => "Stark"
+  fill_in "user_phone_number", :with => 123123123
+  fill_in "user_email", :with => "ned.stark@email.com"
+  click_button "Save admin"
+  # expect(page).to have_content("You successfully registered Ned Stark admin user")
+end
+
+Then(/^I receive an email regarding succesfull admin registration$/) do
+  open_email(@admin.email, :with_subject => "You successfully registered new admin user Ned Stark")
+end
+
+Then(/^I'm redirected to manage users$/) do
+  current_path.should == manage_users_path
+end
+
+Then(/^I see successfull flash message$/) do
+  expect(page).to have_content("You successfully registered admin user Ned Stark")
+end
+

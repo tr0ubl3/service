@@ -58,8 +58,14 @@ Admin users have special functionality called control panel from where it can ma
 		When I'm logged in application
 		Then I don't see a bullet with users pending confirmation	
 
-	Scenario: Admin user registration by another admin
-		And I should be able to register another admin user
-		Then I should receive a confirmation mail
+	Scenario: Admin user registers another admin user
+		When I'm on manage users page
+		Then I click Admin users link
+		And I click new admin user to register new admin
+		When I successfully submit admin user form
+		Then I receive an email regarding succesfull admin registration
+		And I'm redirected to manage users
+		Then I see successfull flash message
+
 
 

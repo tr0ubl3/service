@@ -236,7 +236,7 @@ describe UsersController do
 		let!(:machine_owner) { create(:machine_owner) }
 		let(:params) do
 			 {
-				"machine_owner_id" => "2",
+				"firm_id" => "2",
 				"first_name" => "John",
 				"last_name" => "Wilkins",
 				"phone_number" => "1234567890",
@@ -303,7 +303,7 @@ describe UsersController do
 			let!(:new_user) { create(:user) }
 			let!(:params2) do
 			 {
-				"machine_owner_id" => "",
+				"firm_id" => "",
 				"first_name" => "",
 				"last_name" => "",
 				"phone_number" => "",
@@ -332,4 +332,96 @@ describe UsersController do
 			end
 		end
 	end
+
+	describe "GET new_admin" do
+		let!(:admin) { mock_model('User').as_new_record }
+
+		before :each do
+			User.stub(:new).and_return(admin)
+			get :new_admin
+		end
+
+		it "assigns @admin variable" do
+			get :new_admin
+			expect(assigns(:admin)).to eq(admin)
+		end
+
+		it 'renders new template' do
+			expect(response).to render_template :new_admin
+		end
+
+		it 'renders with application layout' do
+			expect(response).to render_template(layout: 'layouts/application')
+		end
+	end
+
+	describe "POST create_admin" do
+		let(:new_admin) { build(:admin, :password => nil,
+		                  :approved_at => nil, :firm_id => nil, :admin => false) }
+		let!(:reseller) { create(:authorized_reseller) }
+
+		before :each do
+			allow(User).to receive(:new) { new_admin }
+		end
+
+		it 'sends new message to User class' do
+			expect(User).to receive(:new) { new_admin }
+			post :create_admin, admin: new_admin
+		end
+
+		it 'has password set' do
+			post :create_admin, admin: new_admin
+			expect(new_admin.password).not_to be_nil
+		end
+
+		it 'has approved_at set' do
+			post :create_admin, admin: new_admin
+			expect(new_admin.approved_at).not_to be_nil
+		end
+
+		it "has firm_id set" do
+			post :create_admin, admin: new_admin
+			expect(new_admin.firm_id).not_to be_nil
+		end
+
+		it "has admin set to true" do
+			post :create_admin, admin: new_admin
+			expect(new_admin.admin).to be_true
+		end
+
+		it 'sends save message to User model' do
+			expect(new_admin).to receive(:save)
+			post :create_admin, admin: new_admin
+		end
+
+		context 'when save message returns true' do
+			let(:admin) { create(:admin_2, :id => 3) }
+
+			before :each do
+				session[:user_id] = admin.id
+				new_admin.stub(:save).and_return(true)
+			end
+
+			it 'redirects to manage_users_path' do
+				post :create_admin, admin: new_admin
+				expect(response).to redirect_to manage_users_path
+			end
+
+			it 'assigns a success flash message' do
+				post :create_admin, admin: new_admin
+				expect(flash[:notice]).not_to be_nil
+			end
+
+			it 'sends invitation to new admin user' do
+				UserMailer.should_receive(:admin_invitation).with(new_admin).and_return(double(UserMailer, :deliver => true))
+				post :create_admin, admin: new_admin
+			end
+
+			it "sends invitation confirmation mail to admin" do
+				current_admin = controller.current_user
+				UserMailer.should_receive(:confirmation_for_admin).with(new_admin, current_admin).and_return(double(UserMailer, :deliver => true))
+				post :create_admin, admin: new_admin
+			end
+		end		
+	end		
 end

@@ -24,4 +24,8 @@ describe 'manage_users/index.html.erb' do
 	it "has user.full_name links that redirects to show_user" do
 		expect(rendered).to have_link(user.full_name, :href => user_path(user) )
 	end
+
+	it "has 'New admin' link" do
+		expect(rendered).to have_link("New admin", :href => new_admin_users_path)
+	end
 end

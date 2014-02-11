@@ -199,5 +199,27 @@ describe UserMailer do
 		it 'assigns user.full_name' do
 			email.should have_body_text(/#{user.full_name}/)
 		end
+	end
+
+	describe "confirmation_for_admin" do
+		let!(:admin) { create(:admin) }
+		let!(:user) { create(:admin_2) }
+		let(:email) { UserMailer.confirmation_for_admin(user, admin) }
+
+		it "renders the subject" do
+			email.subject.should == "You successfully registered new admin user #{user.full_name}"
+		end
+
+		it "renders the receiver email" do
+			email.should deliver_to(admin.email)
+		end
+
+		it "renders the sender email" do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns user.full_name' do
+			email.should have_body_text(/#{user.full_name}/)
+		end
 	end 
 end

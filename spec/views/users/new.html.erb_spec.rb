@@ -13,7 +13,7 @@ describe 'users/new.html.erb' do
 		expect(rendered).to have_selector('form#new_user')
 	end
 	it 'has firm dropdown menu' do
-		expect(rendered).to have_selector('select#user_machine_owner_id')
+		expect(rendered).to have_selector('select#user_firm_id')
 	end
 	it 'has first_name field' do
 		expect(rendered).to have_selector('input#user_first_name')
@@ -53,42 +53,55 @@ describe 'users/new.html.erb' do
 		it 'when form is submmited empty' do
 			expect(rendered).to have_css('#error_explanation')
 		end
+
 		it 'when machine_owner_id is not selected' do
-			expect(rendered).to have_content("Machine owner can't be blank") 
+			expect(rendered).to have_content("Firm can't be blank") 
 		end
+
 		it 'when first name is empty' do
 			expect(rendered).to have_content("First name can't be blank")
 		end
+
 		it "when first name don't have required length" do
 			expect(rendered).to have_content('First name is too short (minimum is 2 characters)')
 		end
+
 		it 'when first name format is wrong' do
 			expect(rendered).to have_content('First name is invalid')
 		end
+
 		it 'when last_name is empty' do
 			expect(rendered).to have_content("Last name can't be blank")
 		end
+
 		it "when last_name don't have required length" do
 			expect(rendered).to have_content('Last name is too short (minimum is 2 characters)')
 		end
+
 		it 'when last_name format is wrong' do
 			expect(rendered).to have_content('Last name is invalid')
 		end
+
 		it 'when phone number is empty' do
 			expect(rendered).to have_content("Phone number can't be blank")
 		end
+
 		it 'when phone number is not a number' do
 			expect(rendered).to have_content("Phone number is not a number")
 		end
+
 		it "when phone number don't have the required length" do
 			expect(rendered).to have_content("Phone number is too short (minimum is 6 characters)")
 		end
+
 		it 'when email is empty' do
 			expect(rendered).to have_content("Email can't be blank")
 		end
+
 		it "when email format is wrong" do
 			expect(rendered).to have_content('Email is invalid')
 		end
+
 		it 'when email is not unique' do
 			@user.save
 			uniq_email_test = User.create(:email => @user.email)
@@ -96,12 +109,15 @@ describe 'users/new.html.erb' do
 			render
 			expect(rendered).to have_content('Email has already been taken')
 		end
+
 		it 'when password is empty' do
 			expect(rendered).to have_content("Password can't be blank")
 		end
+
 		it "when password don't have required length" do
 			expect(rendered).to have_content('Password is too short (minimum is 6 characters)')
 		end
+		
 		it "when passwords don't match" do
 			pass_test = User.create( password: @user.password, password_confirmation: 'loremipsum' )
 			assign(:user, pass_test)
