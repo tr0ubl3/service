@@ -2,13 +2,13 @@ Given(/^I'm an admin$/) do
   @admin = create(:admin)
   @user = create(:user)
   @user2 = create(:user2)
-  @machine_owners = create(:machine_owner, :id => 1)
+  @machine_owners = create(:machine_owner, :id => 3)
   expect(@admin.admin).to be_true
 end
 
 Given(/^New user registered$/) do
   visit "/signup"
-  select('Delphi', :from => 'user_machine_owner_id')
+  select('Delphi', :from => 'user_firm_id')
   fill_in "user_first_name", :with => "Daenerys"
   fill_in "user_last_name", :with => "Targaryen"
   fill_in "user_phone_number", :with => "0720123123"
@@ -89,7 +89,7 @@ When(/^I successfully create a new user$/) do
   reset_mailer
   click_link 'New client user'
   current_path.should == '/users/cp_new'
-  select('Delphi', :from => 'user_machine_owner_id')
+  select('Delphi', :from => 'user_firm_id')
   fill_in "user_first_name", :with => "Vasile"
   fill_in "user_last_name", :with => "Ionescu"
   fill_in "user_phone_number", :with => "0720123123"
@@ -107,7 +107,7 @@ end
 When(/^I fill new user form with invalid data$/) do
   click_link 'New client user'
   current_path.should == '/users/cp_new'
-  select('', :from => 'user_machine_owner_id')
+  select('', :from => 'user_firm_id')
   fill_in "user_first_name", :with => ""
   fill_in "user_last_name", :with => ""
   fill_in "user_phone_number", :with => ""
