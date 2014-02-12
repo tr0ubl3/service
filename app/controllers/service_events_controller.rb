@@ -27,7 +27,7 @@ class ServiceEventsController < ApplicationController
 
 	def new
 		@event = ServiceEvent.new
-		@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
+		@machines = Machine.where(:machine_owner_id => current_user.firm_id)
 		@alarm_search = Alarm.t1(params[:search])
 		if params[:machine] != nil
 			params[:machine_id] = params[:machine]

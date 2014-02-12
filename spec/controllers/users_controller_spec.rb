@@ -358,9 +358,11 @@ describe UsersController do
 	describe "POST create_admin" do
 		let(:new_admin) { build(:admin, :password => nil,
 		                  :approved_at => nil, :firm_id => nil, :admin => false) }
+		let!(:admin) { create(:admin_2) }
 		let!(:reseller) { create(:authorized_reseller) }
 
 		before :each do
+			session[:user_id] = admin.id
 			allow(User).to receive(:new) { new_admin }
 		end
 
@@ -421,6 +423,32 @@ describe UsersController do
 				current_admin = controller.current_user
 				UserMailer.should_receive(:confirmation_for_admin).with(new_admin, current_admin).and_return(double(UserMailer, :deliver => true))
 				post :create_admin, admin: new_admin
+			end
+		end
+
+		context "when save message return false" do
+			let!(:user) { stub_model(User)}
+			before :each do
+				new_admin.stub(:save).and_return(false)
+				new_admin = nil
+				User.stub(:new).and_return(user)
+				post :create_admin, admin: new_admin
+			end
+
+			it "renders new template" do
+				expect(response).to render_template :new_admin
+			end
+
+			it 'renders with user layout' do
+				expect(response).to render_template(layout: 'layouts/application')
+			end
+
+			it 'assigns admin variable to the view' do
+				expect(assigns[:admin]).to eq(user)
+			end
+
+			it 'assigns error flash message' do
+				expect(flash[:error]).not_to be_nil
 			end
 		end		
 	end		

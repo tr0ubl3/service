@@ -77,7 +77,8 @@ class UsersController < ApplicationController
       UserMailer.admin_invitation(@admin).deliver
       UserMailer.confirmation_for_admin(@admin, current_user).deliver
     else
-      render nothing: true
+      flash.now[:error] = 'Invalid form values'
+      render :new_admin
     end
   end
 end

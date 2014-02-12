@@ -211,3 +211,32 @@ Then(/^I see successfull flash message$/) do
   expect(page).to have_content("You successfully registered admin user Ned Stark")
 end
 
+Then(/^I fill register form with invalid data$/) do
+  reseller = create(:authorized_reseller, :id => 2)
+  fill_in "user_first_name", :with => ""
+  fill_in "user_last_name", :with => ""
+  fill_in "user_phone_number", :with => ""
+  fill_in "user_email", :with => "n.s@email.com"
+  click_button "Save admin"
+end
+
+Then(/^I see the form again$/) do
+  expect(page).to have_content("Sign up new admin")
+end
+
+Then(/^I see an error flash message$/) do
+  expect(page).to have_content("Invalid form values")
+end
+
+When(/^I'm a registered user$/) do
+  @machine_owners.update_attribute(:id, 1)
+  visit login_path
+  fill_in('login_email', :with => @user.email)
+  fill_in('login_password', :with => @user.password)
+  click_button 'Sign in'
+  current_path.should == "/"
+end
+
+Then(/^I don't see control panel link$/) do
+  pending # express the regexp above with the code you wish you had
+end

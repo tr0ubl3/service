@@ -67,5 +67,18 @@ Admin users have special functionality called control panel from where it can ma
 		And I'm redirected to manage users
 		Then I see successfull flash message
 
+	Scenario: Admin tries to register new admin user
+		When I'm on manage users page
+		Then I click Admin users link
+		And I click new admin user to register new admin
+		And I fill register form with invalid data
+		Then I see the form again
+		And I see an error flash message
+
+	Scenario: Only admin can see administrative menus
+		When I'm a registered user
+		Then I don't see control panel link
+		And I cannot access control panel
+
 
 
