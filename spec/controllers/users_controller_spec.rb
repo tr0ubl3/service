@@ -402,7 +402,7 @@ describe UsersController do
 			before :each do
 				session[:user_id] = admin.id
 				new_admin.stub(:save).and_return(true)
-			end
+	 		end
 
 			it 'redirects to manage_users_path' do
 				post :create_admin, admin: new_admin

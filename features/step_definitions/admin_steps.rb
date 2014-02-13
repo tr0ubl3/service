@@ -229,7 +229,8 @@ Then(/^I see an error flash message$/) do
 end
 
 When(/^I'm a registered user$/) do
-  @machine_owners.update_attribute(:id, 1)
+  @machine_owners.destroy
+  create(:machine_owner, :id => 1)
   visit login_path
   fill_in('login_email', :with => @user.email)
   fill_in('login_password', :with => @user.password)
@@ -238,5 +239,10 @@ When(/^I'm a registered user$/) do
 end
 
 Then(/^I don't see control panel link$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).not_to have_link("Control panel", :href => control_panel_general_index_path)
+end
+
+Then(/^I cannot access control panel$/) do
+  visit control_panel_general_index_path
+  current_path.should == root_path
 end

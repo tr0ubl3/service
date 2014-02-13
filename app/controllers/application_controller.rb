@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
     UserMailer.welcome(user).deliver if login_count_save.call.login_count == 1
   end
 
+  def check_admin
+    flash[:error] = "You are not allowed to view this page"
+    redirect_to root_path unless current_user.admin?
+  end
+
 private
   def check_auth
     unless session[:user_id]

@@ -27,6 +27,29 @@ describe ApplicationController do
 		end	
 	end
 
+
+	describe "#check_admin" do
+		context "when user is not admin" do
+			let(:user) { create(:user) }
+			
+			before :each do
+				session[:user_id] = user.id
+				# stub(index).and_return
+			end
+
+			it "redirects to root path" do
+				controller.should_receive(:redirect_to).with(root_path)
+				controller.send(:check_admin)
+			end
+
+			it "shows a flash message" do
+				expect(subject.check_admin.flash).not_to be_nil
+			end
+		end
+
+
+	end
+
 	describe "#update_login_count" do
 		let!(:user) { create(:user, :login_count => 2) }
 		

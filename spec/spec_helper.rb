@@ -31,6 +31,7 @@ Spork.prefork do
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)
     config.include Capybara::DSL
+    # config.include RackSessionAccess::Middleware
     config.order = "random"
   end
   ActiveSupport::Dependencies.clear

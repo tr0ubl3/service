@@ -23,7 +23,7 @@ module ApplicationHelper
 	end
 
 	def admin_notifications
-		if pending_users > 0
+		if pending_users > 0 && admin?
 			content_tag(:div, class: "admin_notifications", 
 						title: "#{pending_users} users pending confirmation") do
 				link_to manage_users_path do
@@ -41,6 +41,10 @@ module ApplicationHelper
 		pending_number = User.where(:approved_at => nil).count
 	end
 
+	def admin?
+		current_user.admin?
+	end
+
 	private
 
 	def link_top_right_menu(user)
@@ -50,7 +54,7 @@ module ApplicationHelper
 
 	def dropdown_menu
 		content_tag(:ul, class: "dropdown-menu", :role => "menu") do
-			items_dropdown
+			items_dropdown if admin?
 		end
 	end
 
@@ -61,4 +65,5 @@ module ApplicationHelper
 			end
 		end
 	end
+
 end
