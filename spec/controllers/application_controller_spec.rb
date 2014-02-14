@@ -34,20 +34,25 @@ describe ApplicationController do
 			
 			before :each do
 				session[:user_id] = user.id
-				# stub(index).and_return
+			end
+
+			controller do
+				before_filter :check_admin
+				def index
+					render :text => "Testing permision method"
+				end
 			end
 
 			it "redirects to root path" do
 				controller.should_receive(:redirect_to).with(root_path)
-				controller.send(:check_admin)
+				get :index
 			end
 
 			it "shows a flash message" do
-				expect(subject.check_admin.flash).not_to be_nil
+				get :index
+				expect(controller.flash[:error]).to eq("You are not allowed to view this page")
 			end
 		end
-
-
 	end
 
 	describe "#update_login_count" do

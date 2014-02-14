@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   layout 'user', only: [:new, :create, :login]
-  before_filter :check_auth, only: [:show, :approve_user, :cp_new, :cp_create]
+  # before_filter :check_auth, except: [:new, :create, :login]
+  # before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
 
   def new
     @user = User.new
@@ -26,18 +27,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def approve_user
+  def approve
     @user = User.find(params[:id])
-    redirect_to user_path(@user)
-    if params[:approved]
-      @user.update_attributes(approved_at: Time.now)
-      flash[:notice] = 'User registration is approved'
+    if params[:approve] == "true"
+      @user.update_attribute(:approved_at, Time.now)
+      @user.update_attribute(:denied_at, nil)
+      flash[:notice] = "#{@user.full_name} registration is approved"
       UserMailer.user_registration_approved(@user).deliver
       UserMailer.user_registration_approved_to_admin(@user, current_user).deliver
+      redirect_to user_path(@user)
     else
-      @user.update_attributes(denied_at: Time.now)
+      @user.update_attribute(:denied_at, Time.now)
+      @user.update_attribute(:approved_at, nil)
       flash[:alert] = "#{@user.full_name} registration it's denied"
       UserMailer.user_registration_denied(@user).deliver
+      redirect_to user_path(@user)
     end
   end
 

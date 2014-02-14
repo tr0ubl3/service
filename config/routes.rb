@@ -6,8 +6,8 @@ Service::Application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'destroy'
-  get 'approve_user/:id', to: 'users#approve_user', as: 'approve_user'
-  get 'approve_user/:id', to: 'users#approve_user', as: 'deny_user'
+  # get 'approve_user/:id', to: 'users#approve_user', as: 'approve_user'
+  # get 'approve_user/:id', to: 'users#approve_user', as: 'deny_user'
 
   resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
   resources :general do
@@ -23,6 +23,9 @@ Service::Application.routes.draw do
       post :cp_create
       get :new_admin
       post :create_admin
+    end
+    member do
+      get :approve
     end
   end
 
