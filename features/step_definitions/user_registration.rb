@@ -8,7 +8,7 @@ end
 
 When(/^I fill the register form with valid data$/) do
   current_path.should == '/signup'
-  select('Delphi', :from => 'user_machine_owner_id')
+  select('Delphi', :from => 'user_firm_id')
   fill_in "user_first_name", :with => "Daenerys"
   fill_in "user_last_name", :with => "Targaryen"
   fill_in "user_phone_number", :with => "0720123123"
@@ -70,7 +70,7 @@ When(/^I receive the confirmation account email from application$/) do
 end 
 
 Then(/^I shoud be able to login into application with my credentials$/) do
-  create(:machine_owner)
+  create(:machine_owner, :id => 1)
   @user.update_attributes(:approved_at => Time.now)
   visit "/login"
   fill_in "login_email", :with => "#{@user.email}"
@@ -99,7 +99,7 @@ end
 
 Given(/^I don't know about web application$/) do
   @user = create(:user2, :approved_at => Time.now)
-  @machine_owner = create(:machine_owner)
+  @machine_owner = create(:machine_owner, :id => 1)
 end
 
 Given(/^I received an email with registration invitation$/) do

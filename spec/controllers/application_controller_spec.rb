@@ -29,18 +29,19 @@ describe ApplicationController do
 
 
 	describe "#check_admin" do
+		
+		controller do
+			before_filter :check_admin
+			def index
+				render :text => "Testing permision method"
+			end
+		end
+		
 		context "when user is not admin" do
 			let(:user) { create(:user) }
 			
 			before :each do
 				session[:user_id] = user.id
-			end
-
-			controller do
-				before_filter :check_admin
-				def index
-					render :text => "Testing permision method"
-				end
 			end
 
 			it "redirects to root path" do
@@ -51,6 +52,23 @@ describe ApplicationController do
 			it "shows a flash message" do
 				get :index
 				expect(controller.flash[:error]).to eq("You are not allowed to view this page")
+			end
+		end
+
+		context "when user is admin" do
+			let(:admin) { create(:admin) }
+
+			before :each do
+				session[:user_id] = admin.id
+				get :index
+			end
+
+			it "renders the protected page" do
+				expect(response).to be_success 
+			end
+
+			it "doesn't show a flash message" do
+				expect(controller.flash[:error]).to be_nil
 			end
 		end
 	end

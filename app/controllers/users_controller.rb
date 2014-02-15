@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   layout 'user', only: [:new, :create, :login]
-  # before_filter :check_auth, except: [:new, :create, :login]
-  # before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
+  before_filter :check_auth, except: [:new, :create, :login]
+  before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
 
   def new
     @user = User.new

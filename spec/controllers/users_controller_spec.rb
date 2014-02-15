@@ -187,20 +187,25 @@ describe UsersController do
 
 			it 'sends confirmation email to user' do
 				UserMailer.should_receive(:user_registration_approved).with(user).and_return(double("UserMailer", :deliver => true))
-				get :approve, id: user, approve: "true"
+				get :approve, id: user, :approve => "true"
 			end
 
 			it "sends confirmation email to admin" do
 				UserMailer.should_receive(:user_registration_approved_to_admin).with(user, admin).and_return(double("UserMailer", :deliver => true))
-				get :approve, id: user, approved: "true"
+				get :approve, id: user, :approve => "true"
 			end
 		end
 
 		context 'Admin denies user registration' do
 			
 			it 'saves denied_at to user table' do
-				get :approve, id: user, approved: "false"
-				expect(user).to receive(:update_attribute) { :denied_at }
+				get :approve, id: user, :approve => "false"
+				expect(user.denied_at).not_to be_nil
+			end
+			
+			it 'saves or clear approved_at to user table' do
+				get :approve, id: user, :approve => "false"
+				expect(user.approved_at).to be_nil
 			end
 
 			it 'assigns an alert flash message' do

@@ -23,8 +23,11 @@ class ApplicationController < ActionController::Base
   end
 
   def check_admin
-    flash[:error] = "You are not allowed to view this page"
-    redirect_to root_path unless current_user.admin?
+    not_admin_actions = proc do
+      flash[:error] = "You are not allowed to view this page"
+      redirect_to root_path
+    end
+    not_admin_actions.call unless current_user.admin?
   end
 
 private
