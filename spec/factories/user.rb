@@ -9,6 +9,7 @@ FactoryGirl.define do
 		password 'securepassword'
 		login_count 0
 		approved_at Time.now.to_date.to_time
+		token 'qksTlGmV2iewGRsIQdhGuw'
 	end
 
 	factory :user2, class: User do
@@ -20,6 +21,7 @@ FactoryGirl.define do
 		firm_id 1
 		password 'securepassword'
 		login_count 0
+		token 'qksTlGmV2iewGRsIQdhGuw'
 	end
 
 	factory :admin, class: User do

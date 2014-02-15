@@ -94,6 +94,12 @@ describe User do
 		expect(user.denied_at).to eq(time)
 	end
 
+	it "has token attribute" do
+		token = user.generate_token
+		user.token = token
+		expect(user.token).to eq(token)
+	end
+
 	describe "#full_name" do
 		let(:user) { create(:user) }
 		it 'returns full name of a user' do
@@ -106,6 +112,19 @@ describe User do
 		
 		it 'increase user.login_count by 1' do
 			expect{user.login_count_increment}.to change{user.login_count}.from(0).to(1)
+		end
+	end
+
+	describe "#generate_token" do
+		
+		it "generates a random string" do
+			expect(user.generate_token.length).to eq(22)	
+		end
+
+		it "generates an unique token" do
+			test_token = SecureRandom.urlsafe_base64(nil, false)
+			# test_user = create(:user2, token: test_token)
+			expect(user.generate_token).not_to eq(test_token)
 		end
 	end
 end

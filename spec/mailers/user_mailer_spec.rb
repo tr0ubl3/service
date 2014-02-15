@@ -70,6 +70,10 @@ describe UserMailer do
 		it 'assigns first and last name' do
 			email.should have_body_text(/#{user.full_name}/)
 		end
+
+		it "should contain a link to the confirmation link" do
+			email.should have_body_text(/#{confirm_account_url(user.token)}/)
+		end
 	end
 
 	describe 'user_registration_denied' do

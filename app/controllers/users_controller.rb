@@ -85,4 +85,8 @@ class UsersController < ApplicationController
       render :new_admin
     end
   end
+
+  def confirm
+    
+  end
 end

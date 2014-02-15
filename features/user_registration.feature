@@ -21,14 +21,15 @@ Scenario: I try to register with invalid data
 	Then I should see the register form again
 	And I should not be registered in application	
 
-Scenario: The registration is confirmed
+Scenario: The registration is confirmed, and user clicks confirmation in email
 	Given I am a guest
 	And I've registered before with "daenarys.targaryen@mail.com"
 	And I'm waiting for account confirmation
 	And I can't login yet into application
 	When I receive the confirmation account email from application
-	Then I shoud be able to login into application with my credentials
-	And I should be able to see the root index with all my firm machines listed
+	Then I click the confirmation link
+	Then I login into application with my credentials
+	And I see the root index with all my firm machines listed
 
 Scenario: The registration is denied
 	Given I was registered and waiting for confirmation

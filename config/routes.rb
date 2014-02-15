@@ -6,8 +6,7 @@ Service::Application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'destroy'
-  # get 'approve_user/:id', to: 'users#approve_user', as: 'approve_user'
-  # get 'approve_user/:id', to: 'users#approve_user', as: 'deny_user'
+  get '/:token', to: 'users#confirm', as: 'confirm_account'
 
   resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
   resources :general do

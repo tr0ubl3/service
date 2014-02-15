@@ -69,7 +69,7 @@ When(/^I receive the confirmation account email from application$/) do
   open_email(@user.email, :with_subject => "Your registration has been approved" )
 end 
 
-Then(/^I shoud be able to login into application with my credentials$/) do
+Then(/^I login into application with my credentials$/) do
   create(:machine_owner, :id => 1)
   @user.update_attributes(:approved_at => Time.now)
   visit "/login"
@@ -78,7 +78,7 @@ Then(/^I shoud be able to login into application with my credentials$/) do
   click_button "Sign in"
 end
 
-Then(/^I should be able to see the root index with all my firm machines listed$/) do
+Then(/^I see the root index with all my firm machines listed$/) do
   @machines = create(:machine)
   current_path.should == "/"
 end
@@ -127,59 +127,6 @@ Then(/^I receive an welcome email$/) do
   open_email(@user.email, :with_subject => "Welcome to International G&T web platform")
 end
 
-Given(/^I am an admin user$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I receive an email to approve a new user registration$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should be able to click a link in mail to approve user registration$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^A confirmation mail should be sent to me$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-
-When(/^I approve a user from control panel$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should receive a confirmation mail$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I denny user registration from control panel$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should provide a reason of why I dennied registration$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should receive a confirmation mail with the reason$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should be able to click a link in mail to denny user registration$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should be redirected to application for entering a reason of denying$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^I should be able to register a new regular user from control panel$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Given(/^I should be able to register another admin user$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
 Given(/^user with mail "(.*?)" exists$/) do |arg1|
   User.stub(:find).and_return(create(:user))
 end
@@ -219,4 +166,8 @@ end
 
 Then(/^I should be logged out$/) do
   current_path.should == '/login'
+end
+
+Then(/^I click the confirmation link$/) do
+  click_first_link_in_email
 end
