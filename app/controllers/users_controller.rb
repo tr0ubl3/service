@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   layout 'user', only: [:new, :create, :login]
-  before_filter :check_auth, except: [:new, :create, :login]
+  before_filter :check_auth, except: [:new, :create, :login, :confirm]
   before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
 
   def new
@@ -87,6 +87,9 @@ class UsersController < ApplicationController
   end
 
   def confirm
-    
-  end
+    @user = User.find_by_token(params[:token])
+    @user.update_attribute(:confirmed, true)
+    redirect_to login_path
+    flash[:notice] = "You successfully confirmed your account, you can now login into application"
+  end 
 end

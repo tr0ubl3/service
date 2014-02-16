@@ -100,6 +100,10 @@ describe User do
 		expect(user.token).to eq(token)
 	end
 
+	it "has confirmed attribute" do
+		expect(user.confirmed).to be_false
+	end
+
 	describe "#full_name" do
 		let(:user) { create(:user) }
 		it 'returns full name of a user' do

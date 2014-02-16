@@ -29,6 +29,7 @@ Scenario: The registration is confirmed, and user clicks confirmation in email
 	When I receive the confirmation account email from application
 	Then I click the confirmation link
 	Then I login into application with my credentials
+	And I receive an welcome email
 	And I see the root index with all my firm machines listed
 
 Scenario: The registration is denied

@@ -508,5 +508,29 @@ describe UsersController do
 				expect(flash[:error]).not_to be_nil
 			end
 		end		
+	end
+
+	describe "GET confirm" do
+		let(:user) { create(:user, :confirmed => false) }
+		before :each do
+			get :confirm, {token: user.token}
+		end
+
+		it "redirects to login page" do
+			expect(response).to redirect_to login_path		
+		end
+
+		it "assigns success flash message" do
+			expect(flash[:notice]).not_to be_nil
+		end
+
+		it "assings @user variable" do
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it "updates the user.confirmed" do
+			user.reload
+			expect(user.confirmed).to be_true
+		end
 	end		
 end
