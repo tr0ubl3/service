@@ -171,3 +171,17 @@ end
 Then(/^I click the confirmation link$/) do
   click_first_link_in_email
 end
+
+Then(/^I try to login with my credentials$/) do
+  @user2 = create(:user)
+  @machine_owner = create(:machine_owner, :id => 1)
+  visit login_path
+  fill_in "login_email", with: @user2.email
+  fill_in "login_password", with: @user2.password
+  click_button "Sign in"
+end
+
+Then(/^I'm not logged into application$/) do
+  current_path.should == login_path
+  expect(page).to have_content("Invalid email or password")
+end

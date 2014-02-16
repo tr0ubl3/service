@@ -120,7 +120,7 @@ describe User do
 	end
 
 	describe "#generate_token" do
-		
+		let(:user2) { build(:user2, token: nil) }
 		it "generates a random string" do
 			expect(user.generate_token.length).to eq(22)	
 		end
@@ -129,6 +129,11 @@ describe User do
 			test_token = SecureRandom.urlsafe_base64(nil, false)
 			# test_user = create(:user2, token: test_token)
 			expect(user.generate_token).not_to eq(test_token)
+		end
+
+		it "saves token field on new user creation" do
+			user2.save && user2.reload
+			expect(user2.token).not_to be_empty
 		end
 	end
 end

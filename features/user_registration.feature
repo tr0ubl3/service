@@ -32,6 +32,15 @@ Scenario: The registration is confirmed, and user clicks confirmation in email
 	And I receive an welcome email
 	And I see the root index with all my firm machines listed
 
+Scenario: The registration is confirmed, and user didn't click on confirmation in email
+	Given I am a guest
+	And I've registered before with "daenarys.targaryen@mail.com"
+	And I'm waiting for account confirmation
+	And I can't login yet into application
+	When I receive the confirmation account email from application
+	Then I try to login with my credentials
+	But I'm not logged into application
+
 Scenario: The registration is denied
 	Given I was registered and waiting for confirmation
 	And Waiting for confirmation of the account

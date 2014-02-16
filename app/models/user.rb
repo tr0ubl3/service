@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
                   :denied_at
   belongs_to :firm
   has_many :service_events
-  
+  before_create :generate_token
+
+
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
   NAME_REGEX = /^\A([A-Z']+-?+[A-Z']+\z)+$/i
 
