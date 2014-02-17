@@ -54,4 +54,13 @@ Scenario: I received a registration invitation
 	And I'm logged into application
 	And I receive an welcome email
 
-Scenario: I receive admin confirmation
+Scenario: User forgot password
+	Given I'm a registered user
+	When I forgot my password
+	Then I go to login page
+	And I click "Forgot your password?"
+	And I enter my email
+	Then I receive an email with a password reset link
+	And I follow the link
+	Then I set a new password
+	And I login into application with my new password

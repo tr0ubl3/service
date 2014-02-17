@@ -1,12 +1,12 @@
 Service::Application.routes.draw do
-  # get "general/index"
-  # resources :events, :except => [:create] do
-  #   post "create" => "events#create", :as => :create, :path => 'new', :on => :collection
-  # end
+  
+  get "users/password_reset"
+
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'destroy'
-  get '/:token', to: 'users#confirm', as: 'confirm_account'
+  get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
+  # get 'password_reset/:token', to: 'users#password_reset', as: 'password_reset'
 
   resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
   resources :general do
@@ -22,6 +22,7 @@ Service::Application.routes.draw do
       post :cp_create
       get :new_admin
       post :create_admin
+      get :password_reset
     end
     member do
       get :approve

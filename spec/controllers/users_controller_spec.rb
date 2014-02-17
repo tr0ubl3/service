@@ -7,7 +7,7 @@ describe UsersController do
 		before :each do
 			User.stub(:new).and_return(user)
 			allow(Firm).to receive(:find) { machine_owner }
-			get :new 
+			get :new
 		end
 		it 'assigns user variable to the view' do
 			expect(assigns[:user]).to eq(user)
@@ -77,7 +77,7 @@ describe UsersController do
 				post :create, user: user, admins: admin
 			end
 		end
-		
+
 		context "when save message return false" do
 			before :each do
 				user.stub(:save).and_return(false)
@@ -119,12 +119,12 @@ describe UsersController do
 				session[:user_id] = user.id
 				allow(User).to receive(:find).and_return(user)
 			end
-			
+
 			it 'sends find message to User class' do
 				expect(User).to receive(:find) { user }
 				get :show, id: user.id
 			end
-			
+
 			it 'assigns user variable to the view' do
 				get :show, id: user.id
 				expect(assigns[:user]).to eq(user)
@@ -140,7 +140,7 @@ describe UsersController do
 	describe 'GET approve' do
 		let!(:user) { create(:user2) }
 		let!(:admin) { create(:admin) }
-		
+
 		before :each do
 			session[:user_id] = admin.id
 			allow(User).to receive(:find) { user }
@@ -197,12 +197,12 @@ describe UsersController do
 		end
 
 		context 'Admin denies user registration' do
-			
+
 			it 'saves denied_at to user table' do
 				get :approve, id: user, :approve => "false"
 				expect(user.denied_at).not_to be_nil
 			end
-			
+
 			it 'saves or clear approved_at to user table' do
 				get :approve, id: user, :approve => "false"
 				expect(user.approved_at).to be_nil
@@ -224,13 +224,13 @@ describe UsersController do
 		let!(:user) { mock_model('User').as_new_record }
 		let!(:admin) { create(:admin) }
 		let!(:machine_owner) { create(:machine_owner) }
-		
+
 		before :each do
 			session[:user_id] = admin.id
 			User.stub(:new).and_return(user)
 			# get :cp_new
 		end
-		
+
 		it 'assigns @user variable' do
 			get :cp_new
 			expect(assigns[:user]).to eq(user)
@@ -279,7 +279,7 @@ describe UsersController do
 			session[:user_id] = admin.id
 			User.stub(:new).and_return(user)
 		end
-		
+
 		it 'sends new message to User class' do
 			User.should_receive(:new).with(params)
 			post :cp_create, user: params
@@ -293,6 +293,11 @@ describe UsersController do
 		it 'has approved_at set' do
 			post :cp_create, user: params
 			expect(user.approved_at).not_to be_nil
+		end
+
+		it "has confirmed set to true" do
+			post :cp_create, user: params
+			expect(user.confirmed).to be_true
 		end
 
 		it 'sends save message to user model' do
@@ -310,7 +315,7 @@ describe UsersController do
 
 		context 'when save message returns true' do
 			let(:new_user) { create(:user) }
-			
+
 			before :each do
 				new_user.stub(:save).and_return(true)
 			end
@@ -336,7 +341,7 @@ describe UsersController do
 				post :cp_create, :user => new_user
 			end
 		end
-		
+
 		context "when save message return false" do
 			let!(:new_user) { create(:user) }
 			let!(:params2) do
@@ -507,7 +512,7 @@ describe UsersController do
 			it 'assigns error flash message' do
 				expect(flash[:error]).not_to be_nil
 			end
-		end		
+		end
 	end
 
 	describe "GET confirm" do
@@ -517,7 +522,7 @@ describe UsersController do
 		end
 
 		it "redirects to login page" do
-			expect(response).to redirect_to login_path		
+			expect(response).to redirect_to login_path
 		end
 
 		it "assigns success flash message" do
@@ -532,5 +537,26 @@ describe UsersController do
 			user.reload
 			expect(user.confirmed).to be_true
 		end
-	end		
+	end
+
+	describe "GET password_reset" do
+		let(:user) { create(:user) }
+		before :each do
+			User.stub(:new).and_return(user).as_new_record
+		end
+		it "assigns @user vairable to the view" do
+			get :password_reset
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it "renders the password_reset template" do
+			get :password_reset	
+			expect(response).to render_template :password_reset
+		end
+
+		it "renders the user layout" do
+			get :password_reset
+			expect(response).to render_template(:layout => 'layouts/user')
+		end
+	end
 end

@@ -229,7 +229,8 @@ Then(/^I see an error flash message$/) do
 end
 
 When(/^I'm a registered user$/) do
-  @machine_owners.destroy
+  @machine_owners.destroy unless @machine_owners == nil
+  @user = create(:user) if @user == nil
   create(:machine_owner, :id => 1)
   visit login_path
   fill_in('login_email', :with => @user.email)

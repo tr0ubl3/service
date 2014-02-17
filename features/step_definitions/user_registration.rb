@@ -98,7 +98,7 @@ Then(/^I received an email with denial reason$/) do
 end
 
 Given(/^I don't know about web application$/) do
-  @user = create(:user2, :approved_at => Time.now)
+  @user = create(:user2, approved_at: Time.now, confirmed: true)
   @machine_owner = create(:machine_owner, :id => 1)
 end
 
@@ -119,7 +119,6 @@ Then(/^I enter credentials from email$/) do
 end
 
 Then(/^I'm logged into application$/) do
-  # expect(page.get_rack_session_key('user_id')).to eq(@user.id)
   expect(page).to have_content("Logged in as #{@user.full_name}")
 end
 
@@ -173,7 +172,7 @@ Then(/^I click the confirmation link$/) do
 end
 
 Then(/^I try to login with my credentials$/) do
-  @user2 = create(:user)
+  @user2 = create(:user, confirmed: false)
   @machine_owner = create(:machine_owner, :id => 1)
   visit login_path
   fill_in "login_email", with: @user2.email
@@ -184,4 +183,21 @@ end
 Then(/^I'm not logged into application$/) do
   current_path.should == login_path
   expect(page).to have_content("Invalid email or password")
+end
+
+When(/^I forgot my password$/) do
+end
+
+Then(/^I go to login page$/) do
+  visit login_path
+end
+
+Then(/^I click "(.*?)"$/) do |link|
+  click_link link
+end
+
+Then(/^I enter my email$/) do
+  current_path.should == password_reset_users_path
+  fill_in "user_email", with: @user.email
+  click_button "Send"
 end

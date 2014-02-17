@@ -21,4 +21,12 @@ describe 'sessions/new.html.erb' do
 	it 'has submit button' do
 		expect(rendered).to have_selector("input[type='submit']")
 	end
+
+	it "has 'Create an account ...' link" do
+		expect(rendered).to have_link("Create an account ...", href: signup_path)
+	end
+
+	it "has 'Forgot your password?' link" do
+		expect(rendered).to have_link("Forgot your password?", href: password_reset_users_path)
+	end
 end

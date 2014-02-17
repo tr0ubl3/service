@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  layout 'user', only: [:new, :create, :login]
-  before_filter :check_auth, except: [:new, :create, :login, :confirm]
+  layout 'user', only: [:new, :create, :login, :password_reset]
+  before_filter :check_auth, except: [:new, :create, :login, :confirm, :password_reset]
   before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
 
   def new
@@ -55,6 +55,7 @@ class UsersController < ApplicationController
     @machine_owners = MachineOwner.all
     @user.password = rand(36**8).to_s(36)
     @user.approved_at = Time.now
+    @user.confirmed = true
     if @user.save
       redirect_to manage_users_path, notice: "You successfully created user #{@user.full_name}"
       UserMailer.invitation(@user).deliver
@@ -91,5 +92,9 @@ class UsersController < ApplicationController
     @user.update_attribute(:confirmed, true)
     redirect_to login_path
     flash[:notice] = "You successfully confirmed your account, you can now login into application"
+  end
+
+  def password_reset
+    @user = User.new
   end 
 end
