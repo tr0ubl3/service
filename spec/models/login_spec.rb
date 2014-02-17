@@ -1,29 +1,38 @@
 require 'spec_helper'
 
 describe Login do
-	describe "#authenticate" do
+	describe "#conditional_authentication" do
+		let!(:user) { create(:user, confirmed: false) }
+
 		before :each do
-			@user = create(:user)
+			@login = Login.new(email: user.email, password: user.password)
 		end
-		it 'return user id if credentials are valid' do
-			login = Login.new(email: 'bud.spencer@mail.com', password: 'securepassword')
-			expect(login.conditional_authentication).to eq(1)
+
+		it 'return user_id if credentials are valid' do
+			expect(@login.conditional_authentication).to eq(1)
 		end
+
 		it 'return nil if email is not valid' do
-			login = Login.new(email: 'test@mail.com', password: 'securepassword')
-			expect(login.conditional_authentication).to eq(nil)
+			@login2 = Login.new(email: "email@email.com", password: "testpassword")
+			expect(@login2.conditional_authentication).to be_nil
 		end
+
 		it 'returns nil if password is not valid' do
-			login = Login.new(email: 'bud.spencer@mail.com', password: 'secure')
-			expect(login.conditional_authentication).to eq(nil)
+			@login2 = Login.new(email: user.email, password: "testpassword2")
+			expect(@login2.conditional_authentication).to be_nil
 		end
+
 		it 'returns nil when user registration is not approved' do
-			@user.approved_at = nil
-			@user.save
-			login = Login.new(email: 'bud.spencer@mail.com', password: 'securepassword')
-			expect(login.conditional_authentication).to eq(nil)
+			user.update_attribute(:approved_at, nil) && user.reload
+			new_login = Login.new(email: user.email, password: user.password)
+			expect(new_login.conditional_authentication).to be_nil
+		end
+
+		it "returns nil when user has not confirmed the email" do
+			expect(@login.conditional_authentication).to be_nil
 		end
 	end
+	
 	context "attributes" do
 		let(:login) {Login.new}
 

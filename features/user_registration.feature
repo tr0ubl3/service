@@ -32,7 +32,7 @@ Scenario: The registration is confirmed, and user clicks confirmation in email
 	And I receive an welcome email
 	And I see the root index with all my firm machines listed
 
-Scenario: The registration is confirmed, and user didn't click on confirmation in email
+Scenario: The registration is confirmed, but user didn't click on confirmation link in email
 	Given I am a guest
 	And I've registered before with "daenarys.targaryen@mail.com"
 	And I'm waiting for account confirmation

@@ -5,7 +5,7 @@ class Login
 
 	def conditional_authentication
 		user = User.find_by_email(email)
-		if user && user.authenticate(password) && check_approval(user)
+		if user && user.authenticate(password) && check_approval(user) && user.confirmed
 			user.id 
 		else
 			nil
