@@ -94,14 +94,20 @@ describe User do
 		expect(user.denied_at).to eq(time)
 	end
 
-	it "has token attribute" do
-		token = user.generate_token
-		user.token = token
-		expect(user.token).to eq(token)
+	it "has auth_token attribute" do
+		token = user.generate_token(:auth_token)
+		user.auth_token = token
+		expect(user.auth_token).to eq(token)
 	end
 
 	it "has confirmed attribute" do
 		expect(user.confirmed).to be_false
+	end
+
+	it "has password_reset_token field" do
+		new_user = create(:user, password_reset_token: nil)
+		new_user.update_attribute(:password_reset_token, new_user.generate_token(:password_reset_token))
+		expect(new_user.password_reset_token).not_to be_nil
 	end
 
 	describe "#full_name" do
@@ -119,21 +125,22 @@ describe User do
 		end
 	end
 
-	describe "#generate_token" do
-		let(:user2) { build(:user2, token: nil) }
+	describe "#generate_token(column)" do
+		let(:user2) { build(:user2) }
+
 		it "generates a random string" do
-			expect(user.generate_token.length).to eq(22)	
+			expect(user.generate_token(:auth_token).length).to eq(22)	
 		end
 
 		it "generates an unique token" do
 			test_token = SecureRandom.urlsafe_base64(nil, false)
 			# test_user = create(:user2, token: test_token)
-			expect(user.generate_token).not_to eq(test_token)
+			expect(user.generate_token(:auth_token)).not_to eq(test_token)
 		end
 
-		it "saves token field on new user creation" do
-			user2.save && user2.reload
-			expect(user2.token).not_to be_empty
+		it "saves auth_token field on new user creation" do
+			user2.save! && user2.reload
+			expect(user2.auth_token).not_to be_empty
 		end
 	end
 end

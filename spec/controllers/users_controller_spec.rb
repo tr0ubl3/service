@@ -539,24 +539,71 @@ describe UsersController do
 		end
 	end
 
-	describe "GET password_reset" do
-		let(:user) { create(:user) }
+	describe "GET new_password_reset" do
 		before :each do
-			User.stub(:new).and_return(user).as_new_record
-		end
-		it "assigns @user vairable to the view" do
-			get :password_reset
-			expect(assigns[:user]).to eq(user)
+			get :new_password_reset
 		end
 
-		it "renders the password_reset template" do
-			get :password_reset	
-			expect(response).to render_template :password_reset
+		it "renders the new_password_reset template" do
+			expect(response).to render_template :new_password_reset
 		end
 
 		it "renders the user layout" do
-			get :password_reset
 			expect(response).to render_template(:layout => 'layouts/user')
+		end
+	end
+
+	describe "POST create_password_reset" do
+		let(:user) { create(:user, password_reset_token: nil) }
+		
+		before :each do
+		end
+		
+		it "assigns user variable searching by email" do
+			post :create_password_reset, email: user.email
+			expect(assigns[:user]).to eq(user)
+		end
+
+		context "@user exists" do
+			it "saves user.password_reset_token" do
+				post :create_password_reset, email: user.email
+				user.reload
+				expect(user.password_reset_token).not_to be_nil
+			end
+
+			it "sends instruction email to user" do
+				UserMailer.should_receive(:password_reset_instructions).with(user).and_return(double(UserMailer, :deliver => true))
+				post :create_password_reset, email: user.email
+			end
+
+			it "redirects to login_path" do
+				post :create_password_reset, email: user.email
+				expect(response).to redirect_to login_path
+			end
+
+			it "assigns flash message 'Email sent with password reset instructions.'" do
+				post :create_password_reset, email: user.email
+				expect(flash[:notice]).to eq('Email sent with password reset instructions.')
+			end
+		end
+	end
+	
+	describe "GET edit_password_reset" do
+		let!(:user) { create(:user) }
+		before :each do
+			get :edit_password_reset, token: user.password_reset_token 
+		end
+
+		it "the edit_password_reset page" do
+			expect(response).to render_template :edit_password_reset
+		end
+
+		it "renders with user layeout" do
+			expect(response).to render_template(:layout => 'layouts/user')
+		end
+
+		it "assigns @user variable to the view" do
+			expect(assigns[:user]).to eq(user)
 		end
 	end
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  layout 'user', only: [:new, :create, :login, :password_reset]
-  before_filter :check_auth, except: [:new, :create, :login, :confirm, :password_reset]
+  layout 'user', only: [:new, :create, :login, :new_password_reset, :edit_password_reset]
+  before_filter :check_auth, except: [:new, :create, :login, :confirm, :new_password_reset, :create_password_reset, :edit_password_reset]
   before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
 
   def new
@@ -94,7 +94,21 @@ class UsersController < ApplicationController
     flash[:notice] = "You successfully confirmed your account, you can now login into application"
   end
 
-  def password_reset
-    @user = User.new
+  def new_password_reset
+    
+  end
+
+  def create_password_reset
+    @user = User.find_by_email(params[:email])
+    actions = proc do
+      @user.update_attribute(:password_reset_token, @user.generate_token(:password_reset_token))
+      UserMailer.password_reset_instructions(@user).deliver
+      redirect_to login_path, :notice => "Email sent with password reset instructions."
+    end
+    actions.call if @user #else redirect_to :back
+  end
+
+  def edit_password_reset
+    @user = User.find_by_password_reset_token(params[:token])   
   end 
 end

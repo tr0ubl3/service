@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
                   :denied_at
   belongs_to :firm
   has_many :service_events
-  before_create :generate_token
+  before_create { generate_token(:auth_token) }
 
 
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
@@ -36,10 +36,10 @@ class User < ActiveRecord::Base
       self.increment!(:login_count)
   end
 
-  def generate_token
-    self.token = loop do
+  def generate_token(column)
+    self[column] = loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless User.exists?(token: random_token)
+      break random_token unless User.exists?(column => random_token)
     end
   end
 end

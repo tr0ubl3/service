@@ -225,5 +225,26 @@ describe UserMailer do
 		it 'assigns user.full_name' do
 			email.should have_body_text(/#{user.full_name}/)
 		end
-	end 
+	end
+
+	describe "password_reset_instructions" do
+		let!(:user) { create(:user) }
+		let(:email) { UserMailer.password_reset_instructions(user) }
+		
+		it "renders the subject" do
+			email.subject.should == "Password reset instructions" 		
+	 	end
+
+	 	it "renders the receiver email" do
+	 		email.should deliver_to(user.email)
+	 	end
+
+	 	it "renders the sender email" do
+			email.should deliver_from('noreply@service.com')
+		end
+
+		it 'assigns user.full_name' do
+			email.should have_body_text(/#{edit_password_reset_users_url(user.password_reset_token)}/)
+		end	 	
+	end
 end

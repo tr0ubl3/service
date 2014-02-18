@@ -59,4 +59,9 @@ class UserMailer < ActionMailer::Base
     @admin = admin
     mail(to: @admin.email, :subject => "You successfully registered new admin user #{@new_admin.full_name}")
   end
+
+  def password_reset_instructions(user)
+    @user = user
+    mail(to: @user.email, :subject => "Password reset instructions")
+  end
 end

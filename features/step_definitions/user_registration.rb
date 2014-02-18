@@ -197,7 +197,30 @@ Then(/^I click "(.*?)"$/) do |link|
 end
 
 Then(/^I enter my email$/) do
-  current_path.should == password_reset_users_path
-  fill_in "user_email", with: @user.email
-  click_button "Send"
+  current_path.should == new_password_reset_users_path
+  fill_in "email", with: @user.email
+  click_button "Reset Password"
+end
+
+Then(/^I receive an email with a password reset link$/) do
+  open_email(@user.email, :with_subject => "Password reset instructions")
+end
+
+Then(/^I follow the link$/) do
+  click_first_link_in_email
+end
+
+Then(/^I set a new password$/) do
+  current_path.should == edit_password_reset_users_path(@user.reload.password_reset_token)
+  fill_in "user_password", with: "securepassword2"
+  fill_in "user_password_confirmation", with: "securepassword2"
+  click_button "Save"
+end
+
+Then(/^I login into application with my new password$/) do
+  current_path.should == login_path
+  fill_in "login_email", with: @user.email
+  fill_in "login_password", with: "securepassword2"
+  click_button "Sign in"
+  current_path.should == root_path
 end

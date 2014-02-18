@@ -1,12 +1,11 @@
 Service::Application.routes.draw do
   
-  get "users/password_reset"
-
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'destroy'
   get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
   # get 'password_reset/:token', to: 'users#password_reset', as: 'password_reset'
+  # get "users/password_reset"
 
   resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
   resources :general do
@@ -22,7 +21,9 @@ Service::Application.routes.draw do
       post :cp_create
       get :new_admin
       post :create_admin
-      get :password_reset
+      get :new_password_reset
+      post :create_password_reset
+      get :edit_password_reset, path: 'edit_password_reset/:token'
     end
     member do
       get :approve

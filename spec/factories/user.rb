@@ -9,8 +9,9 @@ FactoryGirl.define do
 		password 'securepassword'
 		login_count 0
 		approved_at Time.now.to_date.to_time
-		token 'qksTlGmV2iewGRsIQdhG_1'
+		auth_token nil
 		confirmed true
+		password_reset_token "KEL8tw01cIvD9pLmJ7BA_1"
 	end
 
 	factory :user2, class: User do
@@ -22,8 +23,9 @@ FactoryGirl.define do
 		firm_id 1
 		password 'securepassword'
 		login_count 0
-		token 'qksTlGmV2iewGRsIQdhG_2'
+		auth_token nil
 		confirmed false
+		password_reset_token "KEL8tw01cIvD9pLmJ7BA_2"
 	end
 
 	factory :admin, class: User do
@@ -35,8 +37,9 @@ FactoryGirl.define do
 		firm_id 3
 		password "securepassword"
 		approved_at Time.now
-		token 'qksTlGmV2iewGRsIQdhG_3'
+		auth_token nil
 		confirmed true
+		password_reset_token "KEL8tw01cIvD9pLmJ7BA_3"
 	end
 
 	factory :admin_2, class: User do
@@ -48,7 +51,8 @@ FactoryGirl.define do
 		firm_id 3
 		password "securepassword"
 		approved_at Time.now
-		token 'qksTlGmV2iewGRsIQdhG_4'
+		auth_token nil
 		confirmed true
+		password_reset_token "KEL8tw01cIvD9pLmJ7BA_4"
 	end
 end

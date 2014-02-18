@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/password_reset.html.erb" do
+describe "users/new_password_reset.html.erb" do
   before :each do
   	render
   end

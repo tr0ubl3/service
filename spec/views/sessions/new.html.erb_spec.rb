@@ -27,6 +27,6 @@ describe 'sessions/new.html.erb' do
 	end
 
 	it "has 'Forgot your password?' link" do
-		expect(rendered).to have_link("Forgot your password?", href: password_reset_users_path)
+		expect(rendered).to have_link("Forgot your password?", href: new_password_reset_users_path)
 	end
 end
