@@ -185,6 +185,11 @@ Then(/^I'm not logged into application$/) do
   expect(page).to have_content("Invalid email or password")
 end
 
+Given(/^I'm a registered and approved user$/) do
+  @user = create(:user, password_reset_token: nil)
+  create(:machine_owner, :id => 1)
+end
+
 When(/^I forgot my password$/) do
 end
 
@@ -212,15 +217,15 @@ end
 
 Then(/^I set a new password$/) do
   current_path.should == edit_password_reset_users_path(@user.reload.password_reset_token)
-  fill_in "user_password", with: "securepassword2"
-  fill_in "user_password_confirmation", with: "securepassword2"
+  fill_in "user_password", with: "securepassword11"
+  fill_in "user_password_confirmation", with: "securepassword11"
   click_button "Save"
 end
 
 Then(/^I login into application with my new password$/) do
   current_path.should == login_path
   fill_in "login_email", with: @user.email
-  fill_in "login_password", with: "securepassword2"
+  fill_in "login_password", with: "securepassword11"
   click_button "Sign in"
   current_path.should == root_path
 end

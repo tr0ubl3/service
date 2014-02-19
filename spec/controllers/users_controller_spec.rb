@@ -518,7 +518,7 @@ describe UsersController do
 	describe "GET confirm" do
 		let(:user) { create(:user, :confirmed => false) }
 		before :each do
-			get :confirm, {token: user.token}
+			get :confirm, {token: user.auth_token}
 		end
 
 		it "redirects to login page" do
@@ -598,12 +598,40 @@ describe UsersController do
 			expect(response).to render_template :edit_password_reset
 		end
 
-		it "renders with user layeout" do
+		it "renders with user layout" do
 			expect(response).to render_template(:layout => 'layouts/user')
 		end
 
 		it "assigns @user variable to the view" do
 			expect(assigns[:user]).to eq(user)
+		end
+	end
+
+	describe "PUT save_password_reset" do
+		let!(:user) { create(:user) }
+		before :each do
+			post :save_password_reset, token: user.password_reset_token
+		end
+
+		it "assigns @user variable to the view" do
+			expect(assigns[:user]).to eq(user)
+		end
+
+		context "it saves user password to db" do
+			before :each do
+				user.stub(:update_attributes).and_return(true)
+				user.password = 'securepassword2'
+				user.password_confirmation = 'securepassword2'
+				post :save_password_reset, token: user.password_reset_token, 
+					 user: { :password => 'securepass5', :password_confirmation => 'securepass5'}
+			end
+			it "redirects to login page" do
+				expect(response).to redirect_to login_path	
+			end
+
+			it "displays a flash message" do
+				expect(flash[:notice]).not_to be_nil
+			end
 		end
 	end
 end

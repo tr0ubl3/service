@@ -55,7 +55,7 @@ Scenario: I received a registration invitation
 	And I receive an welcome email
 
 Scenario: User forgot password
-	Given I'm a registered user
+	Given I'm a registered and approved user
 	When I forgot my password
 	Then I go to login page
 	And I click "Forgot your password?"

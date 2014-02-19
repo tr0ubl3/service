@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
-  layout 'user', only: [:new, :create, :login, :new_password_reset, :edit_password_reset]
-  before_filter :check_auth, except: [:new, :create, :login, :confirm, :new_password_reset, :create_password_reset, :edit_password_reset]
-  before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, :create_admin]
+  layout 'user', only: [:new, :create, :login, :new_password_reset,
+                        :edit_password_reset]
+  before_filter :check_auth, except: [:new, :create, :login, :confirm,
+                                      :new_password_reset, :create_password_reset,
+                                      :edit_password_reset, :save_password_reset]
+  before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, 
+                                     :create_admin]
 
   def new
     @user = User.new
@@ -88,7 +92,7 @@ class UsersController < ApplicationController
   end
 
   def confirm
-    @user = User.find_by_token(params[:token])
+    @user = User.find_by_auth_token(params[:token])
     @user.update_attribute(:confirmed, true)
     redirect_to login_path
     flash[:notice] = "You successfully confirmed your account, you can now login into application"
@@ -110,5 +114,15 @@ class UsersController < ApplicationController
 
   def edit_password_reset
     @user = User.find_by_password_reset_token(params[:token])   
+  end
+
+  def save_password_reset
+    @user = User.find_by_password_reset_token(params[:token])
+    if @user.update_attributes(params[:user])
+      redirect_to login_path
+      flash[:notice] = "Your password has been reseted, you can login with new credentials"
+    else
+      render nothing: true 
+    end
   end 
 end
