@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
-  layout 'user', only: [:new, :create, :login, :new_password_reset,
-                        :edit_password_reset]
+  layout 'user', only: [:new, :create, :login, :new_password_reset, 
+                        :create_password_reset, :edit_password_reset,
+                        :save_password_reset]
   before_filter :check_auth, except: [:new, :create, :login, :confirm,
                                       :new_password_reset, :create_password_reset,
                                       :edit_password_reset, :save_password_reset]
@@ -104,16 +105,30 @@ class UsersController < ApplicationController
 
   def create_password_reset
     @user = User.find_by_email(params[:email])
-    actions = proc do
+    
+    if @user
       @user.update_attribute(:password_reset_token, @user.generate_token(:password_reset_token))
       UserMailer.password_reset_instructions(@user).deliver
       redirect_to login_path, :notice => "Email sent with password reset instructions."
+    else
+      flash.now[:error] = "Entered email was not found!"
+      render :new_password_reset
     end
-    actions.call if @user #else redirect_to :back
   end
 
   def edit_password_reset
-    @user = User.find_by_password_reset_token(params[:token])   
+    check_user = User.find_by_password_reset_token(params[:token])
+    if check_user != nil
+      if check_user.password_reset_sent_at < 2.hours.ago
+        redirect_to new_password_reset_users_path
+        flash[:alert] = 'Password reset link has expired'
+      else
+        @user = check_user
+      end
+    else
+      flash[:error] = "Oops, url not valid!"
+      redirect_to login_path
+    end
   end
 
   def save_password_reset
@@ -122,7 +137,8 @@ class UsersController < ApplicationController
       redirect_to login_path
       flash[:notice] = "Your password has been reseted, you can login with new credentials"
     else
-      render nothing: true 
+      flash[:error] = 'Please correct form errors!'
+      render :edit_password_reset
     end
   end 
 end

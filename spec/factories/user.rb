@@ -12,6 +12,7 @@ FactoryGirl.define do
 		auth_token nil
 		confirmed true
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_1"
+		password_reset_sent_at Time.now
 	end
 
 	factory :user2, class: User do
@@ -26,6 +27,7 @@ FactoryGirl.define do
 		auth_token nil
 		confirmed false
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_2"
+		password_reset_sent_at Time.now
 	end
 
 	factory :admin, class: User do
@@ -40,6 +42,7 @@ FactoryGirl.define do
 		auth_token nil
 		confirmed true
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_3"
+		password_reset_sent_at Time.now
 	end
 
 	factory :admin_2, class: User do
@@ -54,5 +57,6 @@ FactoryGirl.define do
 		auth_token nil
 		confirmed true
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_4"
+		password_reset_sent_at Time.now
 	end
 end

@@ -64,3 +64,42 @@ Scenario: User forgot password
 	And I follow the link
 	Then I set a new password
 	And I login into application with my new password
+
+Scenario: User forgot password, and email is filled wrong
+	Given I'm a registered and approved user
+	When I forgot my password
+	Then I go to login page
+	And I click "Forgot your password?"
+	But I enter a wrong email
+	And I see the form again with a flash message
+
+Scenario: User forgot password, but he copy and paste the link wrong from email
+	Given I'm a registered and approved user
+	When I forgot my password
+	Then I go to login page
+	And I click "Forgot your password?"
+	And I enter my email
+	Then I receive an email with a password reset link
+	But I copy and paste wrong the link from email
+	Then I see the login page with a warning flash message
+
+Scenario: User forgot password, but reset password is not valid
+	Given I'm a registered and approved user
+	When I forgot my password
+	Then I go to login page
+	And I click "Forgot your password?"
+	And I enter my email
+	Then I receive an email with a password reset link
+	And I follow the link
+	Then I fill the new password form with invalid date
+	And I see the new password form again
+
+Scenario: User forgot password, but accessed password reset link from mail too late
+	Given I'm a registered and approved user
+	When I forgot my password
+	Then I go to login page
+	And I click "Forgot your password?"
+	And I enter my email
+	Then I receive an email with a password reset link
+	And I follow the link after three hours
+	Then I'm on login page with a warning flash message

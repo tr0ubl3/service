@@ -586,24 +586,73 @@ describe UsersController do
 				expect(flash[:notice]).to eq('Email sent with password reset instructions.')
 			end
 		end
+
+		context "@user does not exist" do
+			before :each do
+				post :create_password_reset, email: "nil@mail.com" 					
+			end
+
+			it "renders the form again" do
+				expect(response).to render_template :new_password_reset
+			end
+
+			it "shows an error flash message" do
+				expect(flash.now[:error]).not_to be_nil
+			end
+
+			it "renders the user layout" do
+				expect(response).to render_template(:layout => 'layouts/user')
+			end
+		end
 	end
 	
 	describe "GET edit_password_reset" do
 		let!(:user) { create(:user) }
-		before :each do
-			get :edit_password_reset, token: user.password_reset_token 
+		context "password_reset_token is valid" do
+			before :each do
+				get :edit_password_reset, token: user.password_reset_token 
+			end
+
+			it "renders the edit_password_reset page" do
+				expect(response).to render_template :edit_password_reset
+			end
+
+			it "renders with user layout" do
+				expect(response).to render_template(:layout => 'layouts/user')
+			end
+
+			it "assigns @user variable to the view" do
+				expect(assigns[:user]).to eq(user)
+			end
 		end
 
-		it "the edit_password_reset page" do
-			expect(response).to render_template :edit_password_reset
+		context "password_reset_token is invalid" do
+			before :each do
+				get :edit_password_reset, token: '123123123123123'
+			end
+
+			it "redirects to login_path when token is invalid" do
+				expect(response).to redirect_to login_path
+			end
+
+			it "shows an error flash message" do
+				expect(flash[:error]).not_to be_nil
+			end
 		end
 
-		it "renders with user layout" do
-			expect(response).to render_template(:layout => 'layouts/user')
-		end
+		context "password_reset_token is older that 2 hours" do
+			before :each do
+				user.update_attribute(:password_reset_sent_at, Time.now - 3.hours)
+				get :edit_password_reset, token: user.password_reset_token
+			end
 
-		it "assigns @user variable to the view" do
-			expect(assigns[:user]).to eq(user)
+			it "redirects to new_password_reset path" do
+				expect(response).to redirect_to new_password_reset_users_path
+			end
+
+			it "assigns an error flash message" do
+				expect(flash[:alert]).not_to be_nil
+			end
 		end
 	end
 
@@ -631,6 +680,30 @@ describe UsersController do
 
 			it "displays a flash message" do
 				expect(flash[:notice]).not_to be_nil
+			end
+		end
+
+		context "form has invalid data" do
+			before :each do
+				user.stub(:update_attributes).and_return(false)
+				post :save_password_reset, token: user.password_reset_token, 
+					 user: { :password => '', :password_confirmation => ''}
+			end
+
+			it "renders the form again" do
+				expect(response).to render_template :edit_password_reset
+			end
+
+			it "displays a flash message" do
+				expect(flash.now[:error]).not_to be_nil
+			end
+
+			it "renders with user template layout" do
+				expect(response).to render_template(:layout => 'layouts/user')
+			end
+
+			it "password errors are assigned" do
+				expect(user.errors).not_to be_nil
 			end
 		end
 	end

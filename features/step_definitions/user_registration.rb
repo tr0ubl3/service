@@ -229,3 +229,45 @@ Then(/^I login into application with my new password$/) do
   click_button "Sign in"
   current_path.should == root_path
 end
+
+Then(/^I enter a wrong email$/) do
+  click_button "Reset Password"
+end
+
+Then(/^I see the form again with a flash message$/) do
+  current_path.should == create_password_reset_users_path
+  expect(page).to have_content("Entered email was not found!")
+end
+
+Then(/^I copy and paste wrong the link from email$/) do
+  @user.password_reset_token = '12312313123123'
+  visit edit_password_reset_users_path(@user.password_reset_token)
+end
+
+Then(/^I see the login page with a warning flash message$/) do
+  current_path.should == login_path
+  expect(page).to have_content("Oops, url not valid!")
+end
+
+Then(/^I fill the new password form with invalid date$/) do
+  current_path.should == edit_password_reset_users_path(@user.reload.password_reset_token)
+  fill_in "user_password", with: ""
+  fill_in "user_password_confirmation", with: ""
+  click_button "Save"
+end
+
+Then(/^I see the new password form again$/) do
+  current_path.should == save_password_reset_users_path(@user.password_reset_token)
+  expect(page).to have_selector("form#reset_password")
+  expect(page).to have_content("Please correct form errors!")
+end
+
+Then(/^I follow the link after three hours$/) do
+  @user.update_attribute(:password_reset_sent_at, Time.now - 3.hours)
+  click_first_link_in_email
+end
+
+Then(/^I'm on login page with a warning flash message$/) do
+  current_path.should == new_password_reset_users_path
+  expect(page).to have_content("Password reset link has expired")
+end

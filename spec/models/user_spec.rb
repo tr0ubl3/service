@@ -104,10 +104,16 @@ describe User do
 		expect(user.confirmed).to be_false
 	end
 
-	it "has password_reset_token field" do
+	it "has password_reset_token attribute" do
 		new_user = create(:user, password_reset_token: nil)
 		new_user.update_attribute(:password_reset_token, new_user.generate_token(:password_reset_token))
 		expect(new_user.password_reset_token).not_to be_nil
+	end
+
+	it "has password_reset_sent_at attribute" do
+		time = Time.now
+		user.password_reset_sent_at = time
+		expect(user.password_reset_sent_at).to eq(time)
 	end
 
 	describe "#full_name" do
