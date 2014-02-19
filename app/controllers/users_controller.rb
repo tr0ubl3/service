@@ -105,13 +105,13 @@ class UsersController < ApplicationController
 
   def create_password_reset
     @user = User.find_by_email(params[:email])
-    
     if @user
       @user.update_attribute(:password_reset_token, @user.generate_token(:password_reset_token))
+      @user.update_attribute(:password_reset_sent_at, Time.now)
       UserMailer.password_reset_instructions(@user).deliver
       redirect_to login_path, :notice => "Email sent with password reset instructions."
     else
-      flash.now[:error] = "Entered email was not found!"
+      flash.now[:alert] = "Entered email was not found!"
       render :new_password_reset
     end
   end

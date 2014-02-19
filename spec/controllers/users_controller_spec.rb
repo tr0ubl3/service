@@ -554,10 +554,7 @@ describe UsersController do
 	end
 
 	describe "POST create_password_reset" do
-		let(:user) { create(:user, password_reset_token: nil) }
-		
-		before :each do
-		end
+		let(:user) { create(:user, password_reset_token: nil, password_reset_sent_at: nil) }
 		
 		it "assigns user variable searching by email" do
 			post :create_password_reset, email: user.email
@@ -569,6 +566,12 @@ describe UsersController do
 				post :create_password_reset, email: user.email
 				user.reload
 				expect(user.password_reset_token).not_to be_nil
+			end
+
+			it "saves user.password_reset_sent_at" do
+				post :create_password_reset, email: user.email
+				user.reload
+				expect(user.password_reset_sent_at).not_to be_nil
 			end
 
 			it "sends instruction email to user" do
@@ -597,7 +600,7 @@ describe UsersController do
 			end
 
 			it "shows an error flash message" do
-				expect(flash.now[:error]).not_to be_nil
+				expect(flash.now[:alert]).not_to be_nil
 			end
 
 			it "renders the user layout" do

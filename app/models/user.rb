@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # attr_accessor :password, :password_confirmation
   attr_accessible :email, :firm_id, :first_name, :last_name,
                   :phone_number, :admin, :password, :password_confirmation, :approved_at,
-                  :denied_at
+                  :denied_at, :password_reset_token, :password_reset_sent_at
   belongs_to :firm
   has_many :service_events
   before_create { generate_token(:auth_token) }
