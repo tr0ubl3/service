@@ -61,5 +61,6 @@ module Service
     config.assets.initialize_on_precompile = false
     config.filter_parameters += [:password, :password_confirmation]
     config.i18n.enforce_available_locales = true
+    # config.force_ssl = true
   end
 end

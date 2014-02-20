@@ -1,11 +1,11 @@
 Feature: User registration
 	Regular user registration
 		In order for a regular user to be registered there are two ways to do it:
-			1. He has to go to the sign up page and choose his working firm, fill in first and last name, phone number, email and password. After registration a confirmation email is sent to admins for approval. After the regular user registration is approved he can login and work with the application.
+			1. He has to go to the sign up page and choose his working firm, fill in first and last name, phone number, email and password. After registration a confirmation email is sent to admins for approval. After the regular user registration is approved, he has to confirm his email and he can login and work with the application.
 			2. The user is registered by an existing admin user using the control panel from the application
 	Admin user registration	
 		A new admin user can be registered only by another existing admin user through control panel from the application.
-		It's important that only admin users can create another users.
+		It's important that only admin users can create another admin users.
 
 Scenario: Successfully registering through web form application
 	Given I am a guest
