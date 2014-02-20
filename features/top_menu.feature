@@ -19,5 +19,5 @@ Feature: Top menu
 		Given I am an admin user
 		And I'm logged in
 		When I am on home page
-		Then I see "John Snow" menu
+		Then I see "Jon Snow" menu
 		And I see also notification bullets

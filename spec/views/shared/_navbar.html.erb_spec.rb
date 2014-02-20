@@ -36,7 +36,7 @@ describe 'shared/_navbar.html.erb' do
 	end
 
 	it "has ul>li>a with text 'Account settings'" do
-		expect(rendered).to have_link('Account settings', href: '#')
+		expect(rendered).to have_link('Account settings', href: edit_user_path(@user))
 	end
 
 	it "has ul>li>a'Account settings'>i" do
@@ -44,10 +44,23 @@ describe 'shared/_navbar.html.erb' do
 	end
 
 	it "has ul>li>a with text 'Logout'" do
-		expect(rendered).to have_link('Logout', href: '#')
+		expect(rendered).to have_link('Logout', href: logout_path)
 	end
 
 	it "has ul>li>a>i.icon-off" do
 		expect(rendered).to have_selector('i.icon-off')
+	end
+
+	context "admin user" do
+		before do
+			@user.destroy
+			@admin = create(:admin)
+			view.stub(:current_user).and_return(@admin)
+			render
+		end
+
+		it "has control panel link in menu" do
+			expect(rendered).to have_link("Control panel", href: control_panel_general_index_path)
+		end
 	end
 end

@@ -140,5 +140,9 @@ class UsersController < ApplicationController
       flash[:error] = 'Please correct form errors!'
       render :edit_password_reset
     end
+  end
+
+  def edit
+     
   end 
 end
