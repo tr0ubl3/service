@@ -7,16 +7,7 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <%= link_to "Service", root_path, :class => "brand brand-custom" %>
-          <div class="nav-collapse collapse">
-            <%= top_right_menu %>
-          </div>
-        </div>
-      </div>
-    </div>
+  <%= render "shared/navbar" %>
 		<!-- <div class="container margin-top-container"> -->
 		  <% flash.each do |type, message| %>
 		  	<div class="alert <%= flash_class type %>">

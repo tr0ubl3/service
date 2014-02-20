@@ -10,17 +10,17 @@ module ApplicationHelper
 		end
 	end
 
-	def top_right_menu
-		content_tag(:div, class: "dropdown pull-right navbar-text")	do
-			if current_user
-				admin_notifications +
-				raw("Logged in as #{link_top_right_menu(current_user)}") +
-				dropdown_menu
-			else
-				link_to "Register", signup_path
-			end
-		end
-	end
+	# def top_right_menu
+	# 	content_tag(:div, class: "dropdown pull-right navbar-text")	do
+	# 		if current_user
+	# 			admin_notifications +
+	# 			raw("Logged in as #{link_top_right_menu(current_user)}") +
+	# 			dropdown_menu
+	# 		else
+	# 			link_to "Register", signup_path
+	# 		end
+	# 	end
+	# end
 
 	def admin_notifications
 		if pending_users > 0 && admin?

@@ -1,7 +1,7 @@
 Feature: Top menu
 	
 	Top menu is available only to logged in users.
-	Registered users see Service (link to home), Account link and Logout link.
+	Registered users see Service (link to home), Account settings link and Logout link.
 	Admin see the same thing the user does, but it has also the Control Panel link and notification bullets for new user registration and waiting for approval and for new event related to machines.
 
 	Scenario: Guest user
