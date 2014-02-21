@@ -45,7 +45,7 @@ end
 
 Then(/^I see also notification bullets$/) do
   expect(page).to have_selector("div.admin_notifications")
-  expect(page).to have_selector("div.admin_notifications.users_pending")
-  expect(page).to have_selector("div.admin_notifications.service_events_pending")
+  expect(page).to have_selector("div.admin_notifications>a.users_pending")
+  expect(page).to have_selector("div.admin_notifications>a.service_events_pending")
 end
 

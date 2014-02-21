@@ -72,3 +72,8 @@ body {
 	display: inline-block !important;
 	margin-right: 10px;
 }
+
+.user_menu {
+	display: inline-block;
+}
+

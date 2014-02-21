@@ -51,12 +51,24 @@ describe 'shared/_navbar.html.erb' do
 		expect(rendered).to have_selector('i.icon-off')
 	end
 
+	it "doesn't see  control panel link" do
+		expect(rendered).not_to have_link("Control panel", href: control_panel_general_index_path)
+	end
+
+	it "doesn't have admin_notifications" do
+		expect(rendered).not_to have_selector("div.admin_notifications")
+	end
+
 	context "admin user" do
 		before do
 			@user.destroy
 			@admin = create(:admin)
 			view.stub(:current_user).and_return(@admin)
 			render
+		end
+
+		it "has admin notification div" do
+			expect(rendered).to have_selector("div.admin_notifications")
 		end
 
 		it "has control panel link in menu" do
