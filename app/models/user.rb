@@ -1,13 +1,12 @@
 class User < ActiveRecord::Base
   has_secure_password
-  # attr_accessor :password, :password_confirmation
+  attr_accessor :current_password
   attr_accessible :email, :firm_id, :first_name, :last_name,
                   :phone_number, :admin, :password, :password_confirmation, :approved_at,
-                  :denied_at, :password_reset_token, :password_reset_sent_at
+                  :denied_at, :password_reset_token, :password_reset_sent_at, :current_password
   belongs_to :firm
   has_many :service_events
   before_create { generate_token(:auth_token) }
-
 
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
   NAME_REGEX = /^\A([A-Z']+-?+[A-Z']+\z)+$/i
@@ -26,8 +25,7 @@ class User < ActiveRecord::Base
                     :format => { with: EMAIL_REGEX},
                     :uniqueness => true
   validates :password, :presence => true,
-                       :length => { :within => 6..255 }                                                
-
+                       :length => { :within => 6..255 }
   def full_name
   	first_name + " " + last_name
   end

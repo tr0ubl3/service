@@ -25,7 +25,4 @@ $(document).ready(function() {
                });
 	$('.field_with_errors').closest('.control-group').addClass('error');
 	var notification_badge = $('span.badge.badge-important.event-notification-bullet');
-	if(notification_badge.html().trim() == "") {
-		return notification_badge.css("display", "none");
-	};
 });

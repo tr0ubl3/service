@@ -82,6 +82,11 @@ describe User do
 		expect(user.password_confirmation).to eq("pass")
 	end
 
+	it "responds to current_password" do
+		user.current_password = "securepassword"
+		expect(user.current_password). to eq("securepassword")
+	end
+
 	it 'has approved_at attribute' do
 		time = Time.now
 		user.approved_at = time
@@ -140,7 +145,6 @@ describe User do
 
 		it "generates an unique token" do
 			test_token = SecureRandom.urlsafe_base64(nil, false)
-			# test_user = create(:user2, token: test_token)
 			expect(user.generate_token(:auth_token)).not_to eq(test_token)
 		end
 

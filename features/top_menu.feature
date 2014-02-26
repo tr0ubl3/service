@@ -21,3 +21,15 @@ Feature: Top menu
 		When I am on home page
 		Then I see "Jon Snow" menu
 		And I see also notification bullets
+
+	Scenario: User changes account settings
+		Given I am a registered user
+		And I'm logged in
+		When I go to user menu and go to account settings
+		Then I change my account settings
+
+	Scenario: User logout from application
+		Given I'm logged in
+		When I go to user menu
+		Then I choose logout
+		And I'm logged out from application

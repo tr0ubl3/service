@@ -143,6 +143,82 @@ class UsersController < ApplicationController
   end
 
   def edit
-     
+    @user = current_user
   end 
+
+  def update
+    @user = User.find(params[:id])
+    if @user.authenticate(params[:user][:current_password])
+      @user.assign_attributes(params[:user])
+      
+      count_errors = 0
+      errors = proc do
+        count_errors += 1
+      end
+
+      count_updated = 0
+      updated = proc do
+        count_updated += 1
+      end
+
+      update_success = proc do
+        flash[:notice] = "You successfully updated your account"
+        redirect_to root_path
+      end
+
+      update_error = proc do
+        flash[:error] = "Please correct errors"
+        render :edit
+      end
+
+      case @user
+      when lambda(&:email_changed?)
+        update_email = proc do
+          @user.update_attribute(:confirmed, false) && 
+          @user.update_attribute(:email, @user.email) &&
+          @user.update_attribute(:auth_token, @user.generate_token(:auth_token))
+            # UserMailer.email_change(@user).deliver
+          end
+          @user.valid?
+          if @user.errors[:email].empty?
+            update_email.call
+            updated.call
+          else
+            errors.call
+          end
+
+        when lambda(&:phone_number_changed?)
+          update_phone = proc do
+            @user.update_attribute(:phone_number, @user.phone_number)
+          end
+          @user.valid?
+          if @user.errors[:phone_number].empty?
+            update_phone.call
+            updated.call
+          else
+            errors.call
+          end
+
+        when Proc.new {@user.password != '' || @user.password_confirmation != ''}
+          if @user.update_attributes(params[:user])
+            updated.call
+          else
+            errors.call
+          end
+        else
+          flash[:error] = "Nothing to change"
+          render :edit
+        end
+        
+        if count_errors > 0 && count_updated == 0
+          @user.errors.delete(:password) unless !@user.password.empty? || !@user.password_confirmation.empty?
+          update_error.call
+        elsif count_errors == 0 && count_updated  > 0
+          update_success.call
+        end
+      else
+        flash.now[:alert] = "Invalid current password!"
+        render :edit
+      end
+    end
 end

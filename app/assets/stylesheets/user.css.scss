@@ -60,10 +60,15 @@
 #error_explanation {
   color: #f00;
   ul {
+    clear: both;
     list-style-type: none;
   }
 
   li {
     font-weight: bold;
   }
+}
+
+label.with_subtitle {
+  margin-bottom: -3px !important;
 }

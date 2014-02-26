@@ -710,4 +710,102 @@ describe UsersController do
 			end
 		end
 	end
+
+	describe "GET edit" do
+		let!(:user) { create(:user) }
+		before :each do
+			session[:user_id] = user.id
+			# controller.stub(:current_user).and_return(user)
+			get :edit, id: user.id
+		end
+		it "assigns user variable to the current_user" do
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it "renders edit template" do
+			expect(response).to render_template :edit
+		end
+	end
+	
+
+	describe "PUT update" do
+		let!(:user) { create(:user) }
+		let(:params) do { 
+			"email" => "bud2.spencer@email.com",
+			"password" => "newsecurepassword",
+			"password_confirmation" => "newsecurepassword",
+			"current_password" => user.password
+		}
+		end
+
+		before do
+			session[:user_id] = user.id
+			User.stub(:find).and_return(user)
+			post :update, id: user.id, user: params
+		end
+
+		it "assigns @user to the action" do
+			expect(assigns[:user]).to eq(user)
+		end
+
+		it "it sends update_attributes with provided params" do
+			user.should_receive(:update_attributes)
+			post :update, id: user.id, user: params
+		end
+
+		context "when current_password is valid" do
+			before :each do
+				user.stub(:authenticate).and_return(true)	
+			end
+
+			context "when update_attributes returns true" do
+				before :each do
+					user.stub(:upate_attributes).and_return(true)
+					put :update, id: user.id, user: params
+				end
+
+				it "redirects to root page" do
+					expect(response).to redirect_to root_path
+				end
+
+				it "assigns flash[:notice]" do
+					expect(flash[:notice]).not_to be_nil
+				end
+			end
+
+			context "when update_attributes returns false" do
+				before :each do
+					user.stub(:update_attributes).and_return(false)
+					put :update, id: user.id, user: params
+				end
+
+				it "renders the edit user page again" do
+					expect(response).to render_template :edit
+				end
+
+				it "assigns user varable to the view" do
+					expect(assigns[:user]).to eq(user)
+				end
+
+				it "assigns flash[:error]" do
+					expect(flash[:error]).not_to be_nil
+				end
+			end
+		end
+
+		context "when current_password is invalid" do
+			before :each do
+				user.stub(:authenticate).and_return(false)
+				put :update, id: user.id, user: params
+			end
+
+			it "renders the edit user page again" do
+				expect(response).to render_template :edit
+			end
+
+			it "assigns flash[:alert]" do
+				expect(flash[:alert]).not_to be_nil
+			end
+		end
+	end
 end
