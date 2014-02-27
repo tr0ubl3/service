@@ -6,15 +6,19 @@
 				<div class="dropdown pull-right navbar-text">
 					<% if current_user.admin? %>				
 						<div class="admin_notifications navbar-text">
-							<%= link_to service_events_path, :class => 'service_events_pending', :title => "#{pending_events} "+"event".pluralize(pending_events)+" pending confirmation" do %>
-								<span class='badge badge-important'>
-									<i class='icon icon-warning-sign'></i> <%= pending_events %>
-								</span>
+							<% if pending_events > 0 %>
+								<%= link_to service_events_path, :class => 'service_events_pending', :title => "#{pending_events} "+"event".pluralize(pending_events)+" pending confirmation" do %>
+									<span class='badge badge-important'>
+										<i class='icon icon-warning-sign'></i> <%= pending_events %>
+									</span>
+								<% end %>
 							<% end %>
-							<%= link_to manage_users_path, :class => "users_pending", title: "#{pending_users} "+"user".pluralize(pending_users)+" pending confirmation" do %>
-								<span class='badge badge-info'>
-									<i class='icon-user'></i> <%= pending_users %>
-								</span>
+							<% if pending_users > 0 %>
+								<%= link_to manage_users_path, :class => "users_pending", title: "#{pending_users} "+"user".pluralize(pending_users)+" pending confirmation" do %>
+									<span class='badge badge-info'>
+										<i class='icon-user'></i> <%= pending_users %>
+									</span>
+								<% end %>
 							<% end %>
 						</div>
 					<% end %>

@@ -74,5 +74,37 @@ describe 'shared/_navbar.html.erb' do
 		it "has control panel link in menu" do
 			expect(rendered).to have_link("Control panel", href: control_panel_general_index_path)
 		end
+
+		context "there are no pending [events, users]" do
+			before do
+				view.stub(:pending_events).and_return(0)
+				view.stub(:pending_users).and_return(0)
+				render
+			end
+
+			it "doesn't display pending events notification bullet" do
+				expect(rendered).not_to have_selector("a.service_events_pending")
+			end
+
+			it "doesn't display pending users notification bullet" do
+				expect(rendered).not_to have_selector("a.users_pending")
+			end
+		end
+
+		context "there are pending [users, events]" do
+			before do
+				view.stub(:pending_events).and_return(1)
+				view.stub(:pending_users).and_return(1)
+				render
+			end
+
+			it "displays pending evetns notification bullet" do
+				expect(rendered).to have_selector("a.service_events_pending")
+			end
+
+			it "displays pending users notification bullet" do
+				expect(rendered).to have_selector("a.users_pending")
+			end
+		end 
 	end
 end
