@@ -29,6 +29,7 @@ Feature: Top menu
 		Then I change my account settings
 
 	Scenario: User logout from application
+		Given I am a registered user
 		Given I'm logged in
 		When I go to user menu
 		Then I choose logout

@@ -63,3 +63,15 @@ Then(/^I change my account settings$/) do
   current_path.should == root_path
   expect(page).to have_content("You successfully updated your account")
 end
+
+When(/^I go to user menu$/) do
+  click_link "#{@registered_user.full_name}"
+end
+
+Then(/^I choose logout$/) do
+  click_link "Logout"
+end
+
+Then(/^I'm logged out from application$/) do
+  current_path.should == login_path
+end
