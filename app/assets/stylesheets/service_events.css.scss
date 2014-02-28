@@ -123,4 +123,51 @@ span.column2of2 {
 .label-show-style {
   font-weight: bold;
   font-size: medium;
+
+}
+
+.event-table {
+    width: 80%;
+    height: auto;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.event-table th, .event-table td {
+    border: 1px solid #DDD;
+}
+
+table.event-table > tbody {
+    border-radius: 10px;
+}
+
+.event-table td {
+    padding: 5px;
+}
+
+.event-table tr > td:first-child {
+    background-color: rgba(243, 243, 243, 0.6);
+}
+
+table.event-table td[colspan="2"] {
+    background-color: rgba(235, 235, 235, 0.8);
+    padding: 5px;
+    width: 100%;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.event-table > tbody:nth-child(1) > tr:nth-child(18) > td:nth-child(2) {
+    width: 80%;
+}
+
+table.event-table .event-description {
+  background-color: inherit !important;
+  padding: 7px !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+table.event-table .td-alarm-reset {
+  background-color: inherit !important;
 }

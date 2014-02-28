@@ -1,138 +1,116 @@
-<h1>Event <%= @event.event_name %></h1>
-<div class="event-show-table">
-	<div class="event-column">
-		<div class="event-cell">
-			<span class="header-column">Client details:</span>
-			<div>
-				<span class="column1of2">Name:</span>
-				<span class="column2of2"><%= @machine_owner.name %></span>
-			</div>
-			<div>
-				<span class="column1of2">Address:</span>
-				<span class="column2of2"><%= @machine_owner.address %></span>			
-			</div>
-			<div>
-				<span class="column1of2">City:</span>
-				<span class="column2of2"><%= @machine_owner.city %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Postal code:</span>
-				<span class="column2of2"><%= @machine_owner.postal_code %></span>			
-			</div>			
-			<div>
-				<span class="column1of2">GPS coordinates:</span>
-				<span class="column2of2">N10.23232</span>
-			</div>
-				<span class="column2of2" style="margin-left: 120px;">E23.31231</span>
-		</div>
-	</div>
-	<div class="event-column" style="border: none !important;">
-		<div class="event-cell">
-			<span class="header-column">Machine details:</span>
-			<div>
-				<span class="column1of2">Machine type:</span>
-				<span class="column2of2"><%= @machine.machine_type %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Machine no:</span>
-				<span class="column2of2"><%= @machine.machine_number %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Machine short name:</span>
-				<span class="column2of2"><%= @machine.display_name %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Delivery date:</span>
-				<span class="column2of2"><%= @machine.delivery_date.strftime("%d.%m.%Y") %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Functioning hours:</span>
-				<span class="column2of2"><%= @hour_counter %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Waranty period?:</span>
-				<span class="column2of2"><%= @machine.waranty_boolean %> (waranty period is until <u><%= @machine.waranty_date.strftime("%d.%m.%Y") %></u>)</span>			
-			</div>
-		</div>
-	</div>
-</div>
-<div class="event-show-table">
-	<div class="event-column">
-		<div class="event-cell">
-			<div>
-				<span class="column1of2">Event reported by:</span>
-				<span class="column2of2"><%= @event_user.full_name %> (from <%= @machine_owner.name %>)</span>			
-			</div>
-		</div>
-	</div>
-	<div class="event-column">
-		<div class="event-cell">
-			<div>
-				<span class="column1of2">Phone number:</span>
-				<span class="column2of2"><%= @event_user.phone_number %></span>			
-			</div>
-			<div>
-				<span class="column1of2">Email:</span>
-				<span class="column2of2"><%= @event_user.email %></span>			
-			</div>
-		</div>
-	</div>
-</div>
-<div class="event-show-table" style="display: block;">
-	<span class="header-column" style="width: 100%; padding: 0; text-indent: 3px;">
-		Event details:
-	</span>
-	<div class="form-horizontal">
-	  <div class="control-group">
-	    <label class="control-label">Event date:</label>
-	    <div class="controls fix_LineHeight">
-	    	<%= @event.event_date.strftime("%d.%m.%Y") %>
-	    </div>
-	  </div>
-	  <div class="control-group">
-	    <label class="control-label">Event ID:</label>
-	    <div class="controls fix_LineHeight">
-	    	<%= @event.event_name %>
-	    </div>
-	  </div>
-	  <div class="control-group">
-	    <label class="control-label">Event type:</label>
-	    <div class="controls fix_LineHeight">
-	    	<%= @event_type_text %>
-	    </div>
-	  </div>
-	  <div class="control-group">
-	    <label class="control-label">Screen alarms:</label>
-	    <div class="controls fix_LineHeight">
-	    	<% @event.alarms.each do |alarm| %>
-					<%= alarm.number.to_s + " - " + alarm.text %>
-					<br />
+<h3>Event <%= @event.event_name %></h3>
+
+<table class="event-table">
+	<tbody>
+		<tr>
+			<td colspan="2">Machine details</td>
+		</tr>
+		<tr>
+			<td>Manufacturer</td>
+			<td><%= @event.machine.manufacturer.name %></td>
+		</tr>
+		<tr>
+			<td>Type</td>
+			<td><%= @event.machine.machine_type %></td>
+		</tr>    
+		<tr>
+			<td>Number</td>
+			<td><%= @event.machine.machine_number %></td>
+		</tr>
+		<tr>
+			<td>Short uniq name</td>
+			<td><%= @event.machine.display_name %></td>
+		</tr>
+		<tr>
+			<td>Delivery date</td>
+			<td><%= @event.machine.delivery_date %></td>
+		</tr>
+		<tr>
+			<td>Waranty period?</td>
+			<td><%= @event.machine.waranty_boolean %></td>
+		</tr>
+		<tr>
+			<td colspan="2">Client details</td>
+		</tr>
+		<tr>
+			<td>Name</td>
+			<td><%= @event.machine.machine_owner.name %></td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><%= @event.machine.machine_owner.address %></td>
+		</tr>
+		<tr>
+			<td>City</td>
+			<td><%= @event.machine.machine_owner.city %></td>
+		</tr>
+		<tr>
+			<td>Postal code</td>
+			<td><%= @event.machine.machine_owner.postal_code %></td>
+		</tr>
+		<tr>
+			<td colspan="2">Event details</td>
+		</tr>
+		<tr>
+			<td>Number</td>
+			<td><%= @event.event_name %></td>
+		</tr>
+		<tr>
+			<td>Date</td>
+			<td><%= @event.event_date %></td>
+		</tr>
+		<tr>
+			<td>Reported by:</td>
+			<td><%= @event.user.full_name %></td>
+		</tr>
+		<tr>
+			<td>Type</td>
+			<td><%= event_type(@event) %></td>
+		</tr>
+		<tr>
+			<td rowspan="<%= @event.alarms.count if @event.alarms.count > 0 %>">
+				Alarms
+			</td>
+			<% alarm_arr = @event.alarms %>
+			<% if alarm_arr.empty? %>
+				<td>
+					No alarms reported
+				</td>
+		</tr>
+			<% else %>
+			<% first_alarm = alarm_arr.shift %>
+				<td>
+					<%= first_alarm.number.to_s + ' - ' + first_alarm.text %>
+				</td>
+			</tr>
+			<% if alarm_arr.length > 0  %>
+				<% alarm_arr.each do |alarm| %>
+					<tr>
+						<td class="td-alarm-reset">
+							<%= alarm.number.to_s + ' - ' + alarm.text %>
+						</td>
+					</tr>
+				<% end %>
 			<% end %>
-	    </div>
-	  </div>
-	  <div class="control-group">
-	    <label class="control-label">Event description:</label>
-	    <div class="controls fix_LineHeight">
-	    	<%= @event.event_description %>
-	  </div>
-	</div>
-	</div>
-</div>
-<div class="event-show-table" style="display: block;">
-	<span class="header-column" style="width: 100%; padding: 0; text-indent: 3px;">
-		Event status track:
-	</span>
-	<% @event.service_event_state_transitions.each do |state| %>
-		<p><%= state.to %> - <%= state.created_at.strftime("%d.%m.%Y" " - " "%H:%M") %></p>
-	<% end %>
-</div>
+		<% end %>
+		<tr>
+			<td colspan="2">Event description</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="event-description">
+				<%= @event.event_description %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
 <div class="btn-group" style="margin-top: 10px;">
   <a class="btn dropdown-toggle <%= @class %>" data-toggle="dropdown" title="<%= @title %>" href="#">
     Event confirmation
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <li><%= link_to "Confirm event", @confirm_event_link, :confirm => @confirm_event_confirmation %></li>
-    <li><%= link_to "Unconfirm this event", edit_service_event_path %></li>
+    <li><%= link_to "Confirm event", "#" %></li>
+    <li><%= link_to "Unconfirm this event", "#" %></li>
   </ul>
 </div>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "events/new.html.erb" do
+describe "service_events/new.html.erb" do
   before :each do
     render
   end

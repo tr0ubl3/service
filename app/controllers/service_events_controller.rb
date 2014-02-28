@@ -1,5 +1,4 @@
 class ServiceEventsController < ApplicationController
-	
 	respond_to :html, :json
 
 	def index
@@ -8,21 +7,6 @@ class ServiceEventsController < ApplicationController
 
 	def show
 		@event = ServiceEvent.find(params[:id])
-		@confirm_event_link = confirm_event_service_events_path(:id => params[:id])
-		@confirm_event_confirmation = "Are you sure you want to confirm this event ?"
-		check_event_confirmation(@event)
-		@machine_owner = Firm.find(Machine.find(@event.machine_id).machine_owner_id)
-		@event_user = User.find(@event.user_id)
-		@machine = Machine.find(@event.machine_id)
-		@hour_counter = Machine.find(@event.machine_id).hour_counter.machine_hours_age
-		if @event.event_type == 1
-				@event_type_text = 'Machine fully stopped'
-		elsif @event.event_type == 2
-				@event_type_text = 'Machine was working with problems'
-		else
-				@event_type_text = 'Event unrelated to machine stopping'
-		end
-		# @me = @event.machines.order("events.id ASC")
 	end
 
 	def new
@@ -66,7 +50,7 @@ class ServiceEventsController < ApplicationController
 			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
 			redirect_to root_path
 		else
-			@machines = Machine.where(:machine_owner_id => current_user.machine_owner)
+			@machines = Machine.where(:machine_owner_id => current_user.firm_id)
 			flash.now[:alert] = 'Please correct errors and try again!'
 			render :new
 		end

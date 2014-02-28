@@ -1,6 +1,6 @@
 FactoryGirl.define do
 	factory :machine_owner do
-	    id 3
+	    id 2
 	  	name "Delphi"
 	  	address "Str. Victoria, No. 10"
 	  	office_tel "0123456789"

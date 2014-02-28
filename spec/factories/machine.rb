@@ -7,5 +7,7 @@ FactoryGirl.define do
   	delivery_date '10.10.2010'
   	waranty_period '780'
   	display_name 'MH.329'
+  	manufacturer
+  	machine_owner
   end
 end
