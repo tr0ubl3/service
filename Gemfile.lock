@@ -139,6 +139,9 @@ GEM
     js-routes (0.9.6)
       rails (>= 3.2)
     json (1.8.1)
+    json_spec (1.1.1)
+      multi_json (~> 1.0)
+      rspec (~> 2.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
@@ -293,6 +296,7 @@ DEPENDENCIES
   guard-spork!
   jquery-rails
   js-routes
+  json_spec
   pg
   rack_session_access
   rails (= 3.2.11)

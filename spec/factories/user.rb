@@ -29,7 +29,7 @@ FactoryGirl.define do
 		confirmed false
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_2"
 		password_reset_sent_at Time.now
-		association :firm, factory: :manufacturer
+		association :firm, factory: :manufacturer_with_machines
 	end
 
 	factory :admin, class: User do

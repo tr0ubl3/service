@@ -11,15 +11,15 @@ class ServiceEventsController < ApplicationController
 
 	def new
 		@event = ServiceEvent.new
-		@alarm_search = Alarm.t1(params[:search])
-		if params[:machine] != nil
-			params[:machine_id] = params[:machine]
-			@machine_display_name = Machine.find_by_id(params[:machine]).display_name
-		end
+		# @alarm_search = Alarm.search(params[:search])
+		# if params[:machine] != nil
+		# 	params[:machine_id] = params[:machine]
+		# 	@machine_display_name = Machine.find_by_id(params[:machine]).display_name
+		# end
 
 		respond_to do |format|
 			format.html
-			format.json { render json: @alarm_search }
+			format.json { render json: Alarm.search(params[:search]) }
 		end
 
 	end

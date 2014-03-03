@@ -5,7 +5,7 @@ describe ServiceEventsController do
 		let!(:event) { mock_model('ServiceEvent').as_new_record }
 		let!(:user) { create(:user) }
 		
-		before :each do
+		before do
 			session[:user_id] = user.id
     		User.stub(:new).and_return(event)
     		get :new
@@ -15,12 +15,14 @@ describe ServiceEventsController do
 			expect(assigns[:event]).not_to be_nil
 		end
 
-		it 'assigns @machines.all array too the view' do
-			expect(assigns[:machines]).not_to be_nil
-		end
-
 		it 'renders new template' do
 			expect(response).to render_template :new
+		end
+
+		it 'responds to json format' do
+			alarm = [create(:alarm)].to_json
+			get :new, format: :json, search: Alarm.first.number
+			response.body.should be_json_eql(alarm)
 		end
 	end
 

@@ -1,12 +1,51 @@
 require 'spec_helper'
 
 describe "service_events/new.html.erb" do
-  before :each do
+   before do
     render
   end
 
-  it "has text 'Define new machine event'" do
-  	expect(rendered).to have_content('Define new machine event')
+  context "params[:machine] is nil" do
+    let!(:user) { create(:user2) }
+    before :each do
+      view.stub(:current_user).and_return(user)
+      params[:machine] = nil
+      render
+    end
+
+    it "has h2 heading with text: 'Define new machine event'" do
+      expect(rendered).to have_selector("h2", "Define new machine event")
+    end
+
+    it "has select machine combo box" do
+      expect(rendered).to have_css("select#event_machine_id")
+    end
+
+    it "does not have hidden field" do
+      expect(rendered).not_to have_css("input#event_machine_id")
+    end
+  end
+
+  context "params[:machine] is not nil" do
+     let!(:user) { create(:user2) }
+     before :each do
+        view.stub(:current_user).and_return(user)    
+        params[:machine] = user.firm.machines.first.id
+        render
+     end
+
+     it "has h2 heading with text: 'Define new machine event MH.xxx'" do
+         machine_name = user.firm.machines.first.display_name
+         expect(rendered).to have_selector("h2", "Define new machine event #{machine_name}")
+     end
+
+     it "doesn't display select machine combo box" do
+        expect(rendered).not_to have_css("select#event_machine_id")
+     end
+
+     it "has hidden input field" do
+       expect(rendered).to have_css("input#event_machine_id", "#{user.firm.machines.first.id}")
+     end
   end
 
   it 'has new_event form' do

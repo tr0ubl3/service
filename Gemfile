@@ -44,9 +44,10 @@ group :test do
 	# gem 'growl'
 	# gem 'ruby_gntp'
 	# gem 'win32-process'
-	gem 'database_cleaner'
 	# gem 'childprocess', '0.3.6'
+	gem 'database_cleaner'
 	gem 'rack_session_access'
+	gem 'json_spec'
 end
 
 # Gems used only for assets and not required

@@ -10,8 +10,8 @@ FactoryGirl.define do
       user_id 1
       alarms {[FactoryGirl.create(:alarm)]}
   	  # state 'open'
-      machine
-      user
+      association :machine, strategy: :build
+      association :user, strategy: :build
   end
 
   factory :service_event_with_alarms, :parent => :service_event do
