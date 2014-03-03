@@ -13,6 +13,7 @@ FactoryGirl.define do
 		confirmed true
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_1"
 		password_reset_sent_at Time.now
+		association :firm, factory: :machine_owner
 	end
 
 	factory :user2, class: User do
@@ -28,6 +29,7 @@ FactoryGirl.define do
 		confirmed false
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_2"
 		password_reset_sent_at Time.now
+		association :firm, factory: :manufacturer
 	end
 
 	factory :admin, class: User do
@@ -36,13 +38,14 @@ FactoryGirl.define do
 		email "jon.snow@mail.com"
 		phone_number 0740223223
 		admin true
-		firm_id 3
+		firm_id 301
 		password "securepassword"
 		approved_at Time.now
 		auth_token nil
 		confirmed true
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_3"
 		password_reset_sent_at Time.now
+		association :firm, factory: :authorized_reseller
 	end
 
 	factory :admin_2, class: User do
@@ -51,12 +54,13 @@ FactoryGirl.define do
 		email "edard.stark@mail.com"
 		phone_number 0740323323
 		admin true
-		firm_id 3
+		firm_id 301
 		password "securepassword"
 		approved_at Time.now
 		auth_token nil
 		confirmed true
 		password_reset_token "KEL8tw01cIvD9pLmJ7BA_4"
 		password_reset_sent_at Time.now
+		association :firm, factory: :authorized_reseller_with_machines
 	end
 end

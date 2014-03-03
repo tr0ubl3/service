@@ -1,13 +1,26 @@
 FactoryGirl.define do
+
   factory :machine do
-  	manufacturer_id 1
-  	machine_owner_id 1
-  	machine_number '9-1101-334'
+  	sequence :id do |n|
+      n
+    end
+    manufacturer_id 101
+  	machine_owner_id 201
+    authorized_reseller_id 301
+
+  	sequence :machine_number do |n|
+      "9-1101-33#{n}"
+    end
   	machine_type 'CVA'
   	delivery_date '10.10.2010'
   	waranty_period '780'
-  	display_name 'MH.329'
-  	manufacturer
-  	machine_owner
+
+    sequence :display_name do |n|
+    	"MH.33#{n}"
+    end
+    hour_counter
+    association :manufacturer, strategy: :build
+    association :machine_owner, strategy: :build
+  	association :authorized_reseller, strategy: :build
   end
 end

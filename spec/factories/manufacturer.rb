@@ -1,6 +1,6 @@
 FactoryGirl.define do
 	factory :manufacturer do
-	    id 3
+	    id 101
 	  	name "Posalux"
 	  	address "Str. Biel, No 1"
 	  	office_tel "01234567891"

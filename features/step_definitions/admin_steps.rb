@@ -2,7 +2,7 @@ Given(/^I'm an admin$/) do
   @admin = create(:admin)
   @user = create(:user)
   @user2 = create(:user2)
-  @machine_owners = create(:machine_owner, :id => 3)
+  # @machine_owners = create(:machine_owner, :id => 3)
   expect(@admin.admin).to be_true
 end
 
@@ -190,7 +190,7 @@ Then(/^I click new admin user to register new admin$/) do
 end
 
 When(/^I successfully submit admin user form$/) do
-  reseller = create(:authorized_reseller, :id => 2)
+  # reseller = create(:authorized_reseller)
   fill_in "user_first_name", :with => "Ned"
   fill_in "user_last_name", :with => "Stark"
   fill_in "user_phone_number", :with => 123123123
@@ -212,7 +212,7 @@ Then(/^I see successfull flash message$/) do
 end
 
 Then(/^I fill register form with invalid data$/) do
-  reseller = create(:authorized_reseller, :id => 2)
+  # reseller = create(:authorized_reseller, :id => 2)
   fill_in "user_first_name", :with => ""
   fill_in "user_last_name", :with => ""
   fill_in "user_phone_number", :with => ""
@@ -231,7 +231,7 @@ end
 When(/^I'm a registered user$/) do
   @machine_owners.destroy unless @machine_owners == nil
   @user = create(:user) if @user == nil
-  create(:machine_owner, :id => 1)
+  # create(:machine_owner)
   visit login_path
   fill_in('login_email', :with => @user.email)
   fill_in('login_password', :with => @user.password)

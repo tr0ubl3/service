@@ -4,7 +4,7 @@ class GeneralController < ApplicationController
   before_filter :check_admin, only: [:control_panel] 
 
   def index
-  	@machines = MachineOwner.find(current_user.firm_id).machines
+  	@machines = current_user.firm.machines
     @manufacturer_names = @machines.collect(&:manufacturer).uniq.collect(&:name)
   end
 

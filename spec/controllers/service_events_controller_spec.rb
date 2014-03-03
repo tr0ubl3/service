@@ -2,9 +2,15 @@ require 'spec_helper'
 
 describe ServiceEventsController do
 	describe 'GET new' do
+		let!(:event) { mock_model('ServiceEvent').as_new_record }
+		let!(:user) { create(:user) }
+		
 		before :each do
+			session[:user_id] = user.id
+    		User.stub(:new).and_return(event)
     		get :new
 		end
+		
 		it 'assigns @event variable to the view' do
 			expect(assigns[:event]).not_to be_nil
 		end
@@ -12,13 +18,15 @@ describe ServiceEventsController do
 		it 'assigns @machines.all array too the view' do
 			expect(assigns[:machines]).not_to be_nil
 		end
+
 		it 'renders new template' do
 			expect(response).to render_template :new
 		end
 	end
 
 	describe 'POST create' do
-		let!(:event) { stub_model(ServiceEvent) }
+		let!(:event) { mock_model('ServiceEvent').as_new_record }
+		let!(:user) { create(:user) }
 		let(:params) do
 		    {
 				'event_date' => '01.01.1900',
@@ -28,17 +36,22 @@ describe ServiceEventsController do
 			}
 		    
 		end
+
 		before :each do
-			Event.stub(:new).and_return(event)
+			session[:user_id] = user.id
+			ServiceEvent.stub(:new).and_return(event)
 		end
+
 		it 'sends new message to Event class' do
-			Event.should_receive(:new).with(params)
+			ServiceEvent.should_receive(:new).with(params)
 			post :create, event: params 
 		end
+
 		it 'sends save message to Event model' do
 			event.should_receive(:save)
 			post :create, event: params
 		end
+		
 		context 'when save message returns true' do
 			before :each do
 				event.stub(:save).and_return(true)

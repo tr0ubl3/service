@@ -9,7 +9,7 @@ FactoryGirl.define do
       event_name "POS-91231344-200214120809-00001-DEL"
       user_id 1
       alarms {[FactoryGirl.create(:alarm)]}
-  	  state 'pending_confirmation'
+  	  # state 'open'
       machine
       user
   end

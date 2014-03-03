@@ -1,3 +1,4 @@
 class AuthorizedReseller < Firm
-  # attr_accessible :title, :body
+  has_many :machines
+  has_many :users
 end
