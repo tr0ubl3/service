@@ -71,4 +71,27 @@ describe ServiceEventsHelper do
 			end
 		end
 	end
+
+	describe "#evaluate_event_button" do
+		let!(:event) { create(:service_event) }
+		context "event is in open state" do
+			before do
+				event.current_state.stub(:open)
+			end
+
+			it "it shows a button on show#service_event" do
+				expect(helper.evaluate_event_button(event)).to have_link("Evaluate event", :href => evaluate_service_event_path(event))
+			end
+		end
+
+		context "event is in evaluated state" do
+			before do
+				event.stub(:open?).and_return(false)
+			end
+
+			it "returns nothing when event is in other state" do
+				expect(helper.evaluate_event_button(event)).to be_nil
+			end
+		end
+	end
 end

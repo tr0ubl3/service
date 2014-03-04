@@ -105,12 +105,5 @@
 </table>
 
 <div class="btn-group" style="margin-top: 10px;">
-  <a class="btn dropdown-toggle <%= @class %>" data-toggle="dropdown" title="<%= @title %>" href="#">
-    Event confirmation
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-    <li><%= link_to "Confirm event", "#" %></li>
-    <li><%= link_to "Unconfirm this event", "#" %></li>
-  </ul>
+	<%= evaluate_event_button(@event) %>
 </div>

@@ -11,11 +11,6 @@ class ServiceEventsController < ApplicationController
 
 	def new
 		@event = ServiceEvent.new
-		# @alarm_search = Alarm.search(params[:search])
-		# if params[:machine] != nil
-		# 	params[:machine_id] = params[:machine]
-		# 	@machine_display_name = Machine.find_by_id(params[:machine]).display_name
-		# end
 
 		respond_to do |format|
 			format.html
@@ -33,19 +28,11 @@ class ServiceEventsController < ApplicationController
 			if params[:alarms] != nil
 				@event.alarms << Alarm.find(params[:alarms])
 			end
-			@machine = Machine.find(@event.machine_id)
-			@manufacturer = @machine.manufacturer.name.upcase.first(limit=3)
-			@machine_number = @machine.machine_number.gsub(/[-]/i, '')
-			@event_time = @event.created_at.strftime('%d%m%y%H%M%S')
-			@event_count = "%.5d" % @machine.service_events.count
-			@owner = @machine.machine_owner.name.upcase.first(limit=3)
-			@event_name = @manufacturer + '-'+ @machine_number + '-' + @event_time + '-' + @event_count + '-' + @owner
-			@event.update_attributes(:event_name => @event_name)
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
-			@event.confirmation
+			# @event.confirmation
 			# ServiceEventNotifier.confirmation(@event, @machine).deliver
 			# ServiceEventNotifier.notification(@event, @machine).deliver
-			flash[:notice] = 'Event ' + @event_name + ' registered!' 	
+			flash[:notice] = 'Event successfully registered!' 	
 			redirect_to root_path
 		else
 			@machines = Machine.where(:machine_owner_id => current_user.firm_id)

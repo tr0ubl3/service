@@ -16,6 +16,7 @@ describe UsersController do
 		it 'assigns machine_owners variable to the view' do
 			expect(assigns[:machine_owners]).to eq([machine_owner])
 		end
+		
 		it 'renders new template' do
 			expect(response).to render_template :new
 		end

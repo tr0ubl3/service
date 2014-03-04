@@ -22,4 +22,12 @@ module ServiceEventsHelper
 			render :partial => "service_events/new_event_scoped"
 		end
 	end
+
+	def evaluate_event_button(event)
+		if event.open?
+			link_to "Evaluate event", evaluate_service_event_path(event), :class => "btn btn-primary"
+		else
+			return
+		end
+	end
 end

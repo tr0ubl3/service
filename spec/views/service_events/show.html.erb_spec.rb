@@ -119,4 +119,8 @@ describe "service_events/show.html.erb" do
 	it "has td with event_description" do
 		expect(rendered).to have_selector("td", text: "#{event.event_description}")
 	end
+
+	it "has 'Evaluate event' button" do
+		expect(rendered).to have_link("Evaluate event")
+	end
 end

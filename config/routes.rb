@@ -31,8 +31,8 @@ Service::Application.routes.draw do
   end
 
   resources :service_events do
-    collection do
-      get :confirm_event
+    member do
+      get :evaluate
     end
   end  
 

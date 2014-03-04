@@ -18,5 +18,5 @@ end
 
 Then(/^Then service event state is open$/) do
   event = ServiceEvent.last
-  expect(event.state).to eq("open")
+  expect(event.open?).to be_true
 end
