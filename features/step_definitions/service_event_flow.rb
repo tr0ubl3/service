@@ -9,5 +9,5 @@ Then(/^I click button "(.*?)"$/) do |arg1|
 end
 
 Then(/^I see evaluate event page$/) do
-  current_path.should == service_event_evaluate(@event)
+  current_path.should == evaluate_service_event_path(@event)
 end

@@ -20,13 +20,14 @@ describe ServiceEventsController do
 		end
 
 		it 'responds to json format' do
-			alarm = [create(:alarm)].to_json
-			get :new, format: :json, search: Alarm.first.number
-			response.body.should be_json_eql(alarm)
+			alarm = create(:alarm)
+			get :new, format: :json, search: alarm.number
+			response.body.should include_json(alarm.to_json)
 		end
 	end
 
 	describe 'POST create' do
+		pending
 		let!(:event) { mock_model('ServiceEvent').as_new_record }
 		let!(:user) { create(:user) }
 		let(:params) do
@@ -82,6 +83,18 @@ describe ServiceEventsController do
 			it 'assigns error flash message' do
 				expect(flash[:alert]).not_to be_nil
 			end
+		end
+	end
+
+	describe "GET evaluate" do
+		let!(:event) { create(:service_event) }
+		
+		before :each do
+			get :evaluate, id: event
+		end
+
+		it 'renders evaluate template' do
+			expect(response).to render_template :evaluate
 		end
 	end
 end

@@ -29,7 +29,6 @@ class ServiceEventsController < ApplicationController
 				@event.alarms << Alarm.find(params[:alarms])
 			end
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
-			# @event.confirmation
 			# ServiceEventNotifier.confirmation(@event, @machine).deliver
 			# ServiceEventNotifier.notification(@event, @machine).deliver
 			flash[:notice] = 'Event successfully registered!' 	
@@ -94,6 +93,9 @@ class ServiceEventsController < ApplicationController
 				redirect_to edit_service_event_path(@event), :method => :get
 			end
 	    end
+	end
+	
+	def evaluate
 	end
 	
 	private
