@@ -96,5 +96,9 @@ describe ServiceEventsController do
 		it 'renders evaluate template' do
 			expect(response).to render_template :evaluate
 		end
+
+		it "assigns @event variable to the view" do
+			expect(assigns[:event]).to eq(event)
+		end
 	end
 end

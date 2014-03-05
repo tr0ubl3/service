@@ -1,0 +1,22 @@
+<div id="recursive_event" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="recursive_event_label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="recursive_event_label">Select parent event for machine <%= @event.machine.display_name %></h3>
+	</div>
+	<div class="modal-body">
+			<div>
+				<% @event.machine.service_events.query_state("open").each do |event| %>
+						<li data-eventid="<%= event.id %>"><%= event.event_name %></li>
+						<li><%= event.event_description %></li>
+				<% end %>
+			</div>
+			<div>
+				<p>Description:</p>
+				<p id="modal-event-description"></p>
+			</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<p class="btn btn-primary">Insert event</p>
+	</div>
+</div>

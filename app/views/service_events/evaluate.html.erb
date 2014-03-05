@@ -1,0 +1,36 @@
+<%= form_for @event do |f| %>
+	<div class="control-group">
+		<%= f.label(:recursive, 'Recurrent event?') %>
+		<label class='radio'>
+			<%= f.radio_button(:recursive, 't', data: { toggle: "modal", target: "#recursive_event" }) %>
+			<%= label_tag(:recursive, 'True') %>
+		</label>
+		<label class='radio'>
+			<%= f.radio_button(:recursive, 'f') %>
+			<%= label_tag(:recursive, 'False') %>
+		</label>
+		<%= render(:partial => "evaluate_modal", :locals => { :event => @event }) %>
+	</div>
+
+	<div class="control-group">
+    <%= f.label(:alarm_code, 'Error codes', class: 'control-label') %>
+    <div class="controls input-append">
+      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
+      <button id="acjs" class="btn" type="button">Insert alarm</button>
+    </div>
+    <div id="acdp" style="display: block">
+      <% @event.alarms.each do |alarm| %>
+        <p class="alarm_code_add" data-alarmnumber="<%= alarm.number %>"><%= alarm.number %> - <%= alarm.text %></p>
+        <input id="alarms" multiple="multiple" name="alarms[]" type="hidden" value="<%= alarm.id %>" />
+      <% end %>
+    </div>
+  </div>
+
+	<div class="control-group">
+		<%= f.label(:evaluation_description, 'Event evaluation details', class: 'control-label') %>
+		<div class="controls">
+			<%= f.text_area :evaluation_description, :id => 'event_description' %>
+		</div>
+	</div>
+	<%= submit_tag("Save", class: 'btn btn-primary') %>
+<% end %>

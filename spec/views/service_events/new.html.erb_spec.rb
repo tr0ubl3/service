@@ -55,12 +55,6 @@ describe "service_events/new.html.erb" do
     	expect(rendered).to have_css('form#new_event')
     end
 
-    it 'has machine list drop down' do
-    	expect(rendered).to have_css('select#event_machine_id')
-    end
-
-    it 'has a json event with machine details after selecting the machine number'
-
     it 'has date of the event' do
     	expect(rendered).to have_css('input#event_date')
     end

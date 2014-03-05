@@ -171,3 +171,45 @@ table.event-table .event-description {
 table.event-table .td-alarm-reset {
   background-color: inherit !important;
 }
+
+div#recursive_event {
+  div.modal-body {
+       div {
+          display: inline-block;
+          float: left;
+          height: 200px;
+          overflow: auto; 
+          border-radius: 5px;
+        li {
+          list-style: none;
+          padding: 0 0 0 5px;
+        }
+       }
+
+       div:nth-child(1) {
+          width: 52%; 
+          border: 1px solid #aaa; 
+          
+           li:nth-child(odd) {
+           }
+
+           li:nth-child(odd):hover {
+            background-color: #eee;
+            cursor: pointer;
+           }
+
+           li:nth-child(odd).active {
+            background-color: rgba(0, 136, 204, 0.5);
+           }
+
+           li:nth-child(even) {
+            display: none;
+           } 
+        }
+
+        div:nth-child(2) {
+          background-color: rgba(235, 235, 235, 0.5);
+          width: 47%;
+        }
+  }
+}

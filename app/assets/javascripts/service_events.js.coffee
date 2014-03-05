@@ -85,3 +85,15 @@ $(document).ready ->
 	$("#acjs").on("click", doChkVal)
 	$('body').on('click', '.alarm_code_add', doDeleteAlarm)
 	# $("#acdp").on("DOMNodeInserted", getAlarmArray)
+	evtnm = $("div#recursive_event>div.modal-body>div:nth-child(1)>li:nth-child(odd)")
+	doShowEvntDesc = (e) ->
+		t = $(@)
+		if t.hasClass("active") is false
+			event_id = t.data("eventid")
+			t.addClass('active')
+			t.siblings().removeClass('active')
+			console.log("li is clicked " + event_id)
+			pmed = $('p#modal-event-description')
+			pmed.empty()
+			t.next().first().clone().appendTo(pmed)
+	evtnm.on("click", doShowEvntDesc)

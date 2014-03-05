@@ -23,4 +23,4 @@ Scenario: Admin goes from open event page to evaluate event page
 Scenario: Admin evaluates an event
 	Given I'm on evaluate event page
 	When I finished form
-	Then I submit for and event gets into solving state
+	Then I submit form and event gets into solving state
