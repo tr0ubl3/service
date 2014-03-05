@@ -2,11 +2,12 @@
 	<div class="control-group">
 		<%= f.label(:recursive, 'Recurrent event?') %>
 		<label class='radio'>
-			<%= f.radio_button(:recursive, 't', data: { toggle: "modal", target: "#recursive_event" }) %>
+			<%= f.radio_button(:recursive, true) %>
 			<%= label_tag(:recursive, 'True') %>
+			<%= f.hidden_field :parent_event, :value => "" %>
 		</label>
 		<label class='radio'>
-			<%= f.radio_button(:recursive, 'f') %>
+			<%= f.radio_button(:recursive, false, :checked => false) %>
 			<%= label_tag(:recursive, 'False') %>
 		</label>
 		<%= render(:partial => "evaluate_modal", :locals => { :event => @event }) %>

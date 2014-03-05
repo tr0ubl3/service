@@ -36,17 +36,17 @@ class ServiceEvent < ActiveRecord::Base
 	end
 
 	private
-	def event_prepare
-		self.event_name = assembly_name
-	end
+		def event_prepare
+			self.event_name = assembly_name
+		end
 
-	def assembly_name
-		machine = Machine.find(self.machine_id)
-		owner = machine.machine_owner.name.upcase.first(limit=3)
-		manufacturer = machine.manufacturer.name.upcase.first(limit=3)
-		machine_number = machine.machine_number.gsub(/[-]/i, '')
-		event_time = Time.now.strftime('%-d%-m%y%H%M')
-		event_count = "%.5d" % (machine.service_events.count + 1)
-		return manufacturer + '-'+ machine_number + '-' + event_time + '-' + event_count + '-' + owner
-	end
+		def assembly_name
+			machine = Machine.find(self.machine_id)
+			owner = machine.machine_owner.name.upcase.first(limit=3)
+			manufacturer = machine.manufacturer.name.upcase.first(limit=3)
+			machine_number = machine.machine_number.gsub(/[-]/i, '')
+			event_time = Time.now.strftime('%-d%-m%y%H%M')
+			event_count = "%.5d" % (machine.service_events.count + 1)
+			return manufacturer + '-'+ machine_number + '-' + event_time + '-' + event_count + '-' + owner
+		end
 end
