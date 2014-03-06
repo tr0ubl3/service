@@ -3,6 +3,6 @@ class ServiceEventState < ActiveRecord::Base
   belongs_to :service_event
 
   def self.with_last_state(state)
-  	order("id desc").group("service_event_id").having(state: state)
+  	order("id desc").group(self.column_names.collect {|c| "service_event_states.#{c}"}.join(",")).having(state: state)
   end
 end
