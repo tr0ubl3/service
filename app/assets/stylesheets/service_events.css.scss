@@ -213,3 +213,11 @@ div#recursive_event {
         }
   }
 }
+
+label > input#service_event_recursive_true + label {
+  display: inline;
+}
+
+label > input#service_event_recursive_true ~ p {
+  display: inline;
+}

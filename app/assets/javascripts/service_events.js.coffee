@@ -87,10 +87,12 @@ $(document).ready ->
 	# $("#acdp").on("DOMNodeInserted", getAlarmArray)
 	evtnm = $("div#recursive_event>div.modal-body>div:nth-child(1)>li:nth-child(odd)")
 	event_id = null
+	event_name = null
 	doShowEvntDesc = (e) ->
 		t = $(@)
 		if t.hasClass("active") is false
 			event_id = t.data("eventid")
+			event_name = t.text()
 			t.addClass('active')
 			t.siblings().removeClass('active')
 			# console.log("li is clicked " + event_id)
@@ -99,18 +101,19 @@ $(document).ready ->
 			t.next().first().clone().appendTo(pmed)
 	evtnm.on("click", doShowEvntDesc)
 	evtnmCloseBtn = $("div#recursive_event>div.modal-footer>p.btn.btn-primary")
+	evntnameappend = $("label > input#service_event_recursive_true + label")
 	doCloseEvntDesc = ->
 		$("#recursive_event").modal('hide')
 		$("#service_event_parent_event").val(event_id)
 		$("service_event_recursive_true").prop("checked", true)
-		console.log(event_id + " exista")
+		evntnameappend.siblings("p").remove()
+		evntnameappend.after("<p>, the parent event is <b>"+event_name+"</b></p>")
+		# console.log(event_name + " exista")
 	evtnmCloseBtn.on("click", doCloseEvntDesc)
 	doShowEventModal = ->
 		$('#recursive_event').modal('show')
 	$('#service_event_recursive_true').on("click", doShowEventModal)
 	doClearTrueRecurent = ->
 		$("#service_event_parent_event").val("")
+		evntnameappend.siblings("p").remove()
 	$('#service_event_recursive_false').on("click", doClearTrueRecurent)
-
-
-
