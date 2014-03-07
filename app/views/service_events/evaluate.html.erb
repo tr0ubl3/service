@@ -36,13 +36,13 @@
 
 	<div class="control-group">
 		<%= f.fields_for :service_event_files do |file| %>
-			<%= file.label :file, "Attach files to event" %>
-			<%= file.file_field :file %>
-			<br />
 			<% if file.object.persisted? %>
 			<%= file.check_box :_destroy %>
 				<%= image_tag file.object.file.url %>
 				<%= file.label :_destroy, "Destroy" %>
+			<% else %>
+				<%= file.label :file, "Attach files to event" %>
+				<%= file.file_field :file %>
 			<% end %>
 		<% end %>
 	</div>

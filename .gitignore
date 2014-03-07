@@ -23,3 +23,5 @@
 
 #ignore db schema from linux mint
 db/schema.rb
+
+public/uploads
