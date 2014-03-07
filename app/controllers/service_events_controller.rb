@@ -68,6 +68,7 @@ class ServiceEventsController < ApplicationController
 		@machines = Machine.where(:machine_owner_id => current_user.firm)
 		@machine_display_name = @machines.find(@event.machine_id).display_name
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
+		@event.service_event_files.build
 		respond_to do |format|
 			if @event.update_attributes(params[:service_event])
 				if params[:alarms] != nil
@@ -85,7 +86,7 @@ class ServiceEventsController < ApplicationController
 				if params[:hour_counter].to_i != @hc
 					@hc.update_attributes(:machine_hours_age => params[:hour_counter].to_i)
 				end
-				@event.unconfirmed
+				# @event.unconfirmed
 				flash[:notice] = "Successfully updated event."
 				format.html { redirect_to service_event_path(@event) }
 			else
@@ -97,6 +98,17 @@ class ServiceEventsController < ApplicationController
 	
 	def evaluate
 		@event = ServiceEvent.find(params[:id])
+		@files = @event.service_event_files.build
+	end
+
+	def create_evaluate
+		@event = ServiceEvent.find(params[:id])
+		
+		if @event.update_attributes(params[:service_event])
+			redirect_to service_event_path(@event), notice: "Yeeey, is saved!"
+		else
+			flash.now[:alert] = "error" 
+		end
 	end
 	
 	private

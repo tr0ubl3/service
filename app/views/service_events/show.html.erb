@@ -104,6 +104,10 @@
 	</tbody>
 </table>
 
+<% @event.service_event_files.each do |file| %>
+	<%= image_tag file.file.url %>
+<% end %>
+<br />
 <div class="btn-group" style="margin-top: 10px;">
 	<%= evaluate_event_button(@event) %>
 </div>

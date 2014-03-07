@@ -33,6 +33,7 @@ Service::Application.routes.draw do
   resources :service_events do
     member do
       get :evaluate
+      put :create_evaluate
     end
   end  
 

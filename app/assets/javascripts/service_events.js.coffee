@@ -117,3 +117,4 @@ $(document).ready ->
 		$("#service_event_parent_event").val("")
 		evntnameappend.siblings("p").remove()
 	$('#service_event_recursive_false').on("click", doClearTrueRecurent)
+	$("#edit_service_event_28").fileupload()

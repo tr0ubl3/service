@@ -47,6 +47,13 @@
 			<%= f.text_area :event_description, :id => 'event_description' %>
 		</div>
 	</div>
+
+	<div class="control-group">
+		<% f.fields_for :service_event_files do |file| %>
+			<%= file.label :file, "Attach files to event" %>
+			<%= file.file_field :file %>
+		<% end %>
+	</div>
 	<%= submit_tag("Save", class: 'btn btn-primary') %>
 <% end %>
 </div>

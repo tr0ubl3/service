@@ -19,8 +19,10 @@ Given(/^I'm on evaluate event page$/) do
 end
 
 When(/^I finished form$/) do
+	current_path.should == evaluate_service_event_path(@event)
 	choose "False"
-	
+	fill_in "event_description", with: "The machine doesn't have power"
+	click_button "Save"
 end
 
 Then(/^I submit form and event gets into solving state$/) do

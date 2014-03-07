@@ -1,4 +1,4 @@
-<%= form_for @event do |f| %>
+<%= form_for @event, :html => { :multipart => true }, :url => {:action => "create_evaluate"}, :method => "put" do |f| %>
 	<div class="control-group">
 		<%= f.label(:recursive, 'Recurrent event?') %>
 		<label class='radio'>
@@ -15,17 +15,17 @@
 
 	<div class="control-group">
     <%= f.label(:alarm_code, 'Error codes', class: 'control-label') %>
-    <div class="controls input-append">
-      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
-      <button id="acjs" class="btn" type="button">Insert alarm</button>
-    </div>
-    <div id="acdp" style="display: block">
-      <% @event.alarms.each do |alarm| %>
-        <p class="alarm_code_add" data-alarmnumber="<%= alarm.number %>"><%= alarm.number %> - <%= alarm.text %></p>
-        <input id="alarms" multiple="multiple" name="alarms[]" type="hidden" value="<%= alarm.id %>" />
-      <% end %>
-    </div>
-  </div>
+	    <div class="controls input-append">
+	      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
+	      <button id="acjs" class="btn" type="button">Insert alarm</button>
+	    </div>
+	    <div id="acdp" style="display: block">
+	      <% @event.alarms.each do |alarm| %>
+	        <p class="alarm_code_add" data-alarmnumber="<%= alarm.number %>"><%= alarm.number %> - <%= alarm.text %></p>
+	        <input id="alarms" multiple="multiple" name="alarms[]" type="hidden" value="<%= alarm.id %>" />
+	      <% end %>
+	    </div>
+	</div>
 
 	<div class="control-group">
 		<%= f.label(:evaluation_description, 'Event evaluation details', class: 'control-label') %>
@@ -33,5 +33,19 @@
 			<%= f.text_area :evaluation_description, :id => 'event_description' %>
 		</div>
 	</div>
-	<%= submit_tag("Save", class: 'btn btn-primary') %>
+
+	<div class="control-group">
+		<%= f.fields_for :service_event_files do |file| %>
+			<%= file.label :file, "Attach files to event" %>
+			<%= file.file_field :file %>
+			<br />
+			<% if file.object.persisted? %>
+			<%= file.check_box :_destroy %>
+				<%= image_tag file.object.file.url %>
+				<%= file.label :_destroy, "Destroy" %>
+			<% end %>
+		<% end %>
+	</div>
+
+	<%= f.submit("Save", class: 'btn btn-primary') %>
 <% end %>
