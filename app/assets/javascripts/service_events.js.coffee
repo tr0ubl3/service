@@ -119,8 +119,8 @@ $(document).ready ->
 	$('#service_event_recursive_false').on("click", doClearTrueRecurent)
 	if $("#service_event_parent_event").val() != ""
 		peval = $("#service_event_parent_event").val()
-		a = $("#recursive_event > div.modal-body > div:nth-child(1) > li").filter( -> 
+		txt = $("#recursive_event > div.modal-body > div:nth-child(1) > li").filter( -> 
 			$(@).data("eventid") is parseInt(peval)).text()
-		console.log(a+"val"+peval)
-		evntnameappend.after("<p>, the parent event is <b>"+a+"</b></p>")
+		# console.log(a+"val"+peval)
+		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
 	$("#edit_service_event_28").fileupload()
