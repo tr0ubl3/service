@@ -102,7 +102,7 @@ content: "* click alarm to remove";
 }
 
 span.header-column {
-  @extend custom_span;
+  @extend custom_span !optional;
   display: block;
   font-weight: bold;
   background-color: #DBDBDB;
