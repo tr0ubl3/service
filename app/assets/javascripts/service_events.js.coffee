@@ -123,4 +123,4 @@ $(document).ready ->
 			$(@).data("eventid") is parseInt(peval)).text()
 		# console.log(a+"val"+peval)
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
-	$("#edit_service_event_28").fileupload()
+	$("[id^='edit_service_event']").fileupload()
