@@ -63,7 +63,7 @@ module Service
     config.i18n.enforce_available_locales = true
     # config.force_ssl = true
 
-    config.cache_store = [ :file_store, "/tmp/rails-cache/" ]
-    config.assets.cache_store = [ :file_store, "/tmp/rails-cache/assets/#{Rails.env}/" ]
+    # config.cache_store = [ :file_store, "/tmp/rails-cache/" ]
+    # config.assets.cache_store = [ :file_store, "/tmp/rails-cache/assets/#{Rails.env}/" ]
   end
 end

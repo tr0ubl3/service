@@ -1,10 +1,12 @@
 <%= form_for @event, :html => { :multipart => true }, :url => {:action => "create_evaluate"}, :method => "put" do |f| %>
+	
+	<%= f.hidden_field :parent_event, value: @event.parent_event %>
+
 	<div class="control-group">
 		<%= f.label(:recursive, 'Recurrent event?') %>
 		<label class='radio'>
 			<%= f.radio_button(:recursive, true) %>
 			<%= label_tag(:recursive, 'True') %>
-			<%= f.hidden_field :parent_event, :value => "" %>
 		</label>
 		<label class='radio'>
 			<%= f.radio_button(:recursive, false, :checked => false) %>
