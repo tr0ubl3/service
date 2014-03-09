@@ -236,3 +236,68 @@ label > input#service_event_recursive_true ~ p
   font-size: 14px;
   font-weight: normal;
 }
+
+.file-container {
+  $fc-width: 912px;
+  width: $fc-width;
+  height: auto;
+  // border: 1px solid black;
+  // border-radius: 5px;
+
+  .file-container-object {
+    $square-dim: round($fc-width/6); 
+    display: inline-block;
+    width: $square-dim;
+    height: $square-dim;
+    // border: 1px solid black;
+    margin: -2px;
+    line-height: $square-dim;
+    text-align: center;
+    padding: 0;
+
+    img {
+      height: 95%;
+      width: 95%;
+    }
+
+    img:hover {
+      opacity: 0.8;
+      // cursor: pointer;
+    }
+
+    input[id^="service_event_service_event_files_attributes"] {
+      position: absolute;
+      z-index: 1;
+      margin: 5px;
+    }
+  }
+
+  .file-container-object:hover {
+    background-color: rgba(230, 230, 230, 0.5);
+  }
+
+  div {
+    margin-top: 10px;
+    display: block;
+    width: 100px;
+    position: relative;
+    cursor: pointer;
+    
+    span {
+      cursor: pointer;
+    }
+
+    input[id^="service_event_service_event_files_attributes"][type="file"] {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      opacity: 0;
+      height: 100%;
+      width: 100%;
+      direction: ltr;
+      cursor: pointer;
+    }
+  }
+}

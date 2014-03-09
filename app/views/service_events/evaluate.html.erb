@@ -37,16 +37,22 @@
 	</div>
 
 	<div class="control-group">
-		<%= f.fields_for :service_event_files do |file| %>
-			<% if file.object.persisted? %>
-			<%= file.check_box :_destroy %>
-				<%= image_tag file.object.file.url %>
-				<%= file.label :_destroy, "Destroy" %>
-			<% else %>
-				<%= file.label :file, "Attach files to event" %>
-				<%= file.file_field :file %>
+		<%= f.label :service_event_files, 'Event related files' %>
+		<div class="file-container">
+			<%= f.fields_for :service_event_files do |file| %>
+				<% if file.object.persisted? %>
+					<div class="file-container-object">
+						<%= file.check_box :_destroy %>
+						<%= image_tag file.object.file.url %>
+					</div>
+				<% else %>
+					<div class="btn btn-success">
+						<span><i class="icon-plus icon-white"></i> Add files...</span>
+						<%= file.file_field :file %>
+					</div>
+				<% end %>
 			<% end %>
-		<% end %>
+		</div>
 	</div>
 
 	<%= f.submit("Save", class: 'btn btn-primary') %>
