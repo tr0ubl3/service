@@ -109,11 +109,11 @@ span.header-column {
 }
 
 span.column1of1 {
-  @extend custom_span;
+  @extend custom_span !optional;
 }
 
 span.column2of2 {
-  @extend custom_span;
+  @extend custom_span !optional;
   font-style: italic;
 }
 
