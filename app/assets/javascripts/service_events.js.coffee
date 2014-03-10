@@ -123,4 +123,23 @@ $(document).ready ->
 			$(@).data("eventid") is parseInt(peval)).text()
 		# console.log(a+"val"+peval)
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
-	$("[id^='edit_service_event']").fileupload()
+	$("[id^='edit_service_event']").fileupload({
+		add: (e, data) -> 
+			doGetThumbnail = (data) ->
+				reader = new FileReader()
+				doGetPreview = (data) ->
+					console.log(reader + " path is valid")
+					span = document.createElement('span')
+					span.innerHTML = ['<img class="thumb" src="', reader.readAsDataURL(file),
+	                            '" title="', escape(data.name), '"/>'].join('')
+					$(span).appendTo(document.body)
+				reader.onloadend = doGetPreview(data)
+			doGetThumbnail(file) for file in data.files
+
+			# reader = new FileReader()
+			# console.log(reader)
+			# console.log(data)
+			# reader.onloadend = ((data) ->
+			# 	a = this.readAsDataURL(data)
+			# 	console.log(a))
+		})
