@@ -46,9 +46,16 @@
 						<%= image_tag file.object.file.url %>
 					</div>
 				<% else %>
+					<br />
 					<div class="btn btn-success">
 						<span><i class="icon-plus icon-white"></i> Add files...</span>
-						<%= file.file_field :file, :multiple => true %>
+						<%= file.file_field :file %>
+					</div>
+					<div class="btn btn-primary" id="file-submit">
+						<span><i class="icon-upload icon-white"></i> Upload files</span>
+					</div>
+					<div class="btn btn-danger" id="file-remove">
+						<span><i class="icon-trash icon-white"></i> Delete</span>
 					</div>
 				<% end %>
 			<% end %>

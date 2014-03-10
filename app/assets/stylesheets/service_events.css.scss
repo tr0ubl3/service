@@ -265,11 +265,12 @@ label > input#service_event_recursive_true ~ p
       // cursor: pointer;
     }
 
-    input[id^="service_event_service_event_files_attributes"] {
+    input[id^="service_event_service_event_files_attributes"], input {
       position: absolute;
       z-index: 1;
       margin: 5px;
     }
+
   }
 
   .file-container-object:hover {
@@ -278,11 +279,11 @@ label > input#service_event_recursive_true ~ p
 
   div {
     margin-top: 10px;
-    display: block;
+    display: inline-block;
     width: 100px;
     position: relative;
     cursor: pointer;
-    
+
     span {
       cursor: pointer;
     }

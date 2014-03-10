@@ -132,7 +132,10 @@ $(document).ready ->
 					div_obj.className = "file-container-object"
 					div_obj.innerHTML = ['<img class="thumb" src="', reader.result,
 	                            '" title="', escape(file.name), '"/>'].join('')
-					$(div_obj).insertBefore("div.file-container > div.btn.btn-success")
+					$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
+					$(div_obj).insertBefore("div.file-container > br")
 				reader.readAsDataURL(file)
 			doGetThumbnail(file) for file in data.files
+			data.context = $("div#file-submit").click(->
+				data.submit())
 		})
