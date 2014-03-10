@@ -125,21 +125,14 @@ $(document).ready ->
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
 	$("[id^='edit_service_event']").fileupload({
 		add: (e, data) -> 
-			doGetThumbnail = (data) ->
+			doGetThumbnail = (file) ->
 				reader = new FileReader()
-				doGetPreview = (data) ->
-					console.log(reader + " path is valid")
-					span = document.createElement('span')
-					span.innerHTML = ['<img class="thumb" src="', reader.readAsDataURL(file),
-	                            '" title="', escape(data.name), '"/>'].join('')
-					$(span).appendTo(document.body)
-				reader.onloadend = doGetPreview(data)
+				reader.onloadend = (e) ->
+					div_obj = document.createElement("div")
+					div_obj.className = "file-container-object"
+					div_obj.innerHTML = ['<img class="thumb" src="', reader.result,
+	                            '" title="', escape(file.name), '"/>'].join('')
+					$(div_obj).insertBefore("div.file-container > div.btn.btn-success")
+				reader.readAsDataURL(file)
 			doGetThumbnail(file) for file in data.files
-
-			# reader = new FileReader()
-			# console.log(reader)
-			# console.log(data)
-			# reader.onloadend = ((data) ->
-			# 	a = this.readAsDataURL(data)
-			# 	console.log(a))
 		})

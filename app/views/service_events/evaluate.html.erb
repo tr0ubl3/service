@@ -48,7 +48,7 @@
 				<% else %>
 					<div class="btn btn-success">
 						<span><i class="icon-plus icon-white"></i> Add files...</span>
-						<%= file.file_field :file %>
+						<%= file.file_field :file, :multiple => true %>
 					</div>
 				<% end %>
 			<% end %>
