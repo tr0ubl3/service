@@ -133,9 +133,27 @@ $(document).ready ->
 					div_obj.innerHTML = ['<img class="thumb" src="', reader.result,
 	                            '" title="', escape(file.name), '"/>'].join('')
 					$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
-					$(div_obj).insertBefore("div.file-container > br")
+					data.context = $(div_obj).insertBefore("div.file-container > br")
 				reader.readAsDataURL(file)
 			doGetThumbnail(file) for file in data.files
-			data.context = $("div#file-submit").click(->
-				data.submit())
+			$("div#file-submit").on("click", ->
+				if data.files.length isnt 0
+					if (data.context.is(":visible"))
+						data.submit())
+		change:	(e, data) ->
+			$("div#file-remove").on("click", ->
+				rmEntities = $("div.file-container > div.file-container-object").has("input.destroy:checkbox:checked")
+				console.log(data.files.length)
+				$.each(rmEntities, ->
+					a = $(@).children("img").attr("title")
+					b = data.files.filter( (obj) ->
+						obj.name is a )
+					console.log(b, data.files.indexOf(b[0]))
+					data.files.splice(data.files.indexOf(b[0]), 1)
+					console.log(a, "i have the title")
+					console.log(data.files)
+					)
+				rmEntities.remove()
+				$(@).trigger("change")
+				)
 		})
