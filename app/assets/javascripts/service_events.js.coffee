@@ -124,6 +124,7 @@ $(document).ready ->
 		# console.log(a+"val"+peval)
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
 	$("[id^='edit_service_event']").fileupload({
+		dataType: "script"
 		add: (e, data) -> 
 			doGetThumbnail = (file) ->
 				reader = new FileReader()
@@ -140,20 +141,31 @@ $(document).ready ->
 				if data.files.length isnt 0
 					if (data.context.is(":visible"))
 						data.submit())
-		change:	(e, data) ->
 			$("div#file-remove").on("click", ->
 				rmEntities = $("div.file-container > div.file-container-object").has("input.destroy:checkbox:checked")
-				console.log(data.files.length)
-				$.each(rmEntities, ->
-					a = $(@).children("img").attr("title")
-					b = data.files.filter( (obj) ->
-						obj.name is a )
-					console.log(b, data.files.indexOf(b[0]))
-					data.files.splice(data.files.indexOf(b[0]), 1)
-					console.log(a, "i have the title")
-					console.log(data.files)
-					)
+				# console.log(data.files.length)
+				# $.each(rmEntities, ->
+				# 	a = $(@).children("img").attr("title")
+				# 	b = data.files.filter( (obj) ->
+				# 		obj.name is a )
+				# 	console.log(b, data.files.indexOf(b[0]))
+				# 	data.files.splice(data.files.indexOf(b[0]), 1)
+				# 	console.log(a, "i have the title")
+				# 	console.log(data.files)
+				# 	)
 				rmEntities.remove()
-				$(@).trigger("change")
 				)
+		progressall: (e, data) ->
+			progress = parseInt(data.loaded / data.total * 100, 10)
+			progressbar = $("div.file-container > div.progress")
+			progressbar.css("display", "block")
+			progressbar.children("p").first().text((data.bitrate / (1000000 * 8)).toFixed(2) + " MB/s")
+			progressbar.children("div").first().css("width", progress + '%')
+			# console.log(data.bitrate / (1000000 * 8))
+		done: (e, data) ->
+			$("div.file-container > div.progress").css("display", "none")
+		always: (e, data) -> 
+			# $("div.file-container > div.progress > p").before(data.files[data.index].name)
+			# $("div.file-container > div.progress > p").append("<span>"+data.files[0].name+"</span>")
+			# console.log(data.files[0].name)
 		})

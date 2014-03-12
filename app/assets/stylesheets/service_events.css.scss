@@ -301,4 +301,13 @@ label > input#service_event_recursive_true ~ p
       cursor: pointer;
     }
   }
+
+  div.progress {
+    display: none;
+    height: 40px;
+    width: 100%;
+    div.bar {
+      margin: 0;
+    }
+  }
 }
