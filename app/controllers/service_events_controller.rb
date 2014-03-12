@@ -98,7 +98,8 @@ class ServiceEventsController < ApplicationController
 	
 	def evaluate
 		@event = ServiceEvent.find(params[:id])
-		@files = @event.service_event_files.build
+		@event.service_event_files.build
+		@event.alarms.build
 	end
 
 	def create_evaluate

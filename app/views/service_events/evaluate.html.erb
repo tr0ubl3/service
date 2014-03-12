@@ -16,16 +16,18 @@
 	</div>
 
 	<div class="control-group">
-    <%= f.label(:alarm_code, 'Error codes', class: 'control-label') %>
-	    <div class="controls input-append">
-	      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
-	      <button id="acjs" class="btn" type="button">Insert alarm</button>
-	    </div>
+    <%= f.label :alarms, 'Error codes', class: 'control-label' %>
+    <div class="controls input-append">
+      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
+      <button id="acjs" class="btn" type="button">Insert alarm</button>
+    </div>
 	    <div id="acdp" style="display: block">
-	      <% @event.alarms.each do |alarm| %>
-	        <p class="alarm_code_add" data-alarmnumber="<%= alarm.number %>"><%= alarm.number %> - <%= alarm.text %></p>
-	        <input id="alarms" multiple="multiple" name="alarms[]" type="hidden" value="<%= alarm.id %>" />
-	      <% end %>
+		    <%= f.fields_for :alarms do |alarm| %>
+			    <% if alarm.object.persisted? %>
+			        <p class="alarm_code_add" data-alarmnumber="<%= alarm.object.number %>"><%= alarm.object.number %> - <%= alarm.object.text %></p>
+			        <%= alarm.hidden_field :id, :multiple => true, :name => "service_event[alarm_ids][]", value: alarm.object.id %>
+		        <% end %>
+		    <% end %>
 	    </div>
 	</div>
 

@@ -55,6 +55,8 @@ describe ServiceEvent do
 	it { should allow_mass_assignment_of(:event_type) }
 	it { should allow_mass_assignment_of(:event_description) }
 	it { should allow_mass_assignment_of(:hour_counter) }
+	it { should allow_mass_assignment_of(:service_event_files_attributes) }
+	it { should allow_mass_assignment_of(:alarms_attributes) }
 	it { should_not allow_mass_assignment_of(:event_name) }
 	it { should accept_nested_attributes_for(:alarms) }
 	it { should belong_to(:machine) }

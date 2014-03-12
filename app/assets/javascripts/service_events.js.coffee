@@ -62,7 +62,7 @@ $(document).ready ->
 		$("<input />",
 			id: "alarms"
 			multiple: "true"
-			name: "alarms[]"
+			name: "service_event[alarm_ids][]"
 			type: "hidden"
 			value: alarm_id)
 		.appendTo("#acdp")
