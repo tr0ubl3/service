@@ -75,6 +75,7 @@ gem 'font-awesome-rails'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'active_attr'
+gem 'rmagick', '2.13.2'
 gem 'carrierwave'
 
 # To use Jbuilder templates for JSON

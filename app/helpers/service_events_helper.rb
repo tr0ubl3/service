@@ -30,4 +30,15 @@ module ServiceEventsHelper
 			return
 		end
 	end
+
+	def rowspan_files(event)
+		calc = (event.service_event_files.count / 4.0).round(2)
+		
+		if calc.modulo(1).round(2) < 0.5
+			return (calc + 2).round
+		else
+			return (calc + 1).round
+		end
+
+	end
 end

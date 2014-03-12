@@ -103,11 +103,34 @@
 		</tr>
 	</tbody>
 </table>
+<h3>Event evaluation details</h3>
 
-<% @event.service_event_files.each do |file| %>
-	<%= image_tag file.file.url %>
-<% end %>
-<br />
+<table class="event-table">
+	<tbody>
+		<tr>
+			<td colspan="6">
+				Event files
+			</td>
+		</tr>
+
+		<tr>
+			<td rowspan=<%= rowspan_files(@event) %>>Pictures</td>
+		</tr>
+		
+		<% @event.service_event_files.each_slice(4) do |set| %>
+			<tr>	
+				<% set.each do |file| %>
+					<td style="width: inherit;">
+						<%= link_to file.file.url.to_s do %>
+							<%= image_tag file.file.url(:thumb).to_s %>
+						<% end %>
+					</td>
+				<% end %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
 <div class="btn-group" style="margin-top: 10px;">
 	<%= evaluate_event_button(@event) %>
 </div>

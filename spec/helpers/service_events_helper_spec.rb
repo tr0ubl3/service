@@ -94,4 +94,29 @@ describe ServiceEventsHelper do
 			end
 		end
 	end
+
+	describe "#rowspan_files" do
+		let!(:event) { create(:service_event) }
+		
+		context "number of files divided / 4 < 0.5" do
+			before do
+				event.stub(:service_event_files).and_return([1])
+			end
+
+			it "returns value of 2" do
+				expect(helper.rowspan_files(event)).to eq(2)
+			end
+		end
+
+		context "number of files divided / 4 > 0.5" do
+			before do
+				event.stub(:service_event_files).and_return([1,2,3])
+			end
+
+			it "returns value of 2" do
+				expect(helper.rowspan_files(event)).to eq(2)
+			end
+		end
+	end
+	
 end

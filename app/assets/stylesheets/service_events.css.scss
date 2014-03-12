@@ -148,9 +148,14 @@ table.event-table > tbody {
 
 .event-table tr > td:first-child {
     background-color: rgba(243, 243, 243, 0.6);
+    width: 20%;
 }
 
-table.event-table td[colspan="2"] {
+.event-table tr > td:nth-of-type(2) {
+  text-align: center;
+}
+
+table.event-table td[colspan="2"], table.event-table td[colspan="6"] {
     background-color: rgba(235, 235, 235, 0.8);
     padding: 5px;
     width: 100%;
