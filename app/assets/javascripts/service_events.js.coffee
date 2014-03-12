@@ -162,9 +162,9 @@ $(document).ready ->
 			progressbar.children("p").first().text((data.bitrate / (1000000 * 8)).toFixed(2) + " MB/s")
 			progressbar.children("div").first().css("width", progress + '%')
 			# console.log(data.bitrate / (1000000 * 8))
-		done: (e, data) ->
-			$("div.file-container > div.progress").css("display", "none")
-		always: (e, data) -> 
+		# done: (e, data) ->
+			# $("div.file-container > div.progress").css("display", "none")
+		# always: (e, data) -> 
 			# $("div.file-container > div.progress > p").before(data.files[data.index].name)
 			# $("div.file-container > div.progress > p").append("<span>"+data.files[0].name+"</span>")
 			# console.log(data.files[0].name)
