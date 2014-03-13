@@ -120,7 +120,7 @@
 		<% @event.service_event_files.each_slice(4) do |set| %>
 			<tr>	
 				<% set.each do |file| %>
-					<td style="width: inherit;">
+					<td class="with-content">
 						<%= link_to file.file.url.to_s do %>
 							<%= image_tag file.file.url(:thumb).to_s %>
 						<% end %>
