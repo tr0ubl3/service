@@ -121,7 +121,7 @@
 			<tr>	
 				<% set.each do |file| %>
 					<td class="with-content">
-						<%= link_to file.file.url.to_s do %>
+						<%= link_to file.file.url.to_s, :rel => "pictures" do %>
 							<%= image_tag file.file.url(:thumb).to_s %>
 						<% end %>
 					</td>
