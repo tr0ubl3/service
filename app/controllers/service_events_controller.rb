@@ -108,6 +108,7 @@ class ServiceEventsController < ApplicationController
 		if @event.update_attributes(params[:service_event])
 			redirect_to service_event_path(@event), notice: "Yeeey, is saved!"
 		else
+			render :evaluate
 			flash.now[:alert] = "error" 
 		end
 	end

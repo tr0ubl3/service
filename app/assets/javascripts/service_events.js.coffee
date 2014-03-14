@@ -126,7 +126,7 @@ $(document).ready ->
 		# console.log(a+"val"+peval)
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
 	$("[id^='edit_service_event']").fileupload({
-		dataType: "script"
+		acceptFileTypes: /(\.|\/)(gif|jpe?g|png|log|mp4)$/i
 		add: (e, data) -> 
 			doGetThumbnail = (file) ->
 				reader = new FileReader()
@@ -138,7 +138,32 @@ $(document).ready ->
 					$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
 					data.context = $(div_obj).insertBefore("div.file-container > br")
 				reader.readAsDataURL(file)
-			doGetThumbnail(file) for file in data.files
+			doMakeVideoThumbnail = (file) -> 
+				div_obj = document.createElement("div")
+				div_obj.className = "file-container-object"
+				div_obj.innerHTML = ["<i class='fa fa-film'></i>"].join('')
+				$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
+				data.context = $(div_obj).insertBefore("div.file-container > br")
+
+			doGetLogFileThumbnail = (file) ->
+				div_obj = document.createElement("div")
+				div_obj.className = "file-container-object"
+				div_obj.innerHTML = ["<i class='fa fa-file-text-o'></i>"].join('')
+				$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
+				data.context = $(div_obj).insertBefore("div.file-container > br")
+
+			image_types = /(\.|\/)(gif|jpe?g|png)$/i
+			video_types = /(\.|\/)(mp4)$/i
+			log_file_types = /(\.|\/)(txt|log|text)$/i
+
+			for file in data.files 
+				if image_types.test(file.name)
+					doGetThumbnail(file)
+				else if video_types.test(file.name)
+					doMakeVideoThumbnail(file)
+				else if log_file_types.test(file.name)
+					doGetLogFileThumbnail(file)
+			
 			$("div#file-submit").on("click", ->
 				if data.files.length isnt 0
 					if (data.context.is(":visible"))
