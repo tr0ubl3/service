@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #= require fancybox
+#= require mediaelement-and-player
 
 
 $(document).ready ->
@@ -197,3 +198,4 @@ $(document).ready ->
 			# console.log(data.files[0].name)
 		})
 	$("table.event-table a").fancybox()
+	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})

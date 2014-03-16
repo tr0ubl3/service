@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // *= require fancybox
+// *= require mediaelementplayer
 
 #event_description {
 	width: 100%;
@@ -283,7 +284,6 @@ label > input#service_event_recursive_true ~ p
       z-index: 1;
       margin: 5px;
     }
-
   }
 
   .file-container-object:hover {
@@ -323,4 +323,8 @@ label > input#service_event_recursive_true ~ p
       margin: 0;
     }
   }
+}
+
+div[id^='mep_'] {
+  margin: 0 auto;
 }

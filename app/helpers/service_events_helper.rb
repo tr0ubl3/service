@@ -49,9 +49,7 @@ module ServiceEventsHelper
 				image_tag file.file.url(:thumb).to_s
 			end
 		when Proc.new { |type| type.include? "video" }
-			link_to file.file.url.to_s, :rel => "videos" do
-				video_tag file.file.url.to_s
-			end
+			video_tag file.file.url.to_s, size: "180x180", preload: "none"
 		end
 	end
 end
