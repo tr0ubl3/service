@@ -118,5 +118,30 @@ describe ServiceEventsHelper do
 			end
 		end
 	end
-	
+
+	describe "#thumbnail_assign" do
+		let!(:file) do
+			stub_model(ServiceEventFile, :id => 5, :random_attribute => true)
+		end
+
+		context "file is an image" do
+			before do
+				file.stub(:mime_type).and_return("image/png")
+			end
+			
+			it "assigns the thumbnail version of the image" do
+				expect(helper.thumbnail_assign(file)).to have_selector("a[rel='pictures']")
+			end
+		end
+
+		context "file is a video" do
+			before do
+				file.stub(:mime_type).and_return("video/mp4")
+			end
+
+			it "assigns the uniq thumbnail for video" do
+				expect(helper.thumbnail_assign(file)).to have_selector("a[rel='videos']")
+			end
+		end
+	end
 end

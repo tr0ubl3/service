@@ -112,19 +112,12 @@
 				Event files
 			</td>
 		</tr>
-
-		<tr>
-			<td rowspan=<%= rowspan_files(@event) %>>Pictures</td>
-		</tr>
-		
 		<% @event.service_event_files.each_slice(4) do |set| %>
 			<tr>	
 				<% set.each do |file| %>
-					<td class="with-content">
-						<%= link_to file.file.url.to_s, :rel => "pictures" do %>
-							<%= image_tag file.file.url(:thumb).to_s %>
-						<% end %>
-					</td>
+						<td class="with-content">
+							<%= thumbnail_assign(file) %>
+						</td>
 				<% end %>
 			</tr>
 		<% end %>

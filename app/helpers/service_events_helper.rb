@@ -41,4 +41,17 @@ module ServiceEventsHelper
 		end
 
 	end
+
+	def thumbnail_assign(file)
+		case file.mime_type
+		when Proc.new { |type| type.include? "image" }
+			link_to file.file.url.to_s, :rel => "pictures" do
+				image_tag file.file.url(:thumb).to_s
+			end
+		when Proc.new { |type| type.include? "video" }
+			link_to file.file.url.to_s, :rel => "videos" do
+				video_tag file.file.url.to_s
+			end
+		end
+	end
 end
