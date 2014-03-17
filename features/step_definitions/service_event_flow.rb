@@ -25,6 +25,16 @@ When(/^I finished form$/) do
 	click_button "Save"
 end
 
-Then(/^I submit form and event gets into solving state$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I submit form and event gets into "(.*?)" state$/) do |arg1|
+  @event.reload
+  expect(@event.current_state).to eq(arg1)
+end
+
+Then(/^I'm redirected to show event page$/) do
+  current_path.should == service_event_path(@event)
+end
+
+Then(/^I see evaluation details$/) do
+  @event.update_attribute(:evaluation_description, "Just another test")
+  expect(page).to have_content(@event.evaluation_description)
 end

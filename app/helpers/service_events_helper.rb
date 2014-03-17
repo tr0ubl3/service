@@ -27,7 +27,7 @@ module ServiceEventsHelper
 		if event.open?
 			link_to "Evaluate event", evaluate_service_event_path(event), :class => "btn btn-primary"
 		else
-			return
+			render :partial => "evaluation_details", :locals => { :event => @event }
 		end
 	end
 

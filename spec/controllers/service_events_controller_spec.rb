@@ -101,4 +101,35 @@ describe ServiceEventsController do
 			expect(assigns[:event]).to eq(event)
 		end
 	end
+
+	describe "POST create_evaluate" do
+		let(:event) { create(:service_event) }
+		let(:params) do {
+			"recursive" => false,
+			"evaluation_description" => "testing"
+		}
+		end
+
+		it 'sends update message to ServiceEvent model' do
+			event.should_receive(:update_attributes)
+			post :create_evaluate, id: event.id, :event => params
+		end
+
+		context "evaluation is successfully submited" do
+			it "redirects to show service event" do
+				post :create_evaluate, id: event.id, event: params 
+				expect(response).to redirect_to service_event_path(event)
+			end
+
+			it "assigns a flash message to the view" do
+				post :create_evaluate, id: event.id, event: params 
+				expect(flash[:notice]).not_to be_nil
+			end
+
+			it "sets event to evaluated state" do
+				post :create_evaluate, id: event.id, event: params 
+				expect(event.current_state).to eq("evaluated")
+			end
+		end
+	end
 end

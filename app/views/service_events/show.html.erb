@@ -103,27 +103,5 @@
 		</tr>
 	</tbody>
 </table>
-<h3>Event evaluation details</h3>
 
-<table class="event-table">
-	<tbody>
-		<tr>
-			<td colspan="6">
-				Event files
-			</td>
-		</tr>
-		<% @event.service_event_files.each_slice(4) do |set| %>
-			<tr>	
-				<% set.each do |file| %>
-						<td class="with-content">
-							<%= thumbnail_assign(file) %>
-						</td>
-				<% end %>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
-<div class="btn-group" style="margin-top: 10px;">
-	<%= evaluate_event_button(@event) %>
-</div>
+<%= evaluate_event_button(@event) %>

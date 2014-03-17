@@ -90,7 +90,7 @@ describe ServiceEventsHelper do
 			end
 
 			it "returns nothing when event is in other state" do
-				expect(helper.evaluate_event_button(event)).to be_nil
+				expect(helper.evaluate_event_button(event)).to render_template(:partial => '_evaluation_details')
 			end
 		end
 	end

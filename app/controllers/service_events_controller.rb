@@ -104,9 +104,10 @@ class ServiceEventsController < ApplicationController
 
 	def create_evaluate
 		@event = ServiceEvent.find(params[:id])
-		
+		@event.evaluator = current_user.id
 		if @event.update_attributes(params[:service_event])
 			redirect_to service_event_path(@event), notice: "Yeeey, is saved!"
+			@event.evaluate
 		else
 			render :evaluate
 			flash.now[:alert] = "error" 

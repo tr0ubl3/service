@@ -205,7 +205,11 @@ table.event-table .td-alarm-reset {
   background-color: inherit !important;
 }
 
-div#recursive_event {
+table.event-table + .btn {
+  margin-top: 10px;
+}
+
+div#recurrent_event {
   div.modal-body {
        div {
           display: inline-block;
@@ -247,12 +251,12 @@ div#recursive_event {
   }
 }
 
-label > input#service_event_recursive_true + label {
+label > input#service_event_recurrent_true + label {
   display: inline;
   font-weight: normal;
 }
 
-label > input#service_event_recursive_true ~ p {
+label > input#service_event_recurrent_true ~ p {
   display: inline;
 }
 
@@ -262,8 +266,8 @@ label > input#service_event_recursive_true ~ p {
   // text-shadow: 2px 2px #E2E2E2;
 }
 
-label[for=recursive],
-label > input#service_event_recursive_true ~ p
+label[for=recurrent],
+label > input#service_event_recurrent_true ~ p
 {
   font-size: 14px;
   font-weight: normal;

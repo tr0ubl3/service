@@ -19,14 +19,14 @@
 	<%= f.hidden_field :parent_event, value: @event.parent_event %>
 
 	<div class="control-group">
-		<%= f.label(:recursive, 'Recurrent event?') %>
+		<%= f.label(:recurrent, 'Recurrent event?') %>
 		<label class='radio'>
-			<%= f.radio_button(:recursive, true) %>
-			<%= label_tag(:recursive, 'True') %>
+			<%= f.radio_button(:recurrent, true) %>
+			<%= label_tag(:recurrent, 'True') %>
 		</label>
 		<label class='radio'>
-			<%= f.radio_button(:recursive, false, :checked => false) %>
-			<%= label_tag(:recursive, 'False') %>
+			<%= f.radio_button(:recurrent, false, :checked => false) %>
+			<%= label_tag(:recurrent, 'False') %>
 		</label>
 		<%= render(:partial => "evaluate_modal", :locals => { :event => @event }) %>
 	</div>

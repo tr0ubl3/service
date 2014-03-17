@@ -49,6 +49,12 @@ describe ServiceEvent do
 		event.hour_counter = 1234
 		expect(event.hour_counter).to eq(1234)
 	end
+
+	it "has evaluator" do
+		user = create(:user)
+		event.evaluator = user.id
+		expect(event.evaluator).to eq(user.id)
+	end
 	
 	it { should allow_mass_assignment_of(:machine_id) }
 	it { should allow_mass_assignment_of(:event_date) }
@@ -57,6 +63,8 @@ describe ServiceEvent do
 	it { should allow_mass_assignment_of(:hour_counter) }
 	it { should allow_mass_assignment_of(:service_event_files_attributes) }
 	it { should allow_mass_assignment_of(:alarms_attributes) }
+	it { should allow_mass_assignment_of(:evaluator) }
+	
 	it { should_not allow_mass_assignment_of(:event_name) }
 	it { should accept_nested_attributes_for(:alarms) }
 	it { should belong_to(:machine) }
@@ -105,7 +113,7 @@ describe ServiceEvent do
 			expect(event.user_id).to eq(user.id)
 		end
 
-		it "updates the hour counter of mahcine" do
+		it "updates the hour counter of machine" do
 			pending
 		end
 
@@ -132,14 +140,18 @@ describe ServiceEvent do
 		
 		describe "#opening" do
 			it "saves open state for event" do
-				event.save! & event.reload
+				event.save! && event.reload
 				expect(event.open?).to be_true 	
 			end 
 		end
 		
 		describe "#evaluate" do
+			before do
+				event.save!
+			end
+
 			it "saves evaluated state for event" do
-				event.evaluate
+				event.evaluate && event.reload
 				expect(event.evaluated?).to be_true 	
 			end 
 		end

@@ -1,0 +1,60 @@
+<h3>Event evaluation</h3>
+
+<table class="event-table">
+	<tbody>
+		
+		<tr>
+			<td colspan="6">
+				Evaluation details
+			</td>
+		</tr>
+
+		<tr>
+			<td>Evaluation date</td>
+			<td><%= event.states.where(:state => "evaluated").first.created_at %></td>
+		</tr>
+
+		<tr>
+			<td>Evaluator</td>
+			<td><%= event.evaluator %></td>
+		</tr>
+
+		<tr>
+			<td>Recurrent event?</td>
+			<td><%= event.recurrent.to_s.titleize %></td>
+		</tr>
+
+		<tr>
+			<td>Parent event</td>
+			<td><%= event.parent_event %></td>
+		</tr>
+
+		<tr>
+			<td colspan="6">
+				Event evaluation description
+			</td>			
+		</tr>
+
+		<tr>
+			<td colspan="6" class="event-description">
+				<%= event.evaluation_description %>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="6">
+				Event files
+			</td>
+		</tr>
+
+		<% event.service_event_files.each_slice(4) do |set| %>
+			<tr>	
+				<% set.each do |file| %>
+						<td class="with-content">
+							<%= thumbnail_assign(file) %>
+						</td>
+				<% end %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
