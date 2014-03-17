@@ -50,6 +50,10 @@ module ServiceEventsHelper
 			end
 		when Proc.new { |type| type.include? "video" }
 			video_tag file.file.url.to_s, size: "180x180", preload: "none"
+		when Proc.new { |type| type.include? "text" }
+			link_to file.file.url.to_s, :rel => "logs", class: "fancybox.iframe" do
+				content_tag :div, style: "width:200px; height: 200px;"
+			end
 		end
 	end
 end

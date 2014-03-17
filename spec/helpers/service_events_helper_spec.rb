@@ -143,5 +143,15 @@ describe ServiceEventsHelper do
 				expect(helper.thumbnail_assign(file)).to have_selector("a[rel='videos']")
 			end
 		end
+
+		context "file is a logfile" do
+			before do
+				file.stub(:mime_type).and_return("text/log")
+			end
+
+			it "assigns the uniq thumbnail for video" do
+				expect(helper.thumbnail_assign(file)).to have_selector("a[rel='logs']")
+			end
+		end
 	end
 end
