@@ -14,6 +14,12 @@ let!(:service_event) { create(:service_event) }
 
 	after do
 		EventEvaluationUploader.enable_processing = false
-		@uploader.remove!
+		# @uploader.remove!
+	end
+
+	context 'the thumb version' do
+	    it "should scale down a landscape image to be exactly 180 by 180 pixels" do
+	      @uploader.thumb.should have_dimensions(180, 180)
+	    end
 	end
 end
