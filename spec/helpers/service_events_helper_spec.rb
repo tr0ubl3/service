@@ -150,7 +150,7 @@ describe ServiceEventsHelper do
 			end
 
 			it "assigns the uniq thumbnail for video" do
-				expect(helper.thumbnail_assign(file)).to have_selector("a[rel='logs']")
+				expect(helper.thumbnail_assign(file)).to have_selector("a.fancybox.iframe")
 			end
 		end
 	end
