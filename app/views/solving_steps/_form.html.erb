@@ -1,0 +1,25 @@
+<%= form_for(@solving_step) do |f| %>
+  <% if @solving_step.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@solving_step.errors.count, "error") %> prohibited this solving_step from being saved:</h2>
+
+      <ul>
+      <% @solving_step.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :service_event_id %><br />
+    <%= f.number_field :service_event_id %>
+  </div>
+  <div class="field">
+    <%= f.label :step %><br />
+    <%= f.text_field :step %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

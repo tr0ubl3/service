@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Service event:</b>
+  <%= @solving_step.service_event_id %>
+</p>
+
+<p>
+  <b>Step:</b>
+  <%= @solving_step.step %>
+</p>
+
+
+<%= link_to 'Edit', edit_solving_step_path(@solving_step) %> |
+<%= link_to 'Back', solving_steps_path %>

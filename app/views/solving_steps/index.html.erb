@@ -1,0 +1,27 @@
+<script type="text/x-handlebars">
+  <h1>Listing solving_steps</h1>
+
+  <table>
+    <tr>
+      <th>Service event</th>
+      <th>Step</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @solving_steps.each do |solving_step| %>
+    <tr>
+      <td><%= solving_step.service_event_id %></td>
+      <td><%= solving_step.step %></td>
+      <td><%= link_to 'Show', solving_step %></td>
+      <td><%= link_to 'Edit', edit_solving_step_path(solving_step) %></td>
+      <td><%= link_to 'Destroy', solving_step, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'New Solving step', new_solving_step_path %>
+</script>
