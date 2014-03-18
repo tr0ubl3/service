@@ -154,4 +154,42 @@ describe ServiceEventsHelper do
 			end
 		end
 	end
+
+	describe "evaluator_full_name" do
+		let!(:user) { create(:user) }
+		
+		it "return the evaluator full_name" do
+			expect(helper.evaluator_full_name(user.id)).to eq(user.full_name)
+		end
+	end
+
+	describe "#parent_event_name" do
+		let!(:event) { create(:service_event) }
+
+		context "parent event exists" do
+			it "return the event name" do
+				expect(helper.parent_event_name(event.id)).to eq(event.event_name)
+			end
+		end
+
+		context "parent event don't exist" do
+			it "returns N/A" do
+				expect(helper.parent_event_name(nil)).to eq("N/A")
+			end
+		end
+	end
+	
+	describe "#solve_event_button" do
+		let!(:event) { create(:service_event) }
+		
+		context "event is in evaluated state" do
+			before do
+				event.states.create! state: "evaluated"
+			end
+
+			it "it shows a button on show#service_event" do
+				expect(helper.solve_event_button(event)).to have_link("Solve event", :href => solve_service_event_path(event))
+			end
+		end
+	end
 end

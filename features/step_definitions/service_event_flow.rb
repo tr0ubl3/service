@@ -1,4 +1,4 @@
-When(/^I'm on a open event page$/) do
+When(/^I'm on "(.*?)" event page$/) do |arg1|
   @event = create(:service_event, user: @admin)
   visit service_event_path(@event)
   current_path.should == service_event_path(@event)
@@ -35,6 +35,14 @@ Then(/^I'm redirected to show event page$/) do
 end
 
 Then(/^I see evaluation details$/) do
-  @event.update_attribute(:evaluation_description, "Just another test")
-  expect(page).to have_content(@event.evaluation_description)
+  expect(page).to have_content("The machine doesn't have power")
+end
+
+Then(/^I don't see Evaluate event button$/) do
+  expect(page).not_to have_selector("a", text: "Evaluate event")
+end
+
+When(/^I'm on show event page$/) do
+  visit service_event_path(@event)
+  current_path.should == service_event_path(@event)
 end

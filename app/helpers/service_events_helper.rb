@@ -56,4 +56,22 @@ module ServiceEventsHelper
 			end
 		end
 	end
+
+	def evaluator_full_name(id)
+		User.find(id).full_name
+	end
+
+	def parent_event_name(id)
+		if id
+			return ServiceEvent.find(id).event_name
+		else
+			return "N/A"
+		end
+	end
+
+	def solve_event_button(event)
+		if event.evaluated?
+			link_to "Solve event", solve_service_event_path(event), :class => "btn btn-primary"
+		end
+	end
 end

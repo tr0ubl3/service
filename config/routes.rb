@@ -34,6 +34,7 @@ Service::Application.routes.draw do
     member do
       get :evaluate
       put :create_evaluate
+      get :solve
     end
   end  
 
