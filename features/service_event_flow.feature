@@ -16,9 +16,9 @@ Background:
 		And I'm logged in
 
 Scenario: Admin goes from open event page to evaluate event page
-	When I'm on "a open" event page
+	When I'm on "open" event page
 	Then I click button "Evaluate event"
-	And I see evaluate event page
+	And I see "evaluate" event page
 
 Scenario: Admin evaluates an event
 	Given I'm on evaluate event page
@@ -29,6 +29,6 @@ Scenario: Admin evaluates an event
 	And I don't see Evaluate event button
 
 Scenario: Admin goes from show event page to solve event page
-	When I'm on "an evaluated" event page
+	When I'm on "evaluated" event page
 	Then I click button "Solve event"	
-	And I see solve event page
+	And I see "solve" event page

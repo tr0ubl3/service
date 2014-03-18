@@ -113,6 +113,10 @@ class ServiceEventsController < ApplicationController
 			flash.now[:alert] = "error" 
 		end
 	end
+
+	def solve
+		
+	end
 	
 	private
 	def check_event_confirmation(id)

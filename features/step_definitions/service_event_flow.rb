@@ -1,5 +1,6 @@
 When(/^I'm on "(.*?)" event page$/) do |arg1|
-  @event = create(:service_event, user: @admin)
+  @event = create(:service_event, user: @admin, evaluator: @admin.id)
+  @event.states.create! state: arg1
   visit service_event_path(@event)
   current_path.should == service_event_path(@event)
 end
@@ -8,8 +9,13 @@ Then(/^I click button "(.*?)"$/) do |arg1|
   click_link arg1
 end
 
-Then(/^I see evaluate event page$/) do
-  current_path.should == evaluate_service_event_path(@event)
+Then(/^I see "(.*?)" event page$/) do |arg1|
+  case arg1
+  when "evaluate"
+    current_path.should == evaluate_service_event_path(@event)
+  when "solve"
+    current_path.should == solve_service_event_path(@event)
+  end
 end
 
 Given(/^I'm on evaluate event page$/) do
@@ -42,7 +48,6 @@ Then(/^I don't see Evaluate event button$/) do
   expect(page).not_to have_selector("a", text: "Evaluate event")
 end
 
-When(/^I'm on show event page$/) do
-  visit service_event_path(@event)
-  current_path.should == service_event_path(@event)
+Then(/^I see solve event page$/) do
+  pending # express the regexp above with the code you wish you had
 end
