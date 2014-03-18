@@ -141,5 +141,4 @@ class ServiceEventsController < ApplicationController
 	# 	flash[:notice] = "Event permanently deleted !"
 	# 	redirect_to(:action => 'list')
 	# end
-
 end

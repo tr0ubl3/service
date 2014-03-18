@@ -15,6 +15,8 @@
 //= require jquery-fileupload/basic
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.ro
+//= require ember
+//= require ember/service
 //= require_tree .
 
 $(document).ready(function() {
