@@ -77,9 +77,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'active_attr'
 gem 'rmagick', '2.13.2'
 gem 'carrierwave'
-gem 'ember-rails'
-gem 'ember-source', '1.4.0'
-gem 'handlebars', '~> 0.6.0'
+gem 'ember-rails', github: 'emberjs/ember-rails'
+# gem 'handlebars', '~> 0.6.0'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

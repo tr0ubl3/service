@@ -47,5 +47,5 @@ Service::Application.configure do
   #   enable_starttls_auto: true
   # }
   config.action_mailer.delivery_method = :test
-  # config.ember.variant = :development
+  config.ember.variant = :development
 end
