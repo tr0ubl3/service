@@ -5,4 +5,6 @@
 #= require ./service
 
 # for more details see: http://emberjs.com/guides/application/
-window.Service = Ember.Application.create()
+window.Service = Ember.Application.create({
+	LOG_TRANSITIONS: true
+	})

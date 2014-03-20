@@ -12,18 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-fileupload/basic
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.ro
-//= require_tree .
+//= require bootstrap
 
 $(document).ready(function() {
-	$('#test').popover();
-	$('#event_date').datepicker({
-               format: 'dd.mm.yyyy',
-               autoclose: true,
-               startView: 0
-               });
 	$('.field_with_errors').closest('.control-group').addClass('error');
-	var notification_badge = $('span.badge.badge-important.event-notification-bullet');
+	// var notification_badge = $('span.badge.badge-important.event-notification-bullet');
 });

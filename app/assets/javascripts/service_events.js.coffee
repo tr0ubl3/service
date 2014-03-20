@@ -1,11 +1,19 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+#= require jquery-fileupload/basic
+#= require bootstrap-datepicker/core
+#= require bootstrap-datepicker/locales/bootstrap-datepicker.ro
 #= require fancybox
 #= require mediaelement-and-player
 
-
 $(document).ready ->
+	$('#event_date').datepicker({
+               format: 'dd.mm.yyyy',
+               autoclose: true,
+               startView: 0
+               })
+
 	EnteredArray = []
 	InvalidArray = []
 	ExistingArray = $("#acdp").find("p.alarm_code_add").map( -> 
