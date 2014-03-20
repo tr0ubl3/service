@@ -45,16 +45,16 @@ $(document).ready ->
 		$.ajax
 			url: "/service_events/new"
 			type: "get"
-			async: "false"
+			async: "true"
 			contentType: "json"
 			cache: "false"
 			data:
 				"search": value
 			dataType: "json"
-			complete: doCheckJsonResponse
+			success: doCheckJsonResponse
 	doCheckJsonResponse = (response) ->
-		console.log(response)
-		if response.length isnt 0 then doInsertAlarm(response)
+		# console.log(response.service_events[0].service_events.text)
+		if response.service_events.length isnt 0 then doInsertAlarm(response.service_events[0].service_events)
 		else
 			InvalidArray.push(temp_alarm_value)
 			alert("Invalid alarm")
@@ -62,9 +62,9 @@ $(document).ready ->
 	doAlarmError = ->
 		acfi.closest('.control-group').addClass('error')
 	doInsertAlarm = (json_data) ->
-		alarm_id = json_data[0].id
-		alarm_number = json_data[0].number
-		alarm_text = json_data[0].text
+		alarm_id = json_data.id
+		alarm_number = json_data.number
+		alarm_text = json_data.text
 		$('#acdp').css('display', 'block');
 		$("<p></p>",
 			text: alarm_number + " - " + alarm_text
