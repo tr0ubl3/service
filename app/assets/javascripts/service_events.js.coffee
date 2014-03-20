@@ -51,7 +51,7 @@ $(document).ready ->
 			data:
 				"search": value
 			dataType: "json"
-			complete: doCheckJsonResponse($(@))
+			complete: doCheckJsonResponse
 	doCheckJsonResponse = (response) ->
 		console.log(response)
 		if response.length isnt 0 then doInsertAlarm(response)

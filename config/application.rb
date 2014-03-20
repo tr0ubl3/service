@@ -65,5 +65,6 @@ module Service
 
     # config.cache_store = [ :file_store, "/tmp/rails-cache/" ]
     # config.assets.cache_store = [ :file_store, "/tmp/rails-cache/assets/#{Rails.env}/" ]
+    config.assets.precompile += Dir::entries("app/assets/javascripts").map{|f| f[/^(?!application\.).*\.js/]}.compact
   end
 end
