@@ -1,1 +1,0 @@
-Ember.TEMPLATES["ember/application"]=Ember.Handlebars.template(function(e,t,r,n,i){this.compilerInfo=[4,">= 1.0.0"],r=this.merge(r,Ember.Handlebars.helpers),i=i||{},i.buffer.push("<h1>Test</h1>\n")});

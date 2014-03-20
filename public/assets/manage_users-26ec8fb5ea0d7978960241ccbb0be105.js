@@ -1,1 +1,0 @@
-(function(){$(document).ready(function(){return $("td").find("#user_list").tooltip({placement:"right"})})}).call(this);

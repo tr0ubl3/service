@@ -6,7 +6,7 @@ if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
+  Bundler.require(:default, :assets, Rails.env)
 end
 
 module Service
@@ -65,6 +65,7 @@ module Service
 
     # config.cache_store = [ :file_store, "/tmp/rails-cache/" ]
     # config.assets.cache_store = [ :file_store, "/tmp/rails-cache/assets/#{Rails.env}/" ]
-    config.assets.precompile += Dir::entries("app/assets/javascripts").map{|f| f[/^(?!application\.).*\.js/]}.compact
+    config.assets.precompile += Dir::entries("app/assets/javascripts").map{|f| f[/^(?!application\.).*\.js/]}.compact + 
+                                Dir::entries("app/assets/stylesheets").map{|f| f[/^(?!application\.).*\.css/]}.compact 
   end
 end
