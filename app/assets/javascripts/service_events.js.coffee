@@ -51,8 +51,9 @@ $(document).ready ->
 			data:
 				"search": value
 			dataType: "json"
-			success: doCheckJsonResponse
+			complete: doCheckJsonResponse($(@))
 	doCheckJsonResponse = (response) ->
+		console.log(response)
 		if response.length isnt 0 then doInsertAlarm(response)
 		else
 			InvalidArray.push(temp_alarm_value)
