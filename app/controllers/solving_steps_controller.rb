@@ -10,6 +10,10 @@ class SolvingStepsController < ApplicationController
     end
   end
 
+  def lists
+    render json: SolvingStep.all
+  end
+
   # # GET /solving_steps/1
   # # GET /solving_steps/1.json
   # def show

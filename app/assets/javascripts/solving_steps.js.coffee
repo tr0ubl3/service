@@ -11,4 +11,5 @@ window.Service = Ember.Application.create(
 	rootElement: '#app'
 	LOG_TRANSITIONS: true
 	LOG_VIEW_LOOKUPS: true
-	)
+)
+Service.ApplicationAdapter = DS.RESTAdapter

@@ -5,8 +5,7 @@ Service::Application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
   
-  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions,
-            :solving_steps
+  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
   
   resources :general do
     collection do
@@ -36,6 +35,12 @@ Service::Application.routes.draw do
       get :evaluate
       put :create_evaluate
       get :solve
+    end
+  end
+
+  resources :solving_steps do
+    collection do
+      get :lists
     end
   end  
 
