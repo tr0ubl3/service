@@ -78,6 +78,7 @@ gem 'active_attr'
 gem 'rmagick', '2.13.2'
 gem 'carrierwave'
 gem 'ember-rails', github: 'emberjs/ember-rails'
+gem 'active_model_serializers'
 # gem 'handlebars', '~> 0.6.0'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

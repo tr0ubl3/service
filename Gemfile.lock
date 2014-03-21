@@ -320,6 +320,7 @@ PLATFORMS
 DEPENDENCIES
   active_attr
   active_link_to
+  active_model_serializers
   bcrypt-ruby (~> 3.0.0)
   bootstrap-datepicker-rails
   capybara!

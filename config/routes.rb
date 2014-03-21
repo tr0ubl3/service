@@ -1,14 +1,12 @@
 Service::Application.routes.draw do
   
-  resources :solving_steps
-
-
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
   
-  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions
+  resources :alarms, :manufacturers, :machine_owners, :machines, :manage_users, :sessions,
+            :solving_steps
   
   resources :general do
     collection do
