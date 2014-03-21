@@ -71,7 +71,7 @@ module ServiceEventsHelper
 
 	def solve_event_button(event)
 		if event.evaluated?
-			link_to "Solve event", solve_service_event_path(event), :class => "btn btn-primary"
+			link_to "Solve event", solving_steps_path, :class => "btn btn-primary"
 		end
 	end
 end
