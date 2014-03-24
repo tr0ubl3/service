@@ -11,3 +11,5 @@ Service.SolvingStepAdapter = DS.RESTAdapter.extend(
 		decamelized = Ember.String.decamelize(type)
 		Ember.String.pluralize(decamelized) + @get('suffix')
 )
+
+Service.ApplicationSerializer = DS.ActiveModelSerializer.extend({})

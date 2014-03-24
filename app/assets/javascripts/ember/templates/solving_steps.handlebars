@@ -1,6 +1,14 @@
 <h2>Steps</h2>
 	<ul>
 		{{#each}}
-			{{step}}
+			<li>
+				{{step}}
+			</li>
 		{{/each}}
 	</ul>
+<p>
+	{{#link-to 'solving_steps.new'}}
+		Insert a new solving step
+	{{/link-to}}
+</p>
+{{outlet}}

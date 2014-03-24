@@ -39,19 +39,19 @@ class SolvingStepsController < ApplicationController
 
   # # POST /solving_steps
   # # POST /solving_steps.json
-  # def create
-  #   @solving_step = SolvingStep.new(params[:solving_step])
+  def create
+    @solving_step = SolvingStep.new(params[:solving_step])
 
-  #   respond_to do |format|
-  #     if @solving_step.save
-  #       # format.html { redirect_to @solving_step, notice: 'Solving step was successfully created.' }
-  #       format.json { render json: @solving_step, status: :created, location: @solving_step }
-  #     else
-  #       # format.html { render action: "new" }
-  #       format.json { render json: @solving_step.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    respond_to do |format|
+      if @solving_step.save
+        # format.html { redirect_to @solving_step, notice: 'Solving step was successfully created.' }
+        format.json { render json: @solving_step, status: :created, location: @solving_step }
+      else
+        # format.html { render action: "new" }
+        format.json { render json: @solving_step.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # # PUT /solving_steps/1
   # # PUT /solving_steps/1.json

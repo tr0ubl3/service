@@ -2,7 +2,9 @@
 
 
 Service.Router.map ()->
-  @resource('solving_steps', {path: "/"})
+  @resource('solving_steps', {path: "/"}, ->
+  	@route('new')
+  )
 
 Service.Router.reopen(
   rootURL: '/solving_steps'
