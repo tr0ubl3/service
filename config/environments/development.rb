@@ -48,6 +48,4 @@ Service::Application.configure do
   # }
   config.action_mailer.delivery_method = :test
   config.ember.variant = :development
-  config.ember.ember_path = "app/assets/javascripts/ember/"
-  config.handlebars.templates_root = "ember/templates"
 end
