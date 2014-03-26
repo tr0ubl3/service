@@ -11,7 +11,7 @@ class ServiceEventsController < ApplicationController
 
 	def new
 		@event = ServiceEvent.new
-
+		@event.alarms.build
 		respond_to do |format|
 			format.html
 			format.json { render json: Alarm.search(params[:search]) }
@@ -25,9 +25,6 @@ class ServiceEventsController < ApplicationController
 		# hc = hour counter
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
 		if @event.save
-			if params[:alarms] != nil
-				@event.alarms << Alarm.find(params[:alarms])
-			end
 			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
 			# ServiceEventNotifier.confirmation(@event, @machine).deliver
 			# ServiceEventNotifier.notification(@event, @machine).deliver
@@ -105,7 +102,7 @@ class ServiceEventsController < ApplicationController
 	def create_evaluate
 		@event = ServiceEvent.find(params[:id])
 		@event.evaluator = current_user.id
-		if @event.update_attributes(params[:service_event])
+		if @event.update_attributes(params[:event])
 			redirect_to service_event_path(@event), notice: "Yeeey, is saved!"
 			@event.evaluate
 		else
