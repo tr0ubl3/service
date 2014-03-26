@@ -9,7 +9,8 @@ Service.SolvingStepAdapter = DS.RESTAdapter.extend(
 	suffix: '.json'
 	pathForType: (type) ->
 		decamelized = Ember.String.decamelize(type)
-		Ember.String.pluralize(decamelized) + @get('suffix')
+		event_param = "?event="+location.search.match(/\?event\=([\d]+)/)[1]
+		Ember.String.pluralize(decamelized) + @get('suffix') + event_param
 )
 
 Service.ApplicationSerializer = DS.ActiveModelSerializer.extend({})

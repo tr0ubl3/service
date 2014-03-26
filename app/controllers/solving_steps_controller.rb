@@ -2,7 +2,7 @@ class SolvingStepsController < ApplicationController
   # GET /solving_steps
   # GET /solving_steps.json
   def index
-    @solving_steps = SolvingStep.all
+    @solving_steps = SolvingStep.where(:service_event_id => params[:event])
 
     respond_to do |format|
       format.html # index.html.erb

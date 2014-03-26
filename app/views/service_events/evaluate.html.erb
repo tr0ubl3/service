@@ -16,7 +16,7 @@
 			</div>
 		<% end %>
 	
-	<%= f.hidden_field :parent_event, value: @event.parent_event %>
+	<%= f.hidden_field :parent_event, value: nil %>
 
 	<div class="control-group">
 		<%= f.label(:recurrent, 'Recurrent event?') %>
@@ -41,7 +41,7 @@
 		    <%= f.fields_for :alarms do |alarm| %>
 			    <% if alarm.object.persisted? %>
 			        <p class="alarm_code_add" data-alarmnumber="<%= alarm.object.number %>"><%= alarm.object.number %> - <%= alarm.object.text %></p>
-			        <%= alarm.hidden_field :id, :multiple => true, :name => "event[alarm_ids][]", value: alarm.object.id %>
+			        <%= alarm.hidden_field :id, :multiple => true, :name => "service_event[alarm_ids][]", value: alarm.object.id %>
 		        <% end %>
 		    <% end %>
 	    </div>

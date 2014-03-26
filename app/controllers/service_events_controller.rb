@@ -20,7 +20,7 @@ class ServiceEventsController < ApplicationController
 	end
 
 	def create
-		@event = ServiceEvent.new(params[:event])
+		@event = ServiceEvent.new(params[:service_event])
 		@event.user_id = current_user.id
 		# hc = hour counter
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
@@ -102,7 +102,7 @@ class ServiceEventsController < ApplicationController
 	def create_evaluate
 		@event = ServiceEvent.find(params[:id])
 		@event.evaluator = current_user.id
-		if @event.update_attributes(params[:event])
+		if @event.update_attributes(params[:service_event])
 			redirect_to service_event_path(@event), notice: "Yeeey, is saved!"
 			@event.evaluate
 		else
