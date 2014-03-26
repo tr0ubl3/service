@@ -2,8 +2,8 @@
 
 Service.SolvingStepsNewRoute = Ember.Route.extend({
 	model: ->
-		event = RegExp('[^?event=]+[0-9]').exec(location.search)[0]
-		console.log(event)
+		event = location.search.match(/\?event\=([\d]+)/)[1]
+		# console.log(event)
 		@store.createRecord('solving_step', {serviceEventId: event})
 	actions: 
 		create: (solving_step)->
@@ -12,10 +12,3 @@ Service.SolvingStepsNewRoute = Ember.Route.extend({
 				route.transitionTo('solving_steps') 
 			)
 })
-
-# Service.SolvingStepsController = Ember.ArrayController.extend({
-# 	queryParams: ['event']
-# 	event: null
-# 	@store.
-# })		
-
