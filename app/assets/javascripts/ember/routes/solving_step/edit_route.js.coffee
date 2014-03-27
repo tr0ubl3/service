@@ -5,5 +5,8 @@ Service.SolvingStepEditRoute = Ember.Route.extend({
 		@modelFor('solving_step')
 	actions: 
 		update: (solving_step) ->
-			solving_step.save()
+			route = @
+			solving_step.save().then(->
+				route.transitionTo('solving_steps')
+			)
 })

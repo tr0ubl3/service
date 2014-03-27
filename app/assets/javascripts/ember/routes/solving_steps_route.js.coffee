@@ -9,6 +9,4 @@ Service.SolvingStepsRoute = Ember.Route.extend({
 	actions:
 		'delete': (solving_step) ->
 			solving_step.destroyRecord()
-		reload: ->
-			@get('model').reload()
 })
