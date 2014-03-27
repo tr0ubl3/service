@@ -1,0 +1,11 @@
+<form {{action 'update' this on="submit"}} >
+	{{#if isSaving}}
+		<p>Saving record ...</p>
+	{{/if}}
+	<p>
+		{{input valueBinding="step" placeholder="What do you wanna do?" autofocus="autofocus"}}
+	</p>
+	<button class="btn">
+		Update
+	</button>
+</form>

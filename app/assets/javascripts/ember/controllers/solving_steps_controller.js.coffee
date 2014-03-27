@@ -33,12 +33,7 @@ Groupable = Ember.Mixin.create
 
 
 Service.SolvingStepsController = Ember.ArrayController.extend Groupable,
-	ungroupedContentBinding: 'content' # tell Groupable where your default content is
-	# the callback that will be called for every
-	# item in your content array -
-	# just return the same 'key' to put it in the same group
-	# console.log(ungroupedContentBinding)
-	# console.log(solving_step)
+	ungroupedContentBinding: 'content'
 	group: (solving_step) ->
 		Ember.Object.create
 		  key: moment.utc(solving_step.get('createdAt')).format('DD.MM.YYYY') # using momentjs to pluck the day from the date

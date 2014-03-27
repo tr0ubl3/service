@@ -12,14 +12,14 @@ class SolvingStepsController < ApplicationController
 
   # # GET /solving_steps/1
   # # GET /solving_steps/1.json
-  # def show
-  #   @solving_step = SolvingStep.find(params[:id])
+  def show
+    @solving_step = SolvingStep.find(params[:id])
 
-  #   respond_to do |format|
-  #     # format.html # show.html.erb
-  #     format.json { render json: @solving_step }
-  #   end
-  # end
+    respond_to do |format|
+      # format.html # show.html.erb
+      format.json { render json: @solving_step }
+    end
+  end
 
   # # GET /solving_steps/new
   # # GET /solving_steps/new.json
@@ -55,19 +55,19 @@ class SolvingStepsController < ApplicationController
 
   # # PUT /solving_steps/1
   # # PUT /solving_steps/1.json
-  # def update
-  #   @solving_step = SolvingStep.find(params[:id])
+  def update
+    @solving_step = SolvingStep.find(params[:id])
 
-  #   respond_to do |format|
-  #     if @solving_step.update_attributes(params[:solving_step])
-  #       # format.html { redirect_to @solving_step, notice: 'Solving step was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       # format.html { render action: "edit" }
-  #       format.json { render json: @solving_step.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    respond_to do |format|
+      if @solving_step.update_attributes(params[:solving_step])
+        # format.html { redirect_to @solving_step, notice: 'Solving step was successfully updated.' }
+        format.json { head :no_content }
+      else
+        # format.html { render action: "edit" }
+        format.json { render json: @solving_step.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # # DELETE /solving_steps/1
   # # DELETE /solving_steps/1.json

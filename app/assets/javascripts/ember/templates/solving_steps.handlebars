@@ -4,7 +4,9 @@
 			<p>{{group.key}}</p>
 			{{#each content}}
 				<li>
-					{{ step }}, created {{momentTime createdAt}}
+					{{#link-to 'solving_step' this}}
+						{{ step }}, created {{momentTime createdAt}}
+					{{/link-to}}
 					<button {{action 'delete' this}}>x</button>
 				</li>
 			{{/each}}
