@@ -3,4 +3,5 @@
 Service.SolvingStep = DS.Model.extend(
 	serviceEventId: DS.attr('number')
 	step: DS.attr('string')
+	createdAt: DS.attr()
 )

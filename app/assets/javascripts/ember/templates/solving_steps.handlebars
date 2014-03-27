@@ -1,9 +1,13 @@
-<h2>Steps</h2>
+<h2>Solving steps</h2>
 	<ul>
-		{{#each}}
-			<li>
-				{{step}}
-			</li>
+		{{#each groupedContent}}
+			<p>{{group.key}}</p>
+			{{#each content}}
+				{{!-- {{createdAt}} --}}
+				<li>
+					{{step}}
+				</li>
+			{{/each}}
 		{{/each}}
 	</ul>
 <p>
@@ -11,4 +15,5 @@
 		Insert a new solving step
 	{{/link-to}}
 </p>
+
 {{outlet}}
