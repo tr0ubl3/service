@@ -2,5 +2,13 @@
 
 Service.SolvingStepsRoute = Ember.Route.extend({
 	model: ->
-		@store.find('solving_step')
+		event = location.search.match(/\?event\=([\d]+)/)[1]
+		@store.filter('solving_step', {service_event_id: event}, (solving_step) ->
+			!solving_step.get('isNew')
+		)
+	actions:
+		'delete': (solving_step) ->
+			solving_step.destroyRecord()
+		reload: ->
+			@get('model').reload()
 })

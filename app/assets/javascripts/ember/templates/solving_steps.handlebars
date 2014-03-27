@@ -3,9 +3,9 @@
 		{{#each groupedContent}}
 			<p>{{group.key}}</p>
 			{{#each content}}
-				{{!-- {{createdAt}} --}}
 				<li>
-					{{ step }}, created {{ momentTime createdAt }}
+					{{ step }}, created {{momentTime createdAt}}
+					<button {{action 'delete' this}}>x</button>
 				</li>
 			{{/each}}
 		{{/each}}

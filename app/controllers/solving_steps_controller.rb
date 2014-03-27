@@ -2,7 +2,7 @@ class SolvingStepsController < ApplicationController
   # GET /solving_steps
   # GET /solving_steps.json
   def index
-    @solving_steps = SolvingStep.where(:service_event_id => params[:event])
+    @solving_steps = SolvingStep.where(:service_event_id => params[:service_event_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -71,13 +71,13 @@ class SolvingStepsController < ApplicationController
 
   # # DELETE /solving_steps/1
   # # DELETE /solving_steps/1.json
-  # def destroy
-  #   @solving_step = SolvingStep.find(params[:id])
-  #   @solving_step.destroy
+  def destroy
+    @solving_step = SolvingStep.find(params[:id])
+    @solving_step.destroy
 
-  #   respond_to do |format|
-  #     # format.html { redirect_to solving_steps_url }
-  #     format.json { head :no_content }
-  #   end
-  # end
+    respond_to do |format|
+      format.html { redirect_to solving_steps_url }
+      format.json { head :no_content }
+    end
+  end
 end
