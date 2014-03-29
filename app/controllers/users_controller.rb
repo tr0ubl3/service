@@ -9,6 +9,10 @@ class UsersController < ApplicationController
   before_filter :check_admin, only: [:approve, :cp_new, :cp_create, :new_admin, 
                                      :create_admin]
 
+  def index
+    render json: current_user if !current_user.nil?
+  end
+
   def new
     @user = User.new
     @machine_owners = MachineOwner.all

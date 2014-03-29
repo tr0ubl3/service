@@ -48,9 +48,9 @@
 		</tr>
 
 		<% event.service_event_files.each_slice(4) do |set| %>
-			<tr>	
+			<tr class="thumbnails">	
 				<% set.each do |file| %>
-						<td class="with-content">
+						<td class="with-content thumbnail">
 							<%= thumbnail_assign(file) %>
 						</td>
 				<% end %>
