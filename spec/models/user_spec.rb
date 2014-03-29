@@ -51,6 +51,7 @@ describe User do
 	it { should_not allow_mass_assignment_of(:password_digest) }
 	it { should belong_to(:firm) }
 	it { should have_many(:service_events) }
+	it { should have_many(:solving_steps) }
 
 	it 'has first_name' do
 		user.first_name = "John"

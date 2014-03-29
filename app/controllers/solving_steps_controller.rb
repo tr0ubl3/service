@@ -14,7 +14,6 @@ class SolvingStepsController < ApplicationController
   # # GET /solving_steps/1.json
   def show
     @solving_step = SolvingStep.find(params[:id])
-
     respond_to do |format|
       # format.html # show.html.erb
       format.json { render json: @solving_step }
@@ -41,7 +40,8 @@ class SolvingStepsController < ApplicationController
   # # POST /solving_steps.json
   def create
     @solving_step = SolvingStep.new(params[:solving_step])
-
+    @solving_step.user_id = session[:user_id]
+    
     respond_to do |format|
       if @solving_step.save
         # format.html { redirect_to @solving_step, notice: 'Solving step was successfully created.' }

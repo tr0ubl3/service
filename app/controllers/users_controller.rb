@@ -10,7 +10,7 @@ class UsersController < ApplicationController
                                      :create_admin]
 
   def index
-    render json: current_user if !current_user.nil?
+    render json: [current_user] if !current_user.nil?
   end
 
   def new

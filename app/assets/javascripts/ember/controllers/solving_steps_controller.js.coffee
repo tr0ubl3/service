@@ -38,3 +38,4 @@ Service.SolvingStepsController = Ember.ArrayController.extend Groupable,
     Ember.Object.create
       key: moment.utc(solving_step.get('createdAt')).format('DD.MM.YYYY') # using momentjs to pluck the day from the date
       description: 'some string describing this group (if you want)'
+       

@@ -8,12 +8,12 @@ module GeneralHelper
 	end
 
 	def machine_types(manufacturer_name)
-	@machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id).collect(&:machine_type).uniq
+		@machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id).collect(&:machine_type).uniq
 	end
 
 	def machines_collection(manufacturer_name, machine_type)
-	@machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id,
-	                :machine_type => machine_type)
+		@machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id,
+		                :machine_type => machine_type)
 	end
 	
 	private

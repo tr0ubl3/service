@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
                   :denied_at, :password_reset_token, :password_reset_sent_at, :current_password
   belongs_to :firm
   has_many :service_events
+  has_many :solving_steps
   before_create { generate_token(:auth_token) }
 
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
