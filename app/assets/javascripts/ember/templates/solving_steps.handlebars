@@ -7,7 +7,7 @@
 					{{#link-to 'solving_step' this}}
 						{{ step }}, created {{momentTime createdAt}}
 					{{/link-to}}
-					<button {{action 'delete' this}}>x</button>
+					<button {{action 'delete' this}} class="destroy"></button>
 				</li>
 			{{/each}}
 		{{/each}}
