@@ -3,7 +3,7 @@
 Service.User = DS.Model.extend(
 	firstName: DS.attr('string')
 	lastName: DS.attr('string')
-	solving_steps: DS.hasMany('solving_step')
+	solvingSteps: DS.hasMany('solvingStep')
 	fullName: ->
 		@get('firstName') + ' ' + @get('lastName')
 )

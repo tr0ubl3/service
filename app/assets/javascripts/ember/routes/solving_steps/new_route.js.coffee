@@ -2,7 +2,7 @@
 
 Service.SolvingStepsNewRoute = Ember.Route.extend({
 	model: ->
-		@store.createRecord('solving_step', { serviceEvent: @store.find('serviceEvent', 50) })
+		@store.createRecord('solving_step', { serviceEvent: @modelFor('application') })
 	actions: 
 		create: (solving_step)->
 			route = @
