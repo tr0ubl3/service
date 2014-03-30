@@ -7,6 +7,11 @@ class ServiceEventsController < ApplicationController
 
 	def show
 		@event = ServiceEvent.find(params[:id])
+
+		respond_to do |format|
+	      format.html # index.html.erb
+	      format.json { render json: @event }
+	    end
 	end
 
 	def new

@@ -2,9 +2,7 @@
 
 Service.SolvingStepsNewRoute = Ember.Route.extend({
 	model: ->
-		event = location.search.match(/\?event\=([\d]+)/)[1]
-		# console.log(event)
-		@store.createRecord('solving_step', {serviceEventId: event})
+		@store.createRecord('solving_step', { serviceEvent: @store.find('serviceEvent', 50) })
 	actions: 
 		create: (solving_step)->
 			route = @
