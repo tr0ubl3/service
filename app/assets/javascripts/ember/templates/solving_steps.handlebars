@@ -5,17 +5,33 @@
 			{{#each content}}
 				<li>
 					{{#link-to 'solving_step' this}}
-						{{ step }}, created {{momentTime createdAt}}
-					{{/link-to}}
+						{{ step }}
+					{{/link-to}}, created {{momentTime createdAt}} by <strong>{{user.firstName}}</strong>
 					<button {{action 'delete' this}} class="destroy"></button>
 				</li>
 			{{/each}}
 		{{/each}}
 	</ol>
-<p>
+
+<div class="action-block">
 	{{#link-to 'solving_steps.new'}}
 		Insert a new solving step
 	{{/link-to}}
-</p>
 
-{{outlet}}
+	{{outlet}}
+</div>
+<hr />
+{{#each groupedContent}}
+	<h5>{{group.key}}</h5>
+		{{#each content}}
+			<div class="step-header">
+				<h4>{{step}}</h4>
+			</div>
+			<div class="step-meta">
+				created {{momentTime createdAt}} by <strong>{{user.firstName}}</strong>
+			</div>
+			<div class="step-content">
+				{{description}}
+			</div>
+		{{/each}}
+{{/each}}

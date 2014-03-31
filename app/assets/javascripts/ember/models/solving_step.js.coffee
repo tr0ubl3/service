@@ -2,6 +2,7 @@
 
 Service.SolvingStep = DS.Model.extend(
 	step: DS.attr('string')
+	description: DS.attr('string')
 	createdAt: DS.attr()
 	serviceEvent: DS.belongsTo('serviceEvent')
 	user: DS.belongsTo('user')
