@@ -74,7 +74,7 @@ $bullet_dim: 16px;
 	// transform: rotate(360deg);
 }
 
-#app li .destroy {
+#app li .destroy, #app .step-header .destroy {
   display: none;
   position: absolute;
   top: 0;
@@ -97,11 +97,11 @@ $bullet_dim: 16px;
 	transform: scale(1.3);
 }
 
-#app li .destroy:after {
+#app li .destroy:after, #app .step-header .destroy:after {
   content: '✖';
 }
 
-#app li:hover .destroy {
+#app li:hover .destroy, #app .step-header:hover .destroy {
   display: inline-block;
 }
 
@@ -111,7 +111,40 @@ $bullet_dim: 16px;
 	border-top: 1px solid #eeeeee;
 }
 
+#app .step-container {
+	margin-left: 15px;
+}
+
+#app .step-container:hover {
+	outline: 1px dashed #ccc;
+	outline-offset: 6px;
+}
+
 #app .step-header {
 	border-bottom: 1px solid #ccc;
+	position: relative;
+	h5 {
+		margin: 2px 0;
+	}
+}
+
+#app .step-meta {
+	margin-left: 5px;
+	p {
+		font-style: italic;
+	}
+}
+
+#app .step-content {
+	margin: 10px 0 0 20px;
+	
+	p {
+		text-indent: 20px;
+	}
+}
+
+#app textarea.new-step {
+	width: 60%;
+	height: 50px;
 }
 

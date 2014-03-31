@@ -1,4 +1,4 @@
-<h4>Solving steps</h4>
+<h4>Solving steps - <span class="label label-info">{{length}} defined</span></h4>
 	<ol class="span6">
 		{{#each groupedContent}}
 			<h5>{{group.key}}</h5>
@@ -13,6 +13,33 @@
 		{{/each}}
 	</ol>
 
+<div style="clear: both"></div>
+<hr />
+
+{{#each groupedContent}}
+	<h4>{{length}} steps defined on {{group.key}}</h4>
+		{{#each content}}
+			<div class="step-container">
+				<div class="step-header">
+					{{#link-to 'solving_step' this}}
+						<h5>{{step}}</h5>
+					{{/link-to}}
+					<button {{action 'delete' this}} class="destroy" title="Delete step?"></button>
+				</div>
+				<div class="step-meta">
+					<p>
+						created {{momentTime createdAt}} by <strong>{{user.firstName}} {{user.lastName}}</strong>
+					</p>
+				</div>
+				<div class="step-content">
+				<p>
+					{{description}}
+				</p>
+				</div>
+			</div>
+		{{/each}}
+{{/each}}
+
 <div class="action-block">
 	{{#link-to 'solving_steps.new'}}
 		Insert a new solving step
@@ -20,18 +47,3 @@
 
 	{{outlet}}
 </div>
-<hr />
-{{#each groupedContent}}
-	<h5>{{group.key}}</h5>
-		{{#each content}}
-			<div class="step-header">
-				<h4>{{step}}</h4>
-			</div>
-			<div class="step-meta">
-				created {{momentTime createdAt}} by <strong>{{user.firstName}}</strong>
-			</div>
-			<div class="step-content">
-				{{description}}
-			</div>
-		{{/each}}
-{{/each}}
