@@ -40,9 +40,42 @@ button {
 // 	height: 100%;
 // }
 
+#app ol {
+	counter-reset: li;
+	list-style-type: decimal;
+}
+
+#app li:before {
+	counter-increment: li;
+	content: counter(li)".";
+	// // position: absolute;
+	// height: 15px;
+ //    width: 15px;
+ //    line-height: 15px;
+ //    // border: .3em solid #fff;
+ //    // text-align: center;
+ //    // font-weight: bold;
+ //    // border-radius: 2px;
+ //    // transition: all .3s ease-out;
+	// background-color: lightgrey;
+}
+
+#app li {
+	display: block;
+	position: relative;
+	height: 50px;
+	line-height: 50px;
+	padding: 5px;
+}
+
+#app li:hover {
+	background-color: rgba(230, 230, 230, 0.5);
+	border-radius: 5px;
+}
+
 #app li .destroy {
   display: none;
-  // position: absolute;
+  position: absolute;
   top: 0;
   right: 10px;
   bottom: 0;
@@ -71,8 +104,3 @@ button {
   display: inline-block;
 }
 
-#app li {
-	display: block;
-	height: 50px;
-	line-height: 50px;
-}

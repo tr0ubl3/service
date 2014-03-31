@@ -1,7 +1,7 @@
-<h2>Solving steps</h2>
-	<ul>
+<h4>Solving steps</h4>
+	<ol class="span6">
 		{{#each groupedContent}}
-			<p>{{group.key}}</p>
+			<h5>{{group.key}}</h5>
 			{{#each content}}
 				<li>
 					{{#link-to 'solving_step' this}}
@@ -11,7 +11,7 @@
 				</li>
 			{{/each}}
 		{{/each}}
-	</ul>
+	</ol>
 <p>
 	{{#link-to 'solving_steps.new'}}
 		Insert a new solving step
