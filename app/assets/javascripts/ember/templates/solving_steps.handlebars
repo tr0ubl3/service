@@ -10,8 +10,8 @@
 					<div class="step-content">
 						{{textarea class="edit" value=description}}
 					</div>
-					<button {{action 'acceptChanges'}} class="btn btn-success">Save</button>
-					<button {{action 'cancelChanges'}} class="btn btn-danger">Cancel</button>
+					<button {{action 'acceptChanges'}} class="btn btn-mini btn-success">Save</button>
+					<button {{action 'cancelChanges'}} class="btn btn-mini btn-danger">Cancel</button>
 				{{else}}	
 					<div class="step-header">
 						{{#link-to 'solving_step' this}}
