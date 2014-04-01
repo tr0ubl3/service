@@ -8,15 +8,13 @@
 						{{input class="edit" value=bufferedStep}}
 					</div>
 					<div class="step-content">
-						{{textarea class="edit" value=description}}
+						{{textarea class="edit" value=bufferedDescription}}
 					</div>
 					<button {{action 'acceptChanges'}} class="btn btn-mini btn-success">Save</button>
 					<button {{action 'cancelChanges'}} class="btn btn-mini btn-danger">Cancel</button>
 				{{else}}	
 					<div class="step-header">
-						{{#link-to 'solving_step' this}}
-							<h5 {{action "editSolvingStep" on="doubleClick"}}>{{step}}</h5>
-						{{/link-to}}
+						<h5 {{action "editSolvingStep" on="doubleClick"}}>{{step}}</h5>
 						<button {{action 'delete' this}} class="destroy" title="Delete step?"></button>
 					</div>
 					<div class="step-meta">
@@ -35,8 +33,8 @@
 {{/each}}
 
 <div class="action-block">
-	{{#link-to 'solving_steps.new'}}
-		Insert a new solving step
+	{{#link-to 'solving_steps.new' class="btn btn-info"}}
+		<i class="icon-plus icon-white"></i> new step
 	{{/link-to}}
 
 	{{outlet}}

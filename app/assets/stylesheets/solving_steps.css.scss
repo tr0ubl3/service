@@ -109,14 +109,32 @@ $bullet_dim: 16px;
 	display: block;
 	clear: both;
 	border-top: 1px solid #eeeeee;
+	a {
+		margin: 10px 0;
+	}
 }
 
 #app .step-container {
 	margin-left: 15px;
+	.edit,
+	.edit:focus {
+		// outline: none;
+		// background: transparent;
+		// border: none;
+		// box-shadow: none;
+		}
+	textarea.edit {
+		width: 95%;
+		min-height: 200px;
+	}	
 }
 
 #app .step-container:hover {
 	background-color: rgba(235, 235, 235, 0.6);
+	box-shadow: 
+	 outset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    border-radius: 5px;
 }
 
 #app .step-container:hover {

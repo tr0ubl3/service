@@ -18,6 +18,9 @@ Service.SolvingStepController = Ember.ObjectController.extend({
 				step.set('step', bufferedStep)
 				step.set('description', bufferedDescription)
 				step.save()
+				# step.one('becameInvalid', ->
+				# 	console.log('validation problem')
+				# )
 		removeSolvingStep: ->
 			step = @get('model')
 			step.deleteRecord()
