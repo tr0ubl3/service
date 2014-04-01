@@ -116,6 +116,10 @@ $bullet_dim: 16px;
 }
 
 #app .step-container:hover {
+	background-color: rgba(235, 235, 235, 0.6);
+}
+
+#app .step-container:hover {
 	outline: 1px dashed #ccc;
 	outline-offset: 6px;
 }

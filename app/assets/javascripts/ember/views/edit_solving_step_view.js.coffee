@@ -1,6 +1,6 @@
 # for more details see: http://emberjs.com/guides/views/
 
-Service.EditSolvingStepView = Ember.TextField.extend
+Service.EditSolvingStepView = Ember.View.extend
   didInsertElement: ->
   	@$().focus()
 

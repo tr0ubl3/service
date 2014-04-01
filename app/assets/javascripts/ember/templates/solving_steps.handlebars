@@ -5,11 +5,13 @@
 			<div class="step-container">
 				{{#if isEditing}}
 					<div class="step-header">
-						{{input class="edit" value=step insert-newline="acceptChanges"}}
+						{{input class="edit" value=bufferedStep}}
 					</div>
 					<div class="step-content">
-						{{textarea class="edit" value=description focus-out="acceptChanges" insert-newline="acceptChanges"}}
+						{{textarea class="edit" value=description}}
 					</div>
+					<button {{action 'acceptChanges'}} class="btn btn-success">Save</button>
+					<button {{action 'cancelChanges'}} class="btn btn-danger">Cancel</button>
 				{{else}}	
 					<div class="step-header">
 						{{#link-to 'solving_step' this}}
