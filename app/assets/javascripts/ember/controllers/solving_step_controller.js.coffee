@@ -14,6 +14,6 @@ Service.SolvingStepController = Ember.ObjectController.extend({
 		removeSolvingStep: ->
 			step = @get('model')
 			step.deleteRecord()
-			step.save
+			step.save()
 })
 
