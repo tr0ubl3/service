@@ -1,6 +1,6 @@
 class ServiceEventsController < ApplicationController
 	respond_to :html, :json
-
+	before_filter :check_auth
 	def index
 		@events = ServiceEvent.order("service_events.id DESC")
 	end
@@ -117,7 +117,7 @@ class ServiceEventsController < ApplicationController
 	end
 
 	def solve
-		
+			
 	end
 	
 	private

@@ -32,3 +32,8 @@ Scenario: Admin goes from show event page to solve event page
 	When I'm on "evaluated" event page
 	Then I click button "Solve event"	
 	And I see "solve" event page
+
+Scenario: Admin goes from solve event page to show event
+	When I'm on "solve" event page
+	Then I click button "Close event"
+	And I see "show" event page

@@ -1,6 +1,6 @@
 class SolvingStepsController < ApplicationController
-  # GET /solving_steps
-  # GET /solving_steps.json
+  before_filter :check_auth
+  before_filter :check_admin
   def index
     @solving_steps = SolvingStep.where(:service_event_id => params[:service_event_id])
 
@@ -10,8 +10,6 @@ class SolvingStepsController < ApplicationController
     end
   end
 
-  # # GET /solving_steps/1
-  # # GET /solving_steps/1.json
   def show
     @solving_step = SolvingStep.find(params[:id])
     respond_to do |format|
@@ -20,24 +18,6 @@ class SolvingStepsController < ApplicationController
     end
   end
 
-  # # GET /solving_steps/new
-  # # GET /solving_steps/new.json
-  # def new
-  #   @solving_step = SolvingStep.new
-
-  #   respond_to do |format|
-  #     # format.html # new.html.erb
-  #     format.json { render json: @solving_step }
-  #   end
-  # end
-
-  # # GET /solving_steps/1/edit
-  # def edit
-  #   @solving_step = SolvingStep.find(params[:id])
-  # end
-
-  # # POST /solving_steps
-  # # POST /solving_steps.json
   def create
     @solving_step = SolvingStep.new(params[:solving_step])
     @solving_step.user_id = session[:user_id]
@@ -53,8 +33,6 @@ class SolvingStepsController < ApplicationController
     end
   end
 
-  # # PUT /solving_steps/1
-  # # PUT /solving_steps/1.json
   def update
     @solving_step = SolvingStep.find(params[:id])
 
@@ -69,8 +47,6 @@ class SolvingStepsController < ApplicationController
     end
   end
 
-  # # DELETE /solving_steps/1
-  # # DELETE /solving_steps/1.json
   def destroy
     @solving_step = SolvingStep.find(params[:id])
     @solving_step.destroy
