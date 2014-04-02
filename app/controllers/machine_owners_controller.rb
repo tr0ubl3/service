@@ -1,7 +1,7 @@
 class MachineOwnersController < ApplicationController
 	respond_to :html, :json
 
-	def list
+	def index
 		@owners = MachineOwner.order("firms.id ASC")
 	end
 
