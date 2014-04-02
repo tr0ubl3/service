@@ -14,8 +14,12 @@ module ApplicationHelper
 		pending_number = User.where(:approved_at => nil).count
 	end
 
-	def pending_events
-		pending_number = ServiceEvent.query_state('open').count
+	def pending_events(machine=nil)
+		if !machine.nil?
+			pending_number = ServiceEvent.query_state('open').where(id: machine.id).count
+		else
+			pending_number = ServiceEvent.query_state('open').count
+		end
 	end
 
 	def date_format(date, options = {})

@@ -15,12 +15,15 @@ describe ApplicationHelper do
 
 	describe "#pending_events" do
 		let!(:service_event) { create(:service_event) }
-		before do
-			@pending_number = ServiceEvent.where(state: "pending_confirmation").count
+
+		it "returns the number of all unconfirmed events" do
+			ServiceEvent.destroy_all
+			expect(helper.pending_events).to eq(0)
 		end
 
-		it "it returns the number of unconfirmed events" do
-			expect(helper.pending_events).to eq(@pending_number)
+		it "returns number of unconfirmed events for one machine" do
+			machine = create(:machine)
+			expect(helper.pending_events(machine)).to eq(0)
 		end
 	end
 

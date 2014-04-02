@@ -1,15 +1,16 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the GeneralHelper. For example:
-#
-# describe GeneralHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 describe GeneralHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+	let(:machine) { create(:machine) }
+	before :each do
+		helper.stub(:pending_event).and_return(1)
+	end
+	
+	describe "#machine_status" do
+		context "when option is alarm" do
+			it "returns 'alarm' when passed option is alarm" do
+				expect(helper.machine_status(machine, status: true)).to have_content('alarm')
+			end
+		end
+	end
 end

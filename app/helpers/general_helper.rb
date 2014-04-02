@@ -1,4 +1,13 @@
 module GeneralHelper
+	
+	def machine_status(machine, options={})
+		case options
+		when [:status] && pending_events
+			return 'alarm'
+		end 
+	end
+
+
 	def event_status(machine)
 		events_count(machine)
 		content_tag(:div, :class => @status, :title => "", :data =>{ title: @data_title} ) do
