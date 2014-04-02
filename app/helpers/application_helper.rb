@@ -52,5 +52,4 @@ module ApplicationHelper
 			return date.strftime("%d.%m.%Y at %H:%M")
 		end
 	end
-
 end

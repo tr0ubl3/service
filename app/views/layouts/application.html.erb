@@ -17,33 +17,13 @@
 		  		<%= message %>
 	  		</div>	
 		  <% end %>		
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Events</li>
-              <%= active_link_to "Events list", service_events_path , :active => :exclusive, :wrap_tag => :li %>
-              <%= active_link_to "New event", new_service_event_path , :active => :exclusive, :wrap_tag => :li %>
-              <li class="nav-header">Machines</li>
-              <%= active_link_to "Machines list", machines_path , :active => :exclusive, :wrap_tag => :li %>
-              <%= active_link_to "New machine", new_machine_path , :active => :exclusive, :wrap_tag => :li %>
-              <li class="nav-header">Manufacturers</li>
-              <%= active_link_to "Manufacturers list", manufacturers_path , :active => :exclusive, :wrap_tag => :li %>
-              <%= active_link_to "New manufacturer", new_manufacturer_path , :active => :exclusive, :wrap_tag => :li %>
-              <li class="nav-header">Machine owners</li>
-              <%= active_link_to "Machine Owners list", machine_owners_path , :active => :exclusive, :wrap_tag => :li %>
-              <%= active_link_to "New machine owner", new_machine_owner_path , :active => :exclusive, :wrap_tag => :li %>
-              <li class="nav-header">Machine owners</li>
-              <%= active_link_to "Alarms list", alarms_path , :active => :exclusive, :wrap_tag => :li %>
-              <%= active_link_to "New alarm", new_alarm_path , :active => :exclusive, :wrap_tag => :li %>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
+    <div class="container">
+      <div class="row-fluid" style="min-height: 500px;">
+        <div class="span12">
           <%= yield %>
         </div><!--/span-->
-      </div><!--/row-->
+      </div>
+      <!--/row-->
       <hr>
       <footer>
         <p>&copy; International G&amp;T</p>
