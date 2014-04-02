@@ -117,6 +117,8 @@ class ServiceEventsController < ApplicationController
 	end
 
 	def solved
+		@event = ServiceEvent.find(params[:id])
+		@event.solve
 		redirect_to service_event_path	
 	end
 	

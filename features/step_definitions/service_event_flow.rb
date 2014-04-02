@@ -47,3 +47,8 @@ end
 Then(/^I don't see Evaluate event button$/) do
   expect(page).not_to have_selector("a", text: "Evaluate event")
 end
+
+When(/^I'm on solving steps page$/) do
+  visit "/solving_steps?event=1"
+  current_path.should == "/solving_steps?event=1"
+end

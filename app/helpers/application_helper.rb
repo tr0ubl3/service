@@ -45,29 +45,8 @@ module ApplicationHelper
 		pending_number = ServiceEvent.where(state: 'pending_confirmation').count
 	end
 
-	# def admin?
-	# 	current_user.admin?
-	# end
-
-	# private
-
-	# def link_top_right_menu(user)
-	# 	link_to user.full_name, "#", :class => "navbar-text navbar-link dropdown-toggle",
-	# 	 							 :data => { :toggle => "dropdown" } 
-	# end
-
-	# def dropdown_menu
-	# 	content_tag(:ul, class: "dropdown-menu", :role => "menu") do
-	# 		items_dropdown if admin?
-	# 	end
-	# end
-
-	# def items_dropdown
-	# 	content_tag(:li) do
-	# 		link_to control_panel_general_index_path do
-	# 			raw("<i class='icon-wrench'></i> Control panel")
-	# 		end
-	# 	end
-	# end
+	def date_format(date)
+		return date.strftime("%d.%m.%Y")
+	end
 
 end

@@ -188,8 +188,18 @@ describe ServiceEventsHelper do
 			end
 
 			it "it shows a button on show#service_event" do
-				expect(helper.solve_event_button(event)).to have_link("Solve event", :href => solve_service_event_path(event))
+				expect(helper.solve_event_button(event)).to have_link("Solve event", :href => solving_steps_path(event: event.id))
 			end
 		end
+
+		context "event is solved" do
+			before do
+				event.stub(:solved?).and_return(true)
+			end
+
+			it "returns the partial with solving steps" do
+				expect(helper.solve_event_button(event)).to render_template(:partial => '_solving_steps')
+			end
+		end	
 	end
 end
