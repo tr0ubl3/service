@@ -116,8 +116,8 @@ class ServiceEventsController < ApplicationController
 		end
 	end
 
-	def solve
-			
+	def solved
+		redirect_to service_event_path	
 	end
 	
 	private

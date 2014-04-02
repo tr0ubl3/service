@@ -2,7 +2,7 @@
 
 {{outlet}}
 
-<form method="post" action="/service_events/{{unbound id}}/solve">
+<form method="post" action="/service_events/{{unbound id}}/solved">
 	<input name="authenticity_token" type="hidden" value={{unbound authToken this}} />
 	  <button data-confirm='Are you sure?' class="btn btn-success btn-large" type="submit" ><i class="icon-ok icon-white"></i> Close event</button>
 </form>
