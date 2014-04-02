@@ -16,9 +16,9 @@
 							<%= t.event_name %>
 						<% end %>
 					</td>
-				<td><%= t.event_date.strftime("%d.%m.%Y") %></td>
-				<td><%= t.user_id %></td>
-				<td><%= t.state %></td>
+				<td><%= date_format(t.event_date) %></td>
+				<td><%= t.user.full_name %></td>
+				<td><%= t.current_state %></td>
 			</tr>
 		<% end %>
 	</tbody>

@@ -23,10 +23,10 @@ module ApplicationHelper
 	end
 
 	def date_format(date, options = {})
-		date.strftime("%d.%m.%Y")
-
 		if options[:time]
 			return date.strftime("%d.%m.%Y at %H:%M")
+		else
+			date.strftime("%d.%m.%Y")
 		end
 	end
 end
