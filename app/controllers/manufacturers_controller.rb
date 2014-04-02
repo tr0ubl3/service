@@ -2,7 +2,7 @@ class ManufacturersController < ApplicationController
 
 	respond_to :html, :json
 
-	def list
+	def index
 		@manufacturers = Manufacturer.order("firms.id ASC")
 	end
 
