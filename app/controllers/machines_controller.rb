@@ -1,7 +1,7 @@
 class MachinesController < ApplicationController
 helper_method :manufacturers, :owners
 
-	def list
+	def index
 		@machines = Machine.order("machines.id ASC")
 	end
 
