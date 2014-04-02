@@ -25,9 +25,17 @@ describe ApplicationHelper do
 	end
 
 	describe "#date_format" do
-		it "formats the time stamp to %d.%m.%Y" do
-			time_stamp = Time.now
-			expect(helper.date_format(time_stamp)).to eq(time_stamp.strftime("%d.%m.%Y"))
+		let(:time_stamp) { Time.now }
+		context "date format with no option passed" do
+			it "formats the time stamp to %d.%m.%Y" do
+				expect(helper.date_format(time_stamp)).to eq(time_stamp.strftime("%d.%m.%Y"))
+			end
+		end
+
+		context "date format with time option passed" do
+			it "formats the time stamp like %d.%m.%Y at %H:%M" do
+				expect(helper.date_format(time_stamp, time: true)).to eq(time_stamp.strftime("%d.%m.%Y at %H:%M"))				
+			end
 		end
 	end
 end

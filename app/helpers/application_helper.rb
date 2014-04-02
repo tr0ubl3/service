@@ -45,8 +45,12 @@ module ApplicationHelper
 		pending_number = ServiceEvent.where(state: 'pending_confirmation').count
 	end
 
-	def date_format(date)
-		return date.strftime("%d.%m.%Y")
+	def date_format(date, options = {})
+		date.strftime("%d.%m.%Y")
+
+		if options[:time]
+			return date.strftime("%d.%m.%Y at %H:%M")
+		end
 	end
 
 end

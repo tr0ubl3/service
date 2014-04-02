@@ -1,13 +1,13 @@
 <h3>Event solving</h3>
 
-<div class="step-container">
-	<% event.solving_steps.each do |t| %>
+<% event.solving_steps.each do |t| %>
+	<div id="show" class="step-container">
 		<div class="step-header">
 			<h5><%= t.step %></h5>
 		</div>
 		<div class="step-meta">
 			<p>
-				<%= date_format(t.created_at) %> by <strong><%= t.user.full_name %></strong>
+				Created on <%= date_format(t.created_at, time: true) %> by <strong><%= t.user.full_name %></strong>
 			</p>
 		</div>
 		<div class="step-content">
@@ -15,5 +15,5 @@
 				<%= t.description %>
 			</p>
 		</div>
-	<% end %>
-</div>
+	</div>
+<% end %>
