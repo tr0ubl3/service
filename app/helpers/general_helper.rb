@@ -1,9 +1,16 @@
 module GeneralHelper
 	
 	def machine_status(machine, options={})
-		case options
-		when [:status] && pending_events
+		if options[:status] && pending_events(machine) > 0
 			return 'alarm'
+		elsif options[:title]
+			return title = pending_events(machine).to_s + ' unsolved ' + "event".pluralize(pending_events(machine).to_i)
+		elsif options[:icon]	
+			if pending_events(machine) > 0
+				return 'icon-exclamation-sign blink'
+			else
+				return 'icon-ok'
+			end
 		end 
 	end
 

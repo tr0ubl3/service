@@ -4,7 +4,7 @@
 		<h3><%= type %></h3>
 		<% machines_collection(name, type).each do |machine| %>
 			<%= link_to machine_events_general_index_path(:machine => machine), :class => "link_reset" do %>
-				<%= event_status(machine) %>
+				<%= render :partial => 'machine', :locals => { :machine => machine } %>
 			<% end %>
 		<% end %>
 	<% end %>

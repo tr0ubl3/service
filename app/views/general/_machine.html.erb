@@ -1,6 +1,6 @@
-<div class='machine <%=  %>' title='' data-title="<%=  %>">
-	<i class='corner-icon <%=  %>'></i>
-	<div class='machine-name <%=  %>'>
+<div class='machine <%= machine_status(machine, status: true) %>' title='' data-title="<%= machine_status(machine, title: true) %>">
+	<i class='corner-icon <%= machine_status(machine, icon: true) %> %>'></i>
+	<div class='machine-name'>
 		<%= machine.display_name %>
 	</div>
 </div>
