@@ -4,7 +4,7 @@ module GeneralHelper
 		if options[:status] && pending_events(machine) > 0
 			return 'alarm'
 		elsif options[:title]
-			return title = pending_events(machine).to_s + ' unsolved ' + "event".pluralize(pending_events(machine).to_i)
+			return title = "#{pending_events(machine)} #{"event".pluralize(pending_events(machine))} pending evaluation"
 		elsif options[:icon]	
 			if pending_events(machine) > 0
 				return 'icon-exclamation-sign blink'
