@@ -16,9 +16,9 @@ module ApplicationHelper
 
 	def pending_events(machine=nil)
 		if !machine.nil?
-			pending_number = ServiceEvent.query_state('open').where(id: machine.id).count
+			pending_number = ServiceEvent.query_state('open').where(id: machine.id).length
 		else
-			pending_number = ServiceEvent.query_state('open').count
+			pending_number = ServiceEvent.query_state('open').length
 		end
 	end
 

@@ -25,7 +25,7 @@ class ServiceEvent < ActiveRecord::Base
 	validates :event_description, :presence => true, :length => { :within => 3..500 }
 
 	def self.query_state(state)
-		joins(:states).merge ServiceEventState.where(state: state).with_last_state
+		joins(:states).merge ServiceEventState.with_last_state(state)
 	end
 
 	def current_state
