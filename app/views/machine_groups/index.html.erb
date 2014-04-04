@@ -13,7 +13,7 @@
 <% @machine_groups.each do |machine_group| %>
   <tr>
     <td><%= machine_group.name %></td>
-    <td><%= machine_group.type %></td>
+    <td><%= machine_group.machine_type %></td>
     <td><%= machine_group.manufacturer_id %></td>
     <td><%= link_to 'Show', machine_group %></td>
     <td><%= link_to 'Edit', edit_machine_group_path(machine_group) %></td>
