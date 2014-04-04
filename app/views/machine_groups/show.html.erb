@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @machine_group.name %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @machine_group.type %>
+</p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @machine_group.manufacturer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_machine_group_path(@machine_group) %> |
+<%= link_to 'Back', machine_groups_path %>
