@@ -1,7 +1,7 @@
   <div class="control-group">
     <label class="control-label">Machine type :</label>
     <div class="controls">
-      <%= f.text_field(:machine_type) %>
+      <%= f.collection_select(:machine_group, MachineGroup.all, :id, :name) %>
     </div>
   </div>
   <div class="control-group">
@@ -19,13 +19,12 @@
   <div class="control-group">
     <label class="control-label">Machine manufacturer :</label>
     <div class="controls">
-      <%= f.collection_select(:manufacturer_id, manufacturers, :id, :name) %>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label">Machine owner :</label>
     <div class="controls">
-      <%= f.collection_select(:machine_owner_id, owners, :id, :name) %>
+      it's set in machine group
     </div>
   </div>
   <div class="btn-group">

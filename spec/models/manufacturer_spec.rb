@@ -5,5 +5,6 @@ describe Manufacturer do
 		expect(Manufacturer.superclass).to eq(Firm)
 	end
 
-	it { should have_many(:machine_groups) }	
+	it { should have_many(:machine_groups) }
+	it { should have_many(:machines).through(:machine_groups) }
 end

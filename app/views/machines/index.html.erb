@@ -17,7 +17,7 @@
     <tr>
       <td><%= @i+=1 %></td>
       <td><%= link_to(machine.display_name, {:action =>'show', :id => machine.id}) %></td>
-      <td><%= machine.machine_type %></td>
+      <td><%= machine.machine_group.name %></td>
       <% if machine.manufacturer == nil %>
         <td><%= 'None' %></td>
       <% else %>

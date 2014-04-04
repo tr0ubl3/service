@@ -30,7 +30,7 @@
 				<td><%= user_confirmation_text(t) %></td>
 				<td><%= t.email %></td>
 				<td><%= 'pending' %></td>
-				<td><%= t.created_at %></td>
+				<td><%= date_format(t.created_at) %></td>
 				<td>Ionut Ciobanu</td>
 			</tr>
 		<% end %>

@@ -1,5 +1,4 @@
 class MachinesController < ApplicationController
-helper_method :manufacturers, :owners
 
 	def index
 		@machines = Machine.order("machines.id ASC")
@@ -49,13 +48,5 @@ helper_method :manufacturers, :owners
 		machine = Machine.find(params[:id]).destroy
 		flash[:notice] = "Machine permanently deleted !"
 		redirect_to(:action => 'list')
-	end
-
-	def manufacturers
-	 	@manufacturers ||= Manufacturer.all
-	end
-
-	def owners
-		@owners ||= MachineOwner.all
 	end
 end
