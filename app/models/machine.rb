@@ -1,6 +1,7 @@
 class Machine < ActiveRecord::Base
   attr_accessible :machine_owner_id, :machine_number, :delivery_date,
-                  :waranty_period, :display_name, :machine_group_id
+                  :waranty_period, :display_name, :machine_group_id,
+                  :machine_manufacturer_id
   
   belongs_to :machine_group
   has_one :manufacturer, through: :machine_group
