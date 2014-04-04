@@ -9,6 +9,8 @@ class Machine < ActiveRecord::Base
   belongs_to :authorized_reseller
   has_many :service_events
   has_one :hour_counter
+
+  before_create :set_reseller
   
   validates :display_name, :presence => true,
     				   :length => { :within => 3..255 },
@@ -35,4 +37,10 @@ class Machine < ActiveRecord::Base
     delivery_date + waranty_period.days
   end
 
+
+  private
+
+  def set_reseller
+    self.authorized_reseller_id = AuthorizedReseller.first.id
+  end
 end

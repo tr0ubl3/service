@@ -10,7 +10,7 @@ FactoryGirl.define do
   	sequence :machine_number do |n|
       "9-1101-33#{n}"
     end
-  	machine_type 'CVA'
+  	# machine_type 'CVA'
   	delivery_date '10.10.2010'
   	waranty_period '780'
 
