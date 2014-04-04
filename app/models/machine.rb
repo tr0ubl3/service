@@ -1,5 +1,6 @@
 class Machine < ActiveRecord::Base
-  attr_accessible :machine_owner_id, :machine_number, :machine_type, :delivery_date, :waranty_period, :display_name
+  attr_accessible :machine_owner_id, :machine_number, :delivery_date,
+                  :waranty_period, :display_name, :machine_group_id
   
   belongs_to :machine_group
   has_one :manufacturer, through: :machine_group
@@ -15,8 +16,8 @@ class Machine < ActiveRecord::Base
     				      :length => { :within => 3..255 },
     				      :uniqueness => true
 
-  validates :machine_type, :presence => true,
-  				      :length => { :within => 3..255 }
+  # validates :machine_type, :presence => true,
+  # 				      :length => { :within => 3..255 }
 
   validates :delivery_date, :presence => true,
   				      :length => { :within => 3..255 }
