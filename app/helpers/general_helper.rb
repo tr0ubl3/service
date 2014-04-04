@@ -14,12 +14,11 @@ module GeneralHelper
 		end 
 	end
 
-	def machine_types(manufacturer_name)
-		@machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id).collect(&:machine_type).uniq
+	def machine_types(machines)
+		machines.collect(&:machine_group).collect(&:name).uniq
 	end
 
-	def machines_collection(manufacturer_name, machine_type)
-		@machines.where(:manufacturer_id => Manufacturer.find_by_name(manufacturer_name).id,
-		                :machine_type => machine_type)
+	def machines_collection(machines, manufacturer_name)
+		machines.where(:machine_group_id => Manufacturer.find_by_name(manufacturer_name).machine_groups)
 	end
 end

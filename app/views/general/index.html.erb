@@ -1,8 +1,8 @@
 <% @manufacturer_names.each do |name| %>
 	<h1><%= name %></h1>
-	<% machine_types(name).each do |type| %>
+	<% machine_types(@machines).each do |type| %>
 		<h3><%= type %></h3>
-		<% machines_collection(name, type).each do |machine| %>
+		<% machines_collection(@machines, name).each do |machine| %>
 			<%= link_to machine_events_general_index_path(:machine => machine), :class => "link_reset" do %>
 				<%= render :partial => 'machine', :locals => { :machine => machine } %>
 			<% end %>

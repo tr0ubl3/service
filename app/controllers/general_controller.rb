@@ -5,7 +5,7 @@ class GeneralController < ApplicationController
 
   def index
   	@machines = current_user.firm.machines
-    @manufacturer_names = @machines.collect(&:manufacturer).uniq.collect(&:name)
+    @manufacturer_names = @machines.collect(&:manufacturer).collect(&:name)
   end
 
   def machine_events
