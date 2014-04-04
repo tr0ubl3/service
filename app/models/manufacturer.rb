@@ -1,6 +1,6 @@
 class Manufacturer < Firm
   attr_accessible :name, :country, :city, :address, :postal_code, :fax, :office_tel, :office_mail, :mobile
-  has_many :machines
+  has_many :machine_groups
 
   # validarile sunt preluate din firm
   # validates_presence_of :name

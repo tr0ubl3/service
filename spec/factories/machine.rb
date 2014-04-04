@@ -4,7 +4,6 @@ FactoryGirl.define do
   	sequence :id do |n|
       n
     end
-    manufacturer_id 101
   	machine_owner_id 201
     authorized_reseller_id 301
 
@@ -19,7 +18,7 @@ FactoryGirl.define do
     	"MH.33#{n}"
     end
     hour_counter
-    association :manufacturer, strategy: :build
+    # association :manufacturer, strategy: :build
     association :machine_owner, strategy: :build
   	association :authorized_reseller, strategy: :build
   end

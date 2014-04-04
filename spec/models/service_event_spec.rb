@@ -62,7 +62,7 @@ describe ServiceEvent do
 	it { should allow_mass_assignment_of(:event_description) }
 	it { should allow_mass_assignment_of(:hour_counter) }
 	it { should allow_mass_assignment_of(:service_event_files_attributes) }
-	it { should allow_mass_assignment_of(:alarms_attributes) }
+	it { should allow_mass_assignment_of(:alarm_ids) }
 	it { should allow_mass_assignment_of(:evaluator) }
 	
 	it { should_not allow_mass_assignment_of(:event_name) }
@@ -73,20 +73,20 @@ describe ServiceEvent do
 	it { should have_many(:states).class_name('ServiceEventState') }
 
 	it "should assign variable STATES" do
-		states = %w[open]
+		states = %w[open evaluated solved]
 		expect(ServiceEvent::STATES).to eq(states)
 	end
 
 	it { should delegate(:open?).to(:current_state) }
 	it { should delegate(:evaluated?).to(:current_state) }
 	it { should delegate(:solved?).to(:current_state) }
-	it { should delegate(:closed?).to(:current_state) }
+	# it { should delegate(:closed?).to(:current_state) }
 
-	describe "#self.open_service_events" do
-		let(:event) { create(:event, state: 'open') }
+	describe "#self.query_state(state)" do
+		let(:event) { create(:service_event) }
 
 		it "returns an array of open service events" do
-			expect(ServiceEvent.open_service_events).to have_content(event)
+			expect(ServiceEvent.query_state("open")).to have_content(event)
 		end
 	end
 
