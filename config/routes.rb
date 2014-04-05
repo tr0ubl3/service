@@ -1,8 +1,5 @@
 Service::Application.routes.draw do
   
-  resources :machine_groups
-
-
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
@@ -52,7 +49,13 @@ Service::Application.routes.draw do
     collection do
       post :import
     end
-  end  
+  end 
+
+  resources :machine_groups do
+    member do
+      get :resources
+    end
+  end
 
   # get "main/index"
   root to: 'general#index'

@@ -1,25 +1,38 @@
-<h1>Listing machine_groups</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Manufacturer</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @machine_groups.each do |machine_group| %>
-  <tr>
-    <td><%= machine_group.name %></td>
-    <td><%= machine_group.machine_type %></td>
-    <td><%= machine_group.manufacturer_id %></td>
-    <td><%= link_to 'Show', machine_group %></td>
-    <td><%= link_to 'Edit', edit_machine_group_path(machine_group) %></td>
-    <td><%= link_to 'Destroy', machine_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table class="table table-bordered table-hover">
+  <caption class="titlu-tabel">Machine groups list</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Manufacturer</th>
+      <th>Version</th>
+      <th># machines</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+    
+  <tbody>
+    <% @machine_groups.each do |machine_group| %>
+      <tr>
+        <td>1</td>
+        <td>
+          <%= link_to resources_machine_group_path(machine_group) do %>
+            <%= machine_group.name %>
+          <% end %>
+        </td>
+        <td><%= machine_group.machine_type %></td>
+        <td><%= machine_group.manufacturer.name %></td>
+        <td><%= machine_group.version %></td>
+        <td><%= machine_group.machines.count.to_s %></td>
+        <td><%= link_to 'Show', machine_group %></td>
+        <td><%= link_to 'Edit', edit_machine_group_path(machine_group) %></td>
+        <td><%= link_to 'Destroy', machine_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

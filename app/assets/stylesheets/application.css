@@ -139,3 +139,10 @@ body {
 a.service_events_pending:hover {
 	text-decoration: none;
 }
+
+.titlu-tabel {
+	text-align: left;
+	font-weight: bold;
+	font-size: 24px;
+	padding: 10px 0;
+}

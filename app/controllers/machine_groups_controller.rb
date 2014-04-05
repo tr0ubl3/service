@@ -80,4 +80,8 @@ class MachineGroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def resources
+    
+  end
 end
