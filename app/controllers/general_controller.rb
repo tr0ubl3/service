@@ -4,8 +4,7 @@ class GeneralController < ApplicationController
   before_filter :check_admin, only: [:control_panel] 
 
   def index
-  	@machines = current_user.firm.machines
-    @manufacturer_names = @machines.collect(&:manufacturer).collect(&:name)
+  	@machines = current_user.firm.machines_structure
   end
 
   def machine_events

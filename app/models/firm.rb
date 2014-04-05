@@ -1,5 +1,6 @@
 class Firm < ActiveRecord::Base
-  attr_accessible :name, :country, :city, :address, :postal_code, :fax, :office_tel, :office_mail, :mobile, :type
+  attr_accessible :name, :country, :city, :address, :postal_code,
+                  :fax, :office_tel, :office_mail, :mobile, :type
   
   has_many :users
 
@@ -59,5 +60,33 @@ class Firm < ActiveRecord::Base
   validates :mobile, :length => { :within => 4..20, message: 'missing required length' },
                      :format => { with: NUMBERS,
                                   message: 'not correct format' },
-                     allow_blank: true             
+                     allow_blank: true
+  def machines_structure
+    machines = self.machines
+    machine_groups = self.machines.collect(&:machine_group).uniq
+    structure = Hash.new
+    manufacturers = machine_groups.collect(&:manufacturer).uniq
+    
+    manufacturers.each do |manufacturer|
+      structure[manufacturer.name] = { }
+      filtered_machines = machines.joins(:machine_group).merge MachineGroup.where(:manufacturer_id => manufacturer.id)
+      machine_groups = filtered_machines.collect(&:machine_group).uniq
+      machine_groups.each do |group|
+        structure[manufacturer.name][group.name] = { }
+        filtered_machines = machines.joins(:machine_group).merge MachineGroup.where(:name => group.name)
+        group_machine_types = filtered_machines.collect(&:machine_group).collect(&:machine_type).uniq
+        group_machine_types.each do |type|
+          structure[manufacturer.name][group.name][type] = { }
+          rafined_machines = filtered_machines.joins(:machine_group).merge MachineGroup.where(:machine_type => type)
+          machine_versions = rafined_machines.collect(&:machine_group).collect(&:version).uniq
+          machine_versions.each do |version|
+            final_rafination = rafined_machines.joins(:machine_group).merge MachineGroup.where(:version => version)
+            structure[manufacturer.name][group.name][type][version] = final_rafination
+          end
+        end
+      end
+    end
+
+    return structure
+  end
 end

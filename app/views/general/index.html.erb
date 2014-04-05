@@ -1,10 +1,16 @@
-<% @manufacturer_names.each do |name| %>
-	<h1><%= name %></h1>
-	<% machine_types(@machines).each do |type| %>
-		<h3><%= type %></h3>
-		<% machines_collection(@machines, name).each do |machine| %>
-			<%= link_to machine_events_general_index_path(:machine => machine), :class => "link_reset" do %>
-				<%= render :partial => 'machine', :locals => { :machine => machine } %>
+<% @machines.each do |manufacturer, category| %>
+	<h1><%= manufacturer %></h1>
+	<% category.each do |category, types| %>
+		<h3><%= category %></h3>
+		<% types.each do |type, versions| %>
+			<h4><%= type %></h4>
+			<% versions.each do |version, machine_collection| %>
+				<h5><%= version %></h5>
+				<% machine_collection.each do |machine| %>
+					<%= link_to machine_events_general_index_path(:machine => machine), :class => "link_reset" do %>
+						<%= render :partial => 'machine', :locals => { :machine => machine } %>
+					<% end %>
+				<% end %>
 			<% end %>
 		<% end %>
 	<% end %>

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe AuthorizedReseller do
-  # test if inherits from Firm model
+  
   specify { AuthorizedReseller.should be < Firm }
+  it { should have_many(:machines) }
+  it { should have_many(:users) }
 end
