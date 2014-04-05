@@ -82,6 +82,6 @@ class MachineGroupsController < ApplicationController
   end
 
   def resources
-    
+    @group = MachineGroup.find(params[:id])
   end
 end

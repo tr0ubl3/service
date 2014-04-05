@@ -1,1 +1,53 @@
-nothing yet
+<h2>Machine group <%= @group.name %> for <%= @group.manufacturer.name %></h2>
+
+<table class="table table-bordered table-hover">
+  <caption class="titlu-tabel">Machines</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Delivery date</th>
+    </tr>
+  </thead>
+    
+  <tbody>
+    <% @group.machines.each do |machine| %>
+      <tr>
+        <td>1</td>
+        <td>
+          <%= link_to machine_path(machine) do %>
+            <%= machine.display_name %>
+          <% end %>
+        </td>
+        <td><%= machine.machine_number %></td>
+        <td><%= date_format(machine.delivery_date) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table table-bordered table-hover">
+  <caption class="titlu-tabel">Alarms</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Number</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+    
+  <tbody>
+    <% @group.alarms.each do |alarm| %>
+      <tr>
+        <td>1</td>
+        <td>
+          <%= link_to alarm_path(alarm) do %>
+            <%= alarm.number %>
+          <% end %>
+        </td>
+        <td><%= alarm.text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
