@@ -81,8 +81,8 @@ class AlarmsController < ApplicationController
     end
   end
 
-  def req_ajax
-    @alarm_text = Alarm.seal(number)
-    format.json { render json: @alarm_text }
+  def import
+    Alarm.import(params[:file])
+    redirect_to alarms_path, notice: "Alarms imported"
   end
 end
