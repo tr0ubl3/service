@@ -1,15 +1,12 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the MachineGroupsHelper. For example:
-#
-# describe MachineGroupsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 describe MachineGroupsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+	describe "#group_name" do
+		let(:group) { create(:machine_group) }
+	  
+		it "returns manufacturer+name+type+version " do
+			expect(helper.group_name(group)).to eq(group.manufacturer.name+ "-" +
+											group.machine_type+"-"+group.version)
+		end
+	end
 end

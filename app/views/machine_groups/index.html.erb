@@ -20,7 +20,7 @@
         <td>1</td>
         <td>
           <%= link_to resources_machine_group_path(machine_group) do %>
-            <%= machine_group.name %>
+            <%= group_name(machine_group) %>
           <% end %>
         </td>
         <td><%= machine_group.machine_type %></td>
