@@ -52,6 +52,7 @@ Service::Application.routes.draw do
   end 
 
   resources :machine_groups do
+    resources :machines, :alarms
     member do
       get :resources
     end
