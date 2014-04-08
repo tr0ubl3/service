@@ -1,7 +1,7 @@
   <div class="control-group">
     <label class="control-label">Machine type :</label>
     <div class="controls">
-      <%= f.collection_select(:machine_group_id, MachineGroup.all, :id, :name) %>
+      <%= f.collection_select(:machine_group_id, MachineGroup.all, :id, :view_name) %>
     </div>
   </div>
   <div class="control-group">

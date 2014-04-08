@@ -3,4 +3,8 @@ class MachineGroup < ActiveRecord::Base
   belongs_to :manufacturer
   has_many :machines
   has_many :alarms
+
+  def view_name
+  	"#{manufacturer.name}-#{machine_type}-#{version}"
+  end
 end
