@@ -1,5 +1,5 @@
 module MachineGroupsHelper
 	def group_name(group)
-		return group.manufacturer.name+"-"+group.machine_type+"-"+group.version
+		return group.view_name
 	end
 end
