@@ -1,1 +1,5 @@
-  <%= link_to(raw("<i class='icon-plus'></i><span class='spatiu-st-dr-link-cu-iconita'>Add</span>"), {:action => 'new'}, {:class => 'btn btn-success'}) %>
+  <%= link_to({:action => 'new'}, :class => 'btn btn-success') do %>
+	  <i class='icon-plus icon-white'></i>
+	  <span class='spatiu-st-dr-link-cu-iconita'>New </span>
+	  <%= params[:controller].humanize.downcase.singularize %>
+  <% end %>
