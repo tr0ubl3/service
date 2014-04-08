@@ -41,4 +41,21 @@ describe ApplicationHelper do
 			end
 		end
 	end
+
+	describe "#bootstrap_item" do
+	 	let(:group) { MachineGroup.new }
+	 	it "returns a label and field wraped in div control" do
+	 		content = "<div class='control-group'>
+						    <label class='control-label'>
+						      <%= f.label :name %>
+						    </label>
+						    <div class='controls'>
+						      <%= f.text_field :name %>
+						    </div>
+					   </div>"
+
+	 		expect(helper.bootstrap_item(group, :machine_type, :text)).to have_content(content)
+	 	end
+	end
+	
 end
