@@ -18,14 +18,14 @@
   <div class="control-group">
     <label class="control-label">Machine owner :</label>
     <div class="controls">
-      it's set in machine group
+      <%= f.collection_select(:machine_owner_id, MachineOwner.all, :id, :name) %>
     </div>
   </div>
   <div class="btn-group">
   <div class="control-group">
     <label class="control-label">Delivery date :</label>
     <div class="controls dropdown-toggle">
-      <%= f.date_select(:delivery_date) %>
+      <%= f.text_field(:delivery_date) %>
     </div>
   </div>
   </div>

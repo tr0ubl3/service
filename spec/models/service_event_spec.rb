@@ -67,7 +67,7 @@ describe ServiceEvent do
 	
 	it { should_not allow_mass_assignment_of(:event_name) }
 	it { should accept_nested_attributes_for(:alarms) }
-	it { should belong_to(:machine) }
+	it { should belong_to(:machine).dependent(:destroy) }
 	it { should belong_to(:user) }
 	it { should have_and_belong_to_many(:alarms) }
 	it { should have_many(:states).class_name('ServiceEventState') }
