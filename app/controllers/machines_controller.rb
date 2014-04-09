@@ -9,18 +9,21 @@ class MachinesController < ApplicationController
 	end
 
 	def new
-		@machine = Machine.new
+		@machine_group = MachineGroup.find(params[:machine_group_id])
+		@machine = @machine_group.machines.build
 	end
 
 	def create
-		@machine = Machine.new(params[:machine])
+		@machine_group = MachineGroup.find(params[:machine_group_id])
+		@machine = @machine_group.machines.build(params[:machine])
+
 		if @machine.save
 			flash[:notice] = "Successfully created machine."
 			@machine_hours_debut = HourCounter.new(:machine_id => @machine.id, :machine_hours_age => 0)
 			@machine_hours_debut.save
-			redirect_to machines_path
+			redirect_to root_path
 		else
-			render('new')
+			render 'new'
 		end
 	end
 

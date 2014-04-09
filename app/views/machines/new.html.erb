@@ -1,5 +1,5 @@
 <%= render(:partial => "shared/btn_back_to_list.html.erb") %>
-<h1>New Manufacturer</h1>
-<%= form_for(:machine, :url => {:action => 'create'}, html: {class: "form-horizontal"}) do |f| %>
-<%= render(:partial => 'form', :locals => {:f => f}) %>
-<% end %>
+	<h1>New Machine</h1>
+	<%= form_for [@machine_group, @machine], class: "form-horizontal" do |f| %>
+		<%= render(:partial => 'form', :locals => {:f => f}) %>
+	<% end %>

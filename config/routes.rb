@@ -52,7 +52,12 @@ Service::Application.routes.draw do
   end 
 
   resources :machine_groups do
-    resources :machines, :alarms
+    resources :machines, shallow: true
+    resources :alarms, shallow: true do
+      collection do
+        post :import
+      end
+    end
     member do
       get :resources
     end
