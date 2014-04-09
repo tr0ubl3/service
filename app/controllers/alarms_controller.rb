@@ -24,7 +24,8 @@ class AlarmsController < ApplicationController
   # GET /alarms/new
   # GET /alarms/new.json
   def new
-    @alarm = Alarm.new
+    @machine_group = MachineGroup.find(params[:machine_group_id])
+    @alarm = @machine_group.alarms.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,8 +41,8 @@ class AlarmsController < ApplicationController
   # POST /alarms
   # POST /alarms.json
   def create
-    @alarm = Alarm.new(params[:alarm])
-
+    @machine_group = MachineGroup.find(params[:machine_group_id])
+    @alarm = @machine_group.alarms.build(params[:alarm])
     respond_to do |format|
       if @alarm.save
         format.html { redirect_to @alarm, notice: 'Alarm was successfully created.' }
