@@ -1,5 +1,3 @@
-# //= require jquery.dataTables
-# //= require jquery.dataTables-bootstrap.js
 $ ->
 	$('#machine_group_alarms, #machine_group_machines').dataTable
 				"fnDrawCallback": (oSettings) ->

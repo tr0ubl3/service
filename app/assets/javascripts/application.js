@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery.dataTables
+//= require jquery.dataTables-bootstrap.js
 
 $(document).ready(function() {
 	$('.field_with_errors').closest('.control-group').addClass('error');
