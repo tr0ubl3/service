@@ -1,63 +1,70 @@
 <h2>Machine group <%= @group.view_name %></h2>
 
-<table cellpadding="0" cellspacing="0" border="0" id="machine_group_machines" class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Number</th>
-      <th>Delivery date</th>
-    </tr>
-  </thead>
-    
-  <tbody>
-    <% @group.machines.each do |machine| %>
-      <tr>
-        <td></td>
-        <td>
-          <%= link_to machine_path(machine) do %>
-            <%= machine.display_name %>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Machines</a></li>
+    <li><a href="#tab2" data-toggle="tab">Alarms</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <table cellpadding="0" cellspacing="0" border="0" id="machine_group_machines" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Delivery date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @group.machines.each do |machine| %>
+            <tr>
+              <td></td>
+              <td>
+                <%= link_to machine_path(machine) do %>
+                  <%= machine.display_name %>
+                <% end %>
+              </td>
+              <td><%= machine.machine_number %></td>
+              <td><%= date_format(machine.delivery_date) %></td>
+            </tr>
           <% end %>
-        </td>
-        <td><%= machine.machine_number %></td>
-        <td><%= date_format(machine.delivery_date) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to(new_machine_group_machine_path(@group), :class => 'btn btn-success') do %>
-  <i class='icon-plus icon-white'></i>
-  <span class='spatiu-st-dr-link-cu-iconita'>New machine</span>
-<% end %>
-
-<hr />
-
-<table cellpadding="0" cellspacing="0" border="0" id="machine_group_alarms" class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Number</th>
-      <th>Text</th>
-    </tr>
-  </thead>
-    
-  <tbody>
-    <% @group.alarms.each do |alarm| %>
-      <tr>
-        <td></td>
-        <td>
-          <%= link_to alarm_path(alarm) do %>
-            <%= alarm.number %>
+        </tbody>
+      </table>
+      <%= link_to(new_machine_group_machine_path(@group), :class => 'btn btn-success') do %>
+        <i class='icon-plus icon-white'></i>
+        <span class='spatiu-st-dr-link-cu-iconita'>New machine</span>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <table cellpadding="0" cellspacing="0" border="0" id="machine_group_alarms" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Number</th>
+            <th>Text</th>
+          </tr>
+        </thead>
+          
+        <tbody>
+          <% @group.alarms.each do |alarm| %>
+            <tr>
+              <td></td>
+              <td>
+                <%= link_to alarm_path(alarm) do %>
+                  <%= alarm.number %>
+                <% end %>
+              </td>
+              <td><%= alarm.text %></td>
+            </tr>
           <% end %>
-        </td>
-        <td><%= alarm.text %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to(new_machine_group_alarm_path(@group), :class => 'btn btn-success') do %>
-  <i class='icon-plus icon-white'></i>
-  <span class='spatiu-st-dr-link-cu-iconita'>New alarm</span>
-<% end %>
+        </tbody>
+      </table>
+      <%= link_to(new_machine_group_alarm_path(@group), :class => 'btn btn-success') do %>
+        <i class='icon-plus icon-white'></i>
+        <span class='spatiu-st-dr-link-cu-iconita'>New alarm</span>
+      <% end %>
+    </div>
+  </div>
+</div>
