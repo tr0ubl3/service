@@ -1,7 +1,6 @@
 <h2>Machine group <%= @group.view_name %></h2>
 
-<table class="table table-bordered table-hover">
-  <caption class="titlu-tabel">Machines</caption>
+<table cellpadding="0" cellspacing="0" border="0" id="machine_group_machines" class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>#</th>
@@ -14,7 +13,7 @@
   <tbody>
     <% @group.machines.each do |machine| %>
       <tr>
-        <td>1</td>
+        <td></td>
         <td>
           <%= link_to machine_path(machine) do %>
             <%= machine.display_name %>
@@ -34,9 +33,7 @@
 
 <hr />
 
-
-<table class="table table-bordered table-hover">
-  <caption class="titlu-tabel">Alarms</caption>
+<table cellpadding="0" cellspacing="0" border="0" id="machine_group_alarms" class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>#</th>
@@ -48,7 +45,7 @@
   <tbody>
     <% @group.alarms.each do |alarm| %>
       <tr>
-        <td>1</td>
+        <td></td>
         <td>
           <%= link_to alarm_path(alarm) do %>
             <%= alarm.number %>
