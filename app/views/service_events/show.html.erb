@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td>Delivery date</td>
-			<td><%= @event.machine.delivery_date %></td>
+			<td><%= date_format(@event.machine.delivery_date) %></td>
 		</tr>
 		<tr>
 			<td>Waranty period?</td>
@@ -57,7 +57,7 @@
 		</tr>
 		<tr>
 			<td>Date</td>
-			<td><%= @event.event_date %></td>
+			<td><%= date_format(@event.event_date) %></td>
 		</tr>
 		<tr>
 			<td>Reported by:</td>

@@ -11,7 +11,7 @@
 
 		<tr>
 			<td>Evaluation date</td>
-			<td colspan="5"><%= event.states.where(:state => "evaluated").first.created_at %></td>
+			<td colspan="5"><%= date_format(event.states.where(:state => "evaluated").first.created_at) %></td>
 		</tr>
 
 		<tr>

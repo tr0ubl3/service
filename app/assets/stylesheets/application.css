@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require bootstrap
+ *= require jquery.dataTables-bootstrap
  */
 .field_with_errors {
 	display: inline;
