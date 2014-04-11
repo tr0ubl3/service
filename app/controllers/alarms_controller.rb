@@ -57,9 +57,10 @@ class AlarmsController < ApplicationController
 
   def import
     if Alarm.import(params[:file], params[:machine_group_id])
-        redirect_to resources_machine_group_path(params[:machine_group_id]), notice: "Alarms imported"
+        flash[:notice] = "Alarms imported"
       else
-        redirect_to resources_machine_group_path(params[:machine_group_id]), error: "Invalid file format"
+        flash[:alert] = "No file or invalid file format"
       end
+      redirect_to resources_machine_group_path(params[:machine_group_id])
   end
 end

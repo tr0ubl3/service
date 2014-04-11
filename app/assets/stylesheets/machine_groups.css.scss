@@ -1,9 +1,12 @@
 form.form_csv_alarms {
 	position: relative;
+	margin-top: 10px;
 }
+
 
 input#csv_alarms {
 	position:absolute;
+    width: 210px;
     z-index:2;
     top:0;
     left:0;
