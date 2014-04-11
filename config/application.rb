@@ -67,8 +67,7 @@ module Service
     config.ember.ember_path = "app/assets/javascripts/ember/"
     config.handlebars.templates_root = "ember/templates"
 
-    # config.cache_store = [ :file_store, "/tmp/rails-cache/" ]
-    # config.assets.cache_store = [ :file_store, "/tmp/rails-cache/assets/#{Rails.env}/" ]
+    # config.cache_store = :memory_store, { size: 64.megabytes }
     config.assets.precompile += Dir::entries("app/assets/javascripts").map{|f| f[/^(?!application\.).*\.js/]}.compact + 
                                 Dir::entries("app/assets/stylesheets").map{|f| f[/^(?!application\.).*\.css/]}.compact 
   end
