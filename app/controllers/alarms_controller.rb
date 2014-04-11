@@ -4,36 +4,19 @@ class AlarmsController < ApplicationController
     @alarms = Alarm.all
   end
 
-  # GET /alarms/1
-  # GET /alarms/1.json
   def show
     @alarm = Alarm.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @alarm }
-    end
   end
 
-  # GET /alarms/new
-  # GET /alarms/new.json
   def new
     @machine_group = MachineGroup.find(params[:machine_group_id])
     @alarm = @machine_group.alarms.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @alarm }
-    end
   end
 
-  # GET /alarms/1/edit
   def edit
     @alarm = Alarm.find(params[:id])
   end
-
-  # POST /alarms
-  # POST /alarms.json
+  
   def create
     @machine_group = MachineGroup.find(params[:machine_group_id])
     @alarm = @machine_group.alarms.build(params[:alarm])
@@ -48,8 +31,6 @@ class AlarmsController < ApplicationController
     end
   end
 
-  # PUT /alarms/1
-  # PUT /alarms/1.json
   def update
     @alarm = Alarm.find(params[:id])
 
@@ -64,8 +45,6 @@ class AlarmsController < ApplicationController
     end
   end
 
-  # DELETE /alarms/1
-  # DELETE /alarms/1.json
   def destroy
     @alarm = Alarm.find(params[:id])
     @alarm.destroy
