@@ -1,1 +1,12 @@
+form.form_csv_alarms {
+	position: relative;
+}
 
+input#csv_alarms {
+	position:absolute;
+    z-index:2;
+    top:0;
+    left:0;
+    opacity:0;
+    background-color:transparent;
+}
