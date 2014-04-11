@@ -10,14 +10,11 @@
       </tr>
   </thead>
   <tbody>
-    <% @i=0 %>
     <% @events.each do |event| %>
       <tr>
         <td></td>
-        <td><%= event.event_type %></td>
-        <% if event.machine == nil %>
-
-        <% else %>
+        <td><%= event_type(event) %></td>
+        <% if !event.machine.nil? %>
           <td><%= event.machine.display_name %></td>
         <% end %>
         <td><%= date_format(event.created_at, time: true) %></td>

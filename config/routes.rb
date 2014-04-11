@@ -5,8 +5,7 @@ Service::Application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
   
-  resources :manufacturers, :machine_owners, :machines, :manage_users,
-            :sessions
+  resources :manufacturers, :machine_owners, :manage_users, :sessions
   
   resources :general do
     collection do
@@ -45,7 +44,7 @@ Service::Application.routes.draw do
     end
   end
 
-  resources :alarms do
+  resources :alarms, :only => [:index] do
     collection do
       post :import
     end

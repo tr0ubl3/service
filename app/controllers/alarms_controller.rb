@@ -1,13 +1,7 @@
 class AlarmsController < ApplicationController
-  # GET /alarms
-  # GET /alarms.json
+  
   def index
     @alarms = Alarm.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @alarms }
-    end
   end
 
   # GET /alarms/1
