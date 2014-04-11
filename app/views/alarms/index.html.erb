@@ -19,12 +19,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<h2>Import alarms</h2>
-
-<%= form_tag import_alarms_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>

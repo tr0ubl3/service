@@ -44,11 +44,7 @@ Service::Application.routes.draw do
     end
   end
 
-  resources :alarms, :only => [:index] do
-    collection do
-      post :import
-    end
-  end 
+  resources :alarms, :only => [:index]
 
   resources :machine_groups do
     resources :machines, shallow: true

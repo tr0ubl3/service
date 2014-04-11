@@ -37,5 +37,21 @@ describe Alarm do
 			expect(Alarm.import(@file, group.id)).to be_true
 			expect(Alarm.first.machine_group_id).not_to be_nil
 		end
+		context "file is not a csv" do
+			before :each do
+				@file = Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/files/alarms_valid.nil')))
+				Alarm.delete_all
+				Alarm.import(@file, group.id)
+			end
+
+			it "doesn't save records to db" do
+				expect(Alarm.all.length).to eq(0)
+			end
+
+			it "return false if import was nok" do
+				Alarm.delete_all
+				expect(Alarm.import(@file, group.id)).to be_false
+			end
+		end
 	end
 end
