@@ -5,6 +5,7 @@ describe Alarm do
 	it { should have_and_belong_to_many(:service_events) }
 	it { should allow_mass_assignment_of(:number) }
 	it { should allow_mass_assignment_of(:text) }
+	it { should allow_mass_assignment_of(:machine_group_id) }
 	it { should validate_presence_of(:number) }
 	it { should validate_uniqueness_of(:number) }
 
@@ -18,11 +19,13 @@ describe Alarm do
 
 	describe "#import" do
 		let(:alarm) { create(:alarm) }
+		let(:group) { create(:machine_group) }
 		
 		before :each do
 			@file = Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/files/alarms_valid.csv')))
 			Alarm.delete_all
-			Alarm.import(@file)
+			Alarm.import(@file, group.id)
+
 		end
 
 		it "saves records from csv file" do
@@ -31,7 +34,8 @@ describe Alarm do
 
 		it "returns true if import was ok" do
 			Alarm.delete_all
-			expect(Alarm.import(@file)).to be_true
+			expect(Alarm.import(@file, group.id)).to be_true
+			expect(Alarm.first.machine_group_id).not_to be_nil
 		end
 	end
 end

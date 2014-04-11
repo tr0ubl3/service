@@ -1,5 +1,5 @@
 class Alarm < ActiveRecord::Base
-  attr_accessible :number, :text
+  attr_accessible :number, :text, :machine_group_id
   belongs_to :machine_group
   has_and_belongs_to_many :service_events
 
@@ -7,9 +7,10 @@ class Alarm < ActiveRecord::Base
   
   scope :search, lambda { |query| where(["number = ?", "#{query}".to_i]) }
 
-  def self.import(file)
+  def self.import(file, group)
   	CSV.foreach(file.path, headers: :true) do |row|
-  		Alarm.create! row.to_hash
+  		alarm = Alarm.new(row.to_hash.slice(*accessible_attributes).merge!(:machine_group_id => group))
+  		alarm.save if alarm.valid?
   	end
   	return true
   end

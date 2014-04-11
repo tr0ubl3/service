@@ -56,7 +56,7 @@ class AlarmsController < ApplicationController
   end
 
   def import
-    Alarm.import(params[:file])
+    Alarm.import(params[:file], params[:machine_group_id])
     redirect_to alarms_path, notice: "Alarms imported"
   end
 end
