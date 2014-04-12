@@ -52,6 +52,11 @@ describe Alarm do
 				Alarm.delete_all
 				expect(Alarm.import(@file, group.id)).to be_false
 			end
+
+			it "rescues from CSV::MalformedCSVError" do
+				@file = Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/files/malformed.csv')))
+				expect(Alarm.import(@file, group.id)).to be_false
+			end
 		end
 	end
 end

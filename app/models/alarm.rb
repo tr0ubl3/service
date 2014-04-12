@@ -17,5 +17,8 @@ class Alarm < ActiveRecord::Base
 	  else
 	  	return false
 	  end
+
+	rescue
+		return false
   end
 end
