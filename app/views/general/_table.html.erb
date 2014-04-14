@@ -9,7 +9,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% event_listing.each do |t| %>
+		<% machine.service_events.each do |t| %>
 			<tr>
 				<td></td>
 					<td><%= link_to service_event_path(t.id) do %>

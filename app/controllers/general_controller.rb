@@ -8,11 +8,7 @@ class GeneralController < ApplicationController
   end
 
   def machine_events
-    @machine_name = Machine.find(params[:machine]).display_name
-    @machine_events_all = ServiceEvent.where(:machine_id => params[:machine])
-    @machine_user_events = @machine_events_all.where(:user_id => current_user)
-    @row_number_tab1 = 0
-    @row_number_tab2 = 0
+    @machine = Machine.find(params[:machine])
   end
 
   def control_panel

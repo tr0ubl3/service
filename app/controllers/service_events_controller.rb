@@ -23,11 +23,11 @@ class ServiceEventsController < ApplicationController
 			format.html
 			format.json { render json: Alarm.search(params[:search], @machine.machine_group_id) }
 		end
-
 	end
 
 	def create
-		@event = ServiceEvent.new(params[:service_event])
+		@machine = Machine.find(params[:machine_id])
+		@event = @machine.service_events.build(params[:service_event])
 		@event.user_id = current_user.id
 		# hc = hour counter
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)

@@ -5,7 +5,7 @@ class Alarm < ActiveRecord::Base
 
   validates :number, :presence => true, :uniqueness => {:scope => :machine_group_id}
   
-  scope :search, lambda { |number, machine| where("number = ? AND machine_group_id =?", "#{number}".to_i, "#{machine}".to_i) }
+  scope :search, lambda { |number, machine| where("number LIKE ? AND machine_group_id =?", "#{number}", "#{machine}".to_i) }
 
   def self.import(file, group)
 	  if file && file.original_filename.split(".").pop == "csv"	
