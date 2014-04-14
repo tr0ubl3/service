@@ -7,13 +7,13 @@ describe Alarm do
 	it { should allow_mass_assignment_of(:text) }
 	it { should allow_mass_assignment_of(:machine_group_id) }
 	it { should validate_presence_of(:number) }
-	it { should validate_uniqueness_of(:number) }
+	it { should validate_uniqueness_of(:number).scoped_to(:machine_group_id) }
 
 	describe "search scope" do
-		let(:alarm) { create(:alarm, number: "700123") }
+		let(:alarm) { create(:alarm, number: "700123", machine_group_id: 1) }
 
 		it "searches an alarm by number" do
-			expect(Alarm.search("700123")).to eq([alarm])
+			expect(Alarm.search("700123", 1)).to eq([alarm])
 		end
 	end
 

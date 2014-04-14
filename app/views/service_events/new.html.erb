@@ -1,8 +1,8 @@
 <h2>Define new machine event <%= machine_display_name %></h2>
 <div class='well'>
-	<%= form_for(@event, :url => {:action => 'create'}, html: {id: "new_event"}) do |f| %>
+	<%= form_for [@machine, @event], html: {id: "new_event"} do |f| %>
 
-	<%= machine_scoped(f) %>
+	<%= render partial 'new_event_unscoped' if @machine.nil? %>
 
 	<div class="control-group">
 		<%= f.label(:event_date, 'Date of the event', class: 'control-label') %>	
@@ -32,7 +32,8 @@
 			<%= f.radio_button(:event_type, '3') %>
 			<%= label_tag(:event_type, 'Other') %>
 		</label>
-	</div>	
+	</div>
+
 	<div class="control-group">
 		<%= f.label(:alarm_code, 'Error codes definition', class: 'control-label') %>
 		<div class="controls input-append">
@@ -41,6 +42,7 @@
 		</div>
 		<div id="acdp"></div>
 	</div>
+
 	<div class="control-group">
 		<%= f.label(:event_description, 'Event description', class: 'control-label') %>
 		<div class="controls">

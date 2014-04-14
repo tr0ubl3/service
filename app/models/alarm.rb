@@ -3,9 +3,9 @@ class Alarm < ActiveRecord::Base
   belongs_to :machine_group
   has_and_belongs_to_many :service_events
 
-  validates :number, :presence => true, :uniqueness => true
+  validates :number, :presence => true, :uniqueness => {:scope => :machine_group_id}
   
-  scope :search, lambda { |query| where(["number = ?", "#{query}".to_i]) }
+  scope :search, lambda { |number, machine| where("number = ? AND machine_group_id =?", "#{number}".to_i, "#{machine}".to_i) }
 
   def self.import(file, group)
 	  if file && file.original_filename.split(".").pop == "csv"	

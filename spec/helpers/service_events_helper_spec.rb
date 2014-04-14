@@ -53,21 +53,21 @@ describe ServiceEventsHelper do
 	describe "#machine_scoped" do
 		context "params[:machine] is not nil" do
 			before do
-				params[:machine] = 1
+				params[:machines] = 1
 			end
 
 			it "renders _new_event_scoped partial" do
-				expect(helper.machine_scoped(nil)).to render_template(:partial => 'service_events/_new_event_scoped')
+				expect(helper.machine_scoped(nil)).to be_nil
 			end
 		end
 
 		context "params[:machine] is nil" do
 			before do
-				params[:machine] = nil
+				params[:machines] = nil
 			end
 
 			it "renders _new_event`_unscoped partial" do
-				# expect(helper.machine_scoped(f).stub(:render).and_return(true)).to render_template(:partial => 'service_events/_new_event_unscoped')
+				expect(helper.machine_scoped(f).stub(:render).and_return(true)).to render_template(:partial => 'service_events/_new_event_unscoped')
 			end
 		end
 	end

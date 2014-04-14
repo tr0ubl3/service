@@ -46,6 +46,10 @@ Service::Application.routes.draw do
 
   resources :alarms, :only => [:index]
 
+  resources :machines, :only => [:index] do
+    resources :service_events, shallow: true
+  end
+
   resources :machine_groups do
     resources :machines, shallow: true
     resources :alarms, shallow: true do

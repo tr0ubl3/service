@@ -15,11 +15,13 @@ class ServiceEventsController < ApplicationController
 	end
 
 	def new
-		@event = ServiceEvent.new
+		@machine = Machine.find(params[:machine_id])
+		@event = @machine.service_events.build
 		@event.alarms.build
+		
 		respond_to do |format|
 			format.html
-			format.json { render json: Alarm.search(params[:search]) }
+			format.json { render json: Alarm.search(params[:search], @machine.machine_group_id) }
 		end
 
 	end
