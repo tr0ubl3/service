@@ -1,0 +1,4 @@
+<h1>Edit <%= params[:controller].humanize.downcase.singularize %> <%= firm.name %></h1>
+<%= form_for firm, html: { class: "form-horizontal" } do |f| %>
+	<%= render :partial => "shared/new_firm", :locals => {:f => f} %>
+<% end %>

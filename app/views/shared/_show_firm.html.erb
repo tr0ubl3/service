@@ -1,118 +1,116 @@
-	<h1><%= firm.name %> details</h1>
-	<div class="container-grup">
-		<h2>Address</h2>
-			<div class="clear-row"></div>
-			<div class="tabel-container">
-				<div class="rand-tabel clearfix raza-contur-sus">
-					<span class="titlu-rand">Name :</span>
-					<span class="continut-rand"> 
-					<%= link_to(firm.name, "#", id: "test", data: {trigger: "click", title: "test", content: "mambo jambo", animation: 'true', placement: "top"}) %></span>
-				</div>
-
-				<div class="rand-tabel clearfix">
-					<span class="titlu-rand">Country :</span>
-					<span class="continut-rand"><%= firm.country %></span>
-				</div>
-
-				<div class="rand-tabel clearfix">
-					<span class="titlu-rand">City :</span>
-					<span class="continut-rand"><%= firm.city %></span>
-				</div>
-
-				<div class="rand-tabel clearfix">
-					<span class="titlu-rand">Address :</span>
-					<span class="continut-rand"><%= firm.address %></span>
-				</div>
-
-				<div class="rand-tabel clearfix raza-contur-jos">
-					<span class="titlu-rand">Postal code :</span>
-					<span class="continut-rand"><%= firm.postal_code %></span>
-				</div>
-			</div>
-	</div>
-
-	<div class="container-grup">
-		<h2>Contact</h2>
-			<div class="clear-row"></div>
-			<div class="tabel-container">
-				<div class="rand-tabel clearfix raza-contur-sus">
-					<span class="titlu-rand">Telephone : </span>
-					<span class="continut-rand"><%= firm.office_tel %></span>
-				</div>
-
-				<div class="rand-tabel clearfix">
-					<span class="titlu-rand">Fax :</span>
-					<span class="continut-rand"><%= firm.fax %></span>
-				</div>
-
-				<div class="rand-tabel clearfix">
-					<span class="titlu-rand">E-mail :</span>
-					<span class="continut-rand"><%= firm.office_mail %></span>
-				</div>
-
-				<div class="rand-tabel clearfix raza-contur-jos">
-					<span class="titlu-rand">Mobile :</span>
-					<span class="continut-rand"><%= firm.mobile %></span>
-				</div>
-			</div>
-	</div>
-
-	<div class="container-grup">
-		<h2>Machines</h2>
-			<div class="clear-row"></div>
-<table class="table table-bordered table-hover">
-<thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Delivered date</th>
-      <th>Waranty period</th>
-      <th>Machine number</th>
-    </tr>
-</thead>
-<tbody>
-	<% @i=0 %>
-	<% @mm.each do |machine| %>
-    <tr>
-      <td><%= @i+=1 %></td>
-      <td><%= machine.display_name %></td>
-      <td><%= machine.machine_group.name %></td>
-      <td><%= machine.delivery_date %></td>
-      <td><%= machine.waranty_period %></td>
-      <td><%= machine.machine_number %></td>
-      <% end %>
-    </tr>
-</tbody>
+<h2><%= firm.name %> details</h2>
+<table class="service-table">
+	<tbody>
+		<tr>
+			<td colspan="2">
+				Address
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Name:
+			</td>
+			<td>
+				<%= firm.name %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Country:
+			</td>
+			<td>
+				<%= firm.country %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				City:
+			</td>
+			<td>
+				<%= firm.city %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Postal code:
+			</td>
+			<td>
+				<%= firm.postal_code %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				Contact
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Telephone:
+			</td>
+			<td>
+				<%= firm.office_tel %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Fax:
+			</td>
+			<td>
+				<%= firm.fax %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				E-mail:
+			</td>
+			<td>
+				<%= firm.office_mail %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Mobile:
+			</td>
+			<td>
+				<%= firm.mobile %>
+			</td>
+		</tr>
+	</tbody>
 </table>
-	</div>
 
-	<div class="container-grup">
-		<h2>Users</h2>
-<div class="clear-row"></div>
-		<table class="table table-bordered table-hover">
-<thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Mobile</th>
-      <th>E-mail</th>
-    </tr>
-</thead>
-<tbody>
-	<% @i = 0 %>
-	<% firm.users.each do |user| %>
-    <tr>
-      <td><%= @i+=1 %></td>
-      <td><%= user.full_name %></td>
-      <td><%= user.phone_number %></td>
-      <td><%= user.email %></td>
-    </tr>
-    <% end %>
-</tbody>
-</table>
-</div>
-<div class="spatiu-sus-jos cust-btn">
+<% if firm.users.count > 0 %>
+	<h4>Users</h4>
+	<table class="service-table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>E-mail</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% firm.users.each_with_index do |user, i| %>
+				<tr>
+					<td>
+						<%= i+1 %>
+					</td>
+					<td>
+						<%= user.full_name %>
+					</td>
+					<td>
+						<%= user.phone_number %>
+					</td>
+					<td>
+						<%= user.email %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>	
 
-<%= link_to(raw("<i class='icon-pencil'></i><span class='spatiu-st-dr-link-cu-iconita'>Edit ") + button_name, {:action => 'edit', :id => firm.id}, {:class => 'btn btn-primary'}) %></span>
-</div>
+<%= link_to [:edit, firm], class: "btn btn-primary" do %>
+	<i class='icon-pencil icon-white'></i>
+	Edit <%= params[:controller].humanize.downcase.singularize %>
+<% end %>

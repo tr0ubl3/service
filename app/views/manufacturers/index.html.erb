@@ -1,28 +1,26 @@
-<%= render(:partial => 'shared/flash_show') %>
-<table class="table table-bordered table-hover">
-<caption class="titlu-tabel">Manufacturers List</caption>
-<thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Office tel</th>
-      <th>Office mail</th>
-      <th>Last updated</th>
-    </tr>
-</thead>
-<tbody>
-	<% @i=0 %>
-	<% @manufacturers.each do |manufacturer| %>
-    <tr>
-      <td><%= @i+=1 %></td>
-      <td><%= link_to(manufacturer.name, {:action =>'show', :id => manufacturer.id}) %></td>
-      <td><%= manufacturer.address %></td>
-      <td><%= manufacturer.office_tel %></td>
-      <td><%= manufacturer.office_mail %></td>
-      <td><%= manufacturer.updated_at.strftime("%d.%m.%Y at %H:%M") %></td>
-      <% end %>
-    </tr>
-</tbody>
+<h2>Manufacturers list</h2>
+<table class="table table-bordered table-hover" id="manufacturers_list">
+  <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Office tel</th>
+        <th>Office mail</th>
+        <th>Last updated</th>
+      </tr>
+  </thead>
+  <tbody>
+  	<% @manufacturers.each do |manufacturer| %>
+      <tr>
+        <td></td>
+        <td><%= link_to manufacturer.name, manufacturer_path(manufacturer) %></td>
+        <td><%= manufacturer.address %></td>
+        <td><%= manufacturer.office_tel %></td>
+        <td><%= manufacturer.office_mail %></td>
+        <td><%= date_format(manufacturer.updated_at) %></td>
+        <% end %>
+      </tr>
+  </tbody>
 </table>
 <%= render(:partial => "shared/add_button") %>
