@@ -1,6 +1,7 @@
 class ServiceEventsController < ApplicationController
 	respond_to :html, :json
 	before_filter :check_auth
+	
 	def index
 		@events = ServiceEvent.order("service_events.id DESC")
 	end
@@ -30,9 +31,9 @@ class ServiceEventsController < ApplicationController
 		@event = @machine.service_events.build(params[:service_event])
 		@event.user_id = current_user.id
 		# hc = hour counter
-		@hc = HourCounter.find_by_machine_id(@event.machine_id)
+		# @hc = HourCounter.find_by_machine_id(@event.machine_id)
 		if @event.save
-			@hc.update_attributes(:machine_hours_age => @event.hour_counter)
+			# @hc.update_attributes(:machine_hours_age => @event.hour_counter)
 			# ServiceEventNotifier.confirmation(@event, @machine).deliver
 			# ServiceEventNotifier.notification(@event, @machine).deliver
 			flash[:notice] = 'Event successfully registered!' 	

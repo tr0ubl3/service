@@ -4,6 +4,7 @@
   <thead>
       <tr>
         <th>#</th>
+        <th>Event name</th>
         <th>Event type</th>
         <th>Machine</th>
         <th>Time of event</th>
@@ -13,13 +14,11 @@
     <% @events.each do |event| %>
       <tr>
         <td></td>
+        <td><%= link_to event.event_name, service_event_path(event) %></td>
         <td><%= event_type(event) %></td>
-        <% if !event.machine.nil? %>
-          <td><%= event.machine.display_name %></td>
-        <% end %>
+        <td><%= event.machine.display_name %></td>
         <td><%= date_format(event.created_at, time: true) %></td>
         <% end %>
       </tr>
   </tbody>
 </table>
-<%= render(:partial => "shared/add_button") %>
