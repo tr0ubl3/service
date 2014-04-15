@@ -139,15 +139,12 @@ $(document).ready ->
 		acceptFileTypes: /(\.|\/)(gif|jpe?g|png|log|mp4)$/i
 		add: (e, data) -> 
 			doGetThumbnail = (file) ->
-				reader = new FileReader()
-				reader.onloadend = (e) ->
-					div_obj = document.createElement("div")
-					div_obj.className = "file-container-object"
-					div_obj.innerHTML = ['<img class="thumb" src="', reader.result,
-	                            '" title="', escape(file.name), '"/>'].join('')
-					$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
-					data.context = $(div_obj).insertBefore("div.file-container > br")
-				reader.readAsDataURL(file)
+				div_obj = document.createElement("div")
+				div_obj.className = "file-container-object"
+				div_obj.innerHTML = ["<i class='fa fa-picture-o'></i>", "<p>"+file.name+"</p>"].join('')
+				$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
+				data.context = $(div_obj).insertBefore("div.file-container > br")
+			
 			doMakeVideoThumbnail = (file) -> 
 				div_obj = document.createElement("div")
 				div_obj.className = "file-container-object"
@@ -193,7 +190,7 @@ $(document).ready ->
 			progressbar.children("div").first().css("width", progress + '%')
 	$('#new_service_event_file').on "change", ->
 		$("form[id^='edit_service_event'] > input[name=commit]").css("margin-top", $(@).height() + 15)
-		console.log $(@).height()
+		# console.log $(@).height()
 	$("table.event-table a").fancybox()
 	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})
 	$('#service_events_list').dataTable

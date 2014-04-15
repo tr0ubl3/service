@@ -163,14 +163,15 @@ table.event-table > tbody {
   text-align: center;
 
   a {
+    $size: 180px;
     color: inherit;
-    i {
-      $size: 180px; 
+    i, img {
       width: $size;
       height: $size;
       line-height: $size;
       text-align: center;
       font-size: $size;
+      max-width: none;
     }
   }
 
@@ -185,7 +186,7 @@ table.event-table > tbody {
   // text-align: center;
 }
 
-table.event-table td[colspan="2"], table.event-table td[colspan="6"] {
+table.event-table td[colspan="2"], table.event-table td[colspan="4"] {
     background-color: rgba(235, 235, 235, 0.8);
     padding: 5px;
     width: 100%;
@@ -305,7 +306,7 @@ label > input#service_event_recurrent_true ~ p
       // cursor: pointer;
     }
 
-    input[id^="service_event_service_event_files_attributes"], input {
+    input.destroy {
       position: absolute;
       z-index: 1;
       margin: 5px;
@@ -316,7 +317,7 @@ label > input#service_event_recurrent_true ~ p
     p {
       word-break: break-all;
       color: rgba(50, 50, 50, 0.5);
-      font: normal 10px/10px sans-serif;
+      font: normal 12px/12px sans-serif;
     }
 
     p, i {
@@ -325,6 +326,10 @@ label > input#service_event_recurrent_true ~ p
       -ms-transform: translateY(round($square-dim/3));
       -o-transform: translateY(round($square-dim/3));
       transform: translateY(round($square-dim/3));
+    }
+
+    i {
+      font-size: 20px;
     }
   }
 

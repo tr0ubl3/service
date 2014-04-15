@@ -1,16 +1,16 @@
 class ServiceEvent < ActiveRecord::Base
 	attr_accessible :user_id, :machine_id, :event_date, :event_type, :event_description,
 	 				:hour_counter, :evaluation_description, :parent_event, :recurrent, 
-  					:service_event_files_attributes, :alarm_ids, :evaluator
+  					:alarm_ids, :evaluator
   					
-	belongs_to :machine, dependent: :destroy
+	belongs_to :machine
 	has_and_belongs_to_many :alarms
 	belongs_to :user
 	has_many :states, class_name: "ServiceEventState"
 	has_many :service_event_files, dependent: :destroy
 	has_many :solving_steps
 	accepts_nested_attributes_for :alarms, :allow_destroy => true
-	accepts_nested_attributes_for :service_event_files, :allow_destroy => true, :reject_if => :all_blank
+	# accepts_nested_attributes_for :service_event_files, :allow_destroy => true, :reject_if => :all_blank
 	before_create :event_prepare
 	after_create :opening
 

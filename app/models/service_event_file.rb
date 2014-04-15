@@ -4,7 +4,7 @@ class ServiceEventFile < ActiveRecord::Base
   belongs_to :service_event
   mount_uploader :file, EventEvaluationUploader
   before_create :set_mime_type
-  # validates :file, :presence => true
+  validates :file, :presence => true
 
 
   private

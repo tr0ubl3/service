@@ -4,53 +4,53 @@
 	<tbody>
 		
 		<tr>
-			<td colspan="6">
+			<td colspan="4">
 				Evaluation details
 			</td>
 		</tr>
 
 		<tr>
 			<td>Evaluation date</td>
-			<td colspan="5"><%= date_format(event.states.where(:state => "evaluated").first.created_at) %></td>
+			<td colspan="3"><%= date_format(event.states.where(:state => "evaluated").first.created_at) %></td>
 		</tr>
 
 		<tr>
 			<td>Evaluator</td>
-			<td colspan="5"><%= evaluator_full_name(event.evaluator) %></td>
+			<td colspan="3"><%= evaluator_full_name(event.evaluator) %></td>
 		</tr>
 
 		<tr>
 			<td>Recurrent event?</td>
-			<td colspan="5"><%= event.recurrent.to_s.titleize %></td>
+			<td colspan="3"><%= event.recurrent.to_s.titleize %></td>
 		</tr>
 
 		<tr>
 			<td>Parent event</td>
-			<td colspan="5"><%= parent_event_name(event.parent_event) %></td>
+			<td colspan="3"><%= parent_event_name(event.parent_event) %></td>
 		</tr>
 
 		<tr>
-			<td colspan="6">
+			<td colspan="4">
 				Event evaluation description
 			</td>			
 		</tr>
 
 		<tr>
-			<td colspan="6" class="event-description">
+			<td colspan="4" class="event-description">
 				<%= event.evaluation_description %>
 			</td>
 		</tr>
 
 		<tr>
-			<td colspan="6">
+			<td colspan="4">
 				Event files
 			</td>
 		</tr>
 
 		<% event.service_event_files.each_slice(4) do |set| %>
-			<tr class="thumbnails">	
+			<tr>	
 				<% set.each do |file| %>
-						<td class="with-content thumbnail">
+						<td class="with-content">
 							<%= thumbnail_assign(file) %>
 						</td>
 				<% end %>
