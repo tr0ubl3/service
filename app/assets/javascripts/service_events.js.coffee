@@ -151,14 +151,14 @@ $(document).ready ->
 			doMakeVideoThumbnail = (file) -> 
 				div_obj = document.createElement("div")
 				div_obj.className = "file-container-object"
-				div_obj.innerHTML = ["<i class='fa fa-film'></i>"].join('')
+				div_obj.innerHTML = ["<i class='fa fa-film'></i>", "<p>"+file.name+"</p>"].join('')
 				$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
 				data.context = $(div_obj).insertBefore("div.file-container > br")
 
 			doGetLogFileThumbnail = (file) ->
 				div_obj = document.createElement("div")
 				div_obj.className = "file-container-object"
-				div_obj.innerHTML = ["<i class='fa fa-file-text-o'></i>"].join('')
+				div_obj.innerHTML = ["<i class='fa fa-file-text-o'></i>", "<p>"+file.name+"</p>"].join('')
 				$('<input>', { type: 'checkbox', class: "destroy" }).prependTo(div_obj)	                            
 				data.context = $(div_obj).insertBefore("div.file-container > br")
 

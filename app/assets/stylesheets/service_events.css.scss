@@ -285,14 +285,15 @@ label > input#service_event_recurrent_true ~ p
 
   .file-container-object {
     $square-dim: round($fc-width/6); 
-    display: inline-block;
+    display: table-cell;
     width: $square-dim;
     height: $square-dim;
+    padding: 0;
     // border: 1px solid black;
     margin: -2px;
-    line-height: $square-dim;
+    // line-height: $square-dim;
     text-align: center;
-    padding: 0;
+    vertical-align: middle;
 
     img {
       height: 95%;
@@ -308,6 +309,12 @@ label > input#service_event_recurrent_true ~ p
       position: absolute;
       z-index: 1;
       margin: 5px;
+      left: 5px;
+      top: 5px;
+    }
+
+    p {
+      word-break: break-all;
     }
   }
 
