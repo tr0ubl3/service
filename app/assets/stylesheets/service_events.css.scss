@@ -407,3 +407,8 @@ div#show {
     } 
   }
 }
+
+form[id^='edit_service_event'] > input[name=commit] {
+  position: absolute;
+  margin-top: 100px;
+}

@@ -179,7 +179,7 @@ $(document).ready ->
 					if (data.context.is(":visible"))
 						data.submit())
 			$("div#file-remove").on "click", ->
-				rmEntities = $("div.file-container > div.file-container-object").has("input.destroy:checkbox:checked")
+				# rmEntities = $("div.file-container > div.file-container-object").has("input.destroy:checkbox:checked")
 				# console.log(data.files.length)
 				# $.each(rmEntities, ->
 				# 	a = $(@).children("img").attr("title")
@@ -190,11 +190,19 @@ $(document).ready ->
 				# 	console.log(a, "i have the title")
 				# 	console.log(data.files)
 				# 	)
-				rmEntities.remove()
+				# for object in rmEntities
+				# 	console.log
+				if data.context[0].childNodes[0].checked
+					index = data.originalFiles.indexOf(data.files[0])
+					data.originalFiles.splice(index, 1)
+					data.context[0].remove()
+					$("#new_service_event_file").trigger("change")
+
 		progressall: (e, data) ->
 			progress = parseInt(data.loaded / data.total * 100, 10)
 			progressbar = $("div.file-container > div.progress")
 			progressbar.css("display", "block")
+			$("#new_service_event_file").trigger("change")
 			progressbar.children("p").first().text((data.bitrate / (1000000 * 8)).toFixed(2) + " MB/s")
 			progressbar.children("div").first().css("width", progress + '%')
 			# console.log(data.bitrate / (1000000 * 8))
@@ -204,6 +212,9 @@ $(document).ready ->
 			# $("div.file-container > div.progress > p").before(data.files[data.index].name)
 			# $("div.file-container > div.progress > p").append("<span>"+data.files[0].name+"</span>")
 			# console.log(data.files[0].name)
+	$('#new_service_event_file').on "change", ->
+		$("form[id^='edit_service_event'] > input[name=commit]").css("margin-top", $(@).height() + 15)
+		console.log $(@).height()
 	$("table.event-table a").fancybox()
 	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})
 	$('#service_events_list').dataTable

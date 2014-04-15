@@ -1,4 +1,4 @@
-<%= form_for @event, :html => { :multipart => true }, :url => {:action => "create_evaluate"}, :method => "put" do |f| %>
+<%= form_for @event, :url => {:action => "create_evaluate"}, :method => "put" do |f| %>
 
 		<% if @event.errors.any? %>
 			<% @event.errors.delete(:password_digest) %>
@@ -57,7 +57,7 @@
 <% end %>
 
 
-<%= form_for [@event, @files], remote: true do |f| %>
+<%= form_for [@event, @files], multipart: true, remote: true do |f| %>
 	<div class="control-group">
 		<%= f.label(:service_event_files, 'Event related files', class: 'control-label') %>
 		<div class="file-container">
@@ -74,7 +74,7 @@
 			</div>
 			<div class="progress">
 				<p></p>
-			<div class="bar"></div>
+				<div class="bar"></div>
 			</div>
 		</div>
 	</div>
