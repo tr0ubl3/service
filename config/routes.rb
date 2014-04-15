@@ -31,6 +31,7 @@ Service::Application.routes.draw do
   end
 
   resources :service_events do
+    resources :service_event_files, shallow: true
     member do
       get :evaluate
       put :create_evaluate

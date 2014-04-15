@@ -135,7 +135,7 @@ $(document).ready ->
 			$(@).data("eventid") is parseInt(peval)).text()
 		# console.log(a+"val"+peval)
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
-	$("[id^='edit_service_event']").fileupload({
+	$("[id^='new_service_event_file']").fileupload
 		acceptFileTypes: /(\.|\/)(gif|jpe?g|png|log|mp4)$/i
 		add: (e, data) -> 
 			doGetThumbnail = (file) ->
@@ -178,7 +178,7 @@ $(document).ready ->
 				if data.files.length isnt 0
 					if (data.context.is(":visible"))
 						data.submit())
-			$("div#file-remove").on("click", ->
+			$("div#file-remove").on "click", ->
 				rmEntities = $("div.file-container > div.file-container-object").has("input.destroy:checkbox:checked")
 				# console.log(data.files.length)
 				# $.each(rmEntities, ->
@@ -191,7 +191,6 @@ $(document).ready ->
 				# 	console.log(data.files)
 				# 	)
 				rmEntities.remove()
-				)
 		progressall: (e, data) ->
 			progress = parseInt(data.loaded / data.total * 100, 10)
 			progressbar = $("div.file-container > div.progress")
@@ -205,7 +204,6 @@ $(document).ready ->
 			# $("div.file-container > div.progress > p").before(data.files[data.index].name)
 			# $("div.file-container > div.progress > p").append("<span>"+data.files[0].name+"</span>")
 			# console.log(data.files[0].name)
-		})
 	$("table.event-table a").fancybox()
 	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})
 	$('#service_events_list').dataTable

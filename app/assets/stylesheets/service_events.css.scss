@@ -263,7 +263,7 @@ label > input#service_event_recurrent_true ~ p {
   display: inline;
 }
 
-[id^="edit_service_event"] label {
+[id^="edit_service_event"] label, #new_service_event_file label {
   font-size: 16px;
   font-weight: bold;
   // text-shadow: 2px 2px #E2E2E2;
@@ -285,12 +285,12 @@ label > input#service_event_recurrent_true ~ p
 
   .file-container-object {
     $square-dim: round($fc-width/6); 
-    display: table-cell;
+    display: inline-block;
     width: $square-dim;
     height: $square-dim;
-    padding: 0;
-    // border: 1px solid black;
-    margin: -2px;
+    padding: 5px;
+    border: 1px solid #aaa;
+    margin: 2px;
     // line-height: $square-dim;
     text-align: center;
     vertical-align: middle;
@@ -315,11 +315,25 @@ label > input#service_event_recurrent_true ~ p
 
     p {
       word-break: break-all;
+      color: rgba(50, 50, 50, 0.5);
+      font: normal 10px/10px sans-serif;
+    }
+
+    p, i {
+      -webkit-transform: translateY(round($square-dim/3));
+      -moz-transform: translateY(round($square-dim/3));
+      -ms-transform: translateY(round($square-dim/3));
+      -o-transform: translateY(round($square-dim/3));
+      transform: translateY(round($square-dim/3));
     }
   }
 
   .file-container-object:hover {
     background-color: rgba(230, 230, 230, 0.5);
+    
+    p {
+      text-shadow: 2px 2px 5px #ddd;
+    }
   }
 
   div {
@@ -333,7 +347,7 @@ label > input#service_event_recurrent_true ~ p
       cursor: pointer;
     }
 
-    input[id^="service_event_service_event_files_attributes"][type="file"] {
+    input[id^="service_event_file_file"][type="file"] {
       display: block;
       position: absolute;
       top: 0;
