@@ -105,6 +105,11 @@ class ServiceEventsController < ApplicationController
 		@event = ServiceEvent.find(params[:id])
 		@files = @event.service_event_files.build
 		@event.alarms.build
+
+		respond_to do |format|
+			format.html
+			format.json { render json: Alarm.search(params[:search], @event.machine.machine_group_id) }
+		end
 	end
 
 	def create_evaluate
