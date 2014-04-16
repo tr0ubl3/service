@@ -14,8 +14,8 @@ class ServiceEvent < ActiveRecord::Base
 	before_create :event_prepare
 	after_create :opening
 
-	STATES = %w[open evaluated solved] 
-	delegate :open?, :evaluated?, :solved?, to: :current_state
+	STATES = %w[open evaluated solved closed] 
+	delegate :open?, :evaluated?, :solved?, :closed?, to: :current_state
 
 	validates :machine_id, :presence => true
 	# validates :event_date, :presence => true
@@ -42,6 +42,11 @@ class ServiceEvent < ActiveRecord::Base
 
 	def solve
 		states.create! state: "solved" if evaluated?
+		close
+	end
+
+	def close
+		states.create! state: "closed" if solved?
 	end
 
 	private

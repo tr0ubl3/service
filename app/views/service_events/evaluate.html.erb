@@ -1,35 +1,20 @@
 <%= form_for @event, :url => {:action => "create_evaluate"}, :method => "put" do |f| %>
 
-		<% if @event.errors.any? %>
-			<% @event.errors.delete(:password_digest) %>
-			<div id="error_explanation">
-				<div class="alert alert-error">
-					The form contains <%= pluralize(@event.errors.count, "error") %>
-				</div>
-				<ul>
-					<% @event.errors.full_messages.each do |msg| %>
-					<li>
-						<%= msg %>
-					</li>
-					<% end %>
-				</ul>
+	<% if @event.errors.any? %>
+		<% @event.errors.delete(:password_digest) %>
+		<div id="error_explanation">
+			<div class="alert alert-error">
+				The form contains <%= pluralize(@event.errors.count, "error") %>
 			</div>
-		<% end %>
-	
-	<%= f.hidden_field :parent_event, value: nil %>
-
-	<div class="control-group">
-		<%= f.label(:recurrent, 'Recurrent event?') %>
-		<label class='radio'>
-			<%= f.radio_button(:recurrent, true) %>
-			<%= label_tag(:recurrent, 'True') %>
-		</label>
-		<label class='radio'>
-			<%= f.radio_button(:recurrent, false, :checked => false) %>
-			<%= label_tag(:recurrent, 'False') %>
-		</label>
-		<%= render(:partial => "evaluate_modal", :locals => { :event => @event }) %>
-	</div>
+			<ul>
+				<% @event.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
 
 	<div class="control-group">
     <%= f.label :alarms, 'Error codes', class: 'control-label' %>

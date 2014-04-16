@@ -1,22 +1,6 @@
 <h2>Define new machine event <%= @machine.display_name %></h2>
 <div class='well'>
 	<%= form_for [@machine, @event], html: {id: "new_event"} do |f| %>
-		<% if @event.errors.any? %>
-			<% @event.errors.delete(:password_digest) %>
-			<div id="error_explanation">
-				<div class="alert alert-error">
-					The form contains <%= pluralize(@event.errors.count, "error") %>
-				</div>
-				<ul>
-					<% @event.errors.full_messages.each do |msg| %>
-					<li>
-						<%= msg %>
-					</li>
-					<% end %>
-				</ul>
-			</div>
-		<% end %>
-
 	<%= render partial 'new_event_unscoped' if @machine.nil? %>
 
 	<div class="control-group">

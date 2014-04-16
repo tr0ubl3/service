@@ -163,8 +163,11 @@ describe ServiceEvent do
 		end
 
 		describe "#closing" do
-			it "saves closed state to event" do
+			describe "saves closed state to event" do
 				it "saves closed state to event" do
+					event.save
+					event.evaluate
+					event.solve
 					expect(event.closed?).to be_true
 				end
 			end

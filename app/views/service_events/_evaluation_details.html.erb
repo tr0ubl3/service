@@ -11,22 +11,12 @@
 
 		<tr>
 			<td>Evaluation date</td>
-			<td colspan="3"><%= date_format(event.states.where(:state => "evaluated").first.created_at) %></td>
+			<td colspan="3"><%= date_format(event.states.where(:state => "evaluated").first.created_at, time: true) %></td>
 		</tr>
 
 		<tr>
 			<td>Evaluator</td>
 			<td colspan="3"><%= evaluator_full_name(event.evaluator) %></td>
-		</tr>
-
-		<tr>
-			<td>Recurrent event?</td>
-			<td colspan="3"><%= event.recurrent.to_s.titleize %></td>
-		</tr>
-
-		<tr>
-			<td>Parent event</td>
-			<td colspan="3"><%= parent_event_name(event.parent_event) %></td>
 		</tr>
 
 		<tr>
