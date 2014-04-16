@@ -17,7 +17,7 @@ describe ServiceEvent do
 		it {should validate_presence_of :hour_counter}
 		it {should validate_presence_of :event_type}
 		it {should validate_presence_of :event_description}
-		it {should ensure_length_of(:event_description).is_at_least(3).is_at_most(500)}
+		it {should ensure_length_of(:event_description).is_at_least(3).is_at_most(1000)}
 		it {should validate_numericality_of(:hour_counter)}
 	end
 

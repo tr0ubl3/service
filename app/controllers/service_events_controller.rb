@@ -39,9 +39,8 @@ class ServiceEventsController < ApplicationController
 			flash[:notice] = 'Event successfully registered!' 	
 			redirect_to root_path
 		else
-			@machines = Machine.where(:machine_owner_id => current_user.firm_id)
-			flash.now[:alert] = 'Please correct errors and try again!'
-			render :new
+			flash[:alert] = "Please correct errors: #{@event.errors.to_a}"
+			redirect_to new_machine_service_event_path(@machine)
 		end
 	end
 
