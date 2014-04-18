@@ -61,7 +61,7 @@ describe ServiceEvent do
 	it { should allow_mass_assignment_of(:event_type) }
 	it { should allow_mass_assignment_of(:event_description) }
 	it { should allow_mass_assignment_of(:hour_counter) }
-	it { should allow_mass_assignment_of(:service_event_files_attributes) }
+	it { should_not allow_mass_assignment_of(:service_event_files_attributes) }
 	it { should allow_mass_assignment_of(:alarm_ids) }
 	it { should allow_mass_assignment_of(:evaluator) }
 	
@@ -73,20 +73,20 @@ describe ServiceEvent do
 	it { should have_many(:states).class_name('ServiceEventState') }
 
 	it "should assign variable STATES" do
-		states = %w[open evaluated solved]
+		states = %w[open evaluated solved closed]
 		expect(ServiceEvent::STATES).to eq(states)
 	end
 
 	it { should delegate(:open?).to(:current_state) }
 	it { should delegate(:evaluated?).to(:current_state) }
 	it { should delegate(:solved?).to(:current_state) }
-	# it { should delegate(:closed?).to(:current_state) }
+	it { should delegate(:closed?).to(:current_state) }
 
 	describe "#self.query_state(state)" do
 		let(:event) { create(:service_event) }
 
 		it "returns an array of open service events" do
-			expect(ServiceEvent.query_state("open")).to have_content(event)
+			expect(ServiceEvent.query_state("open")).to eq([event])
 		end
 	end
 
@@ -94,7 +94,6 @@ describe ServiceEvent do
 		let!(:event) { create(:service_event) }	
 		let!(:pstate) { mock_model(ServiceEventState) }
 		it "gives the current state of an event" do
-			event.stub(open?).and_return(true)
 			expect(event.open?).to be_true
 		end
 	end
@@ -105,12 +104,7 @@ describe ServiceEvent do
 		before do
 			event = build(:service_event, user_id: nil)
 			current_user = user
-			event.save & event.reload
-		end
-
-
-		it "assigns current user_id to current user id" do
-			expect(event.user_id).to eq(user.id)
+			event.save && event.reload
 		end
 
 		it "updates the hour counter of machine" do
@@ -123,10 +117,10 @@ describe ServiceEvent do
 	end
 
 	context "new saved record attributes" do
+		let(:event) { create(:service_event) }
 
 		it "has event_name set after creation" do
-			event = build(:service_event, :event_name => nil)
-			event.save! & event.reload
+			event = create(:service_event, :event_name => nil)
 			expect(event.event_name).not_to be_nil
 		end
 		
@@ -136,36 +130,26 @@ describe ServiceEvent do
 	end
 
 	context "event already exists" do
-		let(:event) { build(:service_event) }
-		
-		describe "#opening" do
-			it "saves open state for event" do
-				event.save! && event.reload
-				expect(event.open?).to be_true 	
-			end 
-		end
+		let(:event) { create(:service_event) }
 		
 		describe "#evaluate" do
-			before do
-				event.save!
-			end
-
 			it "saves evaluated state for event" do
-				event.evaluate && event.reload
+				event.evaluate
 				expect(event.evaluated?).to be_true 	
 			end 
 		end
 		
 		describe "#solve" do
 			it "saves solved state to event" do
-				expect(event.solving?).to be_true
+				event.evaluate
+				event.solve
+				expect(event.closed?).to be_true
 			end
 		end
 
-		describe "#closing" do
+		describe "#close" do
 			describe "saves closed state to event" do
 				it "saves closed state to event" do
-					event.save
 					event.evaluate
 					event.solve
 					expect(event.closed?).to be_true

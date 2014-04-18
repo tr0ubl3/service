@@ -1,7 +1,6 @@
 class ServiceEvent < ActiveRecord::Base
 	attr_accessible :user_id, :machine_id, :event_date, :event_type, :event_description,
-	 				:hour_counter, :evaluation_description, :parent_event, :recurrent, 
-  					:alarm_ids, :evaluator
+	 				:hour_counter, :evaluation_description, :alarm_ids, :evaluator
   					
 	belongs_to :machine
 	has_and_belongs_to_many :alarms
