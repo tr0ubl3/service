@@ -1,5 +1,5 @@
 class ServiceEventMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "service@internationalgt.ro"
 
   def open(event)
   	@event = event

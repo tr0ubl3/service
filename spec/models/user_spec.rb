@@ -163,5 +163,4 @@ describe User do
 			expect(User.admins).to be == admins			
 		end
 	end
-	
 end
