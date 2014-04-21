@@ -69,7 +69,7 @@
       <%= form_tag import_machine_group_alarms_path(@group), multipart: true, :class => "form_csv_alarms" do %>
         <a href="#" class="btn btn-primary">
           Import alarms from csv file ...
-          <%= file_field_tag :file, :id => "csv_alarms" %>
+          <%= file_field_tag :file, accept: "text/csv", :id => "csv_alarms" %>
         </a>
           <span class='label label-info' id="upload-file-info"></span>
         <%= submit_tag "Import", :class => "btn btn-success" %>
