@@ -65,4 +65,15 @@ Service::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.ember.variant = :production
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.internationalgt.ro",
+    port: 587,
+    domain: "internationalgt.ro",
+    authentication: "plain",
+    user_name: ENV['IGT_MAIL'],
+    password: ENV['IGT_PASS'],
+    enable_starttls_auto: true
+  }
 end
