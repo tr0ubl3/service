@@ -48,6 +48,7 @@ class ServiceEvent < ActiveRecord::Base
 
 	def close
 		states.create! state: "closed" if solved?
+		ServiceEventMailer.close(self).deliver
 	end
 
 	private

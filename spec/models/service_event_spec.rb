@@ -167,4 +167,16 @@ describe ServiceEvent do
 		ActionMailer::Base.deliveries.last.to.should == [admins]
 		ActionMailer::Base.deliveries.last.subject.should == "#{event.event_name} is open"
 	end
+
+	it "sends notification mail on closing event" do
+		admin = create(:admin)
+		event = create(:service_event)
+		event.evaluate
+		event.solve
+		ActionMailer::Base.deliveries = []
+		event.close
+		admins = User.admins.collect(&:email).join(',')
+		ActionMailer::Base.deliveries.last.to.should == [admins]
+		ActionMailer::Base.deliveries.last.subject.should == "#{event.event_name} is closed"
+	end
 end

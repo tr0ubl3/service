@@ -1,0 +1,8 @@
+Event with id <%= @event.event_name %> was closed on <%= date_format(@event.states.last.created_at, time: true) %> and the solving steps were the following :
+
+<% @event.solving_steps.each_with_index do |step, i| %>
+	<%= i+1 %>. <%= step.step %>, by <%= step.user.full_name %>
+	» <%= step.description %>
+<% end %>
+
+

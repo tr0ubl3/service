@@ -5,7 +5,7 @@ Event details:
 
 Machine :             <%= @event.machine.display_name %>
 Hour counter :        <%= @event.hour_counter %>
-Machine status:       <%= @event.event_type %>
+Machine status:       <%= event_type(@event) %>
 Alarms:               <% @event.alarms.each do |t| %>
 							<%= t.number %> - <%= t.text %>
 					  <% end %>
