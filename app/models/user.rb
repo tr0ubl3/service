@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
                     :uniqueness => true
   validates :password, :presence => true,
                        :length => { :within => 6..255 }
+  
+  scope :admins, -> { where(admin: true) } 
+
   def full_name
   	first_name + " " + last_name
   end

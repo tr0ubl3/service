@@ -33,6 +33,7 @@ class ServiceEvent < ActiveRecord::Base
 
 	def opening
 		states.create! state: "open"
+		ServiceEventMailer.open(self).deliver
 	end
 
 	def evaluate
@@ -41,6 +42,7 @@ class ServiceEvent < ActiveRecord::Base
 
 	def solve
 		states.create! state: "solved" if evaluated?
+		# call close state until
 		close
 	end
 

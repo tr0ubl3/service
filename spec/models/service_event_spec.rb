@@ -158,4 +158,13 @@ describe ServiceEvent do
 			
 		end
 	end
+
+	it 'sends notification mail on opening event' do
+		ActionMailer::Base.deliveries = []
+		create(:admin)
+		admins = User.admins.collect(&:email).join(',')
+		event = create(:service_event)
+		ActionMailer::Base.deliveries.last.to.should == [admins]
+		ActionMailer::Base.deliveries.last.subject.should == "#{event.event_name} is open"
+	end
 end

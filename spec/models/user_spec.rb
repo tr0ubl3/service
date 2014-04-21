@@ -154,4 +154,14 @@ describe User do
 			expect(user2.auth_token).not_to be_empty
 		end
 	end
+
+	describe "admin scope" do
+		let!(:admin) { create(:admin) }
+		let(:admins) { User.where(:admin => true) }
+
+		it "returns all admins" do
+			expect(User.admins).to be == admins			
+		end
+	end
+	
 end
