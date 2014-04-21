@@ -68,10 +68,10 @@ Service::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.internationalgt.ro",
-    port: 587,
+    address: "mail.internationalgt.ro",
+    port: 465,
     domain: "internationalgt.ro",
-    authentication: "plain",
+    authentication: :plain,
     user_name: ENV['IGT_MAIL'],
     password: ENV['IGT_PASS'],
     enable_starttls_auto: true
