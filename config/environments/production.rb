@@ -69,7 +69,7 @@ Service::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "mail.internationalgt.ro",
-    port: 465,
+    port: 25,
     domain: "internationalgt.ro",
     authentication: :plain,
     user_name: ENV['IGT_MAIL'],
