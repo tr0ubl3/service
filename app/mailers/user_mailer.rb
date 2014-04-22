@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "noreply@service.com"
+  default from: "service@service.com"
 
   def confirmation(user)
   	@user = user
@@ -52,6 +52,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def admin_invitation(admin)
+    @admin = admin
+    mail to: @admin.email, :subject => "You have been invited to International G&T web platform"
   end
 
   def confirmation_for_admin(new_admin, admin)

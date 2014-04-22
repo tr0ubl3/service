@@ -1,10 +1,16 @@
 FactoryGirl.define do
 	factory :authorized_reseller do
-		id 301
-		name "INTGT"
+		sequence :id do |n|
+	    	"30#{n}"
+	    end
+		sequence :name do |n|
+	    	"INTGT_#{n}"
+	    end
 		address "Str. Test, No 1"
 		office_tel "01234567891"
-		office_mail "office301@test.com"
+		sequence :office_mail do |n|
+			"office30#{n}@test.com"
+		end
 		country "Test"
 		city "Test"
 		postal_code "123456"

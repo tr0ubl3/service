@@ -414,7 +414,7 @@ describe UsersController do
 		let(:new_admin) { build(:admin, :password => nil,
 		                  :approved_at => nil, :firm_id => nil, :admin => false) }
 		let!(:admin) { create(:admin_2) }
-		let!(:reseller) { create(:authorized_reseller) }
+		# let!(:reseller) { create(:authorized_reseller) }
 
 		before :each do
 			session[:user_id] = admin.id
@@ -452,11 +452,11 @@ describe UsersController do
 		end
 
 		it "can't be accessed by non admin users" do
-			user = create(:user2)
+			# user = create(:user2)
 			session.delete(:user_id)
-			session[:user_id] = user.id
+			session[:user_id] = admin.id
 			post :create_admin, admin: new_admin
-			expect(:response).to redirect_to root_path
+			expect(:response).to redirect_to manage_users_path
 		end
 
 		context 'when save message returns true' do
