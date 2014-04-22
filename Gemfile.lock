@@ -355,6 +355,7 @@ DEPENDENCIES
   rmagick (= 2.13.2)
   rspec
   rspec-rails
+  sass
   sass-rails (~> 3.2.3)
   selenium-client (>= 1.2.18)
   shoulda-matchers
