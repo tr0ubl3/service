@@ -85,6 +85,7 @@ class UsersController < ApplicationController
     @admin.approved_at = Time.now
     @admin.firm_id = Firm.where(:type => "AuthorizedReseller").first.id
     @admin.admin = true
+    @admin.confirmed = true
     if @admin.save
       redirect_to manage_users_path
       flash[:notice] = "You successfully registered admin user #{@admin.full_name}"
