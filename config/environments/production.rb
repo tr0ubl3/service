@@ -77,4 +77,5 @@ Service::Application.configure do
     enable_starttls_auto: true,
     openssl_verify_mode: 'none'
   }
+  config.assets.css_compressor = :yui
 end
