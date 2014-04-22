@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "service@service.com"
+  default from: "service@internationalgt.ro"
 
   def confirmation(user)
   	@user = user
