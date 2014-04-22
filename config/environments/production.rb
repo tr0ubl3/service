@@ -75,5 +75,6 @@ Service::Application.configure do
     user_name: ENV['IGT_MAIL'],
     password: ENV['IGT_PASS'],
     enable_starttls_auto: true
+    openssl_verify_mode: 'none'
   }
 end
