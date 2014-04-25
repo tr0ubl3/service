@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MachineGroup do
   it { should belong_to(:manufacturer) }
   it { should have_many(:machines) }
-  it { should have_many(:alarms) }
+  it { should have_many(:alarms).dependent(:destroy) }
 
   describe "#view_name" do
   	let(:group) { create(:machine_group) }
