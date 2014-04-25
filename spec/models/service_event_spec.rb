@@ -69,8 +69,9 @@ describe ServiceEvent do
 	it { should accept_nested_attributes_for(:alarms) }
 	it { should belong_to(:machine) }
 	it { should belong_to(:user) }
-	it { should have_and_belong_to_many(:alarms) }
-	it { should have_many(:states).class_name('ServiceEventState') }
+	it { should have_and_belong_to_many(:alarms).dependent(:destroy) }
+	it { should have_many(:states).class_name('ServiceEventState').dependent(:destroy) }
+	it { should have_many(:solving_steps).dependent(:destroy) }
 
 	it "should assign variable STATES" do
 		states = %w[open evaluated solved closed]
@@ -179,4 +180,11 @@ describe ServiceEvent do
 		ActionMailer::Base.deliveries.last.to.should == [admins]
 		ActionMailer::Base.deliveries.last.subject.should == "#{event.event_name} is closed"
 	end
+
+	it "destroys alarms association from join table in a before_destroy callback" do
+		event = create(:service_event_with_alarms)
+		event.destroy
+		expect(event.alarms.length).to eq(0)
+	end
+	
 end

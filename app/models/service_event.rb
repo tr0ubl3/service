@@ -5,11 +5,10 @@ class ServiceEvent < ActiveRecord::Base
 	belongs_to :machine
 	has_and_belongs_to_many :alarms
 	belongs_to :user
-	has_many :states, class_name: "ServiceEventState"
+	has_many :states, class_name: "ServiceEventState", dependent: :destroy
 	has_many :service_event_files, dependent: :destroy
-	has_many :solving_steps
+	has_many :solving_steps, dependent: :destroy
 	accepts_nested_attributes_for :alarms, :allow_destroy => true
-	# accepts_nested_attributes_for :service_event_files, :allow_destroy => true, :reject_if => :all_blank
 	before_create :event_prepare
 	after_create :opening
 

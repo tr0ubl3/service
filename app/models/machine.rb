@@ -7,8 +7,8 @@ class Machine < ActiveRecord::Base
   has_one :manufacturer, through: :machine_group
   belongs_to :machine_owner
   belongs_to :authorized_reseller
-  has_many :service_events
-  has_one :hour_counter
+  has_many :service_events, dependent: :destroy
+  has_one :hour_counter, dependent: :destroy
 
   before_create :set_reseller
   
