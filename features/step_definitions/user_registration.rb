@@ -70,7 +70,6 @@ When(/^I receive the confirmation account email from application$/) do
 end 
 
 Then(/^I login into application with my credentials$/) do
-  create(:machine_owner, :id => 1)
   @user.update_attributes(:approved_at => Time.now)
   visit "/login"
   fill_in "login_email", :with => "#{@user.email}"
@@ -99,7 +98,6 @@ end
 
 Given(/^I don't know about web application$/) do
   @user = create(:user2, approved_at: Time.now, confirmed: true)
-  @machine_owner = create(:machine_owner, :id => 1)
 end
 
 Given(/^I received an email with registration invitation$/) do
@@ -172,11 +170,10 @@ Then(/^I click the confirmation link$/) do
 end
 
 Then(/^I try to login with my credentials$/) do
-  @user2 = create(:user, confirmed: false)
-  @machine_owner = create(:machine_owner, :id => 1)
+  @user.update_attribute(:confirmed, false)
   visit login_path
-  fill_in "login_email", with: @user2.email
-  fill_in "login_password", with: @user2.password
+  fill_in "login_email", with: @user.email
+  fill_in "login_password", with: @user.password
   click_button "Sign in"
 end
 
@@ -187,7 +184,6 @@ end
 
 Given(/^I'm a registered and approved user$/) do
   @user = create(:user, password_reset_token: nil)
-  create(:machine_owner, :id => 1)
 end
 
 When(/^I forgot my password$/) do

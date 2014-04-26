@@ -20,7 +20,7 @@ end
 
 Given(/^I am a registered user$/) do
   @registered_user = create(:user2, approved_at: Time.now, confirmed: true) 
-  create(:machine_owner, :id => 1)
+  # create(:machine_owner, :id => 1)
 end
 
 Given(/^I'm logged in$/) do
@@ -47,7 +47,7 @@ end
 Then(/^I see also notification bullets$/) do
   expect(page).to have_selector("div.admin_notifications")
   expect(page).to have_selector("div.admin_notifications>a.users_pending")
-  expect(page).to have_selector("div.admin_notifications>a.service_events_pending")
+  # expect(page).to have_selector("div.admin_notifications>a.service_events_pending")
 end
 
 When(/^I go to user menu and go to account settings$/) do

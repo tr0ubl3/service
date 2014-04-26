@@ -6,7 +6,12 @@ When(/^I'm on "(.*?)" event page$/) do |arg1|
 end
 
 Then(/^I click button "(.*?)"$/) do |arg1|
-  click_link arg1
+  case arg1
+  when "Close event solving"
+    click_button arg1
+  else
+    click_link arg1
+  end
 end
 
 Then(/^I see "(.*?)" event page$/) do |arg1|
@@ -26,7 +31,6 @@ end
 
 When(/^I finished form$/) do
 	current_path.should == evaluate_service_event_path(@event)
-	choose "False"
 	fill_in "event_description", with: "The machine doesn't have power"
 	click_button "Save"
 end
@@ -48,7 +52,7 @@ Then(/^I don't see Evaluate event button$/) do
   expect(page).not_to have_selector("a", text: "Evaluate event")
 end
 
-When(/^I'm on solving steps page$/) do
+When(/^I'm on solving step page$/) do
   visit "/solving_steps?event=1"
-  current_path.should == "/solving_steps?event=1"
+  current_path.should == solving_steps_path
 end

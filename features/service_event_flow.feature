@@ -15,6 +15,8 @@ Background:
 		Given I'm an admin
 		And I'm logged in
 
+@javascript
+
 Scenario: Admin goes from open event page to evaluate event page
 	When I'm on "open" event page
 	Then I click button "Evaluate event"
@@ -34,6 +36,6 @@ Scenario: Admin goes from show event page to solve event page
 	And I see "solve" event page
 
 Scenario: Admin close event solving
-	When I'm on solving steps page
+	When I'm on solving step page
 	Then I click button "Close event solving"
 	And I see "show" event page
