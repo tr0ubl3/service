@@ -15,7 +15,7 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'email_spec'
 	gem 'fuubar'
-	gem "selenium-client" , ">= 1.2.18"
+	gem 'selenium-client' , '>= 1.2.18'
 	gem 'shoulda-matchers'
 	# gem 'email_validator', :require => 'email_validator/strict'
 
@@ -27,7 +27,7 @@ group :development, :test do
 	## end
 	gem 'commands'
 	gem 'factory_girl_rails', :require => false
-	gem "therubyracer"
+	gem 'therubyracer'
 end
 
 group :production do
@@ -37,7 +37,7 @@ end
 
 group :test do
 	gem 'spork'
-	gem "spork-rails"
+	gem 'spork-rails'
 	gem 'capybara', :github => 'jnicklas/capybara'
 	gem 'cucumber', '1.2.5'
 	gem 'cucumber-rails', :require => false
