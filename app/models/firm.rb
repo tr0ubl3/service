@@ -34,14 +34,14 @@ class Firm < ActiveRecord::Base
   validates :postal_code, :presence => true,
   				      :length => { :within => 3..255, message: 'missing required length' }
 
-  validates :office_tel, :presence => true,
-  				      :length => { :within => 3..255, message: 'missing required length' }
+  # validates :office_tel, :presence => true,
+  # 				      :length => { :within => 3..255, message: 'missing required length' }
 
-  validates :fax, :length => { :within => 3..255,
-                               message: 'length must be: 255 >= string > 3' },
-                  format: { with: NUMBERS, 
-                            message: 'manufacturer should contain only numbers' }, 
-                  allow_blank: true
+  # validates :fax, :length => { :within => 3..255,
+  #                              message: 'length must be: 255 >= string > 3' },
+  #                 format: { with: NUMBERS, 
+  #                           message: 'manufacturer should contain only numbers' }, 
+  #                 allow_blank: true
 
   # def verifyfax
   #   if :fax == nil
@@ -51,11 +51,11 @@ class Firm < ActiveRecord::Base
   #   end
   # end
 
-  validates :office_mail, :presence => true,
-  				          :length => { :within => 3..255, message: '255 >= length > 3' },
-  				          :format => { with: EMAIL_REGEX, 
-                                 message: 'must be formated correctly'},
-                    :uniqueness => true            
+  # validates :office_mail, :presence => true,
+  # 				          :length => { :within => 3..255, message: '255 >= length > 3' },
+  # 				          :format => { with: EMAIL_REGEX, 
+  #                                message: 'must be formated correctly'},
+  #                   :uniqueness => true            
 
   validates :mobile, :length => { :within => 4..20, message: 'missing required length' },
                      :format => { with: NUMBERS,
