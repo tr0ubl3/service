@@ -21,7 +21,8 @@ class MachineOwnersController < ApplicationController
 			flash[:notice] = "Successfully created machine owner."
 			redirect_to machine_owners_path
 		else
-			render('new')
+			flash[:alert] = "Please correct errors and try again!"
+			render :new
 		end
 	end
 

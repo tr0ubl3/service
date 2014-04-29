@@ -21,7 +21,8 @@ class ManufacturersController < ApplicationController
 			flash[:notice] = "Successfully created manufacturer."
 			redirect_to manufacturers_path
 		else
-			render('new')
+			flash[:alert] = "Please correct errors and try again!"
+			render :new
 		end
 	end
 
