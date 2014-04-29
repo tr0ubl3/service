@@ -10,7 +10,8 @@ class Alarm < ActiveRecord::Base
   def self.import(file, group)
 	  if file && file.original_filename.split(".").pop == "csv"	
 	  	CSV.foreach(file.path, headers: :true) do |row|
-	  		alarm = Alarm.new(row.to_hash.slice(*accessible_attributes).merge!(:machine_group_id => group))
+	  		alarm = find_by_id(row["id"]) || new
+	  		alarm.attributes = row.to_hash.slice(*accessible_attributes).merge!(:machine_group_id => group)
 	  		alarm.save if alarm.valid?
 	  	end
 	  	return true

@@ -1,6 +1,5 @@
 class MachineGroupsController < ApplicationController
-  # GET /machine_groups
-  # GET /machine_groups.json
+  
   def index
     @machine_groups = MachineGroup.all
 
@@ -10,8 +9,6 @@ class MachineGroupsController < ApplicationController
     end
   end
 
-  # GET /machine_groups/1
-  # GET /machine_groups/1.json
   def show
     @machine_group = MachineGroup.find(params[:id])
 
@@ -21,8 +18,6 @@ class MachineGroupsController < ApplicationController
     end
   end
 
-  # GET /machine_groups/new
-  # GET /machine_groups/new.json
   def new
     @machine_group = MachineGroup.new
 
@@ -32,13 +27,10 @@ class MachineGroupsController < ApplicationController
     end
   end
 
-  # GET /machine_groups/1/edit
   def edit
     @machine_group = MachineGroup.find(params[:id])
   end
 
-  # POST /machine_groups
-  # POST /machine_groups.json
   def create
     @machine_group = MachineGroup.new(params[:machine_group])
 
@@ -53,8 +45,6 @@ class MachineGroupsController < ApplicationController
     end
   end
 
-  # PUT /machine_groups/1
-  # PUT /machine_groups/1.json
   def update
     @machine_group = MachineGroup.find(params[:id])
 
@@ -69,8 +59,6 @@ class MachineGroupsController < ApplicationController
     end
   end
 
-  # DELETE /machine_groups/1
-  # DELETE /machine_groups/1.json
   def destroy
     @machine_group = MachineGroup.find(params[:id])
     @machine_group.destroy
@@ -83,5 +71,10 @@ class MachineGroupsController < ApplicationController
 
   def resources
     @group = MachineGroup.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @group.alarms_to_csv }
+    end
   end
 end
