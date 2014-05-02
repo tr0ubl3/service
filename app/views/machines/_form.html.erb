@@ -1,40 +1,38 @@
-  <div class="control-group">
-
-
-  <div class="control-group">
-    <label class="control-label">Machine number :</label>
-    <div class="controls">
-      <%= f.text_field(:machine_number) %>
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <label class="control-label">Display name :</label>
-    <div class="controls">
-      <%= f.text_field(:display_name) %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label">Machine owner :</label>
-    <div class="controls">
-      <%= f.collection_select(:machine_owner_id, MachineOwner.all, :id, :name) %>
-    </div>
-  </div>
-  <div class="btn-group">
-  <div class="control-group">
-    <label class="control-label">Delivery date :</label>
-    <div class="controls dropdown-toggle">
-      <%= f.text_field(:delivery_date) %>
-    </div>
-  </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Waranty period :</label>
-    <div class="controls">
-      <%= f.text_field(:waranty_period) %>
-    </div>
-  </div>
+<div class="control-group">
+  <label class="control-label">Machine number :</label>
   <div class="controls">
+    <%= f.text_field(:machine_number) %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">Display name :</label>
+  <div class="controls">
+    <%= f.text_field(:display_name) %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">Machine owner :</label>
+  <div class="controls">
+    <%= f.collection_select(:machine_owner_id, MachineOwner.all, :id, :name) %>
+  </div>
+  <span>or create a <a href="#" class="btn" data-toggle="modal" data-target="#new_owner">new owner</a></span>
+</div>
+<div class="btn-group">
+<div class="control-group">
+  <label class="control-label">Delivery date :</label>
+  <div class="controls dropdown-toggle">
+    <%= f.text_field(:delivery_date) %>
+  </div>
+</div>
+</div>
+<div class="control-group">
+  <label class="control-label">Waranty period :</label>
+  <div class="controls">
+    <%= f.text_field(:waranty_period) %>
+  </div>
+</div>
+<div class="controls">
   <%= submit_tag("Save machine", :class => 'btn btn-success') %>
 </div>

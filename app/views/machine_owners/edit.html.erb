@@ -1,1 +1,19 @@
-<%= render partial: 'shared/edit_firm', locals: { firm: @owner } %>
+<h1>Edit machine owner</h1>
+<%= form_for @owner, class: "form-horizontal" do |f| %>
+		<% if @owner.errors.any? %>
+			<% @owner.errors.delete(:password_digest) %>
+			<div id="error_explanation">
+				<div class="alert alert-error">
+					The form contains <%= pluralize(@owner.errors.count, "error") %>
+				</div>
+				<ul>
+					<% @owner.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	<%= render(:partial => "shared/new_firm", :locals => {:f => f}) %>
+<% end %>
