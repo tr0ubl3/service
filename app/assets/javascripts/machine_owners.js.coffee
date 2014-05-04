@@ -5,4 +5,4 @@ $ ->
 	$('#machine_owners_list').dataTable
 		bProcessing: true
 		bServerSide: true
-		sAjaxSource: '/machine_owners.json'
+		sAjaxSource: $('#machine_owners_list').data('source')

@@ -17,13 +17,14 @@ $.extend( true, $.fn.dataTable.defaults, {
             $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html(i + 1);
             i++;
           }
-          return $('th:eq(0)').css('width', 10);
+          // return $('th:eq(0)').css('width', 10);
         }
     },
 	aoColumnDefs: [
         {
           bSortable: false,
-          aTargets: [0]
+          aTargets: [0],
+          sWidth: 10
         }
       ],
 	aaSorting: [[1, 'asc']]

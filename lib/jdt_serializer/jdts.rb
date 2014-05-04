@@ -14,30 +14,24 @@ class Jdts
 		}
 	end
 
-	private
-
-	def data
-		records.map do |record|
-			[
-				h(''),
-				link_to(record.name, record),
-				h(record.address),
-				h(record.office_tel),
-				h(record.office_mail),
-				h(date_format(record.updated_at, time: true))
-			]
-		end
-	end
-
+private
 	def records
 		@records ||= fetch_records
 	end
 
 	def fetch_records
-		records = MachineOwner.order("#{sort_column} #{sort_direction}")
+		records = get_custom_data
 		records = records.page(page).per_page(per_page)
+		search_query = ""
+		columns.each_with_index do |col, index|
+			if index + 1 < columns.length
+				search_query << col + ' like :search or '
+			elsif index + 1 == columns.length
+				search_query << col + ' like :search'
+			end
+		end
 		if params[:sSearch].present?
-			records = records.where("name like :search or address like :search", search: "%#{params[:sSearch]}%")
+			records = records.where("#{search_query}", search: "%#{params[:sSearch]}%")
 		end
 		records
 	end
@@ -51,7 +45,6 @@ class Jdts
 	end
 
 	def sort_column
-		columns = %w[name address office_tel office_mail updated_at]
 		columns[params[:iSortCol_0].to_i]
 	end
 
