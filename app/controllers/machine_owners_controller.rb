@@ -3,6 +3,10 @@ class MachineOwnersController < ApplicationController
 
 	def index
 		@owners = MachineOwner.order("firms.id ASC")
+		respond_to do |format|
+			format.html
+			format.json { render json: MachineOwnerJdts.new(view_context) }
+		end
 	end
 
 	def show

@@ -7,6 +7,27 @@ $.extend( true, $.fn.dataTable.defaults, {
 	}
 } );
 
+$.extend( true, $.fn.dataTable.defaults, {
+	fnDrawCallback: function(oSettings) {
+        var i, iLen;
+        if (oSettings.bSorted || oSettings.bFiltered) {
+          i = 0;
+          iLen = oSettings.aiDisplay.length;
+          while (i < iLen) {
+            $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html(i + 1);
+            i++;
+          }
+          return $('th:eq(0)').css('width', 10);
+        }
+    },
+	aoColumnDefs: [
+        {
+          bSortable: false,
+          aTargets: [0]
+        }
+      ],
+	aaSorting: [[1, 'asc']]
+});
 
 /* Default class modification */
 $.extend( $.fn.dataTableExt.oStdClasses, {
@@ -148,12 +169,12 @@ if ( $.fn.DataTable.TableTools ) {
 
 
 /* Table initialisation */
-$(document).ready(function() {
-	$('#example').dataTable( {
-		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-		"sPaginationType": "bootstrap",
-		"oLanguage": {
-			"sLengthMenu": "_MENU_ records per page"
-		}
-	} );
-} );
+// $(document).ready(function() {
+// 	$('#example').dataTable( {
+// 		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+// 		"sPaginationType": "bootstrap",
+// 		"oLanguage": {
+// 			"sLengthMenu": "_MENU_ records per page"
+// 		}
+// 	} );
+// } );

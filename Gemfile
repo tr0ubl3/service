@@ -86,6 +86,7 @@ gem 'rmagick', '2.13.2'
 gem 'carrierwave'
 gem 'ember-rails', github: 'emberjs/ember-rails'
 gem 'active_model_serializers'
+gem 'will_paginate'
 # gem 'yui-compressor', '~> 0.12.0'
 # gem 'handlebars', '~> 0.6.0'
 # To use Jbuilder templates for JSON

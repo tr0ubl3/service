@@ -22,9 +22,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% users.each do |t| %>
+		<% users.each_with_index do |t, index| %>
 			<tr class="<%= confirm_warning(t) %>">
-				<td><%= 1 %></td>
+				<td><%= index + 1 %></td>
 				<td><%= link_to t.full_name, user_path(t), :data => {:toggle => "tooltip"}, :title => "click to see details of " + t.full_name, :id => "user_list" %></td>
 				<td>Yes</td>
 				<td><%= user_confirmation_text(t) %></td>

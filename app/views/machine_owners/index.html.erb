@@ -11,16 +11,6 @@
       </tr>
   </thead>
   <tbody>
-  	<% @owners.each do |owner| %>
-      <tr>
-        <td></td>
-        <td><%= link_to(owner.name, {:action =>'show', :id => owner.id}) %></td>
-        <td><%= owner.address %></td>
-        <td><%= owner.office_tel %></td>
-        <td><%= owner.office_mail %></td>
-        <td><%= date_format(owner.updated_at) %></td>
-        <% end %>
-      </tr>
   </tbody>
 </table>
 <%= render(:partial => "shared/add_button") %>

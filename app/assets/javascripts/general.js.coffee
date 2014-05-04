@@ -2,15 +2,4 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->	
-	$('#general_events').dataTable
-					"fnDrawCallback": (oSettings) ->
-						if(oSettings.bSorted || oSettings.bFiltered)
-								i = 0
-								iLen = oSettings.aiDisplay.length
-								while i < iLen
-									$('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html i+1
-									i++
-					"aoColumnDefs": [
-						{ "bSortable": false, "aTargets": [ 0 ] }
-					]
-					"aaSorting": [[ 1, 'asc' ]]
+	$('#general_events').dataTable()

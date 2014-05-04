@@ -15,9 +15,9 @@
   </thead>
     
   <tbody>
-    <% @machine_groups.each do |machine_group| %>
+    <% @machine_groups.each_with_index do |machine_group, index| %>
       <tr>
-        <td>1</td>
+        <td><%= index +1 %></td>
         <td>
           <%= link_to resources_machine_group_path(machine_group) do %>
             <%= group_name(machine_group) %>

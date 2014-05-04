@@ -1,0 +1,2 @@
+class MachineOwnerJdts < Jdts
+end
