@@ -2,6 +2,10 @@ class AlarmsController < ApplicationController
   
   def index
     @alarms = Alarm.all
+    respond_to do |format|
+      format.html
+      format.json { render json: AlarmJdts.new(view_context) }
+    end
   end
 
   def show

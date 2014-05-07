@@ -8,7 +8,7 @@ class Jdts
 	def as_json(options = {})
 		{
 			sEcho: params[:sEcho].to_i,
-			iTotalRecords: MachineOwner.count,
+			iTotalRecords: records.count,
 			iTotalDisplayRecords: records.total_entries,
 			aaData: data
 		}
@@ -46,7 +46,7 @@ private
 	end
 
 	def sort_column
-		columns[params[:iSortCol_0].to_i]
+		columns[params[:iSortCol_0].to_i - 1]
 	end
 
 	def sort_direction
