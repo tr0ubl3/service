@@ -23,13 +23,14 @@ private
 		records = get_custom_data
 		records = records.page(page).per_page(per_page)
 		search_query = ""
-		columns.each_with_index do |col, index|
-			if index + 1 < columns.length
-				search_query << col + ' like :search or '
-			elsif index + 1 == columns.length
-				search_query << col + ' like :search'
-			end
-		end
+		# columns.each_with_index do |col, index|
+		# 	if index + 1 < columns.length
+		# 		search_query << col + ' like :search or '
+		# 	elsif index + 1 == columns.length
+		# 		search_query << col + ' like :search'
+		# 	end
+		# end
+		search_query << columns.shift + ' like :search'
 		if params[:sSearch].present?
 			records = records.where("#{search_query}", search: "%#{params[:sSearch]}%")
 		end
