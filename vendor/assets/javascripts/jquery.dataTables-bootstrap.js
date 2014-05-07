@@ -7,16 +7,14 @@ $.extend( true, $.fn.dataTable.defaults, {
 	}
 } );
 
-$.extend( true, $.fn.dataTable.defaults, {
+$.extend($.fn.dataTable.defaults, {
 	fnDrawCallback: function(oSettings) {
         var i, iLen;
-        if (oSettings.bSorted || oSettings.bFiltered) {
           i = 0;
           iLen = oSettings.aiDisplay.length;
           while (i < iLen) {
             $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html(i + 1);
             i++;
-          }
           // return $('th:eq(0)').css('width', 10);
         }
     },
