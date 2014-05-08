@@ -2,6 +2,10 @@ class MachinesController < ApplicationController
 
 	def index
 		@machines = Machine.order("machines.id ASC")
+		respond_to do |format|
+			format.html
+			format.json { render json: MachineJdts.new(view_context) }
+		end
 	end
 
 	def show

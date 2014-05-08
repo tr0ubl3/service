@@ -1,15 +1,22 @@
 $ ->
-	$('#machine_group_machines').dataTable()
-	$('#machine_group_alarms').dataTable
+	machines_table = $('#machine_group_machines')
+	machines_table.dataTable
 		bProcessing: true
 		bServerSide: true
 		bAutoWidth: false
-		sAjaxSource: $('#machine_group_alarms').data('source')
+		sAjaxSource: machines_table.data('source')
 		fnServerParams: (aoData) ->
 			aoData.push("name":"machine_group_id", "value": location.pathname.split("/")[2])
-	$('#machine_group_alarms > thead > tr > th:nth-child(1)').css('width', 10)
-	$('#machine_group_alarms > thead > tr > th:nth-child(2)').css('width', '15%')
-	#machine_group_alarms > thead > tr > th.sorting_asc
+	alarms_table = $('#machine_group_alarms')	
+	alarms_table.dataTable
+		bProcessing: true
+		bServerSide: true
+		bAutoWidth: false
+		sAjaxSource: alarms_table.data('source')
+		fnServerParams: (aoData) ->
+			aoData.push("name":"machine_group_id", "value": location.pathname.split("/")[2])
+	alarms_table.find('thead > tr > th:nth-child(1)').css('width', 10)
+	alarms_table.find('thead > tr > th:nth-child(2)').css('width', '15%')
 	$('input#csv_alarms').on "change", ->
 		value = @value.split(/[\/\\]/).pop()
 		extension = value.split('.').pop()
