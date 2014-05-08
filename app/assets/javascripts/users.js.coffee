@@ -7,13 +7,17 @@ $ ->
 	users_table_admin.dataTable
 		bProcessing: true
 		bServerSide: true
+		bAutoWidth: false
 		sAjaxSource: users_table_admin.data('source')
 		fnServerParams: (aoData) ->
 			aoData.push('name':'admin', 'value':'true')
 	users_table_regular = $('#manage_users_table_regular')
 	users_table_regular.dataTable
 		bProcessing: true
+		bAutoWidth: false
 		bServerSide: true
 		sAjaxSource: users_table_admin.data('source')
 		fnServerParams: (aoData) ->
-			aoData.push('name':'admin', 'value':'false')	
+			aoData.push('name':'admin', 'value':'false')
+	users_table_regular.find('thead > tr > th:nth-child(2)').css('width', '15%')
+	users_table_admin.find('thead > tr > th:nth-child(2)').css('width', '15%')
