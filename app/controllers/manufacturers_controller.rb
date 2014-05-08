@@ -1,9 +1,11 @@
 class ManufacturersController < ApplicationController
 
-	respond_to :html, :json
-
 	def index
 		@manufacturers = Manufacturer.order("firms.id ASC")
+		respond_to do |format|
+			format.html
+			format.json { render json: ManufacturerJdts.new(view_context) }
+		end
 	end
 
 	def show
