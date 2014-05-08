@@ -18,18 +18,6 @@
           </tr>
         </thead>
         <tbody>
-          <% @group.machines.each do |machine| %>
-            <tr>
-              <td></td>
-              <td>
-                <%= link_to machine_path(machine) do %>
-                  <%= machine.display_name %>
-                <% end %>
-              </td>
-              <td><%= machine.machine_number %></td>
-              <td><%= date_format(machine.delivery_date) %></td>
-            </tr>
-          <% end %>
         </tbody>
       </table>
       <%= link_to(new_machine_group_machine_path(@group), :class => 'btn btn-success') do %>
