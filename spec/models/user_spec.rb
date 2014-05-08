@@ -52,6 +52,8 @@ describe User do
 	it { should belong_to(:firm) }
 	it { should have_many(:service_events) }
 	it { should have_many(:solving_steps) }
+	it { should have_many(:created_users).class_name('User').with_foreign_key(:admin_id) }
+	it { should belong_to(:admin).class_name('User') }
 
 	it 'has first_name' do
 		user.first_name = "John"

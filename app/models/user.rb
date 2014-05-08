@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   belongs_to :firm
   has_many :service_events
   has_many :solving_steps
+  has_many :created_users, class_name: 'User', foreign_key: 'admin_id'
+  belongs_to :admin, class_name: 'User'
   before_create { generate_token(:auth_token) }
 
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i

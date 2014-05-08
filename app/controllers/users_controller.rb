@@ -10,7 +10,11 @@ class UsersController < ApplicationController
                                      :create_admin]
 
   def index
-    render json: [current_user] if !current_user.nil?
+    @users = User.all
+    respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: UserJdts.new(view_context) }
+    end
   end
 
   def new
@@ -65,6 +69,7 @@ class UsersController < ApplicationController
     @user.password = rand(36**8).to_s(36)
     @user.approved_at = Time.now
     @user.confirmed = true
+    @user.admin_id = current_user.id if current_user.admin?
     if @user.save
       redirect_to manage_users_path, notice: "You successfully created user #{@user.full_name}"
       UserMailer.invitation(@user).deliver
@@ -86,6 +91,7 @@ class UsersController < ApplicationController
     @admin.firm_id = Firm.where(:type => "AuthorizedReseller").first.id
     @admin.admin = true
     @admin.confirmed = true
+    @admin.admin_id = current_user.id if current_user.admin?
     if @admin.save
       redirect_to manage_users_path
       flash[:notice] = "You successfully registered admin user #{@admin.full_name}"

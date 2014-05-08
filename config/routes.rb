@@ -5,8 +5,8 @@ Service::Application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
   
-  resources :manufacturers, :machine_owners, :manage_users, :sessions
-  
+  resources :manufacturers, :machine_owners, :sessions
+  # resources :manage_users, :only => [:index]
   resources :general do
     collection do
       get :machine_events
