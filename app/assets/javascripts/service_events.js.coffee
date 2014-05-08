@@ -193,15 +193,9 @@ $(document).ready ->
 		# console.log $(@).height()
 	$("table.event-table a").fancybox()
 	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})
-	$('#service_events_list').dataTable
-					"fnDrawCallback": (oSettings) ->
-						if(oSettings.bSorted || oSettings.bFiltered)
-								i = 0
-								iLen = oSettings.aiDisplay.length
-								while i < iLen
-									$('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html i+1
-									i++
-					"aoColumnDefs": [
-						{ "bSortable": false, "aTargets": [ 0 ] }
-					]
-					"aaSorting": [[ 1, 'asc' ]]
+	service_events_table = $('#service_events_list')
+	service_events_table.dataTable
+		bProcessing: true
+		bServerSide: true
+		sAjaxSource: service_events_table.data('source')
+	service_events_table.find('thead > tr > th:nth-child(2)').css('width', '30%')	

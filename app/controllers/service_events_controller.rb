@@ -1,9 +1,12 @@
 class ServiceEventsController < ApplicationController
-	respond_to :html, :json
 	before_filter :check_auth
 	
 	def index
 		@events = ServiceEvent.order("service_events.id DESC")
+		respond_to do |format|
+			format.html
+			format.json { render json: ServiceEventJdts.new(view_context) }
+		end
 	end
 
 	def show

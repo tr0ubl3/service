@@ -1,5 +1,5 @@
 class Jdts
-	delegate :params, :h, :link_to, :number_to_currency, :date_format, to: :@view
+	delegate :params, :h, :link_to, :number_to_currency, :date_format, :event_type, to: :@view
 
 	def initialize(view)
 		@view = view
