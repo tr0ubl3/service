@@ -53,7 +53,7 @@ describe User do
 	it { should have_many(:service_events) }
 	it { should have_many(:solving_steps) }
 	it { should have_many(:created_users).class_name('User').with_foreign_key(:admin_id) }
-	it { should belong_to(:admin).class_name('User') }
+	it { should belong_to(:admin_user).class_name('User').with_foreign_key(:admin_id) }
 
 	it 'has first_name' do
 		user.first_name = "John"

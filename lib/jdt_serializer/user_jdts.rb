@@ -13,7 +13,7 @@ class UserJdts < Jdts
 				h(record.email),
 				h(date_format(record.updated_at, time: true)),
 				h(date_format(record.created_at, time: true)),
-				h(record.admin_id? ? record.admin.full_name : 'Na')
+				h(record.admin_id? ? record.admin_user.full_name : 'Na')
 			]
 		end
 	end
