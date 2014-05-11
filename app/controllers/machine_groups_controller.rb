@@ -1,5 +1,8 @@
 class MachineGroupsController < ApplicationController
   
+  before_filter :check_auth
+  before_filter :check_admin
+  
   def index
     @machine_groups = MachineGroup.all
 

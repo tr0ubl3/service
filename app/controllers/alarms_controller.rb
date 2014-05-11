@@ -1,5 +1,8 @@
 class AlarmsController < ApplicationController
   
+  before_filter :check_auth
+  before_filter :check_admin
+  
   def index
     @alarms = Alarm.all
     respond_to do |format|

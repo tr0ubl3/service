@@ -1,5 +1,8 @@
 class ServiceEventFilesController < ApplicationController
 
+	before_filter :check_auth
+	before_filter :check_admin
+
 	def create
 		@event = ServiceEvent.find(params[:service_event_id])
 	    @file = @event.service_event_files.build(params[:service_event_file])

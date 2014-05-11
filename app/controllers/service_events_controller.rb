@@ -1,5 +1,7 @@
 class ServiceEventsController < ApplicationController
+	
 	before_filter :check_auth
+	before_filter :check_admin, only: [:edit, :update, :evaluate, :create_evaluate]
 	
 	def index
 		@events = ServiceEvent.order("service_events.id DESC")

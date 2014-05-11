@@ -1,5 +1,8 @@
 class MachinesController < ApplicationController
 
+	before_filter :check_auth
+	before_filter :check_admin
+
 	def index
 		@machines = Machine.order("machines.id ASC")
 		respond_to do |format|

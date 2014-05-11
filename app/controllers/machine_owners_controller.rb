@@ -1,5 +1,7 @@
 class MachineOwnersController < ApplicationController
-	respond_to :html, :json
+
+	before_filter :check_auth
+	before_filter :check_admin
 
 	def index
 		@owners = MachineOwner.order("firms.id ASC")
