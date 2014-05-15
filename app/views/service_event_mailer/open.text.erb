@@ -1,9 +1,8 @@
-
 A new event with id <%= @event.event_name %> is open in <%= @event.machine.machine_owner.name %>
 
 Event details: 
 
-Machine :             <%= @event.machine.display_name %>
+Machine :             <%= @event.machine.display_name %> - <%= @event.machine.machine_number %>
 Hour counter :        <%= @event.hour_counter %>
 Machine status:       <%= event_type(@event) %>
 Alarms:               <% @event.alarms.each do |t| %>

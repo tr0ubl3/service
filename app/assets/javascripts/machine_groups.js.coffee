@@ -26,3 +26,24 @@ $ ->
 			$(@).val(null)
 			delete @files[0]
 			alert("." + extension + " invalid file format")
+	# de adaugat sugestii la machining type in functie de alegerea
+	# manufacturer din drop down
+	$('#machine_group_manufacturer_id').on 'change', ->
+		man_id = $(@).val()
+		$.getJSON('/manufacturers/' + man_id).done(
+			(data) -> 
+				input_opt = $('#machine_group_machining_type')
+				input_opt.replaceWith("<div id='m_t' class='input-append btn-group'></div>")
+				$('div#m_t.input-append.btn-group').html(
+					"<input id='machine_group_machining_type' name='machine_group[machining_type]' size='16' type='text' class='dropdown-toggle' data-toggle='dropdown'></input>
+				    <ul class='dropdown-menu'>
+				    </ul>
+				")
+				input_opt_rel = $('#machine_group_machining_type')
+				data_array = data.manufacturer.machining_type
+				input_opt_rel.val(data_array[0])
+				$.each data_array, (val, key) ->
+					$('#m_t > ul.dropdown-menu').append("<li><a href='#'>" + key + "</a></li>")
+				$('#m_t > ul > li:nth-child(n) > a').on 'click', -> 
+					input_opt_rel.val($(this).text())
+		)

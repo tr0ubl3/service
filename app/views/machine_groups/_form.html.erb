@@ -16,7 +16,7 @@
       <%= f.label :manufacturer_id %>
     </label>
     <div class="controls">
-      <%= f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name) %>
+      <%= f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name, :include_blank => true, autofocus: true) %>
     </div>
   </div>
 
