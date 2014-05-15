@@ -28,9 +28,9 @@
 </div>
 
 <div class="control-group">
-  <label class="control-label">Waranty period :</label>
+  <label class="control-label">Waranty period (in months):</label>
   <div class="controls">
-    <%= f.text_field(:waranty_period) %>
+    <%= f.number_field(:waranty_period, value: '24') %>
   </div>
 </div>
 <div class="controls">

@@ -25,18 +25,10 @@ class Machine < ActiveRecord::Base
   validates :delivery_date, :presence => true,
   				      :length => { :within => 3..255 }
 
-  validates :waranty_period, :presence => true,
-  				      :length => { :within => 3..255 }
+  validates :waranty_period, :presence => true, numericality: { only_integer: true, 
+                :greater_than_or_equal_to => 1, :less_than => 60 }
+  				  
   
-
-  def waranty_boolean
-    delivery_date + waranty_period.days > DateTime.now ? 'yes' : 'no'
-  end
-
-  def waranty_date
-    delivery_date + waranty_period.days
-  end
-
 
   private
 

@@ -8,6 +8,9 @@ describe Machine do
 	it { should have_many(:service_events).dependent(:destroy) }
 	it { should have_one(:hour_counter).dependent(:destroy) }
 
+
+	it { should validate_numericality_of(:waranty_period).only_integer.is_greater_than_or_equal_to(1).is_less_than(60) }
+
 	describe "on save the authorized_reseller id is set on create of new record" do
 		let!(:machine) { build(:machine, :authorized_reseller_id => nil) }
 		
