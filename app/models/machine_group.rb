@@ -4,6 +4,11 @@ class MachineGroup < ActiveRecord::Base
   has_many :machines, dependent: :destroy
   has_many :alarms, dependent: :destroy
 
+  validates :manufacturer_id, :presence => true
+  validates :machining_type, :presence => true
+  validates :machine_type, :presence => true, :uniqueness => true
+  validates :version, :presence => true, :uniqueness => true
+
   def view_name
   	"#{manufacturer.name}-#{machine_type}-#{version}"
   end

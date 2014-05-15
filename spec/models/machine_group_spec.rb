@@ -5,6 +5,13 @@ describe MachineGroup do
   it { should have_many(:machines).dependent(:destroy) }
   it { should have_many(:alarms).dependent(:destroy) }
 
+  it { should validate_presence_of(:manufacturer_id) }
+  it { should validate_presence_of(:machining_type) }
+  it { should validate_presence_of(:machine_type) }
+  it { should validate_presence_of(:version) }
+  it { should validate_uniqueness_of(:machine_type) }
+  it { should validate_uniqueness_of(:version) }
+
   describe "#view_name" do
   	let(:group) { create(:machine_group) }
 
