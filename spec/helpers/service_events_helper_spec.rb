@@ -156,8 +156,9 @@ describe ServiceEventsHelper do
 	end
 	
 	describe "#solve_event_button" do
-		let!(:event) { create(:service_event) }
-		
+		let!(:machine) { create(:machine) }
+		let!(:event) { create(:service_event, :machine_id => machine.id) }
+
 		context "event is in evaluated state" do
 			before do
 				event.states.create! state: "evaluated"
@@ -170,7 +171,7 @@ describe ServiceEventsHelper do
 
 		context "event is solved" do
 			before do
-				event.stub(:solved?).and_return(true)
+				event.stub(:closed?).and_return(true)
 			end
 
 			it "returns the partial with solving steps" do

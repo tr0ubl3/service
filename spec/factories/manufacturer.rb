@@ -1,7 +1,11 @@
 FactoryGirl.define do
 	factory :manufacturer do
-	    id 101
-	  	name "Posalux"
+	    sequence :id do |n|
+			n + 200
+	    end
+	  	sequence :name do |n|
+	  		"Manufacturer#{n}"
+	  	end
 	  	address "Str. Biel, No 1"
 	  	office_tel "01234567891"
 	  	office_mail "office@posalux1.com"

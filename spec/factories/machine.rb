@@ -12,7 +12,7 @@ FactoryGirl.define do
     end
   	# machine_type 'CVA'
   	delivery_date '10.10.2010'
-  	waranty_period '780'
+  	waranty_period '24'
 
     sequence :display_name do |n|
     	"MH.33#{n}"

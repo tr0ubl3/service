@@ -1,7 +1,11 @@
 FactoryGirl.define do
 	factory :machine_owner do
-	    id 201
-	  	name "Delphi"
+	    sequence :id do |n|
+			n + 100
+	    end
+	  	sequence :name do |n|
+	  		"Owner#{n}"
+	  	end
 	  	address "Str. Victoria, No. 10"
 	  	office_tel "0123456789"
 	  	office_mail "office@delphi.com"

@@ -53,8 +53,8 @@ module ServiceEventsHelper
 	def solve_event_button(event)
 		if event.evaluated?
 			link_to "Solve event", solving_steps_path(event: event), :class => "btn btn-primary"
-		elsif event.solved?
-			render :partial => "solving_steps", :locals => { :event => @event }			
+		elsif event.closed?
+			render :partial => "solving_steps", :locals => { :event => event }
 		end
 	end
 end

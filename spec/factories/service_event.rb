@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :service_event do
-      id 1
+      sequence :id do |n|
+        n
+      end
       machine_id 1
       event_date Time.now
       event_type 1
