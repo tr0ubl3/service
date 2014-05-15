@@ -1,4 +1,4 @@
-A new event with id <%= @event.event_name %> is open in <%= @event.machine.machine_owner.name %>
+<%= @event.event_date < DateTime.now.to_date ? 'An old' : 'A new' %> event with id <%= @event.event_name %> is open in <%= @event.machine.machine_owner.name %>
 
 Event details: 
 
