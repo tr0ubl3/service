@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :production do
-	ruby '2.1.0'
+	ruby '2.1.2'
 end
 
 gem 'rails', '3.2.18'
