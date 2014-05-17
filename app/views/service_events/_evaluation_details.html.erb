@@ -1,27 +1,19 @@
-<h3>Event evaluation</h3>
-
 <table class="event-table">
 	<tbody>
-		
 		<tr>
 			<td colspan="4">
-				Evaluation details
+				Evaluation
 			</td>
 		</tr>
-
-		<tr>
-			<td>Evaluation date</td>
-			<td colspan="3"><%= date_format(event.states.where(:state => "evaluated").first.created_at, time: true) %></td>
-		</tr>
-
 		<tr>
 			<td>Evaluator</td>
-			<td colspan="3"><%= evaluator_full_name(event.evaluator) %></td>
+			<td><%= evaluator_full_name(event.evaluator) %></td>
+			<td>Date</td>
+			<td><%= date_format(event.states.where(:state => "evaluated").first.created_at, time: true) %></td>
 		</tr>
-
 		<tr>
 			<td colspan="4">
-				Event evaluation description
+				Details
 			</td>			
 		</tr>
 
@@ -30,7 +22,10 @@
 				<%= event.evaluation_description %>
 			</td>
 		</tr>
-
+	</tbody>
+</table>
+<table class="event-table">
+	<tbody>
 		<tr>
 			<td colspan="4">
 				Event files

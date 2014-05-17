@@ -57,4 +57,8 @@ module ServiceEventsHelper
 			render :partial => "solving_steps", :locals => { :event => event }
 		end
 	end
+
+	def event_waranty_boolean(event)
+	    event.event_date + event.machine.waranty_period.months > DateTime.now ? 'yes' : 'no'
+	end
 end

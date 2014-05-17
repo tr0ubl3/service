@@ -1,103 +1,95 @@
 <h3>Event <%= @event.event_name %></h3>
 
+<div id="table1">
+	<table class="event-table">
+		<tbody>
+			<tr>
+				<td colspan="2">Machine</td>
+				<td colspan="2">Client</td>
+			</tr>
+			<tr>
+				<td>Manufacturer</td>
+				<td><%= @event.machine.manufacturer.name %></td>
+				<td>Name</td>
+				<td><%= @event.machine.machine_owner.name %></td>
+			</tr>
+			<tr>
+				<td>Type</td>
+				<td><%= @event.machine.machine_group.machining_type %></td>
+				<td>Address</td>
+				<td><%= @event.machine.machine_owner.address %></td>
+			</tr>    
+			<tr>
+				<td>Number</td>
+				<td><%= @event.machine.machine_number %></td>
+				<td>City</td>
+				<td><%= @event.machine.machine_owner.city %></td>
+			</tr>
+			<tr>
+				<td>Short uniq name</td>
+				<td><%= @event.machine.display_name %></td>
+				<td>Postal code</td>
+				<td><%= @event.machine.machine_owner.postal_code %></td>
+			</tr>
+			<tr>
+				<td>Delivery date</td>
+				<td><%= date_format(@event.machine.delivery_date) %></td>
+				<td colspan="2" rowspan="2"></td>
+			</tr>
+			<tr>
+				<td>Waranty period?</td>
+				<td><%= waranty_boolean(@event.machine) %></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
 <table class="event-table">
 	<tbody>
 		<tr>
-			<td colspan="2">Machine details</td>
-		</tr>
-		<tr>
-			<td>Manufacturer</td>
-			<td><%= @event.machine.manufacturer.name %></td>
-		</tr>
-		<tr>
-			<td>Type</td>
-			<td><%= @event.machine.machine_group.machining_type %></td>
-		</tr>    
-		<tr>
-			<td>Number</td>
-			<td><%= @event.machine.machine_number %></td>
-		</tr>
-		<tr>
-			<td>Short uniq name</td>
-			<td><%= @event.machine.display_name %></td>
-		</tr>
-		<tr>
-			<td>Delivery date</td>
-			<td><%= date_format(@event.machine.delivery_date) %></td>
-		</tr>
-		<tr>
-			<td>Waranty period?</td>
-			<td><%= waranty_boolean(@event.machine) %></td>
-		</tr>
-		<tr>
-			<td colspan="2">Client details</td>
-		</tr>
-		<tr>
-			<td>Name</td>
-			<td><%= @event.machine.machine_owner.name %></td>
-		</tr>
-		<tr>
-			<td>Address</td>
-			<td><%= @event.machine.machine_owner.address %></td>
-		</tr>
-		<tr>
-			<td>City</td>
-			<td><%= @event.machine.machine_owner.city %></td>
-		</tr>
-		<tr>
-			<td>Postal code</td>
-			<td><%= @event.machine.machine_owner.postal_code %></td>
-		</tr>
-		<tr>
-			<td colspan="2">Event details</td>
+			<td colspan="4">Details</td>
 		</tr>
 		<tr>
 			<td>Number</td>
 			<td><%= @event.event_name %></td>
-		</tr>
-		<tr>
-			<td>Date</td>
+			<td>Reported date</td>
 			<td><%= date_format(@event.event_date) %></td>
 		</tr>
 		<tr>
-			<td>Reported by:</td>
+			<td>Reported by</td>
 			<td><%= @event.user.full_name %></td>
-		</tr>
-		<tr>
 			<td>Type</td>
 			<td><%= event_type(@event) %></td>
 		</tr>
 		<tr>
-			<td rowspan="<%= @event.alarms.count if @event.alarms.count > 0 %>">
+			<td>Registered at</td>
+			<td><%= date_format(@event.created_at, time: true) %></td>
+			<td>In waranty period?</td>
+			<td><%= event_waranty_boolean(@event) %></td>
+		</tr>
+<!-- 		<tr>
+			<td rowspan="<%= @event.alarms.count + 1 %>">
 				Alarms
 			</td>
-			<% alarm_arr = @event.alarms %>
-			<% if alarm_arr.empty? %>
+			<% if @event.alarms.empty? %>
 				<td>
 					No alarms reported
 				</td>
 		</tr>
 			<% else %>
-			<% first_alarm = alarm_arr.shift %>
-				<td>
-					<%= first_alarm.number.to_s + ' - ' + first_alarm.text %>
-				</td>
-			</tr>
-			<% if alarm_arr.length > 0  %>
-				<% alarm_arr.each do |alarm| %>
+				<% @event.alarms.each do |alarm| %>
 					<tr>
-						<td class="td-alarm-reset">
+						<td colspan="3">
 							<%= alarm.number.to_s + ' - ' + alarm.text %>
 						</td>
 					</tr>
 				<% end %>
-			<% end %>
-		<% end %>
+			<% end %> -->
 		<tr>
-			<td colspan="2">Event description</td>
+			<td colspan="4">Description</td>
 		</tr>
 		<tr>
-			<td colspan="2" class="event-description">
+			<td colspan="4" class="event-description">
 				<%= @event.event_description %>
 			</td>
 		</tr>

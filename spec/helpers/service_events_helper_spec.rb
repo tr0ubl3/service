@@ -179,4 +179,13 @@ describe ServiceEventsHelper do
 			end
 		end	
 	end
+
+	describe "#waranty_boolean" do
+		let!(:admin) { create(:admin) }
+		let!(:event) { create(:service_event, :user_id => admin.id) }
+
+		it "returns yes or no if machine is(not) in waranty period" do
+			expect(helper.event_waranty_boolean(event)).to eq('yes')
+		end
+	end
 end
