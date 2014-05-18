@@ -67,6 +67,11 @@
 			<td>In waranty period?</td>
 			<td><%= event_waranty_boolean(@event) %></td>
 		</tr>
+		<tr>
+			<td>Hour counter</td>
+			<td><%= @event.hour_counter %></td>
+			<td colspan="2"></td>
+		</tr>
 <!-- 		<tr>
 			<td rowspan="<%= @event.alarms.count + 1 %>">
 				Alarms

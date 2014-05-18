@@ -16,9 +16,11 @@ describe ServiceEvent do
 		it {should validate_presence_of :machine_id}
 		it {should validate_presence_of :hour_counter}
 		it {should validate_presence_of :event_type}
+		it {should validate_presence_of :event_dates}
 		it {should validate_presence_of :event_description}
 		it {should ensure_length_of(:event_description).is_at_least(3).is_at_most(1000)}
 		it {should validate_numericality_of(:hour_counter)}
+		it {should validate_presence_of :evaluation_description}
 	end
 
 	it 'is an ActiveRecord model' do
@@ -72,6 +74,7 @@ describe ServiceEvent do
 	it { should have_and_belong_to_many(:alarms).dependent(:destroy) }
 	it { should have_many(:states).class_name('ServiceEventState').dependent(:destroy) }
 	it { should have_many(:solving_steps).dependent(:destroy) }
+	it { should have_many(:service_event_files).dependent(:destroy).validate(false) }
 
 	it "should assign variable STATES" do
 		states = %w[open evaluated solved closed]

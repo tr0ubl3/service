@@ -6,7 +6,7 @@ class ServiceEvent < ActiveRecord::Base
 	has_and_belongs_to_many :alarms
 	belongs_to :user
 	has_many :states, class_name: "ServiceEventState", dependent: :destroy
-	has_many :service_event_files, dependent: :destroy
+	has_many :service_event_files, dependent: :destroy, validate: false
 	has_many :solving_steps, dependent: :destroy
 	accepts_nested_attributes_for :alarms, :allow_destroy => true
 	before_create :event_prepare
@@ -16,11 +16,12 @@ class ServiceEvent < ActiveRecord::Base
 	delegate :open?, :evaluated?, :solved?, :closed?, to: :current_state
 
 	validates :machine_id, :presence => true
-	# validates :event_date, :presence => true
+	validates :event_date, :presence => true
 	validates :hour_counter, :presence => true, :length => { :within => 3..6 },
 							  numericality: { only_integer: true } 	
 	validates :event_type, :presence => true
 	validates :event_description, :presence => true, :length => { :within => 3..1000 }
+	validates :evaluation_description, :presence => true, :length => { :within => 3..1000 }
 
 	def self.query_state(state)
 		joins(:states).merge ServiceEventState.with_last_state(state)

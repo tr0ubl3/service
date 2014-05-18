@@ -151,7 +151,7 @@ table.event-table {
   }
 
   tr > td.with-content {
-    width: inherit;
+    width: auto !important;
     background-color: inherit;
     text-align: center;
 
@@ -225,7 +225,6 @@ table:nth-child(5).event-table {
 #table1 > table > tbody > tr:nth-child(1) > td {
   width: 50%;
 }
-
 // end of show
 
 div#recurrent_event {

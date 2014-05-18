@@ -1,7 +1,6 @@
 <%= form_for @event, :url => {:action => "create_evaluate"}, :method => "put" do |f| %>
 
 	<% if @event.errors.any? %>
-		<% @event.errors.delete(:password_digest) %>
 		<div id="error_explanation">
 			<div class="alert alert-error">
 				The form contains <%= pluralize(@event.errors.count, "error") %>
@@ -17,11 +16,11 @@
 	<% end %>
 
 	<div class="control-group">
-    <%= f.label :alarms, 'Error codes', class: 'control-label' %>
-    <div class="controls input-append">
-      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
-      <button id="acjs" class="btn" type="button">Insert alarm</button>
-    </div>
+	    <%= f.label :alarms, 'Add or remove existing error codes', class: 'control-label' %>
+	    <div class="controls input-append">
+	      <%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
+	      <button id="acjs" class="btn" type="button">Insert alarm</button>
+	    </div>
 	    <div id="acdp" style="display: block">
 		    <%= f.fields_for :alarms do |alarm| %>
 			    <% if alarm.object.persisted? %>
@@ -31,8 +30,9 @@
 		    <% end %>
 	    </div>
 	</div>
+
 	<div class="control-group">
-		<%= f.label(:evaluation_description, 'Event evaluation details', class: 'control-label') %>
+		<%= f.label(:evaluation_description, 'Details', class: 'control-label') %>
 		<div class="controls">
 			<%= f.text_area :evaluation_description, :id => 'event_description' %>
 		</div>
