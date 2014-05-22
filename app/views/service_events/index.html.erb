@@ -1,15 +1,20 @@
-<%= render(:partial => 'shared/flash_show') %>
-<h2>Service events list</h2>
-<table cellpadding="0" cellspacing="0" border="0" id="service_events_list" class="table table-striped table-bordered" data-source="<%= service_events_path(format: 'json') %>">
+<h2>Events for machine <%= @machine.display_name %></h2>
+<%= link_to new_machine_service_event_path(@machine), :class => 'clearfix' do %>
+  <button class="btn btn-large btn-primary" type="button">Create new event</button>
+<% end %>
+<p></p>
+
+<table cellpadding="0" cellspacing="0" border="0" id="service_events_list" class="table table-striped table-bordered" data-source="<%= machine_service_events_path(@machine, format: 'json') %>">
   <thead>
-      <tr>
-        <th>#</th>
-        <th>Event name</th>
-        <th>Event type</th>
-        <th>Machine</th>
-        <th>Time of event</th>
-      </tr>
+    <tr>
+      <th>#</th>
+      <th>Event name</th>
+      <th>Opened by</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
   </thead>
+
   <tbody>
   </tbody>
 </table>

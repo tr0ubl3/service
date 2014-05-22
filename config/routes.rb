@@ -44,13 +44,7 @@ Service::Application.routes.draw do
       get :lists
     end
   end
-
-  resources :alarms, :only => [:index]
-
-  resources :machines, :only => [:index] do
-    resources :service_events, shallow: true
-  end
-
+  
   resources :machine_groups do
     resources :machines, shallow: true
     resources :alarms, shallow: true do
@@ -62,6 +56,14 @@ Service::Application.routes.draw do
       get :resources
     end
   end
+
+  resources :machines do
+    resources :service_events, shallow: true
+  end
+  
+  resources :alarms, :only => [:index]
+
+
 
   # get "main/index"
   root to: 'general#index'

@@ -193,9 +193,12 @@ $(document).ready ->
 		# console.log $(@).height()
 	$("table.event-table a").fancybox()
 	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})
+	
 	service_events_table = $('#service_events_list')
 	service_events_table.dataTable
 		bProcessing: true
 		bServerSide: true
 		sAjaxSource: service_events_table.data('source')
+		fnServerParams: (aoData) ->
+			aoData.push("name":"machine_id", "value": location.pathname.split("/")[2])
 	service_events_table.find('thead > tr > th:nth-child(2)').css('width', '30%')	

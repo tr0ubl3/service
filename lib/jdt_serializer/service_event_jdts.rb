@@ -9,14 +9,14 @@ class ServiceEventJdts < Jdts
 			[
 				h(''),
 				link_to(record.event_name, record),
-				h(event_type(record)),
-				h(record.machine.display_name),
-				h(date_format(record.created_at, time: true))
+				h(record.user.full_name),
+				h(date_format(record.created_at, time: true)),
+				h(record.current_state)
 			]
 		end
 	end
 
 	def get_custom_data
-		return ServiceEvent.order("#{sort_column} #{sort_direction}")
+		return Machine.find(params[:machine_id]).service_events.order("#{sort_column} #{sort_direction}")
 	end
 end

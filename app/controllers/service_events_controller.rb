@@ -4,7 +4,8 @@ class ServiceEventsController < ApplicationController
 	before_filter :check_admin, only: [:edit, :update, :evaluate, :create_evaluate]
 	
 	def index
-		@events = ServiceEvent.order("service_events.id DESC")
+		@machine = Machine.find(params[:machine_id])
+		@events = @machine.service_events.order("service_events.id DESC")
 		respond_to do |format|
 			format.html
 			format.json { render json: ServiceEventJdts.new(view_context) }

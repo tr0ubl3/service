@@ -21,7 +21,7 @@ class ServiceEvent < ActiveRecord::Base
 							  numericality: { only_integer: true } 	
 	validates :event_type, :presence => true
 	validates :event_description, :presence => true, :length => { :within => 3..1000 }
-	validates :evaluation_description, :presence => true, :length => { :within => 3..1000 }
+	# validates :evaluation_description, :presence => true, :length => { :within => 3..1000 }
 
 	def self.query_state(state)
 		joins(:states).merge ServiceEventState.with_last_state(state)

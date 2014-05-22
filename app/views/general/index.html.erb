@@ -7,7 +7,7 @@
 			<% versions.each do |version, machine_collection| %>
 				<h5><%= version %></h5>
 				<% machine_collection.each do |machine| %>
-					<%= link_to machine_events_general_index_path(:machine => machine), :class => "link_reset" do %>
+					<%= link_to machine_service_events_path(machine), :class => "link_reset" do %>
 						<%= render :partial => 'machine', :locals => { :machine => machine } %>
 					<% end %>
 				<% end %>

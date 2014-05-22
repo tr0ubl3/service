@@ -18,7 +18,7 @@ FactoryGirl.define do
     	"MH.33#{n}"
     end
     hour_counter
-    association :machine_group, strategy: :build
+    association :machine_group, factory: :machine_group_with_alarms, strategy: :build
     association :machine_owner, strategy: :build
   	association :authorized_reseller, strategy: :build
   end
