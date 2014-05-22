@@ -28,6 +28,9 @@ group :development, :test do
 	gem 'commands'
 	gem 'factory_girl_rails', :require => false
 	gem 'therubyracer'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+	gem 'meta_request'
 end
 
 group :production do
