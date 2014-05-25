@@ -1,14 +1,19 @@
 class ServiceEvent < ActiveRecord::Base
-	attr_accessible :user_id, :machine_id, :event_date, :event_type, :event_description,
-	 				:hour_counter, :evaluation_description, :alarm_ids, :evaluator
+	attr_accessible :user_id, :machine_id, :event_date, :event_type, 
+					:event_description, :hour_counter, :evaluation_description,
+					:alarm_ids, :evaluator, :causes_ids
   					
 	belongs_to :machine
-	has_and_belongs_to_many :alarms
 	belongs_to :user
-	has_many :states, class_name: "ServiceEventState", dependent: :destroy
+	has_and_belongs_to_many :alarms
+	has_many :states, class_name: 'ServiceEventState', dependent: :destroy
 	has_many :service_event_files, dependent: :destroy, validate: false
 	has_many :solving_steps, dependent: :destroy
-	accepts_nested_attributes_for :alarms, :allow_destroy => true
+	has_and_belongs_to_many :causes, class_name: 'EventCause'
+
+	accepts_nested_attributes_for :alarms, allow_destroy: true
+	accepts_nested_attributes_for :causes, allow_destroy: true
+
 	before_create :event_prepare
 	after_create :opening
 
@@ -20,7 +25,7 @@ class ServiceEvent < ActiveRecord::Base
 	validates :hour_counter, :presence => true, :length => { :within => 3..6 },
 							  numericality: { only_integer: true } 	
 	validates :event_type, :presence => true
-	validates :event_description, :presence => true, :length => { :within => 3..1000 }
+	# validates :event_description, :presence => true, :length => { :within => 3..1000 }
 	# validates :evaluation_description, :presence => true, :length => { :within => 3..1000 }
 
 	def self.query_state(state)

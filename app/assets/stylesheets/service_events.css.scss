@@ -427,10 +427,12 @@ div#show {
   }
 }
 
-form[id^='edit_service_event'] > input[name=commit] {
-  position: absolute;
-  margin-top: 100px;
-}
+form[id^='edit_service_event'] > input[name=commit],
+form[id^='new_event'] > input[name=commit]
+  {
+    position: absolute;
+    margin-top: 100px;
+  }
 
 #table1 {
   max-height: 31px;

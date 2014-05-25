@@ -17,7 +17,7 @@ describe ServiceEvent do
 		it {should validate_presence_of :hour_counter}
 		it {should validate_presence_of :event_type}
 		it {should validate_presence_of :event_dates}
-		it {should validate_presence_of :event_description}
+		it {should_not validate_presence_of :event_description}
 		it {should ensure_length_of(:event_description).is_at_least(3).is_at_most(1000)}
 		it {should validate_numericality_of(:hour_counter)}
 		# it {should validate_presence_of :evaluation_description}
@@ -66,15 +66,18 @@ describe ServiceEvent do
 	it { should_not allow_mass_assignment_of(:service_event_files_attributes) }
 	it { should allow_mass_assignment_of(:alarm_ids) }
 	it { should allow_mass_assignment_of(:evaluator) }
+	it { should allow_mass_assignment_of(:causes_ids) }
 	
 	it { should_not allow_mass_assignment_of(:event_name) }
-	it { should accept_nested_attributes_for(:alarms) }
 	it { should belong_to(:machine) }
 	it { should belong_to(:user) }
-	it { should have_and_belong_to_many(:alarms).dependent(:destroy) }
+	it { should have_and_belong_to_many(:alarms) }
 	it { should have_many(:states).class_name('ServiceEventState').dependent(:destroy) }
 	it { should have_many(:solving_steps).dependent(:destroy) }
 	it { should have_many(:service_event_files).dependent(:destroy).validate(false) }
+	it { should have_and_belong_to_many(:causes).class_name('EventCause') }
+	it { should accept_nested_attributes_for(:alarms).allow_destroy(true) }
+	it { should accept_nested_attributes_for(:causes).allow_destroy(true) }
 
 	it "should assign variable STATES" do
 		states = %w[open evaluated solved closed]

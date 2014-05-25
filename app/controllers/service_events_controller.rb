@@ -24,6 +24,7 @@ class ServiceEventsController < ApplicationController
 	def new
 		@machine = Machine.find(params[:machine_id])
 		@event = @machine.service_events.build
+		@files = ServiceEventFile.new
 		@event.alarms.build
 		
 		respond_to do |format|

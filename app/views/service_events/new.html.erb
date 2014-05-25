@@ -1,4 +1,4 @@
-<h2>Define new machine event <%= @machine.display_name %></h2>
+<h2>New machine event <%= @machine.display_name %></h2>
 <div class='well'>
 	<%= form_for [@machine, @event], html: {id: "new_event"} do |f| %>
 	<%= render partial 'new_event_unscoped' if @machine.nil? %>
@@ -35,6 +35,19 @@
 	</div>
 
 	<div class="control-group">
+		<%= label_tag 'Do you know root cause(s)?' %>
+		<label class='radio'>
+			<%= radio_button_tag 'cause', 'yes' %>
+			<%= label_tag 'cause','Yes' %>
+		</label>
+
+		<label class='radio'>
+			<%= radio_button_tag 'cause', 'no' %>
+			<%= label_tag 'cause','No' %>
+		</label>
+	</div>
+
+	<div class="control-group">
 		<%= f.label(:alarm_code, 'Error codes definition', class: 'control-label') %>
 		<div class="controls input-append">
 			<%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
@@ -43,19 +56,29 @@
 		<div id="acdp"></div>
 	</div>
 
-	<div class="control-group">
-		<%= f.label(:event_description, 'Event description', class: 'control-label') %>
-		<div class="controls">
-			<%= f.text_area :event_description, :id => 'event_description' %>
-		</div>
-	</div>
-
-	<div class="control-group">
-		<% f.fields_for :service_event_files do |file| %>
-			<%= file.label :file, "Attach files to event" %>
-			<%= file.file_field :file %>
-		<% end %>
-	</div>
 	<%= submit_tag("Save", class: 'btn btn-primary') %>
 <% end %>
+	
+	<%= form_for @files, multipart: true, remote: true do |f| %>
+		<div class="control-group">
+			<%= f.label(:file, 'Event related files', class: 'control-label') %>
+			<div class="file-container">
+				<br />
+				<div class="btn btn-success">
+					<span><i class="icon-plus icon-white"></i> Add files...</span>
+					<%= f.file_field :file, multiple: true, name: "service_event_file[file]" %>
+				</div>
+				<div class="btn btn-danger" id="file-remove">
+					<span><i class="icon-trash icon-white"></i> Delete</span>
+				</div>
+				<div class="btn btn-primary" id="file-submit">
+					<span><i class="icon-upload icon-white"></i> Upload files</span>
+				</div>
+				<div class="progress">
+					<p></p>
+					<div class="bar"></div>
+				</div>
+			</div>
+		</div>
+	<% end %>
 </div>

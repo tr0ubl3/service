@@ -135,6 +135,7 @@ $(document).ready ->
 			$(@).data("eventid") is parseInt(peval)).text()
 		# console.log(a+"val"+peval)
 		evntnameappend.after("<p>, the parent event is <b>"+txt+"</b></p>")
+	
 	$("[id^='new_service_event_file']").fileupload
 		acceptFileTypes: /(\.|\/)(gif|jpe?g|png|log|mp4)$/i
 		add: (e, data) -> 
@@ -188,8 +189,9 @@ $(document).ready ->
 			$("#new_service_event_file").trigger("change")
 			progressbar.children("p").first().text((data.bitrate / (1000000 * 8)).toFixed(2) + " MB/s")
 			progressbar.children("div").first().css("width", progress + '%')
+
 	$('#new_service_event_file').on "change", ->
-		$("form[id^='edit_service_event'] > input[name=commit]").css("margin-top", $(@).height() + 15)
+		$("input[name=commit]").css("margin-top", $(@).height() + 15)
 		# console.log $(@).height()
 	$("table.event-table a").fancybox()
 	$("table.event-table video").mediaelementplayer({defaultVideoWidth: 180, defaultVideoHeight: 180})
@@ -201,4 +203,7 @@ $(document).ready ->
 		sAjaxSource: service_events_table.data('source')
 		fnServerParams: (aoData) ->
 			aoData.push("name":"machine_id", "value": location.pathname.split("/")[2])
-	service_events_table.find('thead > tr > th:nth-child(2)').css('width', '30%')	
+	service_events_table.find('thead > tr > th:nth-child(2)').css('width', '30%')
+
+	$('#cause_yes').on 'change', ->
+		console.log 'clicked'

@@ -1,12 +1,15 @@
 Service::Application.routes.draw do
   
+  resources :event_causes
+
+
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'confirmation/:token', to: 'users#confirm', as: 'confirm_account'
   
-  resources :manufacturers, :machine_owners, :sessions
-  # resources :manage_users, :only => [:index]
+  resources :manufacturers, :machine_owners, :sessions, :service_event_files
+
   resources :general do
     collection do
       get :machine_events
@@ -31,7 +34,6 @@ Service::Application.routes.draw do
   end
 
   resources :service_events do
-    resources :service_event_files, shallow: true
     member do
       get :evaluate
       put :create_evaluate
