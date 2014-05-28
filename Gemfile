@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-group :production do
-	ruby '2.1.2'
-end
+ruby '2.1.2'
 
 gem 'rails', '3.2.18'
 
@@ -20,9 +18,9 @@ group :development, :test do
 	# gem 'email_validator', :require => 'email_validator/strict'
 
 	## guard gems begin 
-	gem 'guard', :github => 'guard/guard'
-	gem 'guard-spork', :github => 'guard/guard-spork'
-	gem 'guard-rspec', :github => 'guard/guard-rspec'
+	gem 'guard'
+	gem 'guard-spork'
+	gem 'guard-rspec'
 	# gem 'guard-cucumber', :github => 'guard/guard-cucumber'
 	## end
 	gem 'commands'
@@ -41,7 +39,7 @@ end
 group :test do
 	gem 'spork'
 	gem 'spork-rails'
-	gem 'capybara', :github => 'jnicklas/capybara'
+	gem 'capybara', github: 'jnicklas/capybara'
 	gem 'cucumber', '1.2.5'
 	gem 'cucumber-rails', :require => false
 	# gem 'rb-fsevent' 

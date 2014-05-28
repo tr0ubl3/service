@@ -40,7 +40,8 @@
 			<%= radio_button_tag 'cause', 'yes' %>
 			<%= label_tag 'cause','Yes' %>
 		</label>
-
+		<label>Insert new cause</label>
+		<input type="text" placeholder="Type something…">
 		<label class='radio'>
 			<%= radio_button_tag 'cause', 'no' %>
 			<%= label_tag 'cause','No' %>
@@ -50,7 +51,7 @@
 	<div class="control-group">
 		<%= f.label(:alarm_code, 'Error codes definition', class: 'control-label') %>
 		<div class="controls input-append">
-			<%= text_field_tag :alarm_code, nil,:placeholder => "insert alarm code only" %>
+			<%= text_field_tag :alarm_code, nil, :placeholder => "insert alarm code only", data: {path: new_machine_service_event_path(@machine) } %>
 			<button id="acjs" class="btn" type="button">Insert alarm</button>
 		</div>
 		<div id="acdp"></div>

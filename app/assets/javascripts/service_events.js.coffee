@@ -43,7 +43,7 @@ $(document).ready ->
 	doSearchAlarm = (value) -> 
 		temp_alarm_value = value
 		$.ajax
-			url: document.location.pathname
+			url: $('#alarm_code').data('path')
 			type: "get"
 			async: "true"
 			contentType: "json"

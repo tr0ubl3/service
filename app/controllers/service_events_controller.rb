@@ -36,6 +36,7 @@ class ServiceEventsController < ApplicationController
 	def create
 		@machine = Machine.find(params[:machine_id])
 		@event = @machine.service_events.build(params[:service_event])
+		@files = ServiceEventFile.new
 		@event.user_id = current_user.id
 		# hc = hour counter
 		# @hc = HourCounter.find_by_machine_id(@event.machine_id)
@@ -47,7 +48,7 @@ class ServiceEventsController < ApplicationController
 			redirect_to root_path
 		else
 			flash[:alert] = "Please correct errors: #{@event.errors.to_a}"
-			redirect_to new_machine_service_event_path(@machine)
+			render :new
 		end
 	end
 
