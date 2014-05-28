@@ -6,6 +6,7 @@
 #= require bootstrap-datepicker/locales/bootstrap-datepicker.ro
 #= require fancybox
 #= require mediaelement-and-player
+#= require jquery.tokeninput
 
 $(document).ready ->
 	$('#event_date').datepicker({
@@ -206,4 +207,7 @@ $(document).ready ->
 	service_events_table.find('thead > tr > th:nth-child(2)').css('width', '30%')
 
 	$('#cause_yes').on 'change', ->
-		console.log 'clicked'
+		$('fieldset#tokens_fieldset').show('fast')
+	$('#cause_no').on 'change', ->
+		$('fieldset#tokens_fieldset').hide('fast')
+	$('#service_event_cause_tokens').tokenInput '/event_causes.json'

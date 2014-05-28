@@ -1,7 +1,8 @@
 class ServiceEvent < ActiveRecord::Base
 	attr_accessible :user_id, :machine_id, :event_date, :event_type, 
 					:event_description, :hour_counter, :evaluation_description,
-					:alarm_ids, :evaluator, :causes_ids
+					:evaluator, :alarm_ids, :cause_tokens
+	attr_reader :cause_tokens
   					
 	belongs_to :machine
 	belongs_to :user
@@ -54,6 +55,10 @@ class ServiceEvent < ActiveRecord::Base
 	def close
 		states.create! state: "closed" if solved?
 		ServiceEventMailer.close(self).deliver
+	end
+
+	def cause_tokens=(ids)
+		self.cause_ids = ids.split(",")
 	end
 
 	private
