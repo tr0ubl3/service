@@ -57,8 +57,8 @@ class ServiceEvent < ActiveRecord::Base
 		ServiceEventMailer.close(self).deliver
 	end
 
-	def cause_tokens=(ids)
-		self.cause_ids = ids.split(",")
+	def cause_tokens=(tokens)
+		self.cause_ids = causes.ids_from_tokens(tokens)
 	end
 
 	private

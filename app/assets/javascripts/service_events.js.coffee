@@ -210,4 +210,7 @@ $(document).ready ->
 		$('fieldset#tokens_fieldset').show('fast')
 	$('#cause_no').on 'change', ->
 		$('fieldset#tokens_fieldset').hide('fast')
-	$('#service_event_cause_tokens').tokenInput '/event_causes.json'
+	$('#service_event_cause_tokens').tokenInput '/event_causes.json',
+		propertyToSearch: 'cause',
+		preventDuplicates: true,
+		tokenLimit: 1
