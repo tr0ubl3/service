@@ -47,7 +47,6 @@
 
 		<fieldset id="tokens_fieldset">
 			<%= f.label :cause_tokens, 'Define causes and symptoms' %>
-			<%= text_field_tag 'input_cause_1', nil, class: 'token_input' %>
 			<%= f.text_field :cause_tokens, data: { url: event_causes_path(format: :json) } %>
 		</fieldset>
 	</div>

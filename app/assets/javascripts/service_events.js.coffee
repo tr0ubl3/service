@@ -212,17 +212,58 @@ $(document).ready ->
 		$('fieldset#tokens_fieldset').show('fast')
 	$('#cause_no').on 'change', ->
 		$('fieldset#tokens_fieldset').hide('fast')
-	# implementare tokeninput
-	$(".token_input").each ->
-		el = $(@)
+	
+	
+	# implementare dynamic fields
+	cause_ids = new Object
+	doDynamicFields = ->
+		cause_field = $('#service_event_cause_tokens')
+		# iteration number
+		nr_crt = cause_field.closest('fieldset').children('div').length + 1
+		# json data path prepare
 		machine_id = location.pathname.split("/")[2]
-		json_url = $('#service_event_cause_tokens').data('url') + '?machine=' + machine_id
-		el.tokenInput json_url,
+		json_url = cause_field.data('url') + '?machine=' + machine_id
+		# dummy input pt token input
+		dummy_input = $("<input />",
+					id: "input_cause_" + nr_crt
+					name: "input_cause_" + nr_crt
+					type: "text")
+		# div wrapper
+		div_wrapper = $("<div>",
+											class: "cause_wrapper_" + nr_crt).html(dummy_input)	
+		# insert div	
+		cause_field.prev().before(div_wrapper)
+		# implementare tokeninput
+		div_wrapper.children('input').tokenInput json_url,
 			propertyToSearch: 'cause',
 			preventDuplicates: true,
 			tokenLimit: 1
-	# implementare elemente aditionale
-	$('#token-input-input_cause_' + '1').closest('ul').before('<span>1. </span>')
-	$('#input_cause_1').on 'change', ->
-		$('#service_event_cause_tokens').val($(@).val())
+		# adaugare trigger on change	
+		div_wrapper.children('input').on 'change', ->
+			cause_ids[$(dummy_input).attr('id')] = div_wrapper.children('input').val()
+			key_values = []
+			for key of cause_ids
+				key_values.push cause_ids[key] unless cause_ids[key] is ''
+			cause_field.val(key_values.toString())
+
+	#implementare add link
+	do doInsertButton = ->
+		insert_link = $('#service_event_cause_tokens').before("<a href='#' id='new_cause'>Insert new cause</a>")
+		doDynamicFields()
+		insert_link.prev().on 'click', (e) ->
+			e.preventDefault()
+			doDynamicFields()
+	
+	# $(".token_input").each ->
+	# 	el = $(@)
+	# 	machine_id = location.pathname.split("/")[2]
+	# 	json_url = $('#service_event_cause_tokens').data('url') + '?machine=' + machine_id
+	# 	el.tokenInput json_url,
+	# 		propertyToSearch: 'cause',
+	# 		preventDuplicates: true,
+	# 		tokenLimit: 1
+	# # implementare elemente aditionale
+	# $('#token-input-input_cause_' + '1').closest('ul').before('<span>1. </span>')
+	# $('#input_cause_1').on 'change', ->
+	# 	$('#service_event_cause_tokens').val($(@).val())
 	# sfarsit cauze si simptome 
