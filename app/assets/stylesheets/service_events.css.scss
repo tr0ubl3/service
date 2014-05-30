@@ -447,6 +447,10 @@ form[id^='new_event'] > input[name=commit]
 fieldset#tokens_fieldset {
   display: none;
 }
+#service_event_cause_tokens {
+  display: none;
+}
+
 
 input#token-input-service_event_cause_tokens:focus {
   border-color: none !important;
@@ -456,6 +460,7 @@ input#token-input-service_event_cause_tokens:focus {
 }
 
 ul.token-input-list {
+  display: inline-block;
   overflow: hidden; 
   height: auto !important; 
   height: 1%; 
@@ -463,7 +468,7 @@ ul.token-input-list {
   border: 1px solid #999;
   cursor: text;
   font-size: 12px;
-  font-family: Verdana;
+  // font-family: Verdana;
   z-index: 999;
   margin: 0;
   padding: 0;
@@ -528,7 +533,7 @@ div.token-input-dropdown {
     border-bottom: 1px solid #ccc;
     cursor: default;
     font-size: 12px;
-    font-family: Verdana;
+    // font-family: Verdana;
     z-index: 1;
 }
 

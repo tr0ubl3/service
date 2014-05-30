@@ -47,7 +47,7 @@ class ServiceEventsController < ApplicationController
 			flash[:notice] = 'Event successfully registered!' 	
 			redirect_to root_path
 		else
-			flash[:alert] = "Please correct errors: #{@event.errors.to_a}"
+			flash.now[:alert] = "Please correct errors!"
 			render :new
 		end
 	end

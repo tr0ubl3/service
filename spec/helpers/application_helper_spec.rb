@@ -2,6 +2,25 @@ require 'spec_helper'
 
 describe ApplicationHelper do
 
+	describe "flash_class" do
+		it "returns success" do
+			expect(helper.flash_class(:notice)).to have_content('success')
+		end
+
+		it "returns error" do
+			expect(helper.flash_class(:alert)).to have_content('error')
+		end
+
+		it "returns info" do
+			expect(helper.flash_class(:info)).to have_content('info')
+		end
+
+		it "returns nil" do
+			expect(helper.flash_class(nil)).to be_nil
+			end
+	end
+	
+
 	describe "#pending_users" do
 		let(:user) { create(:user2) }
 		before :each do

@@ -206,11 +206,23 @@ $(document).ready ->
 			aoData.push("name":"machine_id", "value": location.pathname.split("/")[2])
 	service_events_table.find('thead > tr > th:nth-child(2)').css('width', '30%')
 
+	# sectiune cauze si simptome
+	# radio boxes
 	$('#cause_yes').on 'change', ->
 		$('fieldset#tokens_fieldset').show('fast')
 	$('#cause_no').on 'change', ->
 		$('fieldset#tokens_fieldset').hide('fast')
-	$('#service_event_cause_tokens').tokenInput '/event_causes.json',
-		propertyToSearch: 'cause',
-		preventDuplicates: true,
-		tokenLimit: 1
+	# implementare tokeninput
+	$(".token_input").each ->
+		el = $(@)
+		machine_id = location.pathname.split("/")[2]
+		json_url = $('#service_event_cause_tokens').data('url') + '?machine=' + machine_id
+		el.tokenInput json_url,
+			propertyToSearch: 'cause',
+			preventDuplicates: true,
+			tokenLimit: 1
+	# implementare elemente aditionale
+	$('#token-input-input_cause_' + '1').closest('ul').before('<span>1. </span>')
+	$('#input_cause_1').on 'change', ->
+		$('#service_event_cause_tokens').val($(@).val())
+	# sfarsit cauze si simptome 

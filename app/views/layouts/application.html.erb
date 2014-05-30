@@ -9,25 +9,23 @@
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
-  <%= render "shared/navbar" %>
-		<!-- <div class="container margin-top-container"> -->
+    <%= render "shared/navbar" %>
     <div class="container">
   	  <% flash.each do |type, message| %>
-  	  	<div class="alert <%= flash_class type %>">
+  	  	<div class="alert alert-<%= flash_class(type) %>">
   	  		<button class="close" data-dismiss="alert">x</button>
   	  		<%= message %>
     		</div>	
   	  <% end %>		
-      <div class="row-fluid" style="min-height: 500px;">
+      <div class="row-fluid">
         <div class="span12">
           <%= yield %>
-        </div><!--/span-->
+        </div>
       </div>
-      <!--/row-->
       <hr>
       <footer>
         <p>&copy; International G&amp;T</p>
       </footer>
-    </div><!--/.fluid-container-->
+    </div>
 	</body>
 </html>

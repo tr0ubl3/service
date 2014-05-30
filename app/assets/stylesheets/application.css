@@ -12,6 +12,11 @@
  *= require bootstrap
  *= require jquery.dataTables-bootstrap
  */
+
+body > div.container > div.row-fluid {
+  min-height: 500px;
+}
+
 .field_with_errors {
 	display: inline;
 }
