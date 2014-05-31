@@ -571,3 +571,34 @@ div.token-input-dropdown ul li em {
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
     background-color: #d0efa0;
 }
+
+div[class^="cause_wrapper_"] {
+  position: relative;
+}
+
+div[id^="delete_cause_"] {
+  position: absolute;
+  right: 5px;
+  top: 25%;
+}
+
+div[id^="delete_cause_"] > a {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+div[id^="delete_cause_"] > a:hover {
+  text-shadow: 0 0 1px #000,
+               0 0 10px rgba(158, 158, 158, 0.8);
+  color: rgba(187, 36, 36, 1);
+  -webkit-transform: scale(1.6);
+  -ms-transform: scale(1.6);
+  transform: scale(1.6);
+}
+
+div[id^="delete_cause_"] > a:after {
+  content: '✖';
+}

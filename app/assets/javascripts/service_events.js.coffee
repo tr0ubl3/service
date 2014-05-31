@@ -213,7 +213,6 @@ $(document).ready ->
 	$('#cause_no').on 'change', ->
 		$('fieldset#tokens_fieldset').hide('fast')
 	
-	
 	# implementare dynamic fields
 	cause_ids = new Object
 	doDynamicFields = ->
@@ -228,9 +227,43 @@ $(document).ready ->
 					id: "input_cause_" + nr_crt
 					name: "input_cause_" + nr_crt
 					type: "text")
+		# definire select elements
+		cause_type_select = $('<select>',
+														id: 'cause_type_select_' + nr_crt
+														name: 'cause_type_select_' + nr_crt).
+												html("
+													<option value disabled selected>select type ...</option>
+													<option value='Software'>Software</option>
+													<option value='Hardware'>Hardware</option>")
+		cause_category_select = $('<select>',
+															id: 'cause_category_select_' + nr_crt
+															name: 'cause_category_select_'+ nr_crt	
+															).html("
+																<option value disabled selected>select category ...</option>
+																<option value='Electric'>Electric</option>
+																<option value='Hydraulic'>Hydraulic</option>
+																<option value='Mechanical'>Mechanical</option>
+																<option value='Pneumatic'>Pneumatic</option>
+															")
+		cause_problem_select = $("<select>",
+														id: 'cause_problem_select_' + nr_crt
+														name: 'cause_problem_select_' + nr_crt
+														).html("
+															<option value disabled selected>select problem ...</option>
+															<option value='Malfunction'>Malfunction</option>
+															<option value='Adjustment'>Adjustment</option>
+														")
+		delete_cause = $("<div>",
+											id: 'delete_cause_' + nr_crt
+														).html("<a href='#' title='delete cause'></a>")
 		# div wrapper
 		div_wrapper = $("<div>",
-											class: "cause_wrapper_" + nr_crt).html(dummy_input)	
+											class: "cause_wrapper_" + nr_crt).html(dummy_input)
+		div_wrapper.append(cause_type_select)
+		div_wrapper.append(cause_category_select)
+		div_wrapper.append(cause_problem_select)
+		div_wrapper.prepend('<span>' + nr_crt + '.</span>')
+		div_wrapper.append(delete_cause)
 		# insert div	
 		cause_field.prev().before(div_wrapper)
 		# implementare tokeninput
@@ -238,13 +271,26 @@ $(document).ready ->
 			propertyToSearch: 'cause',
 			preventDuplicates: true,
 			tokenLimit: 1
-		# adaugare trigger on change	
-		div_wrapper.children('input').on 'change', ->
-			cause_ids[$(dummy_input).attr('id')] = div_wrapper.children('input').val()
+		# actiune comuna pt update si delete
+		doUpdateCauseObject = ->
 			key_values = []
 			for key of cause_ids
 				key_values.push cause_ids[key] unless cause_ids[key] is ''
 			cause_field.val(key_values.toString())
+			
+		# adaugare trigger on change	
+		dummy_input_id = 'input_cause_' + nr_crt
+		div_wrapper.children('input').on 'change', ->
+			cause_ids[dummy_input_id] = div_wrapper.children('input').val()
+			doUpdateCauseObject()
+		# adaugare trigger on click pt delete cause
+		div_wrapper.children(delete_cause).children('a').on 'click', (e) ->
+			e.preventDefault()
+			cause_ids[dummy_input_id] = ''
+			doUpdateCauseObject()
+			delete cause_ids.dummy_input_id
+			div_wrapper.remove()
+
 
 	#implementare add link
 	do doInsertButton = ->
@@ -253,7 +299,7 @@ $(document).ready ->
 		insert_link.prev().on 'click', (e) ->
 			e.preventDefault()
 			doDynamicFields()
-	
+
 	# $(".token_input").each ->
 	# 	el = $(@)
 	# 	machine_id = location.pathname.split("/")[2]
