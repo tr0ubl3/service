@@ -39,7 +39,7 @@ class ServiceEvent < ActiveRecord::Base
 
 	def opening
 		states.create! state: "open"
-		ServiceEventMailer.open(self).deliver
+		# ServiceEventMailer.open(self).deliver
 	end
 
 	def evaluate
@@ -54,7 +54,7 @@ class ServiceEvent < ActiveRecord::Base
 
 	def close
 		states.create! state: "closed" if solved?
-		ServiceEventMailer.close(self).deliver
+		# ServiceEventMailer.close(self).deliver
 	end
 
 	def cause_tokens=(tokens)
@@ -71,8 +71,8 @@ class ServiceEvent < ActiveRecord::Base
 			owner = machine.machine_owner.name.upcase.first(limit=3)
 			manufacturer = machine.manufacturer.name.upcase.first(limit=3)
 			machine_number = machine.machine_number.gsub(/[-]/i, '')
-			event_time = Time.now.strftime('%-d%-m%y%H%M')
+			# event_time = Time.now.strftime('%d%m%y%H%M')
 			event_count = "%.5d" % (machine.service_events.count + 1)
-			return manufacturer + '-'+ machine_number + '-' + event_time + '-' + event_count + '-' + owner
+			return manufacturer + '-'+ machine_number + '-' + event_count + '-' + owner
 		end
 end

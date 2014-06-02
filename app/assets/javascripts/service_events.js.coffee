@@ -258,8 +258,9 @@ $(document).ready ->
 														).html("<a href='#' title='delete cause'></a>")
 		# div wrapper
 		div_wrapper = $("<div>",
-											class: "cause_wrapper_" + nr_crt).html(dummy_input)
+											class: "cause_wrapper_" + nr_crt)
 		div_wrapper.append(cause_type_select)
+		div_wrapper.append(dummy_input)	
 		div_wrapper.append(cause_category_select)
 		div_wrapper.append(cause_problem_select)
 		div_wrapper.prepend('<span>' + nr_crt + '.</span>')
@@ -286,10 +287,10 @@ $(document).ready ->
 		# adaugare trigger on click pt delete cause
 		div_wrapper.children(delete_cause).children('a').on 'click', (e) ->
 			e.preventDefault()
+			div_wrapper.remove()
 			cause_ids[dummy_input_id] = ''
 			doUpdateCauseObject()
 			delete cause_ids.dummy_input_id
-			div_wrapper.remove()
 
 
 	#implementare add link
