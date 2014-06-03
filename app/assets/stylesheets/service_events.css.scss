@@ -607,3 +607,9 @@ textarea[id^="software_problem_description_"] {
   width: 100%;
   height: 100px;
 }
+
+fieldset {
+  a.disabled {
+    color: #999999 !important;
+  }
+}

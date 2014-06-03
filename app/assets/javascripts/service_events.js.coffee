@@ -276,10 +276,10 @@ $(document).ready ->
 											class: "cause_wrapper_" + nr_crt)
 		div_wrapper.prepend('<span>' + nr_crt + '.</span>')
 		div_wrapper.append(cause_type_select)
-		div_wrapper.append(dummy_input)	
-		div_wrapper.append(cause_category_select)
-		div_wrapper.append(cause_problem_select)
-		div_wrapper.append(delete_cause)
+		# div_wrapper.append(dummy_input)	
+		# div_wrapper.append(cause_category_select)
+		# div_wrapper.append(cause_problem_select)
+		# div_wrapper.append(delete_cause)
 		
 		# insert div	
 		cause_field.prev().before(div_wrapper)
@@ -296,37 +296,50 @@ $(document).ready ->
 			for key of cause_ids
 				key_values.push cause_ids[key] unless cause_ids[key] is ''
 			cause_field.val(key_values.toString())
-			
-		# adaugare trigger on change	
+
 		dummy_input_id = 'input_cause_' + nr_crt
-		div_wrapper.children('input').on 'change', ->
-			cause_ids[dummy_input_id] = div_wrapper.children('input').val()
+		# adaugare trigger on change pt tokenized input
+		doInputTrigger = ->
+			div_wrapper.children('input').on 'change', ->
+				cause_ids[dummy_input_id] = div_wrapper.children('input').val()
+				doUpdateCauseObject()
+
+		# update cause_ids object la stergere si schimbare tip cauza
+		doUpdateCauseIds = ->
+			cause_ids[dummy_input_id] = ''
 			doUpdateCauseObject()
+			delete cause_ids.dummy_input_id
+
 		# adaugare trigger on click pt delete cause
 		do doDeleteCause = ->
 			div_wrapper.children(delete_cause).children('a').on 'click', (e) ->
 				e.preventDefault()
+				doUpdateCauseIds()
 				div_wrapper.remove()
-				cause_ids[dummy_input_id] = ''
-				doUpdateCauseObject()
-				delete cause_ids.dummy_input_id
-		
+
+		# caching new link
+		insert_link = $('#new_cause')
+
 		# adaugare trigger on click pt schimbare context soft/hard
 		cause_type_select.on 'change', ->
 			type = $(@)
 			hard_content = [dummy_input, cause_category_select, cause_problem_select, delete_cause]
-			
+			insert_link.removeClass('disabled').attr('title', 'add new cause')
 			switch type.val()
 				when 'Software' 
 					type.nextAll().remove()
 					type.after(software_location, software_problem_description, delete_cause)
 					doDeleteCause()
 				when 'Hardware'
-					if type.next().attr('id') is software_location.attr('id')
+					if type.next().attr('id') is software_location.attr('id') or type.next().is() is false
 						type.nextAll().remove()
 						type.after(hard_content)
 						doTokenize()
+						doInputTrigger()
 						doDeleteCause()
+						doUpdateCauseIds()
+		# adagare clasa disabled pt new cause link
+		$('#new_cause').addClass('disabled').attr('title', 'use existing cause before adding new one')
 
 	#implementare add link
 	do doInsertButton = ->
@@ -334,7 +347,8 @@ $(document).ready ->
 		doDynamicFields()
 		insert_link.prev().on 'click', (e) ->
 			e.preventDefault()
-			doDynamicFields()
+			if $('#tokens_fieldset').children("div[class^='cause_wrapper_']").last().children("select[id^='cause_type_select_']").val()? or $('#tokens_fieldset').children("div[class^='cause_wrapper_']").length is 0
+				doDynamicFields() 				
 
 
 
