@@ -271,6 +271,10 @@ $(document).ready ->
 		delete_cause = $("<div>",
 											id: 'delete_cause_' + nr_crt
 														).html("<a href='#' title='delete cause'></a>")
+		doCenterScrollPage = ->
+			offset_val = div_wrapper.offset().top
+			$('body').scrollTop(offset_val)
+
 		# div wrapper
 		div_wrapper = $("<div>",
 											class: "cause_wrapper_" + nr_crt)
@@ -283,7 +287,7 @@ $(document).ready ->
 		
 		# insert div	
 		cause_field.prev().before(div_wrapper)
-		
+		doCenterScrollPage()
 		# implementare tokeninput
 		do doTokenize = ->
 			div_wrapper.children('input').tokenInput json_url,
@@ -316,6 +320,7 @@ $(document).ready ->
 				e.preventDefault()
 				doUpdateCauseIds()
 				div_wrapper.remove()
+				doCenterScrollPage()
 
 		# caching new link
 		insert_link = $('#new_cause')
@@ -330,6 +335,7 @@ $(document).ready ->
 					type.nextAll().remove()
 					type.after(software_location, software_problem_description, delete_cause)
 					doDeleteCause()
+					doCenterScrollPage()
 				when 'Hardware'
 					if type.next().attr('id') is software_location.attr('id') or type.next().is() is false
 						type.nextAll().remove()
@@ -338,6 +344,7 @@ $(document).ready ->
 						doInputTrigger()
 						doDeleteCause()
 						doUpdateCauseIds()
+						doCenterScrollPage()
 		# adagare clasa disabled pt new cause link
 		$('#new_cause').addClass('disabled').attr('title', 'use existing cause before adding new one')
 
@@ -348,8 +355,7 @@ $(document).ready ->
 		insert_link.prev().on 'click', (e) ->
 			e.preventDefault()
 			if $('#tokens_fieldset').children("div[class^='cause_wrapper_']").last().children("select[id^='cause_type_select_']").val()? or $('#tokens_fieldset').children("div[class^='cause_wrapper_']").length is 0
-				doDynamicFields() 				
-
+				doDynamicFields()
 
 
 	# $(".token_input").each ->
