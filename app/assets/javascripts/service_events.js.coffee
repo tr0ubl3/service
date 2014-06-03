@@ -227,6 +227,7 @@ $(document).ready ->
 					id: "input_cause_" + nr_crt
 					name: "input_cause_" + nr_crt
 					type: "text")
+		
 		# definire select elements
 		cause_type_select = $('<select>',
 														id: 'cause_type_select_' + nr_crt
@@ -253,25 +254,42 @@ $(document).ready ->
 															<option value='Malfunction'>Malfunction</option>
 															<option value='Adjustment'>Adjustment</option>
 														")
+		software_location = $('<select>',
+													id: 'software_location_' + nr_crt
+													name: 'software_location_' + nr_crt
+													).html("
+													<option value disabled selected>select software location ...</option>
+													<option value='Sinumerik'>Sinumerik</option>
+													<option value='Sarix'>Sarix</option>
+													")
+		software_problem_description = $('<textarea>',
+																		rows: 10
+																		id: 'software_problem_description_' + nr_crt
+																		name: 'software_problem_description_' + nr_crt
+																		placeholder: 'insert software problem description'
+																		)																					
 		delete_cause = $("<div>",
 											id: 'delete_cause_' + nr_crt
 														).html("<a href='#' title='delete cause'></a>")
 		# div wrapper
 		div_wrapper = $("<div>",
 											class: "cause_wrapper_" + nr_crt)
+		div_wrapper.prepend('<span>' + nr_crt + '.</span>')
 		div_wrapper.append(cause_type_select)
 		div_wrapper.append(dummy_input)	
 		div_wrapper.append(cause_category_select)
 		div_wrapper.append(cause_problem_select)
-		div_wrapper.prepend('<span>' + nr_crt + '.</span>')
 		div_wrapper.append(delete_cause)
+		
 		# insert div	
 		cause_field.prev().before(div_wrapper)
+		
 		# implementare tokeninput
-		div_wrapper.children('input').tokenInput json_url,
-			propertyToSearch: 'cause',
-			preventDuplicates: true,
-			tokenLimit: 1
+		do doTokenize = ->
+			div_wrapper.children('input').tokenInput json_url,
+				propertyToSearch: 'cause',
+				preventDuplicates: true,
+				tokenLimit: 1
 		# actiune comuna pt update si delete
 		doUpdateCauseObject = ->
 			key_values = []
@@ -285,13 +303,30 @@ $(document).ready ->
 			cause_ids[dummy_input_id] = div_wrapper.children('input').val()
 			doUpdateCauseObject()
 		# adaugare trigger on click pt delete cause
-		div_wrapper.children(delete_cause).children('a').on 'click', (e) ->
-			e.preventDefault()
-			div_wrapper.remove()
-			cause_ids[dummy_input_id] = ''
-			doUpdateCauseObject()
-			delete cause_ids.dummy_input_id
-
+		do doDeleteCause = ->
+			div_wrapper.children(delete_cause).children('a').on 'click', (e) ->
+				e.preventDefault()
+				div_wrapper.remove()
+				cause_ids[dummy_input_id] = ''
+				doUpdateCauseObject()
+				delete cause_ids.dummy_input_id
+		
+		# adaugare trigger on click pt schimbare context soft/hard
+		cause_type_select.on 'change', ->
+			type = $(@)
+			hard_content = [dummy_input, cause_category_select, cause_problem_select, delete_cause]
+			
+			switch type.val()
+				when 'Software' 
+					type.nextAll().remove()
+					type.after(software_location, software_problem_description, delete_cause)
+					doDeleteCause()
+				when 'Hardware'
+					if type.next().attr('id') is software_location.attr('id')
+						type.nextAll().remove()
+						type.after(hard_content)
+						doTokenize()
+						doDeleteCause()
 
 	#implementare add link
 	do doInsertButton = ->
@@ -300,6 +335,8 @@ $(document).ready ->
 		insert_link.prev().on 'click', (e) ->
 			e.preventDefault()
 			doDynamicFields()
+
+
 
 	# $(".token_input").each ->
 	# 	el = $(@)

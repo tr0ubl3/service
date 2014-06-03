@@ -579,7 +579,7 @@ div[class^="cause_wrapper_"] {
 div[id^="delete_cause_"] {
   position: absolute;
   right: 5px;
-  top: 25%;
+  top: 13.5px;
 }
 
 div[id^="delete_cause_"] > a {
@@ -601,4 +601,9 @@ div[id^="delete_cause_"] > a:hover {
 
 div[id^="delete_cause_"] > a:after {
   content: '✖';
+}
+
+textarea[id^="software_problem_description_"] {
+  width: 100%;
+  height: 100px;
 }
