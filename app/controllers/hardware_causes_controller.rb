@@ -1,0 +1,2 @@
+class HardwareCausesController < ApplicationController
+end

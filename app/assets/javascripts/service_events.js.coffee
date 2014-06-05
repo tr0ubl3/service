@@ -272,7 +272,7 @@ $(document).ready ->
 											id: 'delete_cause_' + nr_crt
 														).html("<a href='#' title='delete cause'></a>")
 		doCenterScrollPage = ->
-			offset_val = div_wrapper.offset().top
+			offset_val = div_wrapper.offset().top - 50
 			$('html,body').animate({scrollTop: offset_val}, 1000)
 
 		# div wrapper
@@ -291,7 +291,7 @@ $(document).ready ->
 		# implementare tokeninput
 		do doTokenize = ->
 			div_wrapper.children('input').tokenInput json_url,
-				propertyToSearch: 'cause',
+				propertyToSearch: 'name',
 				preventDuplicates: true,
 				tokenLimit: 1
 		# actiune comuna pt update si delete
@@ -302,11 +302,30 @@ $(document).ready ->
 			cause_field.val(key_values.toString())
 
 		dummy_input_id = 'input_cause_' + nr_crt
+
+		# set values and disable selects
+		doSetAndDisableSelect = (obj) ->
+			cause_category_select.html('<option selected>' + obj.category + '</option>')
+			cause_category_select.prop('disabled', true)
+		
+		# query show pt event_cause daca exista
+		doGetFullJsonObject = (id) ->
+			if isNaN(parseInt(id)) is false
+				$.getJSON('/event_causes/' + id, (data) ->
+					doSetAndDisableSelect(data)
+					)
+			else
+				regxp = new RegExp(/<<<(.+?)>>>/)
+				cause_name = regxp.exec(id)[1]
+				console.log cause_name
+
 		# adaugare trigger on change pt tokenized input
 		doInputTrigger = ->
 			div_wrapper.children('input').on 'change', ->
-				cause_ids[dummy_input_id] = div_wrapper.children('input').val()
+				input_val = div_wrapper.children('input').val()
+				cause_ids[dummy_input_id] = input_val
 				doUpdateCauseObject()
+				doGetFullJsonObject(input_val) unless input_val is ''
 
 		# update cause_ids object la stergere si schimbare tip cauza
 		doUpdateCauseIds = ->

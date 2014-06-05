@@ -1,0 +1,2 @@
+class SoftwareCausesController < ApplicationController
+end
