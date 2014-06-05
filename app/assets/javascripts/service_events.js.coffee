@@ -273,7 +273,7 @@ $(document).ready ->
 														).html("<a href='#' title='delete cause'></a>")
 		doCenterScrollPage = ->
 			offset_val = div_wrapper.offset().top
-			$('body').scrollTop(offset_val)
+			$('html,body').animate({scrollTop: offset_val}, 1000)
 
 		# div wrapper
 		div_wrapper = $("<div>",
