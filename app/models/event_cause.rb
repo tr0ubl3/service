@@ -4,11 +4,14 @@ class EventCause < ActiveRecord::Base
   belongs_to :service_event
 
   def self.tokens(query)
-  	causes = select('id, name').where("name like ?", "%#{query}%")
+  	causes = select('id, name, problem').where("name like ?", "%#{query}%")
   	if causes.empty?
   		[{id: "<<<#{query}>>>", name: "New \"#{query}\""}]
   	else
-  		causes
+  		causes.each do |cause|
+        cause.name = cause.name + ' (' + cause.problem + ')' unless cause.problem.nil?
+      end
+      return causes
   	end
   end
 

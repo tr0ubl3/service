@@ -236,23 +236,24 @@ $(document).ready ->
 													<option value disabled selected>select type ...</option>
 													<option value='Software'>Software</option>
 													<option value='Hardware'>Hardware</option>")
+		
 		cause_category_select = $('<select>',
 															id: 'cause_category_select_' + nr_crt
 															name: 'cause_category_select_'+ nr_crt	
 															).html("
 																<option value disabled selected>select category ...</option>
-																<option value='Electric'>Electric</option>
-																<option value='Hydraulic'>Hydraulic</option>
-																<option value='Mechanical'>Mechanical</option>
-																<option value='Pneumatic'>Pneumatic</option>
+																<option value='electric'>Electric</option>
+																<option value='hydraulic'>Hydraulic</option>
+																<option value='mechanical'>Mechanical</option>
+																<option value='pneumatic'>Pneumatic</option>
 															")
 		cause_problem_select = $("<select>",
 														id: 'cause_problem_select_' + nr_crt
 														name: 'cause_problem_select_' + nr_crt
 														).html("
 															<option value disabled selected>select problem ...</option>
-															<option value='Malfunction'>Malfunction</option>
-															<option value='Adjustment'>Adjustment</option>
+															<option value='malfunction'>Malfunction</option>
+															<option value='adjustment'>Adjustment</option>
 														")
 		software_location = $('<select>',
 													id: 'software_location_' + nr_crt
@@ -287,13 +288,14 @@ $(document).ready ->
 		
 		# insert div	
 		cause_field.prev().before(div_wrapper)
-		doCenterScrollPage()
+		# doCenterScrollPage()
 		# implementare tokeninput
 		do doTokenize = ->
 			div_wrapper.children('input').tokenInput json_url,
 				propertyToSearch: 'name',
 				preventDuplicates: true,
 				tokenLimit: 1
+		
 		# actiune comuna pt update si delete
 		doUpdateCauseObject = ->
 			key_values = []
@@ -305,8 +307,10 @@ $(document).ready ->
 
 		# set values and disable selects
 		doSetAndDisableSelect = (obj) ->
-			cause_category_select.html('<option selected>' + obj.category + '</option>')
-			cause_category_select.prop('disabled', true)
+			cause_category_select.val(obj.category).prop('disabled', true)
+			# selecteaza automat problema
+			cause_problem_select.val(obj.problem)
+
 		
 		# query show pt event_cause daca exista
 		doGetFullJsonObject = (id) ->
@@ -319,13 +323,32 @@ $(document).ready ->
 				cause_name = regxp.exec(id)[1]
 				console.log cause_name
 
+		# verificare daca nu mai exista valoarea in obiectul cause_ids
+		doCheckDuplicate = (val) ->
+			conditional = false
+			if val isnt ''
+				for key of cause_ids
+					if cause_ids[key] is val
+						return conditional = true
+			conditional		
+
+		# resetare la starea initiala a meniului hardware
+		doRestoreState = ->
+			cause_category_select.val('').prop('disabled', false)
+			cause_problem_select.val('')
+			
 		# adaugare trigger on change pt tokenized input
 		doInputTrigger = ->
 			div_wrapper.children('input').on 'change', ->
 				input_val = div_wrapper.children('input').val()
-				cause_ids[dummy_input_id] = input_val
-				doUpdateCauseObject()
-				doGetFullJsonObject(input_val) unless input_val is ''
+				if doCheckDuplicate(input_val) is false
+					cause_ids[dummy_input_id] = input_val
+					doUpdateCauseObject()
+					doGetFullJsonObject(input_val) unless input_val is ''
+				else
+					alert 'Cause already exists !'
+					div_wrapper.children('input').tokenInput('clear')
+				doRestoreState() if input_val is ''
 
 		# update cause_ids object la stergere si schimbare tip cauza
 		doUpdateCauseIds = ->
@@ -339,7 +362,7 @@ $(document).ready ->
 				e.preventDefault()
 				doUpdateCauseIds()
 				div_wrapper.remove()
-				doCenterScrollPage()
+				# doCenterScrollPage()
 
 		# caching new link
 		insert_link = $('#new_cause')
@@ -353,8 +376,9 @@ $(document).ready ->
 				when 'Software' 
 					type.nextAll().remove()
 					type.after(software_location, software_problem_description, delete_cause)
+					doRestoreState()
 					doDeleteCause()
-					doCenterScrollPage()
+					# doCenterScrollPage()
 				when 'Hardware'
 					if type.next().attr('id') is software_location.attr('id') or type.next().is() is false
 						type.nextAll().remove()
@@ -363,7 +387,7 @@ $(document).ready ->
 						doInputTrigger()
 						doDeleteCause()
 						doUpdateCauseIds()
-						doCenterScrollPage()
+						# doCenterScrollPage()
 		# adagare clasa disabled pt new cause link
 		$('#new_cause').addClass('disabled').attr('title', 'use existing cause before adding new one')
 
