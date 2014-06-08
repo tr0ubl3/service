@@ -339,16 +339,21 @@ $(document).ready ->
 			
 		# adaugare trigger on change pt tokenized input
 		doInputTrigger = ->
-			div_wrapper.children('input').on 'change', ->
+			div_wrapper.children('input').on 'change', (e) ->
 				input_val = div_wrapper.children('input').val()
+				form_subbmit_btn = $("#new_event > input[name='commit']")
 				if doCheckDuplicate(input_val) is false
 					cause_ids[dummy_input_id] = input_val
 					doUpdateCauseObject()
 					doGetFullJsonObject(input_val) unless input_val is ''
 				else
+					# dezactivare buton form submit pe durata alert
+					form_subbmit_btn.prop('disabled', true)
 					alert 'Cause already exists !'
 					div_wrapper.children('input').tokenInput('clear')
 				doRestoreState() if input_val is ''
+				# reactivare buton form submit
+				form_subbmit_btn.prop('disabled', false)
 
 		# update cause_ids object la stergere si schimbare tip cauza
 		doUpdateCauseIds = ->
