@@ -305,23 +305,47 @@ $(document).ready ->
 
 		dummy_input_id = 'input_cause_' + nr_crt
 
+		# adauga new span label
+		doAppendNewSpan = ->
+			div_wrapper.append("<span class='label new_cause_badge_" + nr_crt + "'>New</span>")
+
+		# delete new span element
+		doDeleteNewSpanElement = ->
+			div_wrapper.children('.new_cause_badge_' + nr_crt).remove()
+
+		# trigger la schimbarea problemei
+		doSetProblemChangeTrigger = (obj) ->
+			cache_cause = div_wrapper.find('p').text()
+			cause_problem_select.on 'change', ->
+				if cause_problem_select.val() != obj.problem
+					delete obj.id
+					delete obj.created_at
+					delete obj.problem_description
+					delete obj.updated_at
+					div_wrapper.find('p').text("New '" + obj.name + ' (' + cause_problem_select.val() + ")'")
+					doAppendNewSpan()
+				else
+						div_wrapper.find('p').text(cache_cause)
+						doDeleteNewSpanElement()
+
 		# set values and disable selects
 		doSetAndDisableSelect = (obj) ->
 			cause_category_select.val(obj.category).prop('disabled', true)
 			# selecteaza automat problema
 			cause_problem_select.val(obj.problem)
+			doSetProblemChangeTrigger(obj)
 
 		
 		# query show pt event_cause daca exista
 		doGetFullJsonObject = (id) ->
 			if isNaN(parseInt(id)) is false
-				$.getJSON('/event_causes/' + id, (data) ->
+				$.getJSON('/hardware_causes/' + id, (data) ->
 					doSetAndDisableSelect(data)
 					)
 			else
 				regxp = new RegExp(/<<<(.+?)>>>/)
 				cause_name = regxp.exec(id)[1]
-				console.log cause_name
+				doAppendNewSpan()
 
 		# verificare daca nu mai exista valoarea in obiectul cause_ids
 		doCheckDuplicate = (val) ->
@@ -341,19 +365,20 @@ $(document).ready ->
 		doInputTrigger = ->
 			div_wrapper.children('input').on 'change', (e) ->
 				input_val = div_wrapper.children('input').val()
-				form_subbmit_btn = $("#new_event > input[name='commit']")
+				form_submit_btn = $("#new_event > input[name='commit']")
+				doDeleteNewSpanElement() if input_val is ''
 				if doCheckDuplicate(input_val) is false
 					cause_ids[dummy_input_id] = input_val
 					doUpdateCauseObject()
 					doGetFullJsonObject(input_val) unless input_val is ''
 				else
 					# dezactivare buton form submit pe durata alert
-					form_subbmit_btn.prop('disabled', true)
+					form_submit_btn.prop('disabled', true)
 					alert 'Cause already exists !'
 					div_wrapper.children('input').tokenInput('clear')
 				doRestoreState() if input_val is ''
 				# reactivare buton form submit
-				form_subbmit_btn.prop('disabled', false)
+				form_submit_btn.prop('disabled', false)
 
 		# update cause_ids object la stergere si schimbare tip cauza
 		doUpdateCauseIds = ->

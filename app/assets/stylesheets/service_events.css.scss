@@ -613,3 +613,9 @@ fieldset {
     color: #999999 !important;
   }
 }
+
+span[class^="label new_cause_badge_"] {
+  position: absolute;
+  left: -40px;
+  top: 35%;
+}
