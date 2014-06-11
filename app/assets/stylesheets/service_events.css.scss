@@ -582,7 +582,8 @@ div[id^="delete_cause_"] {
   top: 13.5px;
 }
 
-div[id^="delete_cause_"] > a {
+div[id^="delete_cause_"] > a,
+.token-input-delete-token {
   display: inline-block;
   color: black;
   text-decoration: none;
@@ -590,13 +591,18 @@ div[id^="delete_cause_"] > a {
   transition: all 0.2s;
 }
 
-div[id^="delete_cause_"] > a:hover {
+div[id^="delete_cause_"] > a:hover, 
+.token-input-delete-token:hover {
   text-shadow: 0 0 1px #000,
                0 0 10px rgba(158, 158, 158, 0.8);
   color: rgba(187, 36, 36, 1);
   -webkit-transform: scale(1.6);
   -ms-transform: scale(1.6);
   transform: scale(1.6);
+}
+
+.token-input-delete-token {
+  // visibility: hidden;
 }
 
 div[id^="delete_cause_"] > a:after {
@@ -614,7 +620,7 @@ fieldset {
   }
 }
 
-span[class^="label new_cause_badge_"] {
+span[class*="new_cause_badge_"] {
   position: absolute;
   left: -40px;
   top: 35%;

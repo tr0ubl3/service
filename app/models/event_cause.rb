@@ -4,7 +4,7 @@ class EventCause < ActiveRecord::Base
   belongs_to :service_event
 
   def self.tokens(query)
-  	causes = select('id, name, problem').where("name like ?", "%#{query}%")
+  	causes = select('id, name, category, problem').where("name like ?", "%#{query}%")
   	if causes.empty?
   		[{id: "<<<#{query}>>>", name: "New \"#{query}\""}]
   	else

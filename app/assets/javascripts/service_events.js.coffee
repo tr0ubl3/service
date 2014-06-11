@@ -215,6 +215,8 @@ $(document).ready ->
 	
 	# implementare dynamic fields
 	cause_ids = new Object
+	# variabila container pt json results
+	json_results = new Object
 	doDynamicFields = ->
 		cause_field = $('#service_event_cause_tokens')
 		# iteration number
@@ -280,21 +282,22 @@ $(document).ready ->
 		div_wrapper = $("<div>",
 											class: "cause_wrapper_" + nr_crt)
 		div_wrapper.prepend('<span>' + nr_crt + '.</span>')
-		div_wrapper.append(cause_type_select)
-		# div_wrapper.append(dummy_input)	
-		# div_wrapper.append(cause_category_select)
-		# div_wrapper.append(cause_problem_select)
-		# div_wrapper.append(delete_cause)
 		
-		# insert div	
+		# populare div_wrapper cu select cause type
+		div_wrapper.append(cause_type_select)
+		
+		# inserare div_wrapper in dom
 		cause_field.prev().before(div_wrapper)
-		# doCenterScrollPage()
+		
 		# implementare tokeninput
 		do doTokenize = ->
 			div_wrapper.children('input').tokenInput json_url,
 				propertyToSearch: 'name',
 				preventDuplicates: true,
-				tokenLimit: 1
+				tokenLimit: 1,
+				onResult: (data) ->
+					json_results = data
+					return data
 		
 		# actiune comuna pt update si delete
 		doUpdateCauseObject = ->
@@ -316,17 +319,32 @@ $(document).ready ->
 		# trigger la schimbarea problemei
 		doSetProblemChangeTrigger = (obj) ->
 			cache_cause = div_wrapper.find('p').text()
+			cause_problem_select.off('change')
 			cause_problem_select.on 'change', ->
-				if cause_problem_select.val() != obj.problem
-					delete obj.id
-					delete obj.created_at
-					delete obj.problem_description
-					delete obj.updated_at
-					div_wrapper.find('p').text("New '" + obj.name + ' (' + cause_problem_select.val() + ")'")
-					doAppendNewSpan()
+				# console.log 'triggered change'
+				problem_val = cause_problem_select.val()
+				regname_test = new RegExp(/([^\s]+)/)
+				obj_name = regname_test.exec(obj.name)[0]
+				if problem_val isnt obj.problem
+					# iteratie pt a verifica daca nu exista cauza deja in cache
+					check = ->
+						for item in json_results
+							if regname_test.exec(item.name)[0] is obj_name and item.problem is problem_val and item.id isnt obj.id
+								div_wrapper.children('input').val(item.id).change()
+								div_wrapper.find('p').text(item.name)
+								# console.log 'cauza exista in cache ' + item.id
+								return true
+					
+					if check() isnt true
+						div_wrapper.find('p').text("New '" + obj_name + ' (' + problem_val + ")'")
+						doAppendNewSpan()
+						doUpdateCauseIds()
 				else
-						div_wrapper.find('p').text(cache_cause)
-						doDeleteNewSpanElement()
+					# console.log 'problema initiala restaurata'
+					doDeleteNewSpanElement()
+					div_wrapper.find('p').text(cache_cause)
+					# div_wrapper.children('input').val(obj.id).change()
+					# console.log div_wrapper.children('input').val()
 
 		# set values and disable selects
 		doSetAndDisableSelect = (obj) ->
@@ -335,17 +353,21 @@ $(document).ready ->
 			cause_problem_select.val(obj.problem)
 			doSetProblemChangeTrigger(obj)
 
+		# stergere trigger select
+		doRemoveProblemSelectTrigger = ->
+			cause_problem_select.off 'change'
 		
 		# query show pt event_cause daca exista
-		doGetFullJsonObject = (id) ->
+		doSearchObjInCache = (id) ->
 			if isNaN(parseInt(id)) is false
-				$.getJSON('/hardware_causes/' + id, (data) ->
-					doSetAndDisableSelect(data)
-					)
+				for cause in json_results
+					if cause.id is parseInt(id)
+						doSetAndDisableSelect(cause)
 			else
 				regxp = new RegExp(/<<<(.+?)>>>/)
 				cause_name = regxp.exec(id)[1]
 				doAppendNewSpan()
+				doRemoveProblemSelectTrigger()
 
 		# verificare daca nu mai exista valoarea in obiectul cause_ids
 		doCheckDuplicate = (val) ->
@@ -360,7 +382,8 @@ $(document).ready ->
 		doRestoreState = ->
 			cause_category_select.val('').prop('disabled', false)
 			cause_problem_select.val('')
-			
+			doRemoveProblemSelectTrigger()
+
 		# adaugare trigger on change pt tokenized input
 		doInputTrigger = ->
 			div_wrapper.children('input').on 'change', (e) ->
@@ -370,7 +393,7 @@ $(document).ready ->
 				if doCheckDuplicate(input_val) is false
 					cause_ids[dummy_input_id] = input_val
 					doUpdateCauseObject()
-					doGetFullJsonObject(input_val) unless input_val is ''
+					doSearchObjInCache(input_val) unless input_val is ''
 				else
 					# dezactivare buton form submit pe durata alert
 					form_submit_btn.prop('disabled', true)
@@ -379,6 +402,7 @@ $(document).ready ->
 				doRestoreState() if input_val is ''
 				# reactivare buton form submit
 				form_submit_btn.prop('disabled', false)
+				# console.log cause_ids
 
 		# update cause_ids object la stergere si schimbare tip cauza
 		doUpdateCauseIds = ->
@@ -430,17 +454,4 @@ $(document).ready ->
 			if $('#tokens_fieldset').children("div[class^='cause_wrapper_']").last().children("select[id^='cause_type_select_']").val()? or $('#tokens_fieldset').children("div[class^='cause_wrapper_']").length is 0
 				doDynamicFields()
 
-
-	# $(".token_input").each ->
-	# 	el = $(@)
-	# 	machine_id = location.pathname.split("/")[2]
-	# 	json_url = $('#service_event_cause_tokens').data('url') + '?machine=' + machine_id
-	# 	el.tokenInput json_url,
-	# 		propertyToSearch: 'cause',
-	# 		preventDuplicates: true,
-	# 		tokenLimit: 1
-	# # implementare elemente aditionale
-	# $('#token-input-input_cause_' + '1').closest('ul').before('<span>1. </span>')
-	# $('#input_cause_1').on 'change', ->
-	# 	$('#service_event_cause_tokens').val($(@).val())
 	# sfarsit cauze si simptome 
