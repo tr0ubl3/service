@@ -270,7 +270,7 @@ $(document).ready ->
 																		id: 'software_problem_description_' + nr_crt
 																		name: 'software_problem_description_' + nr_crt
 																		placeholder: 'insert software problem description'
-																		)																					
+																		)
 		delete_cause = $("<div>",
 											id: 'delete_cause_' + nr_crt
 														).html("<a href='#' title='delete cause'></a>")
@@ -285,7 +285,13 @@ $(document).ready ->
 		
 		# populare div_wrapper cu select cause type
 		div_wrapper.append(cause_type_select)
-		
+
+		# adaugare div container pt symptoms in div_wrapper
+		div_sym_wrapper = $("<div>",
+													class: "sym_wrapper_" + nr_crt
+												)
+		div_wrapper.append(div_sym_wrapper)
+
 		# inserare div_wrapper in dom
 		cause_field.prev().before(div_wrapper)
 		
@@ -319,7 +325,7 @@ $(document).ready ->
 		# trigger la schimbarea problemei
 		doSetProblemChangeTrigger = (obj) ->
 			cache_cause = div_wrapper.find('p').text()
-			cause_problem_select.off('change')
+			doRemoveProblemSelectTrigger()
 			cause_problem_select.on 'change', ->
 				# console.log 'triggered change'
 				problem_val = cause_problem_select.val()
@@ -424,12 +430,12 @@ $(document).ready ->
 		# adaugare trigger on click pt schimbare context soft/hard
 		cause_type_select.on 'change', ->
 			type = $(@)
-			hard_content = [dummy_input, cause_category_select, cause_problem_select, delete_cause]
+			hard_content = [dummy_input, cause_category_select, cause_problem_select, delete_cause, div_sym_wrapper]
 			insert_link.removeClass('disabled').attr('title', 'add new cause')
 			switch type.val()
 				when 'Software' 
 					type.nextAll().remove()
-					type.after(software_location, software_problem_description, delete_cause)
+					type.after(software_location, software_problem_description, delete_cause, div_sym_wrapper)
 					doRestoreState()
 					doDeleteCause()
 					# doCenterScrollPage()
