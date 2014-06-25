@@ -290,10 +290,22 @@ $(document).ready ->
 		div_sym_wrapper = $("<div>",
 													class: "sym_wrapper_" + nr_crt
 												)
+		new_sym_link = $('<a>', 
+										id: 'new_sym_link_' + nr_crt
+										href: '#'
+										text: 'Insert symptome'
+										)
+		div_sym_wrapper.append(new_sym_link)
 		div_wrapper.append(div_sym_wrapper)
-
+		
 		# inserare div_wrapper in dom
 		cause_field.prev().before(div_wrapper)
+		
+		# adaugare trigger pt new sym link
+		do AddSymLinkTrigger = ->
+			$("a[id^='new_sym_link_']").on 'click', (e) ->
+				e.preventDefault()
+				alert 'to be implemented'
 		
 		# implementare tokeninput
 		do doTokenize = ->
@@ -418,7 +430,7 @@ $(document).ready ->
 
 		# adaugare trigger on click pt delete cause
 		do doDeleteCause = ->
-			div_wrapper.children(delete_cause).children('a').on 'click', (e) ->
+			div_wrapper.children(delete_cause).children("a[title='delete cause']").on 'click', (e) ->
 				e.preventDefault()
 				doUpdateCauseIds()
 				div_wrapper.remove()
@@ -448,6 +460,7 @@ $(document).ready ->
 						doDeleteCause()
 						doUpdateCauseIds()
 						# doCenterScrollPage()
+			AddSymLinkTrigger()			
 		# adagare clasa disabled pt new cause link
 		$('#new_cause').addClass('disabled').attr('title', 'use existing cause before adding new one')
 
@@ -455,9 +468,9 @@ $(document).ready ->
 	do doInsertButton = ->
 		insert_link = $('#service_event_cause_tokens').before("<a href='#' id='new_cause'>Insert new cause</a>")
 		doDynamicFields()
-		insert_link.prev().on 'click', (e) ->
+		$('a#new_cause').on 'click', (e) ->
 			e.preventDefault()
 			if $('#tokens_fieldset').children("div[class^='cause_wrapper_']").last().children("select[id^='cause_type_select_']").val()? or $('#tokens_fieldset').children("div[class^='cause_wrapper_']").length is 0
 				doDynamicFields()
 
-	# sfarsit cauze si simptome 
+	# sfarsit cauze si simptome
