@@ -1,7 +1,8 @@
 class EventCause < ActiveRecord::Base
   attr_accessible :name
 
-  belongs_to :service_event
+  has_many :manifestations
+  has_many :events, class_name: 'ServiceEvent', through: :manifestations
 
   def self.tokens(query)
   	causes = select('id, name, category, problem').where("name like ?", "%#{query}%")

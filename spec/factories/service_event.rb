@@ -10,7 +10,7 @@ FactoryGirl.define do
       hour_counter "1000"
       event_name "POS-91231344-200214120809-00001-DEL"
       user_id 1
-      alarms {[FactoryGirl.create(:alarm)]}
+      # alarms {[FactoryGirl.create(:alarm)]}
   	  # state 'open'
       association :machine, strategy: :build
       association :user, strategy: :build

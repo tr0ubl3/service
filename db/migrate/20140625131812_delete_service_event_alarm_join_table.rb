@@ -4,10 +4,10 @@ class DeleteServiceEventAlarmJoinTable < ActiveRecord::Migration
   end
 
   def down
-  	create_table :alarms_events, :id => false do |t|
-  		t.belongs_to :event
+  	create_table :alarms_service_events, :id => false do |t|
+  		t.belongs_to :service_event
   		t.belongs_to :alarm
   	end
-  	add_index :alarms_events, ["event_id", "alarm_id"]
+  	add_index :alarms_service_events, ["service_event_id", "alarm_id"]
   end
 end

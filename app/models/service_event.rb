@@ -1,20 +1,19 @@
 class ServiceEvent < ActiveRecord::Base
 	attr_accessible :user_id, :machine_id, :event_date, :event_type, 
-					:event_description, :hour_counter, :evaluation_description,
-					:evaluator, :alarm_ids, :cause_tokens
+									:event_description, :hour_counter, :evaluation_description,
+									:evaluator, :alarm_ids, :cause_tokens
 	attr_reader :cause_tokens
   					
 	belongs_to :machine
 	belongs_to :user
-	has_and_belongs_to_many :alarms
-	has_many :states, class_name: 'ServiceEventState', dependent: :destroy
-	has_many :service_event_files, dependent: :destroy, validate: false
-	has_many :solving_steps, dependent: :destroy
 	has_many :manifestations
 	has_many :symptoms, through: :manifestations
-	has_and_belongs_to_many :causes, class_name: 'EventCause'
+	has_many :causes, class_name: 'EventCause', through: :manifestations
+	has_many :states, class_name: 'ServiceEventState', dependent: :destroy
+	has_many :files, class_name: 'ServiceEventFile', dependent: :destroy, validate: false
+	has_many :solving_steps, dependent: :destroy
+	
 
-	accepts_nested_attributes_for :alarms, allow_destroy: true
 	accepts_nested_attributes_for :causes, allow_destroy: true
 
 	before_create :event_prepare
