@@ -447,12 +447,12 @@ $(document).ready ->
 			switch type.val()
 				when 'Software' 
 					type.nextAll().remove()
-					type.after(software_location, software_problem_description, delete_cause, div_sym_wrapper)
+					type.after(software_problem_description, delete_cause, div_sym_wrapper)
 					doRestoreState()
 					doDeleteCause()
 					# doCenterScrollPage()
 				when 'Hardware'
-					if type.next().attr('id') is software_location.attr('id') or type.next().is() is false
+					if type.next().attr('id') is software_problem_description.attr('id') or type.next().is() is false
 						type.nextAll().remove()
 						type.after(hard_content)
 						doTokenize()
