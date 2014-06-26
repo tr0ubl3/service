@@ -10,6 +10,8 @@ class ServiceEvent < ActiveRecord::Base
 	has_many :states, class_name: 'ServiceEventState', dependent: :destroy
 	has_many :service_event_files, dependent: :destroy, validate: false
 	has_many :solving_steps, dependent: :destroy
+	has_many :manifestations
+	has_many :symptoms, through: :manifestations
 	has_and_belongs_to_many :causes, class_name: 'EventCause'
 
 	accepts_nested_attributes_for :alarms, allow_destroy: true

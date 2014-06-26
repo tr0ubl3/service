@@ -4,7 +4,7 @@ FactoryGirl.define do
 			"70012#{n}"
 		end
 		
-		sequence :text do |n|
+		sequence :description do |n|
 			"Alarm no##{n}"
 		end
 	end

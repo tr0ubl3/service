@@ -71,9 +71,10 @@ describe ServiceEvent do
 	it { should_not allow_mass_assignment_of(:event_name) }
 	it { should belong_to(:machine) }
 	it { should belong_to(:user) }
-	it { should have_and_belong_to_many(:alarms) }
 	it { should have_many(:states).class_name('ServiceEventState').dependent(:destroy) }
 	it { should have_many(:solving_steps).dependent(:destroy) }
+	it { should have_many(:manifestations) }
+	it { should have_many(:symptoms).through(:manifestations) }
 	it { should have_many(:service_event_files).dependent(:destroy).validate(false) }
 	it { should have_and_belong_to_many(:causes).class_name('EventCause') }
 	it { should accept_nested_attributes_for(:alarms).allow_destroy(true) }

@@ -1,7 +1,4 @@
-class Alarm < ActiveRecord::Base
-  attr_accessible :number, :text, :machine_group_id
-  belongs_to :machine_group
-  has_and_belongs_to_many :service_events
+class Alarm < Symptom
 
   validates :number, :presence => true, :uniqueness => {:scope => :machine_group_id}
   
