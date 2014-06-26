@@ -65,7 +65,7 @@ $(document).ready ->
 	doInsertAlarm = (json_data) ->
 		alarm_id = json_data.id
 		alarm_number = json_data.number
-		alarm_text = json_data.text
+		alarm_text = json_data.description
 		$('#acdp').css('display', 'block');
 		$("<p></p>",
 			text: alarm_number + " - " + alarm_text

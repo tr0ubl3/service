@@ -1,6 +1,7 @@
 class Alarm < Symptom
 
   validates :number, :presence => true, :uniqueness => {:scope => :machine_group_id}
+  validates :description, presence: true
   
   scope :search, lambda { |number, machine| where("number LIKE ? AND machine_group_id = ?", "#{number}", "#{machine}".to_i) }
 

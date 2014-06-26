@@ -1,6 +1,6 @@
 class AlarmJdts < Jdts
 	def columns
-		%w[number text]
+		%w[number description]
 	end
 
 	def data
@@ -8,7 +8,7 @@ class AlarmJdts < Jdts
 			[
 				h(''),
 				link_to(record.number, record),
-				h(record.text)
+				h(record.description)
 			]
 		end
 	end
@@ -17,7 +17,7 @@ class AlarmJdts < Jdts
 		records = get_custom_data
 		records = records.page(page).per_page(per_page)
 		if params[:sSearch].present?
-			records = records.where("number like :search or text like :search", search: "%#{params[:sSearch]}%")
+			records = records.where("number like :search or description like :search", search: "%#{params[:sSearch]}%")
 		end
 		records
 	end
