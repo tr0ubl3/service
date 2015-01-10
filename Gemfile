@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.2.0'
 
-gem 'rails', '3.2.18'
+gem 'rails', '3.2.21'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,6 +14,8 @@ group :development, :test do
 	gem 'email_spec'
 	gem 'fuubar'
 	gem 'selenium-client' , '>= 1.2.18'
+	gem 'minitest'
+	gem 'test-unit'
 	gem 'shoulda-matchers'
 	# gem 'email_validator', :require => 'email_validator/strict'
 

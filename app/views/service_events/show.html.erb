@@ -72,24 +72,6 @@
 			<td><%= @event.hour_counter %></td>
 			<td colspan="2"></td>
 		</tr>
-<!-- 		<tr>
-			<td rowspan="<%= @event.alarms.count + 1 %>">
-				Alarms
-			</td>
-			<% if @event.alarms.empty? %>
-				<td>
-					No alarms reported
-				</td>
-		</tr>
-			<% else %>
-				<% @event.alarms.each do |alarm| %>
-					<tr>
-						<td colspan="3">
-							<%= alarm.number.to_s + ' - ' + alarm.text %>
-						</td>
-					</tr>
-				<% end %>
-			<% end %> -->
 		<tr>
 			<td colspan="4">Description</td>
 		</tr>

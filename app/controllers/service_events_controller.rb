@@ -79,7 +79,7 @@ class ServiceEventsController < ApplicationController
 		@machines = Machine.where(:machine_owner_id => current_user.firm)
 		@machine_display_name = @machines.find(@event.machine_id).display_name
 		@hc = HourCounter.find_by_machine_id(@event.machine_id)
-		@event.service_event_files.build
+		@event.files.build
 		respond_to do |format|
 			if @event.update_attributes(params[:service_event])
 				if params[:alarms] != nil
@@ -109,8 +109,8 @@ class ServiceEventsController < ApplicationController
 	
 	def evaluate
 		@event = ServiceEvent.find(params[:id])
-		@files = @event.service_event_files.build
-		@event.alarms.build
+		@files = @event.files.build
+		@event.symptoms.build
 
 		respond_to do |format|
 			format.html
@@ -120,8 +120,8 @@ class ServiceEventsController < ApplicationController
 
 	def create_evaluate
 		@event = ServiceEvent.find(params[:id])
-		@files = @event.service_event_files.build
-		@event.alarms.build
+		@files = @event.files.build
+		@event.symptoms.build
 		@event.evaluator = current_user.id
 		if @event.update_attributes(params[:service_event])
 			redirect_to service_event_path(@event), notice: "Event #{@event.event_name} is evaluated!"
